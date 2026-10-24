@@ -1,0 +1,183 @@
+# Git LFS for Unity art assets.
+# Macro works only in the top-level .gitattributes.
+[attr]lfs filter=lfs diff=lfs merge=lfs -text
+
+# Unity text assets stay in normal Git (line endings only; no custom merge driver).
+[attr]unity-json text eol=lf linguist-language=json
+[attr]unity-yaml text eol=lf linguist-language=yaml
+
+*.cginc text
+*.compute text linguist-language=hlsl
+*.cs text diff=csharp
+*.hlsl text linguist-language=hlsl
+*.raytrace text linguist-language=hlsl
+*.shader text
+
+*.asmdef unity-json
+*.asmref unity-json
+*.index unity-json
+*.inputactions unity-json
+*.shadergraph unity-json
+*.shadersubgraph unity-json
+
+*.tss text diff=css linguist-language=css
+*.uss text diff=css linguist-language=css
+*.uxml text linguist-language=xml linguist-detectable
+
+*.anim unity-yaml
+*.asset unity-yaml
+*.brush unity-yaml
+*.controller unity-yaml
+*.flare unity-yaml
+*.fontsettings unity-yaml
+*.giparams unity-yaml
+*.guiskin unity-yaml
+*.lighting unity-yaml
+*.mask unity-yaml
+*.mat unity-yaml
+*.meta unity-yaml
+*.mixer unity-yaml
+*.overrideController unity-yaml
+*.playable unity-yaml
+*.prefab unity-yaml
+*.preset unity-yaml
+*.renderTexture unity-yaml
+*.scenetemplate unity-yaml
+*.shadervariants unity-yaml
+*.signal unity-yaml
+*.spriteatlas unity-yaml
+*.spriteatlasv2 unity-yaml
+*.terrainlayer unity-yaml
+*.unity unity-yaml
+*.physicMaterial unity-yaml
+*.physicsMaterial2D unity-yaml
+
+# Lightmap data is binary even though the extension is .asset.
+LightingData.asset binary
+
+# Images
+*.bmp lfs
+*.exr lfs
+*.gif lfs
+*.hdr lfs
+*.iff lfs
+*.jpeg lfs
+*.jpg lfs
+*.pict lfs
+*.png lfs
+*.psd lfs
+*.psb lfs
+*.tga lfs
+*.tif lfs
+*.tiff lfs
+*.webp lfs
+*.BMP lfs
+*.EXR lfs
+*.GIF lfs
+*.HDR lfs
+*.JPEG lfs
+*.JPG lfs
+*.PNG lfs
+*.PSD lfs
+*.PSB lfs
+*.TGA lfs
+*.TIF lfs
+*.TIFF lfs
+*.WEBP lfs
+
+# Audio
+*.aif lfs
+*.aiff lfs
+*.aac lfs
+*.caf lfs
+*.flac lfs
+*.it lfs
+*.m4a lfs
+*.mod lfs
+*.mp3 lfs
+*.ogg lfs
+*.opus lfs
+*.s3m lfs
+*.wav lfs
+*.wma lfs
+*.xm lfs
+*.AIF lfs
+*.AIFF lfs
+*.FLAC lfs
+*.M4A lfs
+*.MP3 lfs
+*.OGG lfs
+*.WAV lfs
+*.WMA lfs
+
+# Audio middleware banks
+*.bank lfs
+*.bnk lfs
+*.wem lfs
+
+# Video
+*.asf lfs
+*.avi lfs
+*.flv lfs
+*.m4v lfs
+*.mkv lfs
+*.mov lfs
+*.mp4 lfs
+*.mpeg lfs
+*.mpg lfs
+*.ogv lfs
+*.webm lfs
+*.wmv lfs
+*.AVI lfs
+*.MOV lfs
+*.MP4 lfs
+*.MKV lfs
+*.WEBM lfs
+*.WMV lfs
+
+# 3D / DCC source
+*.3dm lfs
+*.3ds lfs
+*.abc lfs
+*.blend lfs
+*.c4d lfs
+*.collada lfs
+*.dae lfs
+*.dxf lfs
+*.fbx lfs
+*.FBX lfs
+*.glb lfs
+*.jas lfs
+*.lws lfs
+*.lxo lfs
+*.ma lfs
+*.max lfs
+*.mb lfs
+*.obj lfs
+*.ply lfs
+*.skp lfs
+*.stl lfs
+*.usdc lfs
+*.usdz lfs
+*.ztl lfs
+
+# Fonts and other large binaries commonly committed with Unity projects
+*.otf lfs
+*.ttf lfs
+*.cubemap lfs
+*.unitypackage lfs
+*.skel.bytes lfs
+
+# Archives
+*.7z lfs
+*.bz2 lfs
+*.gz lfs
+*.rar lfs
+*.tar lfs
+*.zip lfs
+
+# Native plugins
+*.dll lfs
+*.pdb lfs
+*.so lfs
+*.a lfs
