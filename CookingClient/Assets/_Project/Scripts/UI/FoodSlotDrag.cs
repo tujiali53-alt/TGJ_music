@@ -46,14 +46,14 @@ namespace Cooking.UI
         public void OnEndDrag(PointerEventData eventData)
         {
             IsDragging = false;
-            CuttingBoard board = FindBoard(eventData);
-            if (board != null && board.TryPlace(FirstItem()))
-                SitOn(board.transform);
+            IFoodStation station = FindStation(eventData);
+            if (station != null && station.TryPlace(FirstItem()))
+                SitOn(((Component)station).transform);
             else
                 ReturnHome();
         }
 
-        CuttingBoard FindBoard(PointerEventData eventData)
+        IFoodStation FindStation(PointerEventData eventData)
         {
             if (EventSystem.current == null)
             {
@@ -69,9 +69,9 @@ namespace Cooking.UI
                 if (hit == null || hit.transform.IsChildOf(transform) || hit == gameObject)
                     continue;
 
-                CuttingBoard board = hit.GetComponentInParent<CuttingBoard>();
-                if (board != null)
-                    return board;
+                IFoodStation station = hit.GetComponentInParent<IFoodStation>();
+                if (station != null)
+                    return station;
             }
 
             return null;

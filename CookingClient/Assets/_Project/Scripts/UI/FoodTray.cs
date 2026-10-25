@@ -1,5 +1,4 @@
 using Cooking.Core;
-using Cooking.Data;
 using Cooking.Runtime;
 using TMPro;
 using UnityEngine;
@@ -12,7 +11,6 @@ namespace Cooking.UI
         [SerializeField] GameObject slot;
         [SerializeField] Image icon;
         [SerializeField] TMP_Text countText;
-        [SerializeField] IngredientDefinition[] definitions;
         [SerializeField] FoodSlotDrag drag;
 
         void Awake()
@@ -50,15 +48,15 @@ namespace Cooking.UI
 
         void OnEnable()
         {
-            Refresh();
+            RefreshVisibility();
         }
 
         void LateUpdate()
         {
-            Refresh();
+            RefreshVisibility();
         }
 
-        void Refresh()
+        void RefreshVisibility()
         {
             if (slot == null)
                 return;
@@ -66,35 +64,7 @@ namespace Cooking.UI
             if (drag != null && drag.IsDragging)
                 return;
 
-            IngredientInstance item = FirstItem();
-            if (item == null || item.Quantity <= 0)
-            {
-                slot.SetActive(false);
-                return;
-            }
-
-            slot.SetActive(true);
-            IngredientDefinition definition = FindDefinition(item.DefinitionId);
-            if (icon != null && definition != null && definition.spriteWhole != null)
-                icon.sprite = definition.spriteWhole;
-
-            if (countText != null)
-                countText.text = "x" + item.Quantity + ShapeLabel(item.Shape);
-        }
-
-        static string ShapeLabel(CutShape shape)
-        {
-            switch (shape)
-            {
-                case CutShape.Dice:
-                    return " 切丁";
-                case CutShape.Slice:
-                    return " 切片";
-                case CutShape.Shred:
-                    return " 切丝";
-                default:
-                    return "";
-            }
+            slot.SetActive(FirstItem() != null);
         }
 
         IngredientInstance FirstItem()
@@ -108,21 +78,6 @@ namespace Cooking.UI
                 IngredientInstance item = root.Session.Inventory[i];
                 if (item != null && item.Quantity > 0)
                     return item;
-            }
-
-            return null;
-        }
-
-        IngredientDefinition FindDefinition(string definitionId)
-        {
-            if (definitions == null)
-                return null;
-
-            for (int i = 0; i < definitions.Length; i++)
-            {
-                IngredientDefinition definition = definitions[i];
-                if (definition != null && definition.id == definitionId)
-                    return definition;
             }
 
             return null;

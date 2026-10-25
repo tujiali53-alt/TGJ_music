@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Cooking.UI
 {
-    public sealed class CuttingBoard : MonoBehaviour
+    public sealed class CuttingBoard : MonoBehaviour, IFoodStation
     {
         [SerializeField] IngredientDefinition[] definitions;
 
