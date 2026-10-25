@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cooking.Data;
 
 namespace Cooking.Runtime
@@ -7,6 +8,7 @@ namespace Cooking.Runtime
         public int SaveVersion = 1;
         public int DayIndex;
         public DayPhase Phase;
+        public List<IngredientInstance> Inventory = new List<IngredientInstance>();
 
         public static GameSession NewGame()
         {
@@ -14,8 +16,10 @@ namespace Cooking.Runtime
             {
                 SaveVersion = 1,
                 DayIndex = 0,
-                Phase = DayPhase.Night
+                Phase = DayPhase.Night,
+                Inventory = new List<IngredientInstance>()
             };
         }
     }
 }
+
