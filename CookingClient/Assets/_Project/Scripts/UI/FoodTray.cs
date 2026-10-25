@@ -48,7 +48,17 @@ namespace Cooking.UI
                 drag = slot.GetComponent<FoodSlotDrag>();
         }
 
+        void OnEnable()
+        {
+            Refresh();
+        }
+
         void LateUpdate()
+        {
+            Refresh();
+        }
+
+        void Refresh()
         {
             if (slot == null)
                 return;
@@ -69,7 +79,22 @@ namespace Cooking.UI
                 icon.sprite = definition.spriteWhole;
 
             if (countText != null)
-                countText.text = "x" + item.Quantity;
+                countText.text = "x" + item.Quantity + ShapeLabel(item.Shape);
+        }
+
+        static string ShapeLabel(CutShape shape)
+        {
+            switch (shape)
+            {
+                case CutShape.Dice:
+                    return " 切丁";
+                case CutShape.Slice:
+                    return " 切片";
+                case CutShape.Shred:
+                    return " 切丝";
+                default:
+                    return "";
+            }
         }
 
         IngredientInstance FirstItem()
