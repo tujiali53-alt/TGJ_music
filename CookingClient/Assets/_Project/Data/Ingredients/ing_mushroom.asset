@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: ing_mushroom
   m_EditorClassIdentifier: Assembly-CSharp::Cooking.Data.IngredientDefinition
   id: ing_mushroom
-  displayName: 蘑菇
+  displayName: "\u767D\u8611\u83C7"
+  description: "\u751F\u957F\u5728\u68EE\u6797\u4E2D\u7684\u83CC\u7C7B\uFF0C\u5F62\u4F3C\u591C\u7A7A\u4E2D\u768E\u767D\u7684\u660E\u6708\u3002"
   kind: 1
   canEatRaw: 0
   canCut: 1
-  optimalDoneness: 100
-  maxDoneness: 160
+  optimalDoneness: 120
+  maxDoneness: 180
   spriteWhole: {fileID: 21300000, guid: fca75298a0281664daa537a70880a8bd, type: 3}
   baseColor: {r: 1, g: 1, b: 1, a: 1}
