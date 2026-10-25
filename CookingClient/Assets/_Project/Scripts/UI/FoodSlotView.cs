@@ -58,7 +58,7 @@ namespace Cooking.UI
 
         void Refresh()
         {
-            IngredientInstance item = FirstItem();
+            IngredientInstance item = ShownItem();
             if (item == null || item.Quantity <= 0)
                 return;
 
@@ -104,6 +104,17 @@ namespace Cooking.UI
                 default:
                     return "";
             }
+        }
+
+        IngredientInstance ShownItem()
+        {
+            if (GetComponentInParent<Plate>() != null)
+                return Plate.FirstHeld();
+
+            if (drag != null && drag.IsDragging && FirstItem() == null)
+                return Plate.FirstHeld();
+
+            return FirstItem();
         }
 
         IngredientInstance FirstItem()

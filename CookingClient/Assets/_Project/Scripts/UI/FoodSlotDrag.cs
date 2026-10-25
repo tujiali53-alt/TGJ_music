@@ -13,6 +13,7 @@ namespace Cooking.UI
         RectTransform rect;
         Canvas canvas;
         Transform homeParent;
+        Transform draggedFrom;
         Vector2 homePosition;
         readonly List<RaycastResult> raycastResults = new List<RaycastResult>();
 
@@ -27,6 +28,7 @@ namespace Cooking.UI
         public void OnBeginDrag(PointerEventData eventData)
         {
             IsDragging = true;
+            draggedFrom = transform.parent;
             if (canvas == null)
                 return;
 
@@ -46,8 +48,12 @@ namespace Cooking.UI
         public void OnEndDrag(PointerEventData eventData)
         {
             IsDragging = false;
+            IngredientInstance item = ItemFrom(draggedFrom);
             IFoodStation station = FindStation(eventData);
-            if (station != null && station.TryPlace(FirstItem()))
+            if (!(station is Plate))
+                Plate.ReleaseToInventory(item);
+
+            if (station != null && station.TryPlace(item))
                 SitOn(((Component)station).transform);
             else
                 ReturnHome();
@@ -77,6 +83,14 @@ namespace Cooking.UI
             return null;
         }
 
+        IngredientInstance ItemFrom(Transform source)
+        {
+            if (source != null && source.GetComponent<Plate>() != null)
+                return Plate.FirstHeld();
+
+            return FirstItem();
+        }
+
         IngredientInstance FirstItem()
         {
             GameRoot root = GameRoot.Instance;
@@ -100,13 +114,19 @@ namespace Cooking.UI
                 rect.anchoredPosition = Vector2.zero;
         }
 
-        void ReturnHome()
+        public void ReturnToTray()
         {
+            IsDragging = false;
             if (homeParent != null)
                 transform.SetParent(homeParent, false);
 
             if (rect != null)
                 rect.anchoredPosition = homePosition;
+        }
+
+        void ReturnHome()
+        {
+            ReturnToTray();
         }
     }
 }

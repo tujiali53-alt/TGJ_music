@@ -9,6 +9,8 @@ namespace Cooking.Runtime
         public int DayIndex;
         public DayPhase Phase;
         public List<IngredientInstance> Inventory = new List<IngredientInstance>();
+        public Dish HeldDish = new Dish();
+        public int MealsEaten;
 
         public static GameSession NewGame()
         {
@@ -17,7 +19,9 @@ namespace Cooking.Runtime
                 SaveVersion = 1,
                 DayIndex = 0,
                 Phase = DayPhase.Night,
-                Inventory = new List<IngredientInstance>()
+                Inventory = new List<IngredientInstance>(),
+                HeldDish = new Dish { DishId = 1, ExecutionScore = 1f },
+                MealsEaten = 0
             };
         }
     }

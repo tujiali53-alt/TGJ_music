@@ -64,6 +64,9 @@ namespace Cooking.UI
             if (drag != null && drag.IsDragging)
                 return;
 
+            if (slot.transform.parent != transform)
+                return;
+
             slot.SetActive(FirstItem() != null);
         }
 
