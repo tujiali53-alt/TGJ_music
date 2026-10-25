@@ -1,11 +1,9 @@
+using Cooking.Core;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
-    const string GameSceneName = "MainCooking";
-
     [SerializeField] GameObject settingPanel;
 
     void Awake()
@@ -25,7 +23,15 @@ public class MenuController : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(GameSceneName);
+        GameRoot root = GameRoot.Instance;
+        if (root == null || root.Flow == null)
+        {
+            Debug.LogError("MeunScene 里需要已经放好带 SceneFlow 的 GameRoot。");
+            return;
+        }
+
+        root.NewGame();
+        root.Flow.Load(SceneNames.Outing);
     }
 
     public void OpenSettings()
