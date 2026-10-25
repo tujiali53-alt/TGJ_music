@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71c2e90d4a64f1e8b35c6d70a9f4e21, type: 3}
   m_Name: ing_tomato
   m_EditorClassIdentifier: Assembly-CSharp::Cooking.Data.IngredientDefinition
-  id: 
-  displayName: 
-  description: 
-  kind: 0
-  canEatRaw: 0
-  canCut: 0
-  optimalDoneness: 100
-  maxDoneness: 140
+  id: 'ing_tomato '
+  displayName: "\u756A\u8304"
+  description: "\u8273\u7EA2\u8272\u7684\u679C\u5B9E\uFF0C\u5FAE\u5FAE\u7684\u9178\u5473\u8BA9\u4EBA\u80C3\u53E3\u5927\u5F00\u3002"
+  kind: 1
+  canEatRaw: 1
+  canCut: 1
+  optimalDoneness: 80
+  maxDoneness: 150
   spriteWhole: {fileID: 0}
   baseColor: {r: 1, g: 1, b: 1, a: 1}

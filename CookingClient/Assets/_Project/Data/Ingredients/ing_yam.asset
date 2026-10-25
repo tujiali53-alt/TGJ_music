@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71c2e90d4a64f1e8b35c6d70a9f4e21, type: 3}
   m_Name: ing_yam
   m_EditorClassIdentifier: Assembly-CSharp::Cooking.Data.IngredientDefinition
-  id: 
-  displayName: 
-  description: 
-  kind: 0
+  id: 'ing_yam '
+  displayName: "\u5C71\u836F "
+  description: "\u50CF\u957F\u6BDB\u7684\u6811\u679D\uFF0C\u6709\u4EBA\u8BF4\u5B83\u662F\u571F\u8C46\u7684\u4EB2\u621A\uFF0C\u53CD\u6B63\u6211\u4E0D\u4FE1\u3002"
+  kind: 1
   canEatRaw: 0
-  canCut: 0
-  optimalDoneness: 100
-  maxDoneness: 140
+  canCut: 1
+  optimalDoneness: 115
+  maxDoneness: 175
   spriteWhole: {fileID: 0}
   baseColor: {r: 1, g: 1, b: 1, a: 1}

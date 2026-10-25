@@ -1,3 +1,4 @@
+using System.Globalization;
 using Cooking.Core;
 using Cooking.Data;
 using Cooking.Runtime;
@@ -11,6 +12,7 @@ namespace Cooking.UI
     {
         [SerializeField] Image icon;
         [SerializeField] TMP_Text countText;
+        [SerializeField] TMP_Text statusText;
         [SerializeField] IngredientDefinition[] definitions;
         [SerializeField] FoodSlotDrag drag;
 
@@ -30,6 +32,16 @@ namespace Cooking.UI
                     countText = found.GetComponent<TMP_Text>();
             }
 
+            if (statusText == null)
+            {
+                Transform found = transform.Find("StatusText");
+                if (found != null)
+                    statusText = found.GetComponent<TMP_Text>();
+            }
+
+            if (statusText == null)
+                Debug.LogError("FoodSlot 下需要有 StatusText。", this);
+
             if (drag == null)
                 drag = GetComponent<FoodSlotDrag>();
         }
@@ -46,11 +58,14 @@ namespace Cooking.UI
 
         void Refresh()
         {
-            if (drag != null && drag.IsDragging)
-                return;
-
             IngredientInstance item = FirstItem();
             if (item == null || item.Quantity <= 0)
+                return;
+
+            if (statusText != null)
+                statusText.text = "熟度：" + item.Doneness.ToString("0.00", CultureInfo.InvariantCulture);
+
+            if (drag != null && drag.IsDragging)
                 return;
 
             IngredientDefinition definition = FindDefinition(item.DefinitionId);
@@ -58,21 +73,7 @@ namespace Cooking.UI
                 icon.sprite = definition.spriteWhole;
 
             if (countText != null)
-                countText.text = Describe(item);
-        }
-
-        static string Describe(IngredientInstance item)
-        {
-            string text = "x" + item.Quantity + ShapeLabel(item.Shape);
-            if (item.Doneness <= 0f && item.CookMethod == CookMethod.Raw)
-                return text;
-
-            text += "\n";
-            if (item.Doneness > 0f)
-                text += "熟" + Mathf.RoundToInt(item.Doneness);
-
-            text += MethodLabel(item.CookMethod);
-            return text;
+                countText.text = "x" + item.Quantity + ShapeLabel(item.Shape) + MethodLabel(item.CookMethod);
         }
 
         static string ShapeLabel(CutShape shape)

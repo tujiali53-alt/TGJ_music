@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71c2e90d4a64f1e8b35c6d70a9f4e21, type: 3}
   m_Name: ing_pumpkin
   m_EditorClassIdentifier: Assembly-CSharp::Cooking.Data.IngredientDefinition
-  id: 
-  displayName: 
-  description: 
-  kind: 0
+  id: 'ing_pumpkin '
+  displayName: "\u5E7D\u7075\u5357\u74DC "
+  description: "\u957F\u6709\u8138\u72B6\u82B1\u7EB9\u7684\u767D\u8272\u5357\u74DC\uFF0C\u7A76\u7ADF\u662F\u5929\u751F\u8FD8\u662F\u4EA1\u7075\u7684\u6267\u5FF5\u5462\uFF1F\u6CA1\u6709\u4EBA\u77E5\u9053\u7B54\u6848\u3002"
+  kind: 1
   canEatRaw: 0
-  canCut: 0
-  optimalDoneness: 100
-  maxDoneness: 140
+  canCut: 1
+  optimalDoneness: 125
+  maxDoneness: 185
   spriteWhole: {fileID: 0}
   baseColor: {r: 1, g: 1, b: 1, a: 1}
