@@ -2,67 +2,103 @@ using System.Collections.Generic;
 using Cooking.Data;
 using Cooking.Runtime;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Cooking.UI
 {
-    public sealed class CookingPot : MonoBehaviour, IFoodStation, IPointerDownHandler, IPointerUpHandler
+    public sealed class CookingPot : MonoBehaviour, IFoodStation
     {
+        public const int Capacity = 8;
+
         [SerializeField] IngredientDefinition[] definitions;
         [SerializeField] float donenessPerSecond = 40f;
 
         static CookingPot current;
 
-        readonly List<IngredientInstance> cooking = new List<IngredientInstance>();
-        bool holding;
+        readonly List<IngredientInstance> held = new List<IngredientInstance>();
+        FoodTokens tokens;
+        Button fireButton;
+        bool burning;
 
         void Awake()
         {
             current = this;
+            tokens = new FoodTokens(transform);
+            tokens.Collect();
+            if (tokens.TokenCount == 0)
+                Debug.LogError("CookingPot 下需要已经摆好的食物令牌。", this);
+
+            fireButton = SceneButtons.Find("openFireButton");
+            if (fireButton != null)
+                fireButton.onClick.AddListener(ToggleFire);
+        }
+
+        void OnDestroy()
+        {
+            if (fireButton != null)
+                fireButton.onClick.RemoveListener(ToggleFire);
         }
 
         public bool TryPlace(IngredientInstance item)
         {
-            if (item == null)
+            return TryPlace(item, Vector2.zero, null);
+        }
+
+        public bool TryPlace(IngredientInstance item, Vector2 localPoint, IngredientDefinition definition)
+        {
+            if (item == null || tokens == null)
                 return false;
 
-            if (!cooking.Contains(item))
-                cooking.Add(item);
+            if (held.Contains(item))
+            {
+                tokens.Present(item, localPoint, definition);
+                return true;
+            }
 
+            if (held.Count >= Capacity || !tokens.HasFree())
+                return false;
+
+            Plate.Detach(item);
+            CuttingBoard.Detach(item);
+            IngredientInventory.Remove(item);
+            held.Add(item);
+            tokens.Present(item, localPoint, definition);
             return true;
         }
 
-        public static void Forget(IngredientInstance item)
+        public static bool Detach(IngredientInstance item)
         {
-            if (current == null || item == null)
+            if (current == null || current.tokens == null || item == null)
+                return false;
+
+            if (!current.held.Remove(item))
+                return false;
+
+            current.tokens.Clear(item);
+            return true;
+        }
+
+        public static void ReleaseToInventory(IngredientInstance item)
+        {
+            if (!Detach(item))
                 return;
 
-            current.cooking.Remove(item);
+            IngredientInventory.Add(item);
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        public void ToggleFire()
         {
-            holding = true;
-        }
-
-        public void OnPointerUp(PointerEventData eventData)
-        {
-            holding = false;
-        }
-
-        void OnDisable()
-        {
-            holding = false;
+            burning = !burning;
         }
 
         void Update()
         {
-            if (!holding)
+            if (!burning)
                 return;
 
-            for (int i = 0; i < cooking.Count; i++)
+            for (int i = 0; i < held.Count; i++)
             {
-                IngredientInstance item = cooking[i];
+                IngredientInstance item = held[i];
                 if (item == null)
                     continue;
 

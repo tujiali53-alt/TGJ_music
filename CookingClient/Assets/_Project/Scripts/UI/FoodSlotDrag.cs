@@ -3,6 +3,7 @@ using Cooking.Data;
 using Cooking.Runtime;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Cooking.UI
 {
@@ -12,10 +13,13 @@ namespace Cooking.UI
 
         RectTransform rect;
         Canvas canvas;
+        Image background;
         Transform homeParent;
         int homeSibling;
         Vector2 homePosition;
+        Vector2 heldPosition;
         bool tracking;
+        bool restoreBackground;
         readonly List<RaycastResult> raycastResults = new List<RaycastResult>();
 
         void Awake()
@@ -25,6 +29,11 @@ namespace Cooking.UI
             homeSibling = transform.GetSiblingIndex();
             homePosition = rect.anchoredPosition;
             canvas = GetComponentInParent<Canvas>();
+            background = GetComponent<Image>();
+            FoodSlotView view = GetComponent<FoodSlotView>();
+            restoreBackground = view == null || view.InventorySlot;
+            if (!restoreBackground && background != null)
+                background.enabled = false;
         }
 
         public void OnBeginDrag(PointerEventData eventData)
@@ -35,6 +44,9 @@ namespace Cooking.UI
 
             tracking = true;
             IsDragging = true;
+            heldPosition = rect != null ? rect.anchoredPosition : Vector2.zero;
+            if (background != null)
+                background.enabled = false;
             if (canvas == null)
                 return;
 
@@ -63,53 +75,52 @@ namespace Cooking.UI
             IFoodStation station = FindStation(eventData);
             bool fromInventory = view != null && view.InventorySlot;
 
+            IngredientDefinition definition = view != null ? view.ShownDefinition : null;
             if (fromInventory)
             {
-                PlaceFromInventory(item, view, station, eventData);
+                Place(item, definition, station, eventData);
                 ReturnToTray();
                 return;
             }
 
-            if (station is Plate plate && LocalOn(plate, eventData, out Vector2 local))
+            if (station == null)
             {
-                plate.TryPlace(item, local, view != null ? view.ShownDefinition : null);
-                CookingPot.Forget(item);
+                Plate.ReleaseToInventory(item);
+                CuttingBoard.ReleaseToInventory(item);
+                CookingPot.ReleaseToInventory(item);
+                ReturnToTray();
+                if (view != null)
+                    view.ShowStack(null, 0, null);
                 return;
             }
 
-            Plate.ReleaseToInventory(item);
-            if (station != null && !(station is Plate))
-                station.TryPlace(item);
-
-            if (!(station is CookingPot))
-                CookingPot.Forget(item);
-
-            ReturnToTray();
-            if (view != null)
-                view.ShowStack(null, 0, null);
+            if (!Place(item, definition, station, eventData))
+                Settle(heldPosition, false);
         }
 
-        void PlaceFromInventory(IngredientInstance item, FoodSlotView view, IFoodStation station, PointerEventData eventData)
+        bool Place(IngredientInstance item, IngredientDefinition definition, IFoodStation station, PointerEventData eventData)
         {
-            bool placedOnPlate = false;
-            if (station is Plate plate && LocalOn(plate, eventData, out Vector2 local))
-                placedOnPlate = plate.TryPlace(item, local, view != null ? view.ShownDefinition : null);
-            else if (station != null)
-                station.TryPlace(item);
+            if (station is Plate plate && LocalOn(plate.transform, eventData, out Vector2 platePoint))
+                return plate.TryPlace(item, platePoint, definition);
 
-            if (placedOnPlate || !(station is CookingPot))
-                CookingPot.Forget(item);
+            if (station is CuttingBoard board && LocalOn(board.transform, eventData, out Vector2 boardPoint))
+                return board.TryPlace(item, boardPoint, definition);
+
+            if (station is CookingPot pot && LocalOn(pot.transform, eventData, out Vector2 potPoint))
+                return pot.TryPlace(item, potPoint, definition);
+
+            return false;
         }
 
-        bool LocalOn(Plate plate, PointerEventData eventData, out Vector2 local)
+        static bool LocalOn(Transform target, PointerEventData eventData, out Vector2 local)
         {
             local = Vector2.zero;
-            RectTransform plateRect = plate.transform as RectTransform;
-            if (plateRect == null)
+            RectTransform targetRect = target as RectTransform;
+            if (targetRect == null)
                 return false;
 
             return RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                plateRect,
+                targetRect,
                 eventData.position,
                 eventData.pressEventCamera,
                 out local);
@@ -141,21 +152,34 @@ namespace Cooking.UI
 
         public void ReturnToTray()
         {
+            Settle(homePosition, true);
+        }
+
+        void Settle(Vector2 position, bool restSibling)
+        {
             IsDragging = false;
             tracking = false;
             if (homeParent != null)
             {
                 transform.SetParent(homeParent, false);
-                int sibling = homeSibling;
-                if (sibling >= homeParent.childCount)
-                    sibling = homeParent.childCount - 1;
-                if (sibling < 0)
-                    sibling = 0;
-                transform.SetSiblingIndex(sibling);
+                if (restSibling)
+                {
+                    int sibling = homeSibling;
+                    if (sibling >= homeParent.childCount)
+                        sibling = homeParent.childCount - 1;
+                    if (sibling < 0)
+                        sibling = 0;
+                    transform.SetSiblingIndex(sibling);
+                }
+                else
+                    transform.SetAsLastSibling();
             }
 
             if (rect != null)
-                rect.anchoredPosition = homePosition;
+                rect.anchoredPosition = position;
+
+            if (background != null)
+                background.enabled = restoreBackground;
         }
     }
 }

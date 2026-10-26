@@ -53,11 +53,21 @@ namespace Cooking.UI
 
             if (drag == null)
                 drag = GetComponent<FoodSlotDrag>();
+
+            if (!inventorySlot)
+            {
+                Image background = GetComponent<Image>();
+                if (background != null && background != icon)
+                    background.enabled = false;
+            }
         }
 
         void LateUpdate()
         {
-            if (!inventorySlot || drag != null && drag.IsDragging)
+            if (drag != null && drag.IsDragging)
+                return;
+
+            if (inventorySlot || shown == null)
                 return;
 
             Apply();
@@ -84,9 +94,27 @@ namespace Cooking.UI
 
             if (icon != null)
             {
-                icon.enabled = has && shownDefinition != null && shownDefinition.spriteWhole != null;
-                if (icon.enabled)
-                    icon.sprite = shownDefinition.spriteWhole;
+                Sprite sprite = null;
+                Color color = Color.white;
+                if (has && shownDefinition != null)
+                {
+                    FoodVisual visual = FoodVisualResolver.Evaluate(shownDefinition, shown);
+                    sprite = visual.Sprite;
+                    color = visual.Color;
+                    if (sprite == null)
+                    {
+                        sprite = shownDefinition.spriteWhole;
+                        color = Color.white;
+                    }
+                }
+
+                icon.enabled = sprite != null;
+                icon.preserveAspect = true;
+                if (sprite != null)
+                {
+                    icon.sprite = sprite;
+                    icon.color = color;
+                }
             }
 
             if (countText != null)

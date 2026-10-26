@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Cooking.Core;
 using Cooking.Data;
 using Cooking.Runtime;
@@ -12,21 +11,14 @@ namespace Cooking.UI
 
         static Plate current;
 
-        readonly List<FoodSlotView> tokens = new List<FoodSlotView>();
+        FoodTokens tokens;
 
         void Awake()
         {
             current = this;
-            tokens.Clear();
-            FoodSlotView[] views = GetComponentsInChildren<FoodSlotView>(true);
-            for (int i = 0; i < views.Length; i++)
-            {
-                FoodSlotView view = views[i];
-                if (view != null && !view.InventorySlot)
-                    tokens.Add(view);
-            }
-
-            if (tokens.Count == 0)
+            tokens = new FoodTokens(transform);
+            tokens.Collect();
+            if (tokens.TokenCount == 0)
                 Debug.LogError("Plate 下需要已经摆好的食物令牌。", this);
         }
 
@@ -37,73 +29,63 @@ namespace Cooking.UI
 
         public bool TryPlace(IngredientInstance item, Vector2 localPoint, IngredientDefinition definition)
         {
-            GameSession session = Session();
+            GameSession session = IngredientInventory.Session();
             if (session == null || session.HeldDish == null)
             {
                 Debug.LogError("需要 GameSession 上的 HeldDish。", this);
                 return false;
             }
 
-            if (item == null)
+            if (item == null || tokens == null)
                 return false;
 
             if (session.HeldDish.Items.Contains(item))
             {
-                Present(item, localPoint, definition);
+                tokens.Present(item, localPoint, definition);
                 return true;
             }
 
-            if (session.HeldDish.Items.Count >= Capacity || FreeToken() == null)
+            if (session.HeldDish.Items.Count >= Capacity || !tokens.HasFree())
                 return false;
 
-            if (session.Inventory != null)
-                session.Inventory.Remove(item);
-
+            CuttingBoard.Detach(item);
+            CookingPot.Detach(item);
+            IngredientInventory.Remove(item);
             session.HeldDish.Items.Add(item);
-            Present(item, localPoint, definition);
+            tokens.Present(item, localPoint, definition);
+            return true;
+        }
+
+        public static bool Detach(IngredientInstance item)
+        {
+            GameSession session = IngredientInventory.Session();
+            if (current == null || current.tokens == null || session == null || session.HeldDish == null || item == null)
+                return false;
+
+            if (!session.HeldDish.Items.Remove(item))
+                return false;
+
+            current.tokens.Clear(item);
             return true;
         }
 
         public static void ReleaseToInventory(IngredientInstance item)
         {
-            GameSession session = Session();
-            if (session == null || session.HeldDish == null || item == null)
+            if (!Detach(item))
                 return;
 
-            if (!session.HeldDish.Items.Remove(item))
-                return;
-
-            if (session.Inventory == null)
-            {
-                Debug.LogError("GameSession 缺少库存列表。");
-                return;
-            }
-
-            if (!session.Inventory.Contains(item))
-                session.Inventory.Add(item);
-
-            if (current != null)
-                current.ClearToken(item);
+            IngredientInventory.Add(item);
         }
 
         public void ClearAll()
         {
-            for (int i = 0; i < tokens.Count; i++)
-            {
-                FoodSlotView token = tokens[i];
-                if (token == null)
-                    continue;
-
-                token.ShowStack(null, 0, null);
-                FoodSlotDrag drag = token.GetComponent<FoodSlotDrag>();
-                if (drag != null)
-                    drag.ReturnToTray();
-            }
+            if (tokens != null)
+                tokens.ClearAll();
         }
 
         public static bool HasFood()
         {
-            GameSession session = Session();
+            GameSession session = IngredientInventory.Session();
             if (session == null || session.HeldDish == null)
                 return false;
 
@@ -115,71 +97,6 @@ namespace Cooking.UI
             }
 
             return false;
-        }
-
-        void Present(IngredientInstance item, Vector2 localPoint, IngredientDefinition definition)
-        {
-            FoodSlotView token = TokenFor(item);
-            if (token == null)
-                token = FreeToken();
-            if (token == null)
-                return;
-
-            if (definition == null)
-                definition = FoodTray.Lookup(item.DefinitionId);
-
-            token.transform.SetParent(transform, false);
-            token.ShowStack(item, item.Quantity, definition);
-            RectTransform rect = token.transform as RectTransform;
-            if (rect != null)
-                rect.anchoredPosition = localPoint;
-
-            token.transform.SetAsLastSibling();
-        }
-
-        void ClearToken(IngredientInstance item)
-        {
-            FoodSlotView token = TokenFor(item);
-            if (token == null)
-                return;
-
-            token.ShowStack(null, 0, null);
-            FoodSlotDrag drag = token.GetComponent<FoodSlotDrag>();
-            if (drag != null)
-                drag.ReturnToTray();
-        }
-
-        FoodSlotView TokenFor(IngredientInstance item)
-        {
-            for (int i = 0; i < tokens.Count; i++)
-            {
-                FoodSlotView token = tokens[i];
-                if (token != null && token.Shown == item)
-                    return token;
-            }
-
-            return null;
-        }
-
-        FoodSlotView FreeToken()
-        {
-            for (int i = 0; i < tokens.Count; i++)
-            {
-                FoodSlotView token = tokens[i];
-                if (token != null && token.Shown == null)
-                    return token;
-            }
-
-            return null;
-        }
-
-        static GameSession Session()
-        {
-            GameRoot root = GameRoot.Instance;
-            if (root == null)
-                return null;
-
-            return root.Session;
         }
     }
 }
