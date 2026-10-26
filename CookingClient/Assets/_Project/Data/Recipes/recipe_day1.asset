@@ -21,14 +21,6 @@ MonoBehaviour:
     shape: 2
     cookMethod: 3
     count: 1
-  - ingredientId: ing_onion
-    shape: 2
-    cookMethod: 3
-    count: 1
-  - ingredientId: ing_potato
-    shape: 2
-    cookMethod: 1
-    count: 1
   seasonings:
   - seasoningId: season_oil
     targetIngredientId: ing_mushroom
@@ -36,22 +28,28 @@ MonoBehaviour:
   - seasoningId: season_salt
     targetIngredientId: ing_mushroom
     count: 1
-  - seasoningId: season_pepper
-    targetIngredientId: ing_mushroom
-    count: 1
-  - seasoningId: season_oil
-    targetIngredientId: ing_onion
-    count: 1
-  - seasoningId: season_salt
-    targetIngredientId: ing_onion
-    count: 1
-  - seasoningId: season_pepper
-    targetIngredientId: ing_onion
-    count: 1
-  - seasoningId: season_salt
-    targetIngredientId: ing_potato
-    count: 1
-  - seasoningId: season_pepper
-    targetIngredientId: ing_potato
-    count: 1
-  steps: []
+  steps:
+  - order: 1
+    hintText: "\u767D\u8611\u83C7\u5207\u7247\u3002"
+    action: 0
+    ingredientId: ing_mushroom
+    cookMethod: 0
+    seasoningId: 
+  - order: 2
+    hintText: "\u9505\u4E2D\u653E\u6CB9\uFF0C\u52A0\u5165\u8611\u83C7\uFF0C\u7092\u81F3\u7126\u9999\u3002"
+    action: 2
+    ingredientId: ing_mushroom
+    cookMethod: 2
+    seasoningId: season_oil
+  - order: 3
+    hintText: "\u5F00\u59CB\u7096\u716E\u3002"
+    action: 1
+    ingredientId: ing_mushroom
+    cookMethod: 3
+    seasoningId: 
+  - order: 4
+    hintText: "\u8BB0\u5F97\u4F7F\u7528\u76D0\u8C03\u5473\u3002"
+    action: 3
+    ingredientId: ing_mushroom
+    cookMethod: 3
+    seasoningId: season_salt

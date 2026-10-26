@@ -90,24 +90,16 @@ namespace Cooking.EditorTools
             if (recipe.unlockDay != 1)
                 return "unlockDay 应为 1，实际 " + recipe.unlockDay;
 
-            if (recipe.ingredients == null || recipe.ingredients.Count != 3)
-                return "ingredients 应有 3 条，实际 " + (recipe.ingredients == null ? 0 : recipe.ingredients.Count);
+            if (recipe.ingredients == null || recipe.ingredients.Count != 1)
+                return "ingredients 应有 1 条，实际 " + (recipe.ingredients == null ? 0 : recipe.ingredients.Count);
 
-            if (!HasIngredient(recipe, "ing_mushroom", CutShape.Slice, CookMethod.BoiledAndFried)
-                || !HasIngredient(recipe, "ing_onion", CutShape.Slice, CookMethod.BoiledAndFried)
-                || !HasIngredient(recipe, "ing_potato", CutShape.Slice, CookMethod.Boiled))
-                return "RecipeIngredients 与 Day1 期望不一致。";
+            if (!HasIngredient(recipe, "ing_mushroom", CutShape.Slice, CookMethod.BoiledAndFried))
+                return "RecipeIngredients 与 Day1 期望不一致（白蘑菇切片后先煎后煮）。";
 
             string[] expectedSeasonings =
             {
                 "season_oil:ing_mushroom",
-                "season_salt:ing_mushroom",
-                "season_pepper:ing_mushroom",
-                "season_oil:ing_onion",
-                "season_salt:ing_onion",
-                "season_pepper:ing_onion",
-                "season_salt:ing_potato",
-                "season_pepper:ing_potato"
+                "season_salt:ing_mushroom"
             };
 
             if (recipe.seasonings == null || recipe.seasonings.Count != expectedSeasonings.Length)
