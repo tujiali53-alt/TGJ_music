@@ -22,4 +22,10 @@ MonoBehaviour:
   maxDoneness: 180
   spriteWhole: {fileID: 21300000, guid: bf08894c88b0d2e44a13dd02d3793477, type: 3}
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  stateSprites: []
+  stateSprites:
+  - shape: 2
+    cookMethod: 0
+    sprite: {fileID: 21300000, guid: ed8e7707f195ef345a50b45d7ef67c8c, type: 3}
+  - shape: 2
+    cookMethod: 1
+    sprite: {fileID: 21300000, guid: fbdad6419ae0eba4bbac53234f891023, type: 3}
