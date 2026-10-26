@@ -95,26 +95,18 @@ namespace Cooking.UI
             if (icon != null)
             {
                 Sprite sprite = null;
-                Color color = Color.white;
                 if (has && shownDefinition != null)
                 {
-                    FoodVisual visual = FoodVisualResolver.Evaluate(shownDefinition, shown);
-                    sprite = visual.Sprite;
-                    color = visual.Color;
+                    sprite = FoodVisualResolver.FindSprite(shownDefinition, shown.Shape, shown.CookMethod);
                     if (sprite == null)
-                    {
                         sprite = shownDefinition.spriteWhole;
-                        color = Color.white;
-                    }
                 }
 
                 icon.enabled = sprite != null;
                 icon.preserveAspect = true;
+                icon.color = Color.white;
                 if (sprite != null)
-                {
                     icon.sprite = sprite;
-                    icon.color = color;
-                }
             }
 
             if (countText != null)
@@ -143,11 +135,9 @@ namespace Cooking.UI
             switch (method)
             {
                 case CookMethod.Boiled:
-                    return " 煮";
                 case CookMethod.Fried:
-                    return " 煎";
                 case CookMethod.BoiledAndFried:
-                    return " 煮煎";
+                    return " 煮";
                 default:
                     return "";
             }

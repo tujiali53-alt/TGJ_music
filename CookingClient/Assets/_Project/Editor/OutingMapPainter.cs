@@ -16,10 +16,10 @@ namespace Cooking.EditorTools
         const float Cell = 0.16f;
         const float CameraSize = 5.4f;
 
-        const int MinX = -180;
-        const int MaxX = 179;
-        const int MinY = -120;
-        const int MaxY = 119;
+        const int MinX = -60;
+        const int MaxX = 59;
+        const int MinY = -34;
+        const int MaxY = 33;
         static readonly int[] GrassIds = { 3, 15, 7, 5 };
         static readonly int[] DirtIds = { 17, 13, 21, 16 };
         static readonly int[] BushIds = { 1, 9, 5, 8, 4, 0, 10 };
@@ -118,36 +118,29 @@ namespace Cooking.EditorTools
 
         static bool IsDirt(int x, int y)
         {
-            float noise = Mathf.PerlinNoise(x * 0.045f + 20f, y * 0.045f + 8f);
-            float nx = x / 100f;
-            float ny = (y + 6f) / 68f;
-            if (nx * nx + ny * ny < 0.72f + noise * 0.38f)
+            float noise = Mathf.PerlinNoise(x * 0.08f + 4f, y * 0.08f + 2f);
+            float nx = x / 36f;
+            float ny = (y + 2f) / 22f;
+            if (nx * nx + ny * ny < 0.62f + noise * 0.28f)
             {
-                if (Island(x, y, -50, 18, 24, 16))
+                if (Island(x, y, -18, 6, 9, 6))
                     return false;
-                if (Island(x, y, 48, -28, 28, 18))
-                    return false;
-                if (Island(x, y, 8, 36, 18, 14))
-                    return false;
-                if (Island(x, y, -28, -42, 26, 14))
-                    return false;
-                if (Island(x, y, 78, 8, 16, 12))
+                if (Island(x, y, 16, -8, 10, 6))
                     return false;
                 return true;
             }
 
-            int roadY = -8 + Mathf.RoundToInt(Mathf.Sin(x * 0.035f) * 5f);
-            if (Mathf.Abs(y - roadY) <= 2 && x >= -150 && x <= 155)
+            if (Mathf.Abs(y + 2) <= 1 && x >= -42 && x <= 42)
                 return true;
-            if (Mathf.Abs(x - 6) <= 2 && y >= -100 && y <= 85)
+            if (Mathf.Abs(x - 2) <= 1 && y >= -20 && y <= 16)
                 return true;
-            if (DistanceToSegment(x, y, 30, 8, 125, 42) <= 2.4f)
+            if (DistanceToSegment(x, y, 10, 0, 36, 10) <= 1.6f)
                 return true;
-            if (DistanceToSegment(x, y, -20, -4, -125, 28) <= 2.2f)
+            if (DistanceToSegment(x, y, -8, -2, -36, -8) <= 1.6f)
                 return true;
-            if (DistanceToSegment(x, y, 10, -40, 55, -95) <= 2.2f)
+            if (Island(x, y, 36, 10, 7, 5))
                 return true;
-            if (Island(x, y, 128, 44, 22, 16))
+            if (Island(x, y, -36, -8, 6, 5))
                 return true;
             return false;
         }
@@ -162,11 +155,11 @@ namespace Cooking.EditorTools
 
         static bool KeptClear(int x, int y)
         {
-            if (Island(x, y, 0, -8, 14, 12))
+            if (Island(x, y, 0, -2, 6, 5))
                 return true;
-            if (Island(x, y, 128, 44, 16, 12))
+            if (Island(x, y, 36, 10, 6, 5))
                 return true;
-            if (Island(x, y, -118, 26, 8, 8))
+            if (Island(x, y, -36, -8, 5, 4))
                 return true;
             return false;
         }
@@ -199,19 +192,19 @@ namespace Cooking.EditorTools
 
             if (player != null)
             {
-                player.position = CellCenter(0, -8);
+                player.position = CellCenter(0, -2);
                 SetOrder(player, 5);
             }
 
             if (bed != null)
             {
-                bed.position = CellCenter(128, 44);
+                bed.position = CellCenter(36, 10);
                 SetOrder(bed, 5);
             }
 
             if (mushroom != null)
             {
-                mushroom.position = CellCenter(-118, 26);
+                mushroom.position = CellCenter(-36, -8);
                 SetOrder(mushroom, 5);
             }
 

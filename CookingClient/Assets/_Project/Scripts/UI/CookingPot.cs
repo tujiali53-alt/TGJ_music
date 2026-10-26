@@ -120,10 +120,8 @@ namespace Cooking.UI
 
         static void ApplyBoil(IngredientInstance item)
         {
-            if (item.CookMethod == CookMethod.Raw)
+            if (item.CookMethod != CookMethod.Boiled)
                 item.CookMethod = CookMethod.Boiled;
-            else if (item.CookMethod == CookMethod.Fried)
-                item.CookMethod = CookMethod.BoiledAndFried;
         }
 
         IngredientDefinition FindDefinition(string definitionId)
