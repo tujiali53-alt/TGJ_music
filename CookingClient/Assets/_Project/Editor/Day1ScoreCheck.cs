@@ -350,6 +350,7 @@ namespace Cooking.EditorTools
             return new RecipeIngredient
             {
                 ingredientId = id,
+                shape = CutShape.Slice,
                 cookMethod = method,
                 count = 1
             };

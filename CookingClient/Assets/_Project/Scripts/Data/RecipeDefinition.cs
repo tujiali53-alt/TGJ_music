@@ -8,6 +8,7 @@ namespace Cooking.Data
     public struct RecipeIngredient
     {
         public string ingredientId;
+        public CutShape shape;
         public CookMethod cookMethod;
         public int count;
     }

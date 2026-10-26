@@ -14,9 +14,30 @@ namespace Cooking.EditorTools
     public static class CookingTableImporter
     {
         const string TableAssetPath = "Assets/_Project/Data/Tables/CookingTables.xlsx";
+        const string TableAssetPathFallback = "Assets/_Project/Data/Tables/CookingTables_new.xlsx";
         const string IngredientsFolder = "Assets/_Project/Data/Ingredients";
         const string SeasoningsFolder = "Assets/_Project/Data/Seasonings";
         const string RecipesFolder = "Assets/_Project/Data/Recipes";
+
+        static string ResolveTableAssetPath()
+        {
+            string primary = ToAbsolutePath(TableAssetPath);
+            if (File.Exists(primary))
+            {
+                // Prefer rewritten workbook if official file is still the locked old copy.
+                string fallback = ToAbsolutePath(TableAssetPathFallback);
+                if (File.Exists(fallback)
+                    && File.GetLastWriteTimeUtc(fallback) > File.GetLastWriteTimeUtc(primary))
+                    return TableAssetPathFallback;
+
+                return TableAssetPath;
+            }
+
+            if (File.Exists(ToAbsolutePath(TableAssetPathFallback)))
+                return TableAssetPathFallback;
+
+            return TableAssetPath;
+        }
 
         [MenuItem("Cooking/Import Cooking Tables")]
         public static void ImportMenu()
@@ -36,14 +57,15 @@ namespace Cooking.EditorTools
         [MenuItem("Cooking/Reveal Cooking Tables")]
         public static void RevealTables()
         {
-            string absolute = ToAbsolutePath(TableAssetPath);
+            string assetPath = ResolveTableAssetPath();
+            string absolute = ToAbsolutePath(assetPath);
             if (!File.Exists(absolute))
             {
                 Debug.LogError("缺少表文件：" + TableAssetPath);
                 return;
             }
 
-            EditorUtility.RevealInFinder(TableAssetPath);
+            EditorUtility.RevealInFinder(assetPath);
         }
 
         [MenuItem("Cooking/Validate Imported Day1 Recipe")]
@@ -71,9 +93,9 @@ namespace Cooking.EditorTools
             if (recipe.ingredients == null || recipe.ingredients.Count != 3)
                 return "ingredients 应有 3 条，实际 " + (recipe.ingredients == null ? 0 : recipe.ingredients.Count);
 
-            if (!HasIngredient(recipe, "ing_mushroom", CookMethod.BoiledAndFried)
-                || !HasIngredient(recipe, "ing_onion", CookMethod.BoiledAndFried)
-                || !HasIngredient(recipe, "ing_potato", CookMethod.Boiled))
+            if (!HasIngredient(recipe, "ing_mushroom", CutShape.Slice, CookMethod.BoiledAndFried)
+                || !HasIngredient(recipe, "ing_onion", CutShape.Slice, CookMethod.BoiledAndFried)
+                || !HasIngredient(recipe, "ing_potato", CutShape.Slice, CookMethod.Boiled))
                 return "RecipeIngredients 与 Day1 期望不一致。";
 
             string[] expectedSeasonings =
@@ -113,12 +135,18 @@ namespace Cooking.EditorTools
             return null;
         }
 
-        static bool HasIngredient(RecipeDefinition recipe, string ingredientId, CookMethod method)
+        static bool HasIngredient(
+            RecipeDefinition recipe,
+            string ingredientId,
+            CutShape shape,
+            CookMethod method)
         {
             for (int i = 0; i < recipe.ingredients.Count; i++)
             {
                 RecipeIngredient item = recipe.ingredients[i];
-                if (item.ingredientId == ingredientId && item.cookMethod == method)
+                if (item.ingredientId == ingredientId
+                    && item.shape == shape
+                    && item.cookMethod == method)
                     return true;
             }
 
@@ -128,13 +156,17 @@ namespace Cooking.EditorTools
         public static ImportResult Import()
         {
             var result = new ImportResult();
-            string absolute = ToAbsolutePath(TableAssetPath);
+            string assetPath = ResolveTableAssetPath();
+            string absolute = ToAbsolutePath(assetPath);
             if (!File.Exists(absolute))
             {
                 Debug.LogError("缺少表文件：" + TableAssetPath);
                 result.ErrorCount++;
                 return result;
             }
+
+            if (assetPath != TableAssetPath)
+                Debug.LogWarning("使用较新的表文件导入：" + assetPath);
 
             EnsureFolders();
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -168,7 +200,7 @@ namespace Cooking.EditorTools
 
             ImportIngredients(RequireSheet(dataSet, "Ingredients", result), ingredientIds, result);
             ImportIngredientVisualStates(
-                RequireSheet(dataSet, "IngredientVisualStates", result),
+                OptionalSheet(dataSet, "IngredientVisualStates"),
                 visualByIngredient,
                 result);
             ApplyVisualStates(visualByIngredient, result);
@@ -176,7 +208,8 @@ namespace Cooking.EditorTools
             ImportRecipes(RequireSheet(dataSet, "Recipes", result), recipeIds, result);
             ImportRecipeIngredients(RequireSheet(dataSet, "RecipeIngredients", result), result);
             ImportRecipeSeasonings(RequireSheet(dataSet, "RecipeSeasonings", result), result);
-            ImportRecipeSteps(RequireSheet(dataSet, "RecipeSteps", result), result);
+            // steps 日记功能尚未接入，Sheet 可选
+            ImportRecipeSteps(OptionalSheet(dataSet, "RecipeSteps"), result);
 
             WarnMissing("Ingredients", IngredientsFolder, typeof(IngredientDefinition), ingredientIds);
             WarnMissing("Seasonings", SeasoningsFolder, typeof(SeasoningDefinition), seasoningIds);
@@ -227,7 +260,11 @@ namespace Cooking.EditorTools
                     continue;
                 asset.maxDoneness = max;
 
-                ApplySprite(Cell(row, "spriteWholePath"), ref asset.spriteWhole, "Ingredients/" + id + ".spriteWholePath", result);
+                ApplySprite(
+                    FirstCell(row, "spriteWhole", "spriteWholePath"),
+                    ref asset.spriteWhole,
+                    "Ingredients/" + id + ".spriteWhole",
+                    result);
 
                 string colorText = Cell(row, "baseColor");
                 if (!string.IsNullOrWhiteSpace(colorText))
@@ -266,7 +303,7 @@ namespace Cooking.EditorTools
                     continue;
 
                 Sprite sprite = null;
-                string spritePath = Cell(row, "spritePath");
+                string spritePath = FirstCell(row, "sprite", "spritePath");
                 if (!string.IsNullOrWhiteSpace(spritePath))
                 {
                     sprite = AssetDatabase.LoadAssetAtPath<Sprite>(spritePath.Trim());
@@ -329,7 +366,11 @@ namespace Cooking.EditorTools
                 SeasoningDefinition asset = FindOrCreate<SeasoningDefinition>(SeasoningsFolder, id, result);
                 asset.id = id;
                 asset.displayName = Cell(row, "displayName");
-                ApplySprite(Cell(row, "iconPath"), ref asset.icon, "Seasonings/" + id + ".iconPath", result);
+                ApplySprite(
+                    FirstCell(row, "iconPath", "icon"),
+                    ref asset.icon,
+                    "Seasonings/" + id + ".icon",
+                    result);
                 EditorUtility.SetDirty(asset);
             }
         }
@@ -360,7 +401,11 @@ namespace Cooking.EditorTools
                 else
                     continue;
 
-                ApplySprite(Cell(row, "finishedSpritePath"), ref asset.finishedSprite, "Recipes/" + id + ".finishedSpritePath", result);
+                ApplySprite(
+                    FirstCell(row, "finishedSpritePath", "finishedSprite"),
+                    ref asset.finishedSprite,
+                    "Recipes/" + id + ".finishedSprite",
+                    result);
 
                 if (asset.ingredients == null)
                     asset.ingredients = new List<RecipeIngredient>();
@@ -394,7 +439,7 @@ namespace Cooking.EditorTools
                     continue;
 
                 recipeId = recipeId.Trim();
-                string ingredientId = Cell(row, "ingredientId").Trim();
+                string ingredientId = FirstCell(row, "ingredientId", "ingredient Id").Trim();
                 if (string.IsNullOrEmpty(ingredientId))
                 {
                     Debug.LogError("RecipeIngredients 缺少 ingredientId @ " + recipeId);
@@ -402,7 +447,18 @@ namespace Cooking.EditorTools
                     continue;
                 }
 
-                if (!TryParseEnum(Cell(row, "cookMethod"), out CookMethod cookMethod, "RecipeIngredients/" + recipeId, result))
+                if (!TryParseEnum(
+                        FirstCell(row, "shape"),
+                        out CutShape shape,
+                        "RecipeIngredients/" + recipeId + ".shape",
+                        result))
+                    continue;
+
+                if (!TryParseEnum(
+                        FirstCell(row, "cookMethod", "cook Method"),
+                        out CookMethod cookMethod,
+                        "RecipeIngredients/" + recipeId + ".cookMethod",
+                        result))
                     continue;
 
                 int count = 1;
@@ -422,6 +478,7 @@ namespace Cooking.EditorTools
                 list.Add(new RecipeIngredient
                 {
                     ingredientId = ingredientId,
+                    shape = shape,
                     cookMethod = cookMethod,
                     count = count
                 });
@@ -455,8 +512,11 @@ namespace Cooking.EditorTools
                     continue;
 
                 recipeId = recipeId.Trim();
-                string seasoningId = Cell(row, "seasoningId").Trim();
-                string targetIngredientId = Cell(row, "targetIngredientId").Trim();
+                string seasoningId = FirstCell(row, "seasoningId", "seasoning Id").Trim();
+                string targetIngredientId = FirstCell(
+                    row,
+                    "targetIngredientId",
+                    "target Ingredient Id").Trim();
                 if (string.IsNullOrEmpty(seasoningId) || string.IsNullOrEmpty(targetIngredientId))
                 {
                     Debug.LogError("RecipeSeasonings 缺少 seasoningId 或 targetIngredientId @ " + recipeId);
@@ -572,6 +632,23 @@ namespace Cooking.EditorTools
             }
 
             return table;
+        }
+
+        static DataTable OptionalSheet(DataSet dataSet, string name)
+        {
+            return dataSet.Tables[name];
+        }
+
+        static string FirstCell(DataRow row, params string[] columns)
+        {
+            for (int i = 0; i < columns.Length; i++)
+            {
+                string value = Cell(row, columns[i]);
+                if (!string.IsNullOrWhiteSpace(value))
+                    return value;
+            }
+
+            return "";
         }
 
         static void ApplySprite(string path, ref Sprite target, string context, ImportResult result)

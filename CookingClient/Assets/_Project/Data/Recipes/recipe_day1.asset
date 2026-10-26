@@ -18,12 +18,15 @@ MonoBehaviour:
   finishedSprite: {fileID: 0}
   ingredients:
   - ingredientId: ing_mushroom
+    shape: 2
     cookMethod: 3
     count: 1
   - ingredientId: ing_onion
+    shape: 2
     cookMethod: 3
     count: 1
   - ingredientId: ing_potato
+    shape: 2
     cookMethod: 1
     count: 1
   seasonings:
@@ -51,106 +54,4 @@ MonoBehaviour:
   - seasoningId: season_pepper
     targetIngredientId: ing_potato
     count: 1
-  steps:
-  - order: 1
-    hintText: "\u628A\u8611\u83C7\u5207\u7247"
-    action: 0
-    ingredientId: ing_mushroom
-    cookMethod: 0
-    seasoningId: 
-  - order: 2
-    hintText: "\u628A\u6D0B\u8471\u5207\u7247"
-    action: 0
-    ingredientId: ing_onion
-    cookMethod: 0
-    seasoningId: 
-  - order: 3
-    hintText: "\u628A\u571F\u8C46\u5207\u7247"
-    action: 0
-    ingredientId: ing_potato
-    cookMethod: 0
-    seasoningId: 
-  - order: 4
-    hintText: "\u714E\u8611\u83C7"
-    action: 2
-    ingredientId: ing_mushroom
-    cookMethod: 2
-    seasoningId: 
-  - order: 5
-    hintText: "\u714E\u6D0B\u8471"
-    action: 2
-    ingredientId: ing_onion
-    cookMethod: 2
-    seasoningId: 
-  - order: 6
-    hintText: "\u716E\u8611\u83C7"
-    action: 1
-    ingredientId: ing_mushroom
-    cookMethod: 3
-    seasoningId: 
-  - order: 7
-    hintText: "\u716E\u6D0B\u8471"
-    action: 1
-    ingredientId: ing_onion
-    cookMethod: 3
-    seasoningId: 
-  - order: 8
-    hintText: "\u716E\u571F\u8C46"
-    action: 1
-    ingredientId: ing_potato
-    cookMethod: 1
-    seasoningId: 
-  - order: 9
-    hintText: "\u7ED9\u8611\u83C7\u4E0A\u6CB9"
-    action: 3
-    ingredientId: ing_mushroom
-    cookMethod: 3
-    seasoningId: season_oil
-  - order: 10
-    hintText: "\u7ED9\u8611\u83C7\u4E0A\u76D0"
-    action: 3
-    ingredientId: ing_mushroom
-    cookMethod: 3
-    seasoningId: season_salt
-  - order: 11
-    hintText: "\u7ED9\u8611\u83C7\u4E0A\u80E1\u6912"
-    action: 3
-    ingredientId: ing_mushroom
-    cookMethod: 3
-    seasoningId: season_pepper
-  - order: 12
-    hintText: "\u7ED9\u6D0B\u8471\u4E0A\u6CB9"
-    action: 3
-    ingredientId: ing_onion
-    cookMethod: 3
-    seasoningId: season_oil
-  - order: 13
-    hintText: "\u7ED9\u6D0B\u8471\u4E0A\u76D0"
-    action: 3
-    ingredientId: ing_onion
-    cookMethod: 3
-    seasoningId: season_salt
-  - order: 14
-    hintText: "\u7ED9\u6D0B\u8471\u4E0A\u80E1\u6912"
-    action: 3
-    ingredientId: ing_onion
-    cookMethod: 3
-    seasoningId: season_pepper
-  - order: 15
-    hintText: "\u7ED9\u571F\u8C46\u4E0A\u76D0"
-    action: 3
-    ingredientId: ing_potato
-    cookMethod: 1
-    seasoningId: season_salt
-  - order: 16
-    hintText: "\u7ED9\u571F\u8C46\u4E0A\u80E1\u6912"
-    action: 3
-    ingredientId: ing_potato
-    cookMethod: 1
-    seasoningId: season_pepper
-  - order: 17
-    hintText: "\u88C5\u76D8"
-    action: 4
-    ingredientId: 
-    cookMethod: 0
-    seasoningId: 
+  steps: []
