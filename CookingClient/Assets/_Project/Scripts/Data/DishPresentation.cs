@@ -6,5 +6,6 @@ namespace Cooking.Data
     public sealed class DishPresentation : ScriptableObject
     {
         public Sprite charcoalSprite;
+        public Sprite looseSprite;
     }
 }

@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad69dc1ddfb10346b27c6d3fe5cb2df, type: 3}
+  m_Name: DishPresentation
+  m_EditorClassIdentifier: Cooking::Cooking.Data.DishPresentation
+  charcoalSprite: {fileID: 0}
+  looseSprite: {fileID: 0}

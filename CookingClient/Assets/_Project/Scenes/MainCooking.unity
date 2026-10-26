@@ -2517,6 +2517,9 @@ MonoBehaviour:
   mealsText: {fileID: 1409720745}
   resultPanel: {fileID: 1458961160}
   resultDelay: 1
+  recipes:
+  - {fileID: 11400000, guid: 3a4b5c6d7e8f901a2b3c4d5e6f708192, type: 2}
+  presentation: {fileID: 11400000, guid: b7e2c4a91f6d4c0e8a3b5d7f1c9e2a44, type: 2}
 --- !u!114 &364117978
 MonoBehaviour:
   m_ObjectHideFlags: 0

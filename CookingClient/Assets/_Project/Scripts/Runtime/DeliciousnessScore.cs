@@ -61,6 +61,7 @@ namespace Cooking.Runtime
                 {
                     anyCharcoal = true;
                     result.Score -= CharcoalPenalty * item.Quantity;
+                    // 临时评语。以后按情况从 Excel 表读取，不要把这句当成最终文案。
                     comments.Add("我把" + DisplayName(definition, item) + "烧过头了");
                     continue;
                 }
@@ -97,6 +98,7 @@ namespace Cooking.Runtime
             else
             {
                 result.Picture = DishPictureKind.Loose;
+                result.SummarySprite = presentation != null ? presentation.looseSprite : null;
                 for (int i = 0; i < plate.Count; i++)
                 {
                     IngredientInstance item = plate[i];
