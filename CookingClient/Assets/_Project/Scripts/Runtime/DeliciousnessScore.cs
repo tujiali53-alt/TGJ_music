@@ -26,7 +26,6 @@ namespace Cooking.Runtime
         public const float BasePerPortion = 10f;
         public const float OptimalBonus = 10f;
         public const float OptimalWindow = 10f;
-        public const float SeasoningBonus = 5f;
         public const float UndercookedPenalty = 5f;
         public const float MeatVegetableBonus = 10f;
         public const float CharcoalPenalty = 5f;
@@ -75,10 +74,6 @@ namespace Cooking.Runtime
 
                 if (!definition.canEatRaw && item.Doneness < 100f)
                     result.Score -= UndercookedPenalty * item.Quantity;
-
-                if (HasSeasoningRule(recipe, item.DefinitionId)
-                    && RecipeMatcher.SameSequence(item.SeasoningIds, RecipeMatcher.ExpectedSeasonings(recipe, item.DefinitionId)))
-                    result.Score += SeasoningBonus * item.Quantity;
 
                 if (definition.kind == IngredientKind.Meat)
                     anyMeat = true;
@@ -137,11 +132,6 @@ namespace Cooking.Runtime
                 return whole.ToString("0", CultureInfo.InvariantCulture);
 
             return tenth.ToString("0.0", CultureInfo.InvariantCulture);
-        }
-
-        static bool HasSeasoningRule(RecipeDefinition recipe, string ingredientId)
-        {
-            return RecipeMatcher.ExpectedSeasonings(recipe, ingredientId).Count > 0;
         }
 
         static string DisplayName(IngredientDefinition definition, IngredientInstance item)

@@ -89,7 +89,7 @@ namespace Cooking.UI
                 return;
             }
 
-            if (Plate.FirstHeld() == null)
+            if (!Plate.HasFood())
             {
                 Debug.Log("盘子上没有食物，不能进食。", this);
                 return;
@@ -97,7 +97,9 @@ namespace Cooking.UI
 
             root.Session.HeldDish.Items.Clear();
             root.Session.MealsEaten += 1;
-            ReturnTokenToTray();
+            Plate plate = FindAnyObjectByType<Plate>(FindObjectsInactive.Include);
+            if (plate != null)
+                plate.ClearAll();
             resolving = true;
 
             if (resultDelay <= 0f)
@@ -136,27 +138,6 @@ namespace Cooking.UI
             root.Session.MealsEaten = 0;
             root.Session.HeldDish = new Dish { DishId = root.Session.HeldDish != null ? root.Session.HeldDish.DishId + 1 : 1, ExecutionScore = 1f };
             root.Flow.Load(SceneNames.Outing);
-        }
-
-        static void ReturnTokenToTray()
-        {
-            FoodSlotDrag drag = FindToken();
-            if (drag != null)
-                drag.ReturnToTray();
-        }
-
-        static FoodSlotDrag FindToken()
-        {
-            Scene scene = SceneManager.GetActiveScene();
-            GameObject[] roots = scene.GetRootGameObjects();
-            for (int i = 0; i < roots.Length; i++)
-            {
-                FoodSlotDrag drag = roots[i].GetComponentInChildren<FoodSlotDrag>(true);
-                if (drag != null)
-                    return drag;
-            }
-
-            return null;
         }
 
         static GameSession Session()

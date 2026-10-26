@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09755a807a2b5304389e829d5a0953eb, type: 3}
   m_Name: MixedMushroomCreamSoup
   m_EditorClassIdentifier: Cooking::Cooking.Data.RecipeDefinition
-  id: 
-  displayName: 
+  id: reci_Mixed MushroomCreamSoup
+  displayName: "\u4EC0\u9526\u8611\u83C7\u6D53\u6C64"
   unlockDay: 1
-  finishedSprite: {fileID: 0}
-  ingredients: []
-  seasonings: []
+  finishedSprite: {fileID: 21300000, guid: 9593d7af11445c246accfeb991c0a009, type: 3}
+  ingredients:
+  - ingredientId: ing_mushroom
+    cookMethod: 0
+    count: 2
+  seasonings:
+  - seasoningId: salt
+    targetIngredientId: reci_Mixed MushroomCreamSoup
+    count: 1
   steps: []

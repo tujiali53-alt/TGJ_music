@@ -13,7 +13,7 @@ namespace Cooking.EditorTools
         {
             string error = Run();
             if (error == null)
-                Debug.Log("第 1 天计分通过：做对 75，一份焦炭 45。");
+                Debug.Log("第 1 天计分通过：做对 60，一份焦炭 35。");
             else
                 Debug.LogError(error);
         }
@@ -127,8 +127,8 @@ namespace Cooking.EditorTools
             };
 
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, soup, presentation);
-            if (!Near(result.Score, 75f))
-                return "第 1 天做对应为 75，实际 " + result.Score;
+            if (!Near(result.Score, 60f))
+                return "第 1 天做对应为 60，实际 " + result.Score;
 
             if (result.Picture != DishPictureKind.Recipe)
                 return "第 1 天做对时应使用成品图。";
@@ -152,8 +152,8 @@ namespace Cooking.EditorTools
             };
 
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, soup, presentation);
-            if (!Near(result.Score, 75f) || result.Picture != DishPictureKind.Recipe)
-                return "上盘不看形状。原形或切丝仍应是成品，分数 75，实际 " + result.Score;
+            if (!Near(result.Score, 60f) || result.Picture != DishPictureKind.Recipe)
+                return "上盘不看形状。原形或切丝仍应是成品，分数 60，实际 " + result.Score;
 
             return null;
         }
@@ -173,8 +173,8 @@ namespace Cooking.EditorTools
             };
 
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, soup, presentation);
-            if (!Near(result.Score, 45f))
-                return "一份蘑菇焦炭时应为 45，实际 " + result.Score;
+            if (!Near(result.Score, 35f))
+                return "一份蘑菇焦炭时应为 35，实际 " + result.Score;
 
             if (!burnt.IsCharcoal)
                 return "熟度达到最大熟度时要标成焦炭。";
@@ -201,8 +201,8 @@ namespace Cooking.EditorTools
             };
 
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, soup, presentation);
-            if (!Near(result.Score, 70f))
-                return "调味顺序不对时应为 70，实际 " + result.Score;
+            if (!Near(result.Score, 60f))
+                return "调味不改变分数，顺序不对时仍应为 60，实际 " + result.Score;
 
             if (result.Picture != DishPictureKind.Loose || result.LooseFoods.Count != 3)
                 return "调味顺序不对时总结图是三份散装食材。";

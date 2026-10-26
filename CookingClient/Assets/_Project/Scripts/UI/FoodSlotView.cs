@@ -1,5 +1,4 @@
 using System.Globalization;
-using Cooking.Core;
 using Cooking.Data;
 using Cooking.Runtime;
 using TMPro;
@@ -13,8 +12,18 @@ namespace Cooking.UI
         [SerializeField] Image icon;
         [SerializeField] TMP_Text countText;
         [SerializeField] TMP_Text statusText;
-        [SerializeField] IngredientDefinition[] definitions;
         [SerializeField] FoodSlotDrag drag;
+        [SerializeField] int stackIndex;
+        [SerializeField] bool inventorySlot = true;
+
+        IngredientInstance shown;
+        IngredientDefinition shownDefinition;
+        int shownQuantity;
+
+        public int StackIndex => stackIndex;
+        public bool InventorySlot => inventorySlot;
+        public IngredientInstance Shown => shown;
+        public IngredientDefinition ShownDefinition => shownDefinition;
 
         void Awake()
         {
@@ -46,34 +55,44 @@ namespace Cooking.UI
                 drag = GetComponent<FoodSlotDrag>();
         }
 
-        void OnEnable()
-        {
-            Refresh();
-        }
-
         void LateUpdate()
         {
-            Refresh();
-        }
-
-        void Refresh()
-        {
-            IngredientInstance item = ShownItem();
-            if (item == null || item.Quantity <= 0)
+            if (!inventorySlot || drag != null && drag.IsDragging)
                 return;
 
-            if (statusText != null)
-                statusText.text = "熟度：" + item.Doneness.ToString("0.00", CultureInfo.InvariantCulture);
+            Apply();
+        }
 
+        public void ShowStack(IngredientInstance item, int quantity, IngredientDefinition definition)
+        {
+            shown = item;
+            shownQuantity = quantity;
+            shownDefinition = definition;
             if (drag != null && drag.IsDragging)
                 return;
 
-            IngredientDefinition definition = FindDefinition(item.DefinitionId);
-            if (icon != null && definition != null && definition.spriteWhole != null)
-                icon.sprite = definition.spriteWhole;
+            Apply();
+        }
+
+        void Apply()
+        {
+            bool has = shown != null && shownQuantity > 0;
+            if (statusText != null)
+                statusText.text = has
+                    ? "熟度：" + shown.Doneness.ToString("0.00", CultureInfo.InvariantCulture)
+                    : "";
+
+            if (icon != null)
+            {
+                icon.enabled = has && shownDefinition != null && shownDefinition.spriteWhole != null;
+                if (icon.enabled)
+                    icon.sprite = shownDefinition.spriteWhole;
+            }
 
             if (countText != null)
-                countText.text = "x" + item.Quantity + ShapeLabel(item.Shape) + MethodLabel(item.CookMethod);
+                countText.text = has
+                    ? "x" + shownQuantity + ShapeLabel(shown.Shape) + MethodLabel(shown.CookMethod)
+                    : "";
         }
 
         static string ShapeLabel(CutShape shape)
@@ -106,46 +125,5 @@ namespace Cooking.UI
             }
         }
 
-        IngredientInstance ShownItem()
-        {
-            if (GetComponentInParent<Plate>() != null)
-                return Plate.FirstHeld();
-
-            if (drag != null && drag.IsDragging && FirstItem() == null)
-                return Plate.FirstHeld();
-
-            return FirstItem();
-        }
-
-        IngredientInstance FirstItem()
-        {
-            GameRoot root = GameRoot.Instance;
-            if (root == null || root.Session == null || root.Session.Inventory == null)
-                return null;
-
-            for (int i = 0; i < root.Session.Inventory.Count; i++)
-            {
-                IngredientInstance item = root.Session.Inventory[i];
-                if (item != null && item.Quantity > 0)
-                    return item;
-            }
-
-            return null;
-        }
-
-        IngredientDefinition FindDefinition(string definitionId)
-        {
-            if (definitions == null)
-                return null;
-
-            for (int i = 0; i < definitions.Length; i++)
-            {
-                IngredientDefinition definition = definitions[i];
-                if (definition != null && definition.id == definitionId)
-                    return definition;
-            }
-
-            return null;
-        }
     }
 }

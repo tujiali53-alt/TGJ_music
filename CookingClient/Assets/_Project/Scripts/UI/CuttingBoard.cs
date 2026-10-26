@@ -25,17 +25,17 @@ namespace Cooking.UI
 
         IngredientDefinition FindDefinition(string definitionId)
         {
-            if (definitions == null)
-                return null;
-
-            for (int i = 0; i < definitions.Length; i++)
+            if (definitions != null)
             {
-                IngredientDefinition definition = definitions[i];
-                if (definition != null && definition.id == definitionId)
-                    return definition;
+                for (int i = 0; i < definitions.Length; i++)
+                {
+                    IngredientDefinition definition = definitions[i];
+                    if (definition != null && definition.id == definitionId)
+                        return definition;
+                }
             }
 
-            return null;
+            return FoodTray.Lookup(definitionId);
         }
     }
 }

@@ -114,7 +114,6 @@ namespace Cooking.Runtime
         static bool SameBody(IngredientInstance item, RecipeIngredient requirement)
         {
             return item.DefinitionId == requirement.ingredientId
-                && item.Shape == requirement.shape
                 && item.CookMethod == requirement.cookMethod;
         }
 
