@@ -54,6 +54,7 @@ namespace Cooking.Core
 
             Session.DayIndex += 1;
             Session.Phase = DayPhase.Day;
+            Session.ClearCookingScores();
             Flow.Load(SceneNames.Cooking);
             return true;
         }

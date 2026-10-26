@@ -31,4 +31,13 @@ namespace Cooking.Data
         Normal = 1,
         Fine = 2
     }
+
+    public enum CookAction
+    {
+        Cut = 0,
+        Boil = 1,
+        Fry = 2,
+        Season = 3,
+        Plate = 4
+    }
 }

@@ -11,6 +11,8 @@ namespace Cooking.Runtime
         public List<IngredientInstance> Inventory = new List<IngredientInstance>();
         public Dish HeldDish = new Dish();
         public int MealsEaten;
+        public float[] AttemptScores = new float[3];
+        public float TodayDeliciousness;
 
         public static GameSession NewGame()
         {
@@ -21,8 +23,17 @@ namespace Cooking.Runtime
                 Phase = DayPhase.Night,
                 Inventory = new List<IngredientInstance>(),
                 HeldDish = new Dish { DishId = 1, ExecutionScore = 1f },
-                MealsEaten = 0
+                MealsEaten = 0,
+                AttemptScores = new float[3],
+                TodayDeliciousness = 0f
             };
+        }
+
+        public void ClearCookingScores()
+        {
+            MealsEaten = 0;
+            TodayDeliciousness = 0f;
+            AttemptScores = new float[3];
         }
     }
 }
