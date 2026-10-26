@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: season_pepper
   m_EditorClassIdentifier: Cooking::Cooking.Data.SeasoningDefinition
   id: season_pepper
-  displayName: "\u80E1\u6912"
+  displayName: "\u9ED1\u80E1\u6912"
   icon: {fileID: 0}

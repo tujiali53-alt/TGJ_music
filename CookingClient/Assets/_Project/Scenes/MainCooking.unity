@@ -2295,6 +2295,7 @@ GameObject:
   - component: {fileID: 356863571}
   - component: {fileID: 356863573}
   - component: {fileID: 356863572}
+  - component: {fileID: 356863574}
   m_Layer: 5
   m_Name: season_salt
   m_TagString: Untagged
@@ -2360,6 +2361,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 356863570}
   m_CullTransparentMesh: 1
+--- !u!114 &356863574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356863570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4e8a1b27d3f4e6a9b0c1d2e3f4a5b6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cooking.UI.SeasoningBottleDrag
+  seasoning: {fileID: 11400000, guid: 1b55d0f3b3c0c4142890f98c9f484c78, type: 2}
 --- !u!1 &364117971
 GameObject:
   m_ObjectHideFlags: 0
@@ -5089,7 +5103,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 4.0099945}
+  m_AnchoredPosition: {x: 0, y: 4.0099792}
   m_SizeDelta: {x: -15.001, y: -24.079}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &810000003
@@ -35791,6 +35805,7 @@ GameObject:
   - component: {fileID: 869589736}
   - component: {fileID: 869589738}
   - component: {fileID: 869589737}
+  - component: {fileID: 869589739}
   m_Layer: 5
   m_Name: season_pepper
   m_TagString: Untagged
@@ -35856,6 +35871,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 869589735}
   m_CullTransparentMesh: 1
+--- !u!114 &869589739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869589735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4e8a1b27d3f4e6a9b0c1d2e3f4a5b6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cooking.UI.SeasoningBottleDrag
+  seasoning: {fileID: 11400000, guid: 5c6d7e8f901a2b3c4d5e6f708192a3b4, type: 2}
 --- !u!1 &880003001
 GameObject:
   m_ObjectHideFlags: 0
@@ -41099,6 +41127,7 @@ GameObject:
   - component: {fileID: 1798009594}
   - component: {fileID: 1798009596}
   - component: {fileID: 1798009595}
+  - component: {fileID: 1798009597}
   m_Layer: 5
   m_Name: season_oil
   m_TagString: Untagged
@@ -41164,6 +41193,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798009593}
   m_CullTransparentMesh: 1
+--- !u!114 &1798009597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798009593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4e8a1b27d3f4e6a9b0c1d2e3f4a5b6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cooking.UI.SeasoningBottleDrag
+  seasoning: {fileID: 11400000, guid: 4b5c6d7e8f901a2b3c4d5e6f708192a3, type: 2}
 --- !u!1 &1806292813
 GameObject:
   m_ObjectHideFlags: 0
