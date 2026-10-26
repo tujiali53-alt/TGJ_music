@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09755a807a2b5304389e829d5a0953eb, type: 3}
+  m_Name: MixedMushroomCreamSoup
+  m_EditorClassIdentifier: Assembly-CSharp::Cooking.Data.RecipeDefinition
+  id: 
+  displayName: 
+  unlockDay: 1
+  finishedSprite: {fileID: 0}
+  ingredients: []
+  seasonings: []
+  steps: []
