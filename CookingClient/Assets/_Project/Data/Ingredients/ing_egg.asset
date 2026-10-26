@@ -11,8 +11,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b71c2e90d4a64f1e8b35c6d70a9f4e21, type: 3}
   m_Name: ing_egg
-  m_EditorClassIdentifier: Assembly-CSharp::Cooking.Data.IngredientDefinition
-  id: 'ing_egg '
+  m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
+  id: ing_egg
   displayName: "\u9E21\u86CB"
   description: "\u4E0D\u77E5\u9053\u662F\u54EA\u79CD\u9E21\u4E0B\u7684\u86CB\uFF0C\u770B\u8D77\u6765\u5341\u5206\u666E\u901A\uFF0C\u5E0C\u671B\u5473\u9053\u4E5F\u662F\u3002"
   kind: 0

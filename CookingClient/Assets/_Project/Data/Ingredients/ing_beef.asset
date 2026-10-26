@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b71c2e90d4a64f1e8b35c6d70a9f4e21, type: 3}
   m_Name: ing_beef
-  m_EditorClassIdentifier: Assembly-CSharp::Cooking.Data.IngredientDefinition
+  m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
   id: ing_beef
   displayName: "\u8679\u5F69\u725B\u8089"
   description: "\u6563\u53D1\u7740\u5F69\u8679\u5149\u5F69\u7684\u725B\u8089\uFF0C\u6700\u7F8E\u5473\u7684\u7CBE\u534E\u90FD\u6D53\u7F29\u5728\u6B64"

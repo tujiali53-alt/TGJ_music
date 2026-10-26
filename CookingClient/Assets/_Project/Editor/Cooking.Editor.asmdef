@@ -1,0 +1,27 @@
+{
+    "name": "Cooking.Editor",
+    "rootNamespace": "Cooking.EditorTools",
+    "references": [
+        "Cooking",
+        "Unity.InputSystem",
+        "Unity.TextMeshPro",
+        "Unity.TextMeshPro.Editor",
+        "UnityEditor.UI",
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "ExcelDataReader.dll",
+        "ExcelDataReader.DataSet.dll",
+        "System.Text.Encoding.CodePages.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

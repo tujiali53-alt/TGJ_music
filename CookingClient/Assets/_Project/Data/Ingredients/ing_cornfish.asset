@@ -11,8 +11,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b71c2e90d4a64f1e8b35c6d70a9f4e21, type: 3}
   m_Name: ing_cornfish
-  m_EditorClassIdentifier: Assembly-CSharp::Cooking.Data.IngredientDefinition
-  id: 'ing_cornfish '
+  m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
+  id: ing_cornfish
   displayName: "\u7389\u7C73\u9C7C"
   description: "\u901A\u4F53\u9EC4\u8272\u7684\u6709\u9CDE\u9C7C\uFF0C\u8089\u8D28\u9C9C\u751C\uFF0C\u96BE\u602A\u88AB\u6BD4\u4F5C\u7389\u7C73\u3002"
   kind: 0

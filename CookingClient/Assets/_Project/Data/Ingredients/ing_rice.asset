@@ -11,8 +11,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b71c2e90d4a64f1e8b35c6d70a9f4e21, type: 3}
   m_Name: ing_rice
-  m_EditorClassIdentifier: Assembly-CSharp::Cooking.Data.IngredientDefinition
-  id: 'ing_rice '
+  m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
+  id: ing_rice
   displayName: "\u5927\u7C73"
   description: "\u4E00\u79CD\u5F62\u4F3C\u7C73\u7684\u8C37\u7269\uFF0C\u5473\u9053\u4E5F\u5F88\u63A5\u8FD1\uFF0C\u4E0D\u5982\u5C31\u5F53\u6210\u7C73\u5427\u3002"
   kind: 2

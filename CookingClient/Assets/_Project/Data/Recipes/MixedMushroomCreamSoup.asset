@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09755a807a2b5304389e829d5a0953eb, type: 3}
   m_Name: MixedMushroomCreamSoup
-  m_EditorClassIdentifier: Assembly-CSharp::Cooking.Data.RecipeDefinition
+  m_EditorClassIdentifier: Cooking::Cooking.Data.RecipeDefinition
   id: 
   displayName: 
   unlockDay: 1

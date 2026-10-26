@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b71c2e90d4a64f1e8b35c6d70a9f4e21, type: 3}
   m_Name: ing_mushroom
-  m_EditorClassIdentifier: Assembly-CSharp::Cooking.Data.IngredientDefinition
+  m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
   id: ing_mushroom
   displayName: "\u767D\u8611\u83C7"
   description: "\u751F\u957F\u5728\u68EE\u6797\u4E2D\u7684\u83CC\u7C7B\uFF0C\u5F62\u4F3C\u591C\u7A7A\u4E2D\u768E\u767D\u7684\u660E\u6708\u3002"

@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b71c2e90d4a64f1e8b35c6d70a9f4e21, type: 3}
   m_Name: ing_onion
-  m_EditorClassIdentifier: Assembly-CSharp::Cooking.Data.IngredientDefinition
+  m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
   id: ing_onion
   displayName: "\u6D0B\u8471"
   description: "\u751F\u957F\u5728\u68EE\u6797\u4E2D\u7684\u91CE\u6D0B\u8471\uFF0C\u5473\u9053\u8F9B\u751C\u3002"

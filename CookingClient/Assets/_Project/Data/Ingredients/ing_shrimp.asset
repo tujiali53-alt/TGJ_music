@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b71c2e90d4a64f1e8b35c6d70a9f4e21, type: 3}
   m_Name: ing_shrimp
-  m_EditorClassIdentifier: Assembly-CSharp::Cooking.Data.IngredientDefinition
+  m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
   id: ing_shrimp
   displayName: "\u7EA2\u6591\u867E"
   description: "\u6D51\u8EAB\u957F\u6EE1\u6591\u7EB9\u7684\u7EA2\u8910\u8272\u867E\u7C7B\uFF0C\u636E\u8BF4\u6591\u7EB9\u8D8A\u591A\u8D8A\u7F8E\u5473\u3002"
