@@ -85,7 +85,7 @@ namespace Cooking.Exploration
             if (!hitCollider.OverlapPoint(world))
                 return;
 
-            if (!hitCollider.OverlapPoint(player.position))
+            if (!PlayerIsInside())
                 return;
 
             GameRoot root = GameRoot.Instance;
@@ -96,6 +96,21 @@ namespace Cooking.Exploration
                 return;
 
             dialog.OpenIntro(definition, NightLayoutSelector.SuccessFaceDelta);
+        }
+
+        bool PlayerIsInside()
+        {
+            if (hitCollider.OverlapPoint(player.position))
+                return true;
+
+            SpriteRenderer body = player.GetComponent<SpriteRenderer>();
+            if (body == null || body.sprite == null)
+                return false;
+
+            Bounds area = hitCollider.bounds;
+            Bounds sprite = body.bounds;
+            return sprite.min.x <= area.max.x && sprite.max.x >= area.min.x
+                && sprite.min.y <= area.max.y && sprite.max.y >= area.min.y;
         }
 
         void ApplyUnlock()

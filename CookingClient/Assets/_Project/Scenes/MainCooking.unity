@@ -32962,6 +32962,7 @@ GameObject:
   - component: {fileID: 930010002}
   - component: {fileID: 930010004}
   - component: {fileID: 930010003}
+  - component: {fileID: 930010005}
   m_Layer: 5
   m_Name: InteractionPanel
   m_TagString: Untagged
@@ -33032,6 +33033,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930010001}
   m_CullTransparentMesh: 1
+--- !u!114 &930010005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930010001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faa42a173a3a40441864178fcd33c3c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.DiaryNotice
+  redPoint: {fileID: 0}
 --- !u!1 &930010011
 GameObject:
   m_ObjectHideFlags: 0
@@ -34323,6 +34337,7 @@ GameObject:
   - component: {fileID: 950823003}
   - component: {fileID: 950823005}
   - component: {fileID: 950823004}
+  - component: {fileID: 950823006}
   m_Layer: 5
   m_Name: DiaryPanel
   m_TagString: Untagged
@@ -34392,6 +34407,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 950823002}
   m_CullTransparentMesh: 1
+--- !u!114 &950823006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950823002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ba7197f053f3de4d95df49703121ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.DiaryPanelView
+  catalog: {fileID: 11400000, guid: 6fab823231500614db503580db656d29, type: 2}
+  language: 0
+  dayText: {fileID: 0}
+  titleText: {fileID: 0}
+  leftText: {fileID: 0}
+  rightText: {fileID: 0}
+  previousButton: {fileID: 0}
+  nextButton: {fileID: 0}
 --- !u!1 &964802215
 GameObject:
   m_ObjectHideFlags: 0

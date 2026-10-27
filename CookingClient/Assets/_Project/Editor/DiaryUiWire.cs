@@ -42,9 +42,17 @@ namespace Cooking.EditorTools
                 view = Undo.AddComponent<DiaryPanelView>(diary.gameObject);
 
             SerializedObject serialized = new SerializedObject(view);
-            serialized.FindProperty("catalog").objectReferenceValue = catalog;
+            serialized.Update();
+            SerializedProperty catalogProperty = serialized.FindProperty("catalog");
+            if (catalogProperty == null)
+                return "DiaryPanelView 上没有 catalog 字段。";
+
+            catalogProperty.objectReferenceValue = catalog;
             serialized.FindProperty("language").enumValueIndex = (int)DiaryLanguage.Zh;
-            serialized.ApplyModifiedPropertiesWithoutUndo();
+            serialized.ApplyModifiedProperties();
+            EditorUtility.SetDirty(view);
+            if (view.Catalog != catalog)
+                return "DiaryCatalog 没有写进 DiaryPanel。";
 
             if (interaction.GetComponent<DiaryNotice>() == null)
                 Undo.AddComponent<DiaryNotice>(interaction.gameObject);
