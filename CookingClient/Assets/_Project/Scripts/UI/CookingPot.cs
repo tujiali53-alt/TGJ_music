@@ -16,8 +16,10 @@ namespace Cooking.UI
         static CookingPot current;
 
         readonly List<Zone> zones = new List<Zone>();
-        Button fireButton;
-        bool burning;
+        Button boiledFireButton;
+        Button friedFireButton;
+        bool boiling;
+        bool frying;
 
         void Awake()
         {
@@ -46,15 +48,20 @@ namespace Cooking.UI
             if (zones.Count == 0)
                 Debug.LogError("CookingPot 下需要 Fried_area 和 Boiled_area，并挂 PotArea。", this);
 
-            fireButton = SceneButtons.Find("openFireButton");
-            if (fireButton != null)
-                fireButton.onClick.AddListener(ToggleFire);
+            boiledFireButton = SceneButtons.Find("openFire_BoiledButton");
+            friedFireButton = SceneButtons.Find("openFire_FiredButton");
+            if (boiledFireButton != null)
+                boiledFireButton.onClick.AddListener(ToggleBoiledFire);
+            if (friedFireButton != null)
+                friedFireButton.onClick.AddListener(ToggleFriedFire);
         }
 
         void OnDestroy()
         {
-            if (fireButton != null)
-                fireButton.onClick.RemoveListener(ToggleFire);
+            if (boiledFireButton != null)
+                boiledFireButton.onClick.RemoveListener(ToggleBoiledFire);
+            if (friedFireButton != null)
+                friedFireButton.onClick.RemoveListener(ToggleFriedFire);
         }
 
         public bool TryPlace(IngredientInstance item)
@@ -150,19 +157,25 @@ namespace Cooking.UI
             return true;
         }
 
-        public void ToggleFire()
+        public void ToggleBoiledFire()
         {
-            burning = !burning;
+            boiling = !boiling;
+        }
+
+        public void ToggleFriedFire()
+        {
+            frying = !frying;
         }
 
         void Update()
         {
-            if (!burning)
-                return;
-
             for (int z = 0; z < zones.Count; z++)
             {
-                List<IngredientInstance> held = zones[z].Held;
+                Zone zone = zones[z];
+                if (!Heating(zone))
+                    continue;
+
+                List<IngredientInstance> held = zone.Held;
                 for (int i = 0; i < held.Count; i++)
                 {
                     IngredientInstance item = held[i];
@@ -183,6 +196,20 @@ namespace Cooking.UI
                     item.Doneness = Mathf.Min(definition.maxDoneness, next);
                 }
             }
+        }
+
+        bool Heating(Zone zone)
+        {
+            if (zone == null || zone.Area == null)
+                return false;
+
+            if (zone.Area.Method == CookMethod.Boiled)
+                return boiling;
+
+            if (zone.Area.Method == CookMethod.Fried)
+                return frying;
+
+            return false;
         }
 
         static void ApplyArea(IngredientInstance item, CookMethod area)

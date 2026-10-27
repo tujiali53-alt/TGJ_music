@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6537096960326842784}
   - component: {fileID: 5822177781713494285}
   - component: {fileID: 8893943271737186492}
+  - component: {fileID: 5254160340878521657}
   m_Layer: 0
   m_Name: Interaction_beasts
   m_TagString: Untagged
@@ -155,6 +156,28 @@ MonoBehaviour:
   definition: {fileID: 11400000, guid: 31fbeb0098ee999479d6997d1874929a, type: 2}
   hitCollider: {fileID: 5822177781713494285}
   player: {fileID: 0}
+--- !u!95 &5254160340878521657
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983568167272992819}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98769d4f60c67d8409fe3f2c1ab88c5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2312738771975884463
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,6 +190,7 @@ GameObject:
   - component: {fileID: 8571399528524546610}
   - component: {fileID: 3228086671829702654}
   - component: {fileID: 8781517670653231952}
+  - component: {fileID: 8729983566363233440}
   m_Layer: 0
   m_Name: Interaction_fishing
   m_TagString: Untagged
@@ -310,6 +334,28 @@ MonoBehaviour:
   definition: {fileID: 11400000, guid: f1d8a1e1054ce90498c8fc78613abcfd, type: 2}
   hitCollider: {fileID: 3228086671829702654}
   player: {fileID: 0}
+--- !u!95 &8729983566363233440
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2312738771975884463}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98769d4f60c67d8409fe3f2c1ab88c5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2354226691268530804
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +574,7 @@ GameObject:
   - component: {fileID: 4624966826391442999}
   - component: {fileID: 613546686287248035}
   - component: {fileID: 6351212296361675379}
+  - component: {fileID: 4960077456689771060}
   m_Layer: 0
   m_Name: Interaction_grave
   m_TagString: Untagged
@@ -671,6 +718,28 @@ MonoBehaviour:
   definition: {fileID: 11400000, guid: b9684d33dfcd73d49b1efe50f0bd7c35, type: 2}
   hitCollider: {fileID: 613546686287248035}
   player: {fileID: 0}
+--- !u!95 &4960077456689771060
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5414696562950670760}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98769d4f60c67d8409fe3f2c1ab88c5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7432616518911957757
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,6 +907,7 @@ GameObject:
   - component: {fileID: 6114918434561847863}
   - component: {fileID: 7407791547218882871}
   - component: {fileID: 5664412097482277220}
+  - component: {fileID: 6963654751776239864}
   m_Layer: 0
   m_Name: Interaction_merchant
   m_TagString: Untagged
@@ -981,3 +1051,25 @@ MonoBehaviour:
   definition: {fileID: 11400000, guid: 4c0c4d319f53d47429675b2127c8f19f, type: 2}
   hitCollider: {fileID: 7407791547218882871}
   player: {fileID: 0}
+--- !u!95 &6963654751776239864
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8613162414841855139}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98769d4f60c67d8409fe3f2c1ab88c5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

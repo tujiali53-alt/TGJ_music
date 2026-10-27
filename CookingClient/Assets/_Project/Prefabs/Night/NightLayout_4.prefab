@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2807755002120241784}
   - component: {fileID: 886909227885784614}
   - component: {fileID: 8898938762992884605}
+  - component: {fileID: 7061170708299553593}
   m_Layer: 0
   m_Name: Interaction_grave
   m_TagString: Untagged
@@ -155,6 +156,28 @@ MonoBehaviour:
   definition: {fileID: 11400000, guid: b9684d33dfcd73d49b1efe50f0bd7c35, type: 2}
   hitCollider: {fileID: 886909227885784614}
   player: {fileID: 0}
+--- !u!95 &7061170708299553593
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3257225340392540402}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98769d4f60c67d8409fe3f2c1ab88c5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3779870246081272514
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,6 +345,7 @@ GameObject:
   - component: {fileID: 4186513619242093571}
   - component: {fileID: 7787994486806742770}
   - component: {fileID: 6045554216174531436}
+  - component: {fileID: 5882635977409131454}
   m_Layer: 0
   m_Name: Interaction_fishing
   m_TagString: Untagged
@@ -465,6 +489,28 @@ MonoBehaviour:
   definition: {fileID: 11400000, guid: f1d8a1e1054ce90498c8fc78613abcfd, type: 2}
   hitCollider: {fileID: 7787994486806742770}
   player: {fileID: 0}
+--- !u!95 &5882635977409131454
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6252428303817182087}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98769d4f60c67d8409fe3f2c1ab88c5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6523597125016088720
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +523,7 @@ GameObject:
   - component: {fileID: 9022520596228264683}
   - component: {fileID: 1863856662997502798}
   - component: {fileID: 5204857301492731461}
+  - component: {fileID: 3110116180819706215}
   m_Layer: 0
   m_Name: Interaction_beasts
   m_TagString: Untagged
@@ -620,6 +667,28 @@ MonoBehaviour:
   definition: {fileID: 11400000, guid: 31fbeb0098ee999479d6997d1874929a, type: 2}
   hitCollider: {fileID: 1863856662997502798}
   player: {fileID: 0}
+--- !u!95 &3110116180819706215
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6523597125016088720}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98769d4f60c67d8409fe3f2c1ab88c5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6785484296734910324
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,6 +856,7 @@ GameObject:
   - component: {fileID: 2260714161875165717}
   - component: {fileID: 6735630436116062541}
   - component: {fileID: 4134368658178929744}
+  - component: {fileID: 7390411647499765477}
   m_Layer: 0
   m_Name: Interaction_merchant
   m_TagString: Untagged
@@ -930,6 +1000,28 @@ MonoBehaviour:
   definition: {fileID: 11400000, guid: 4c0c4d319f53d47429675b2127c8f19f, type: 2}
   hitCollider: {fileID: 6735630436116062541}
   player: {fileID: 0}
+--- !u!95 &7390411647499765477
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7102655976423738503}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98769d4f60c67d8409fe3f2c1ab88c5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7604808762685518073
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,6 +1087,7 @@ GameObject:
   - component: {fileID: 9131129110150840904}
   - component: {fileID: 4118703820499428993}
   - component: {fileID: 3972573279484307895}
+  - component: {fileID: 3660024984723322797}
   m_Layer: 0
   m_Name: Interaction_mushroom
   m_TagString: Untagged
@@ -1138,6 +1231,28 @@ MonoBehaviour:
   definition: {fileID: 11400000, guid: de5e9d49bf991b446a6383c13bbbf5ca, type: 2}
   hitCollider: {fileID: 4118703820499428993}
   player: {fileID: 0}
+--- !u!95 &3660024984723322797
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8092285051053406148}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98769d4f60c67d8409fe3f2c1ab88c5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &9036810856137406157
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,6 +1265,7 @@ GameObject:
   - component: {fileID: 3176706476766328356}
   - component: {fileID: 4494391178857415984}
   - component: {fileID: 182739857330018637}
+  - component: {fileID: 4426175248469954656}
   m_Layer: 0
   m_Name: Interaction_moonstone
   m_TagString: Untagged
@@ -1293,3 +1409,25 @@ MonoBehaviour:
   definition: {fileID: 11400000, guid: 75df6b45467850e429e951726852749e, type: 2}
   hitCollider: {fileID: 4494391178857415984}
   player: {fileID: 0}
+--- !u!95 &4426175248469954656
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9036810856137406157}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98769d4f60c67d8409fe3f2c1ab88c5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

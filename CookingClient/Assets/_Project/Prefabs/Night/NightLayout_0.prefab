@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 6494109351675097981}
   - component: {fileID: 7362370497411440837}
   - component: {fileID: 2057598021674188680}
+  - component: {fileID: 8018688223642738372}
   m_Layer: 0
   m_Name: Interaction_mushroom
   m_TagString: Untagged
@@ -357,3 +358,25 @@ MonoBehaviour:
   definition: {fileID: 11400000, guid: de5e9d49bf991b446a6383c13bbbf5ca, type: 2}
   hitCollider: {fileID: 7362370497411440837}
   player: {fileID: 0}
+--- !u!95 &8018688223642738372
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5896733569264309956}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98769d4f60c67d8409fe3f2c1ab88c5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
