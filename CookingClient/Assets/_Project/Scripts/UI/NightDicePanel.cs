@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Cooking.Core;
 using Cooking.Data;
@@ -12,6 +13,8 @@ namespace Cooking.UI
     {
         [SerializeField] GameObject panel;
         [SerializeField] Button beginButton;
+        [SerializeField] Button confirmButton;
+        [SerializeField] float confirmDelay = 2f;
         [SerializeField] TMP_Text scoreText;
         [SerializeField] TMP_Text resultText;
         [SerializeField] IngredientDefinition[] definitions;
@@ -21,6 +24,7 @@ namespace Cooking.UI
         NightOption option;
         int buffDelta;
         bool rolled;
+        Coroutine confirmWait;
 
         void Awake()
         {
@@ -36,6 +40,13 @@ namespace Cooking.UI
                 Transform found = panel.transform.Find("beginDiceButton");
                 if (found != null)
                     beginButton = found.GetComponent<Button>();
+            }
+
+            if (panel != null && confirmButton == null)
+            {
+                Transform found = panel.transform.Find("AfterComfirmDiceButton");
+                if (found != null)
+                    confirmButton = found.GetComponent<Button>();
             }
 
             if (panel != null && scoreText == null)
@@ -54,6 +65,11 @@ namespace Cooking.UI
             else
                 beginButton.onClick.AddListener(OnBegin);
 
+            if (confirmButton == null)
+                Debug.LogError("DicePanel 下需要有 AfterComfirmDiceButton，并且带 Button。", this);
+            else
+                confirmButton.onClick.AddListener(OnConfirm);
+
             if (scoreText == null)
                 Debug.LogError("DicePanel 下需要有 scoreText。", this);
             if (resultText == null)
@@ -71,10 +87,15 @@ namespace Cooking.UI
             option = chosen;
             buffDelta = buffFaceDelta;
             rolled = false;
+            StopConfirmWait();
             if (scoreText != null)
                 scoreText.text = "";
             if (resultText != null)
                 resultText.text = "";
+            if (beginButton != null)
+                beginButton.gameObject.SetActive(true);
+            if (confirmButton != null)
+                confirmButton.gameObject.SetActive(false);
             if (panel != null)
                 panel.SetActive(true);
         }
@@ -109,17 +130,11 @@ namespace Cooking.UI
 
         void OnBegin()
         {
-            if (rolled)
-            {
-                if (panel != null)
-                    panel.SetActive(false);
-                if (dialog != null)
-                    dialog.OpenResult(current, option, LastSuccess());
+            if (rolled || panel == null || !panel.activeSelf)
                 return;
-            }
 
-            if (panel == null || !panel.activeSelf)
-                return;
+            if (beginButton != null)
+                beginButton.gameObject.SetActive(false);
 
             NightRollResult result = NightCheck.Roll(option, buffDelta);
             rolled = true;
@@ -132,12 +147,51 @@ namespace Cooking.UI
             NightLogView.Append(NightLogKind.DiceRoll, "掷出 " + result.Face + " 点");
             NightLogView.Append(NightLogKind.CheckResult, name + "：" + (result.Success ? "成功" : "失败"));
             Remember(option.optionId, result.Success);
+            ScheduleConfirm();
 
             if (!result.Success || result.Rewards == null)
                 return;
 
             for (int i = 0; i < result.Rewards.Count; i++)
                 Grant(result.Rewards[i]);
+        }
+
+        void ScheduleConfirm()
+        {
+            StopConfirmWait();
+            confirmWait = StartCoroutine(ShowConfirmAfterDelay());
+        }
+
+        IEnumerator ShowConfirmAfterDelay()
+        {
+            float wait = Mathf.Max(0f, confirmDelay);
+            if (wait > 0f)
+                yield return new WaitForSeconds(wait);
+
+            confirmWait = null;
+            if (!rolled || panel == null || !panel.activeSelf || confirmButton == null)
+                yield break;
+
+            confirmButton.gameObject.SetActive(true);
+        }
+
+        void OnConfirm()
+        {
+            StopConfirmWait();
+            bool success = LastSuccess();
+            if (panel != null)
+                panel.SetActive(false);
+            if (dialog != null)
+                dialog.OpenResult(current, option, success);
+        }
+
+        void StopConfirmWait()
+        {
+            if (confirmWait == null)
+                return;
+
+            StopCoroutine(confirmWait);
+            confirmWait = null;
         }
 
         bool LastSuccess()

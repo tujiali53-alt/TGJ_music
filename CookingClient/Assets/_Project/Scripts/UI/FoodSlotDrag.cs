@@ -3,11 +3,12 @@ using Cooking.Data;
 using Cooking.Runtime;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Cooking.UI
 {
-    public sealed class FoodSlotDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public sealed class FoodSlotDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         public bool IsDragging { get; private set; }
 
@@ -19,6 +20,9 @@ namespace Cooking.UI
         Vector2 homePosition;
         Vector2 heldPosition;
         bool tracking;
+        bool rightTracking;
+        bool takeOne;
+        Vector2 rightScreen;
         bool restoreBackground;
         readonly List<RaycastResult> raycastResults = new List<RaycastResult>();
 
@@ -36,14 +40,63 @@ namespace Cooking.UI
                 background.enabled = false;
         }
 
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (eventData.button != PointerEventData.InputButton.Right || tracking)
+                return;
+
+            FoodSlotView view = GetComponent<FoodSlotView>();
+            if (view == null || !view.InventorySlot || view.Shown == null)
+                return;
+
+            takeOne = false;
+            rightTracking = true;
+            tracking = true;
+            IsDragging = true;
+            rightScreen = eventData.position;
+            Lift();
+        }
+
+        void Update()
+        {
+            if (!rightTracking || rect == null)
+                return;
+
+            Mouse mouse = Mouse.current;
+            if (mouse == null)
+            {
+                EndRightDrag(rightScreen);
+                return;
+            }
+
+            Vector2 pos = mouse.position.ReadValue();
+            if (!mouse.rightButton.isPressed)
+            {
+                EndRightDrag(pos);
+                return;
+            }
+            float scale = canvas != null && canvas.scaleFactor > 0f ? canvas.scaleFactor : 1f;
+            rect.anchoredPosition += (pos - rightScreen) / scale;
+            rightScreen = pos;
+        }
+
         public void OnBeginDrag(PointerEventData eventData)
         {
+            if (rightTracking)
+                return;
+
             FoodSlotView view = GetComponent<FoodSlotView>();
             if (view == null || view.Shown == null)
                 return;
 
+            takeOne = view.InventorySlot;
             tracking = true;
             IsDragging = true;
+            Lift();
+        }
+
+        void Lift()
+        {
             heldPosition = rect != null ? rect.anchoredPosition : Vector2.zero;
             if (background != null)
                 background.enabled = false;
@@ -56,7 +109,7 @@ namespace Cooking.UI
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (!tracking || rect == null)
+            if (rightTracking || !tracking || rect == null)
                 return;
 
             float scale = canvas != null && canvas.scaleFactor > 0f ? canvas.scaleFactor : 1f;
@@ -65,7 +118,7 @@ namespace Cooking.UI
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (!tracking)
+            if (rightTracking || !tracking)
                 return;
 
             tracking = false;
@@ -78,7 +131,7 @@ namespace Cooking.UI
             IngredientDefinition definition = view != null ? view.ShownDefinition : null;
             if (fromInventory)
             {
-                Place(item, definition, station, eventData);
+                PlaceFromInventory(item, definition, station, eventData);
                 ReturnToTray();
                 return;
             }
@@ -98,6 +151,58 @@ namespace Cooking.UI
                 Settle(heldPosition, false);
         }
 
+        void EndRightDrag(Vector2 screen)
+        {
+            rightTracking = false;
+            tracking = false;
+            IsDragging = false;
+
+            FoodSlotView view = GetComponent<FoodSlotView>();
+            IngredientInstance item = view != null ? view.Shown : null;
+            IngredientDefinition definition = view != null ? view.ShownDefinition : null;
+            PointerEventData eventData = PointerAt(screen);
+            IFoodStation station = eventData != null ? FindStation(eventData) : null;
+            PlaceFromInventory(item, definition, station, eventData);
+            takeOne = false;
+            ReturnToTray();
+        }
+
+        PointerEventData PointerAt(Vector2 screen)
+        {
+            if (EventSystem.current == null)
+            {
+                Debug.LogError("场景里需要有 EventSystem。", this);
+                return null;
+            }
+
+            return new PointerEventData(EventSystem.current)
+            {
+                position = screen,
+                button = PointerEventData.InputButton.Right
+            };
+        }
+
+        void PlaceFromInventory(
+            IngredientInstance item,
+            IngredientDefinition definition,
+            IFoodStation station,
+            PointerEventData eventData)
+        {
+            if (item == null)
+                return;
+
+            IngredientInstance piece = item;
+            bool split = false;
+            if (takeOne && item.Quantity > 1)
+            {
+                piece = IngredientInventory.SplitOne(item);
+                split = piece != item;
+            }
+
+            if (!Place(piece, definition, station, eventData) && split)
+                item.Quantity += 1;
+        }
+
         bool Place(IngredientInstance item, IngredientDefinition definition, IFoodStation station, PointerEventData eventData)
         {
             if (station is Plate plate && LocalOn(plate.transform, eventData, out Vector2 platePoint))
@@ -113,17 +218,21 @@ namespace Cooking.UI
             return false;
         }
 
-        static bool LocalOn(Transform target, PointerEventData eventData, out Vector2 local)
+        bool LocalOn(Transform target, PointerEventData eventData, out Vector2 local)
         {
             local = Vector2.zero;
             RectTransform targetRect = target as RectTransform;
-            if (targetRect == null)
+            if (targetRect == null || eventData == null)
                 return false;
+
+            Camera cam = eventData.pressEventCamera;
+            if (cam == null && canvas != null)
+                cam = canvas.worldCamera;
 
             return RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 targetRect,
                 eventData.position,
-                eventData.pressEventCamera,
+                cam,
                 out local);
         }
 

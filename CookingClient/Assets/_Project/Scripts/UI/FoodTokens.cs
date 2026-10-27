@@ -142,6 +142,68 @@ namespace Cooking.UI
                 session.Inventory.Add(item);
         }
 
+        public static IngredientInstance SplitOne(IngredientInstance source)
+        {
+            if (source == null || source.Quantity <= 1)
+                return source;
+
+            source.Quantity -= 1;
+            var seasonings = new List<string>();
+            if (source.SeasoningIds != null)
+            {
+                for (int i = 0; i < source.SeasoningIds.Count; i++)
+                    seasonings.Add(source.SeasoningIds[i]);
+            }
+
+            return new IngredientInstance
+            {
+                InstanceId = AllocateId(),
+                DefinitionId = source.DefinitionId,
+                Quality = source.Quality,
+                Quantity = 1,
+                Doneness = source.Doneness,
+                Shape = source.Shape,
+                CookMethod = source.CookMethod,
+                SeasoningIds = seasonings,
+                IsCharcoal = source.IsCharcoal
+            };
+        }
+
+        static int lastIssuedId;
+
+        static int AllocateId()
+        {
+            int next = 1;
+            GameSession session = Session();
+            if (session != null)
+            {
+                next = RaiseId(next, session.Inventory);
+                if (session.HeldDish != null)
+                    next = RaiseId(next, session.HeldDish.Items);
+            }
+
+            if (next <= lastIssuedId)
+                next = lastIssuedId + 1;
+
+            lastIssuedId = next;
+            return next;
+        }
+
+        static int RaiseId(int next, List<IngredientInstance> items)
+        {
+            if (items == null)
+                return next;
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                IngredientInstance item = items[i];
+                if (item != null && item.InstanceId >= next)
+                    next = item.InstanceId + 1;
+            }
+
+            return next;
+        }
+
         public static GameSession Session()
         {
             GameRoot root = GameRoot.Instance;
