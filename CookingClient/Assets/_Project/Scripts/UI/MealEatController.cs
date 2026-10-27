@@ -180,7 +180,10 @@ namespace Cooking.UI
             }
 
             var plate = new List<IngredientInstance>(session.HeldDish.Items);
-            DishResult result = DeliciousnessScore.Evaluate(plate, DefinitionsFor(plate), TodayRecipe(session), presentation);
+            RecipeDefinition today = TodayRecipe(session);
+            DishResult result = DeliciousnessScore.Evaluate(plate, DefinitionsFor(plate), today, presentation);
+            if (result.Picture == DishPictureKind.Recipe && today != null)
+                session.RememberCorrectRecipe(today.id);
             if (session.AttemptScores == null || session.AttemptScores.Length < MealsPerDay)
                 session.AttemptScores = new float[MealsPerDay];
 

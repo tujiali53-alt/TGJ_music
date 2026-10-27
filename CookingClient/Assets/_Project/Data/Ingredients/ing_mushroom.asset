@@ -20,7 +20,7 @@ MonoBehaviour:
   canCut: 1
   optimalDoneness: 120
   maxDoneness: 180
-  spriteWhole: {fileID: 21300000, guid: fca75298a0281664daa537a70880a8bd, type: 3}
+  spriteWhole: {fileID: 21300000, guid: bf08894c88b0d2e44a13dd02d3793477, type: 3}
   baseColor: {r: 1, g: 1, b: 1, a: 1}
   stateSprites:
   - shape: 2

@@ -247,6 +247,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1133946435}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &121702142 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5896733569264309956, guid: 1cdaba5889028024a8dd5d00170d7900, type: 3}
+  m_PrefabInstance: {fileID: 8697123206382313577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &121702143 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7362370497411440837, guid: 1cdaba5889028024a8dd5d00170d7900, type: 3}
+  m_PrefabInstance: {fileID: 8697123206382313577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &121702148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121702142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93e40b26c816130ad57e8f92c1b6043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.Exploration.IngredientPickup
+  definition: {fileID: 11400000, guid: c82d3fa15b70502f9c46d7e81b0a5f32, type: 2}
+  player: {fileID: 2079142421}
+  hitCollider: {fileID: 121702143}
+  collectDistance: 2.5
 --- !u!115 &122612043
 MonoScript:
   m_ObjectHideFlags: 0
@@ -536,6 +562,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171428050}
   m_CullTransparentMesh: 1
+--- !u!1 &207562614 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4512182409124099545, guid: 84b9e4e3015aebf49908893f3c320774, type: 3}
+  m_PrefabInstance: {fileID: 111699495685511198}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &207562617 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4601671884185079924, guid: 84b9e4e3015aebf49908893f3c320774, type: 3}
+  m_PrefabInstance: {fileID: 111699495685511198}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &207562619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207562614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93e40b26c816130ad57e8f92c1b6043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.Exploration.IngredientPickup
+  definition: {fileID: 11400000, guid: c82d3fa15b70502f9c46d7e81b0a5f32, type: 2}
+  player: {fileID: 2079142421}
+  hitCollider: {fileID: 207562617}
+  collectDistance: 2.5
 --- !u!1 &276683061
 GameObject:
   m_ObjectHideFlags: 0
@@ -5798,6 +5850,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2079142421}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &419840581 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2347774650525765036, guid: f7322b85587f2f44d81198cd63871b76, type: 3}
+  m_PrefabInstance: {fileID: 2556832048232491358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &419840584 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5959655149674326712, guid: f7322b85587f2f44d81198cd63871b76, type: 3}
+  m_PrefabInstance: {fileID: 2556832048232491358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &419840586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419840581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93e40b26c816130ad57e8f92c1b6043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.Exploration.IngredientPickup
+  definition: {fileID: 11400000, guid: c82d3fa15b70502f9c46d7e81b0a5f32, type: 2}
+  player: {fileID: 2079142421}
+  hitCollider: {fileID: 419840584}
+  collectDistance: 2.5
 --- !u!1 &447604919
 GameObject:
   m_ObjectHideFlags: 0
@@ -5852,7 +5930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6296,7 +6374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -8222,6 +8300,32 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1211613535 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1704081577915746566, guid: 3dc55f955e849124585d16d96fdb01a6, type: 3}
+  m_PrefabInstance: {fileID: 388274857578877923}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &1211613538 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 560463178657317740, guid: 3dc55f955e849124585d16d96fdb01a6, type: 3}
+  m_PrefabInstance: {fileID: 388274857578877923}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1211613540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211613535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93e40b26c816130ad57e8f92c1b6043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.Exploration.IngredientPickup
+  definition: {fileID: 11400000, guid: c82d3fa15b70502f9c46d7e81b0a5f32, type: 2}
+  player: {fileID: 2079142421}
+  hitCollider: {fileID: 1211613538}
+  collectDistance: 2.5
 --- !u!1 &1243150928
 GameObject:
   m_ObjectHideFlags: 0
@@ -8258,7 +8362,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 16}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1243150930
 MonoBehaviour:
@@ -90636,6 +90740,32 @@ Transform:
   - {fileID: 111699495685511199}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1562543432 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6863748497325931153, guid: 84b9e4e3015aebf49908893f3c320774, type: 3}
+  m_PrefabInstance: {fileID: 111699495685511198}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &1562543435 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7943910392018133837, guid: 84b9e4e3015aebf49908893f3c320774, type: 3}
+  m_PrefabInstance: {fileID: 111699495685511198}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1562543437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562543432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93e40b26c816130ad57e8f92c1b6043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.Exploration.IngredientPickup
+  definition: {fileID: 11400000, guid: c82d3fa15b70502f9c46d7e81b0a5f32, type: 2}
+  player: {fileID: 2079142421}
+  hitCollider: {fileID: 1562543435}
+  collectDistance: 2.5
 --- !u!1 &1597954265
 GameObject:
   m_ObjectHideFlags: 0
@@ -90773,6 +90903,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1597954265}
   m_CullTransparentMesh: 1
+--- !u!1 &1620182476 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5643461506013765378, guid: 3dc55f955e849124585d16d96fdb01a6, type: 3}
+  m_PrefabInstance: {fileID: 388274857578877923}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &1620182479 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4476650368941767134, guid: 3dc55f955e849124585d16d96fdb01a6, type: 3}
+  m_PrefabInstance: {fileID: 388274857578877923}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1620182481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620182476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93e40b26c816130ad57e8f92c1b6043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.Exploration.IngredientPickup
+  definition: {fileID: 11400000, guid: c82d3fa15b70502f9c46d7e81b0a5f32, type: 2}
+  player: {fileID: 2079142421}
+  hitCollider: {fileID: 1620182479}
+  collectDistance: 2.5
 --- !u!1 &1638333212
 GameObject:
   m_ObjectHideFlags: 0
@@ -122217,7 +122373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -127636,6 +127792,32 @@ MonoBehaviour:
   glowMask: {fileID: 102359037}
   orbitParticles: {fileID: 1921382568}
   driftParticles: {fileID: 375169806}
+--- !u!1 &2096430112 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8092285051053406148, guid: 7c959193acd45ff4c982fff11cdfd3dd, type: 3}
+  m_PrefabInstance: {fileID: 7200048989106969119}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &2096430115 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4118703820499428993, guid: 7c959193acd45ff4c982fff11cdfd3dd, type: 3}
+  m_PrefabInstance: {fileID: 7200048989106969119}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2096430117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096430112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93e40b26c816130ad57e8f92c1b6043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.Exploration.IngredientPickup
+  definition: {fileID: 11400000, guid: c82d3fa15b70502f9c46d7e81b0a5f32, type: 2}
+  player: {fileID: 2079142421}
+  hitCollider: {fileID: 2096430115}
+  collectDistance: 2.5
 --- !u!1 &2106102101
 GameObject:
   m_ObjectHideFlags: 0
@@ -128072,7 +128254,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6863748497325931153, guid: 84b9e4e3015aebf49908893f3c320774, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1562543437}
+    - targetCorrespondingSourceObject: {fileID: 4512182409124099545, guid: 84b9e4e3015aebf49908893f3c320774, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 207562619}
   m_SourcePrefab: {fileID: 100100000, guid: 84b9e4e3015aebf49908893f3c320774, type: 3}
 --- !u!4 &111699495685511199 stripped
 Transform:
@@ -128138,7 +128326,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1704081577915746566, guid: 3dc55f955e849124585d16d96fdb01a6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1211613540}
+    - targetCorrespondingSourceObject: {fileID: 5643461506013765378, guid: 3dc55f955e849124585d16d96fdb01a6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1620182481}
   m_SourcePrefab: {fileID: 100100000, guid: 3dc55f955e849124585d16d96fdb01a6, type: 3}
 --- !u!4 &388274857578877924 stripped
 Transform:
@@ -128204,7 +128398,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2347774650525765036, guid: f7322b85587f2f44d81198cd63871b76, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 419840586}
   m_SourcePrefab: {fileID: 100100000, guid: f7322b85587f2f44d81198cd63871b76, type: 3}
 --- !u!4 &2556832048232491359 stripped
 Transform:
@@ -128402,7 +128599,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8092285051053406148, guid: 7c959193acd45ff4c982fff11cdfd3dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2096430117}
   m_SourcePrefab: {fileID: 100100000, guid: 7c959193acd45ff4c982fff11cdfd3dd, type: 3}
 --- !u!4 &7200048989106969120 stripped
 Transform:
@@ -128464,7 +128664,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5896733569264309956, guid: 1cdaba5889028024a8dd5d00170d7900, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 121702148}
   m_SourcePrefab: {fileID: 100100000, guid: 1cdaba5889028024a8dd5d00170d7900, type: 3}
 --- !u!4 &8697123206382313578 stripped
 Transform:
