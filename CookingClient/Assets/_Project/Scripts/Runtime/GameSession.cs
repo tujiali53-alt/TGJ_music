@@ -13,6 +13,10 @@ namespace Cooking.Runtime
         public int MealsEaten;
         public float[] AttemptScores = new float[3];
         public float TodayDeliciousness;
+        public int LightsAbsorbedTonight;
+        public List<string> ResolvedOptionIdsTonight = new List<string>();
+        public List<string> RevealedRewardOptionIds = new List<string>();
+        public List<NightLogEntry> NightLog = new List<NightLogEntry>();
 
         public static GameSession NewGame()
         {
@@ -25,7 +29,11 @@ namespace Cooking.Runtime
                 HeldDish = new Dish { DishId = 1, ExecutionScore = 1f },
                 MealsEaten = 0,
                 AttemptScores = new float[3],
-                TodayDeliciousness = 0f
+                TodayDeliciousness = 0f,
+                LightsAbsorbedTonight = 0,
+                ResolvedOptionIdsTonight = new List<string>(),
+                RevealedRewardOptionIds = new List<string>(),
+                NightLog = new List<NightLogEntry>()
             };
         }
 
