@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 640dcf76f39a68442a74b006f719c02f, type: 3}
+  m_Name: event_moonstone
+  m_EditorClassIdentifier: Cooking::Cooking.Data.NightEventDefinition
+  id: event_moonstone
+  displayName: "\u6708\u5149\u6652\u5230\u7684\u77F3\u5934"
+  unlockNight: 3
+  options:
+  - optionId: opt_moon_look
+    order: 1
+    displayName: "\u7AEF\u8BE6"
+    conditionType: 0
+    conditionValue: 0
+    successFaces: 6
+    rewards:
+    - pickMode: 0
+      ingredientId: ing_shrimp
+      count: 3
+  - optionId: opt_moon_touch
+    order: 2
+    displayName: "\u89E6\u6478"
+    conditionType: 0
+    conditionValue: 0
+    successFaces: 5
+    rewards:
+    - pickMode: 0
+      ingredientId: ing_cucumber
+      count: 5
+  lines: []

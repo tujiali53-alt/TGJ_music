@@ -7,6 +7,8 @@ namespace Cooking.Exploration
     {
         [SerializeField] float moveSpeed = 4f;
 
+        public float SpeedMultiplier { get; set; } = 1f;
+
         void Update()
         {
             Keyboard keyboard = Keyboard.current;
@@ -28,8 +30,9 @@ namespace Cooking.Exploration
 
             direction.Normalize();
             Vector3 position = transform.position;
-            position.x += direction.x * moveSpeed * Time.deltaTime;
-            position.y += direction.y * moveSpeed * Time.deltaTime;
+            float speed = moveSpeed * SpeedMultiplier;
+            position.x += direction.x * speed * Time.deltaTime;
+            position.y += direction.y * speed * Time.deltaTime;
             position.z = 0f;
             transform.position = position;
         }

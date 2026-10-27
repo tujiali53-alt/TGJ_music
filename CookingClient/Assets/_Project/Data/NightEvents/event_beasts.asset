@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 640dcf76f39a68442a74b006f719c02f, type: 3}
+  m_Name: event_beasts
+  m_EditorClassIdentifier: Cooking::Cooking.Data.NightEventDefinition
+  id: event_beasts
+  displayName: "\u5BB6\u5EAD\u5373\u6CD5\u5EAD"
+  unlockNight: 1
+  options:
+  - optionId: opt_beasts_mediate
+    order: 1
+    displayName: "\u529D\u67B6"
+    conditionType: 0
+    conditionValue: 0
+    successFaces: 3
+    rewards:
+    - pickMode: 0
+      ingredientId: ing_tomato
+      count: 5
+  - optionId: opt_beasts_watch
+    order: 2
+    displayName: "\u770B\u620F"
+    conditionType: 0
+    conditionValue: 0
+    successFaces: 6
+    rewards:
+    - pickMode: 0
+      ingredientId: ing_egg
+      count: 3
+  - optionId: opt_beasts_side
+    order: 3
+    displayName: "\u62C9\u504F\u67B6"
+    conditionType: 3
+    conditionValue: 40
+    successFaces: 4
+    rewards:
+    - pickMode: 0
+      ingredientId: ing_beef
+      count: 3
+    - pickMode: 0
+      ingredientId: ing_rice
+      count: 5
+  lines: []

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 640dcf76f39a68442a74b006f719c02f, type: 3}
+  m_Name: event_fishing
+  m_EditorClassIdentifier: Cooking::Cooking.Data.NightEventDefinition
+  id: event_fishing
+  displayName: "\u9C7C\u94A9\u5F62\u72B6\u7684\u86AF\u8693"
+  unlockNight: 2
+  options:
+  - optionId: opt_fishing_cast
+    order: 1
+    displayName: "\u62C9\u7AFF\uFF01"
+    conditionType: 4
+    conditionValue: 60
+    successFaces: 5
+    rewards:
+    - pickMode: 1
+      ingredientId: ing_cornfish
+      count: 5
+    - pickMode: 1
+      ingredientId: ing_shrimp
+      count: 3
+  - optionId: opt_fishing_wait
+    order: 2
+    displayName: "\u9759\u5019\u65F6\u673A"
+    conditionType: 0
+    conditionValue: 0
+    successFaces: 6
+    rewards:
+    - pickMode: 0
+      ingredientId: ing_berry
+      count: 2
+  lines: []

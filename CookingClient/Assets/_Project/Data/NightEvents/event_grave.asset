@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 640dcf76f39a68442a74b006f719c02f, type: 3}
+  m_Name: event_grave
+  m_EditorClassIdentifier: Cooking::Cooking.Data.NightEventDefinition
+  id: event_grave
+  displayName: "\u54C0\u60BC\u5730"
+  unlockNight: 2
+  options:
+  - optionId: opt_grave_mourn
+    order: 1
+    displayName: "\u9ED8\u54C0"
+    conditionType: 0
+    conditionValue: 0
+    successFaces: 6
+    rewards:
+    - pickMode: 0
+      ingredientId: ing_pumpkin
+      count: 5
+  - optionId: opt_grave_flower
+    order: 2
+    displayName: "\u732E\u82B1"
+    conditionType: 2
+    conditionValue: 0
+    successFaces: 6
+    rewards:
+    - pickMode: 0
+      ingredientId: ing_yam
+      count: 5
+  lines: []

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 640dcf76f39a68442a74b006f719c02f, type: 3}
+  m_Name: event_merchant
+  m_EditorClassIdentifier: Cooking::Cooking.Data.NightEventDefinition
+  id: event_merchant
+  displayName: "\u6324\u7709\u5F04\u773C\u7684\u6295\u673A\u8005"
+  unlockNight: 1
+  options:
+  - optionId: opt_merchant_trade
+    order: 1
+    displayName: "\u540C\u610F\u4EA4\u6362"
+    conditionType: 1
+    conditionValue: 0
+    successFaces: 3
+    rewards:
+    - pickMode: 0
+      ingredientId: ing_beef
+      count: 5
+  - optionId: opt_merchant_leave
+    order: 2
+    displayName: "\u8F6C\u8EAB\u79BB\u5F00"
+    conditionType: 0
+    conditionValue: 0
+    successFaces: 6
+    rewards:
+    - pickMode: 0
+      ingredientId: ing_potato
+      count: 5
+    - pickMode: 0
+      ingredientId: ing_onion
+      count: 5
+  lines: []
