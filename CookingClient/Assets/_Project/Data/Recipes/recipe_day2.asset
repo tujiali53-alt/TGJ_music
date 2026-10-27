@@ -16,6 +16,8 @@ MonoBehaviour:
   displayName: "\u8679\u5F69\u5317\u975E\u86CB"
   unlockDay: 2
   finishedSprite: {fileID: 0}
+  pageSpriteZh: {fileID: 21300000, guid: be7caaaa346708644935ac0a6858abf3, type: 3}
+  pageSpriteEn: {fileID: 0}
   ingredients:
   - ingredientId: ing_beef
     shape: 1

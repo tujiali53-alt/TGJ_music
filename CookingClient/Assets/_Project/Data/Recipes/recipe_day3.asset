@@ -16,6 +16,8 @@ MonoBehaviour:
   displayName: "\u871C\u8393\u9171\u9999\u714E\u7389\u7C73\u9C7C"
   unlockDay: 3
   finishedSprite: {fileID: 0}
+  pageSpriteZh: {fileID: 0}
+  pageSpriteEn: {fileID: 0}
   ingredients:
   - ingredientId: ing_cornfish
     shape: 1

@@ -16,6 +16,8 @@ MonoBehaviour:
   displayName: "\u6D77\u9C9C\u6742\u70E9\u996D"
   unlockDay: 5
   finishedSprite: {fileID: 0}
+  pageSpriteZh: {fileID: 21300000, guid: 7dc33c3fb22b2ce45bbca2ef86e545d6, type: 3}
+  pageSpriteEn: {fileID: 0}
   ingredients:
   - ingredientId: ing_onion
     shape: 1

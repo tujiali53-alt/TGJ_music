@@ -16,6 +16,8 @@ MonoBehaviour:
   displayName: "\u4E03\u65E5\u706B\u9505"
   unlockDay: 7
   finishedSprite: {fileID: 0}
+  pageSpriteZh: {fileID: 0}
+  pageSpriteEn: {fileID: 0}
   ingredients: []
   seasonings: []
   steps: []

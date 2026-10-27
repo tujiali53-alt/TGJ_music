@@ -33615,7 +33615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.62, g: 0.42, b: 0.22, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -35057,6 +35057,7 @@ GameObject:
   - component: {fileID: 1083782838}
   - component: {fileID: 1083782840}
   - component: {fileID: 1083782839}
+  - component: {fileID: 1083782841}
   m_Layer: 5
   m_Name: RecipeImage
   m_TagString: Untagged
@@ -35122,6 +35123,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083782837}
   m_CullTransparentMesh: 1
+--- !u!114 &1083782841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083782837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81af2a27ac69dbc498f26478e69a0401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.RecipePageView
+  recipeImage: {fileID: 1083782839}
+  recipes:
+  - {fileID: 11400000, guid: 3a4b5c6d7e8f901a2b3c4d5e6f708192, type: 2}
+  - {fileID: 11400000, guid: 80a24212156c13b409b489e4ffe96a72, type: 2}
+  - {fileID: 11400000, guid: f3dd3600fb2b34841aef814546d56b52, type: 2}
+  - {fileID: 11400000, guid: fed70d84baf3a26459e64469126c8acd, type: 2}
+  - {fileID: 11400000, guid: daca5e98c44ea834cb9112a2caccf5ab, type: 2}
+  - {fileID: 11400000, guid: e0a07ec966f90f34ea62b59013509068, type: 2}
+  - {fileID: 11400000, guid: 34f485811a46ee643b81c6c2d3013b93, type: 2}
+  language: 0
 --- !u!1 &1111891590
 GameObject:
   m_ObjectHideFlags: 0

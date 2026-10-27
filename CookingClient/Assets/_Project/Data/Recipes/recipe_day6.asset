@@ -16,6 +16,8 @@ MonoBehaviour:
   displayName: "\u9E1F\u5DE2\u5C71\u836F\u997C"
   unlockDay: 6
   finishedSprite: {fileID: 0}
+  pageSpriteZh: {fileID: 0}
+  pageSpriteEn: {fileID: 0}
   ingredients:
   - ingredientId: ing_yam
     shape: 3

@@ -127,6 +127,54 @@ namespace Cooking.EditorTools
             return null;
         }
 
+        [MenuItem("Cooking/Validate Recipe Pages")]
+        public static void ValidateRecipePagesMenu()
+        {
+            string error = ValidateRecipePages();
+            if (error == null)
+                Debug.Log("食谱页图与天数绑定一致。");
+            else
+                Debug.LogError(error);
+        }
+
+        public static string ValidateRecipePages()
+        {
+            string mismatch = ExpectPage("recipe_day1", "Recipe_Day1", null);
+            if (mismatch != null)
+                return mismatch;
+            mismatch = ExpectPage("recipe_day2", "Recipe_Day2", null);
+            if (mismatch != null)
+                return mismatch;
+            mismatch = ExpectPage("recipe_day5", "Recipe_Day5", null);
+            if (mismatch != null)
+                return mismatch;
+
+            string[] empty = { "recipe_day3", "recipe_day4", "recipe_day6", "recipe_day7" };
+            for (int i = 0; i < empty.Length; i++)
+            {
+                mismatch = ExpectPage(empty[i], null, null);
+                if (mismatch != null)
+                    return mismatch;
+            }
+
+            return null;
+        }
+
+        static string ExpectPage(string id, string zhName, string enName)
+        {
+            RecipeDefinition recipe = FindById<RecipeDefinition>(RecipesFolder, id);
+            if (recipe == null)
+                return "缺少 " + id + "，请先执行 Cooking/Import Cooking Tables。";
+
+            string zh = recipe.pageSpriteZh != null ? recipe.pageSpriteZh.name : null;
+            string en = recipe.pageSpriteEn != null ? recipe.pageSpriteEn.name : null;
+            if (zh != zhName)
+                return id + " 中文食谱图应为 " + (zhName ?? "空") + "，实际 " + (zh ?? "空");
+            if (en != enName)
+                return id + " 英文食谱图应为 " + (enName ?? "空") + "，实际 " + (en ?? "空");
+            return null;
+        }
+
         static bool HasIngredient(
             RecipeDefinition recipe,
             string ingredientId,
@@ -398,6 +446,16 @@ namespace Cooking.EditorTools
                     ref asset.finishedSprite,
                     "Recipes/" + id + ".finishedSprite",
                     result);
+                ApplyOptionalSprite(
+                    FirstCell(row, "pageSpriteZh", "pageSpriteZhPath"),
+                    ref asset.pageSpriteZh,
+                    "Recipes/" + id + ".pageSpriteZh",
+                    result);
+                ApplyOptionalSprite(
+                    FirstCell(row, "pageSpriteEn", "pageSpriteEnPath"),
+                    ref asset.pageSpriteEn,
+                    "Recipes/" + id + ".pageSpriteEn",
+                    result);
 
                 if (asset.ingredients == null)
                     asset.ingredients = new List<RecipeIngredient>();
@@ -657,6 +715,17 @@ namespace Cooking.EditorTools
             }
 
             target = sprite;
+        }
+
+        static void ApplyOptionalSprite(string path, ref Sprite target, string context, ImportResult result)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                target = null;
+                return;
+            }
+
+            ApplySprite(path, ref target, context, result);
         }
 
         static T FindOrCreate<T>(string folder, string id, ImportResult result) where T : ScriptableObject

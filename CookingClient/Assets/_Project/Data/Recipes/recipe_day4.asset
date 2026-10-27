@@ -16,6 +16,8 @@ MonoBehaviour:
   displayName: "\u5E7D\u7075\u5E03\u4E01\u8239"
   unlockDay: 4
   finishedSprite: {fileID: 0}
+  pageSpriteZh: {fileID: 0}
+  pageSpriteEn: {fileID: 0}
   ingredients:
   - ingredientId: ing_pumpkin
     shape: 1

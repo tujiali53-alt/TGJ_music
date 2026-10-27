@@ -39,6 +39,8 @@ namespace Cooking.Data
         public string displayName;
         public int unlockDay = 1;
         public Sprite finishedSprite;
+        public Sprite pageSpriteZh;
+        public Sprite pageSpriteEn;
         public List<RecipeIngredient> ingredients = new List<RecipeIngredient>();
         public List<RecipeSeasoning> seasonings = new List<RecipeSeasoning>();
         public List<RecipeStep> steps = new List<RecipeStep>();

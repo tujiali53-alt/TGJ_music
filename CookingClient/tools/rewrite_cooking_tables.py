@@ -46,6 +46,7 @@ for i, line in enumerate(
         "RecipeSeasonings 行序 = 该食材上调料顺序。",
         "RecipeSteps 为日记文案；暂可不参与判定。",
         "DAY7 火锅：ingredients/seasonings 留空。",
+        "pageSpriteZh / pageSpriteEn：食谱页图。没有图时留空。",
     ],
     start=2,
 ):
@@ -69,15 +70,15 @@ sheet(
 # ---------- Recipes ----------
 sheet(
     "Recipes",
-    ["id", "displayName", "unlockDay", "finishedSprite"],
+    ["id", "displayName", "unlockDay", "finishedSprite", "pageSpriteZh", "pageSpriteEn"],
     [
-        ("recipe_day1", "什锦蘑菇浓汤", 1, ""),
-        ("recipe_day2", "虹彩北非蛋", 2, ""),
-        ("recipe_day3", "蜜莓酱香煎玉米鱼", 3, ""),
-        ("recipe_day4", "幽灵布丁船", 4, ""),
-        ("recipe_day5", "海鲜杂烩饭", 5, ""),
-        ("recipe_day6", "鸟巢山药饼", 6, ""),
-        ("recipe_day7", "七日火锅", 7, ""),
+        ("recipe_day1", "什锦蘑菇浓汤", 1, "", "Assets/_Project/Arts/UI/Recipe/Recipe_Day1.png", ""),
+        ("recipe_day2", "虹彩北非蛋", 2, "", "Assets/_Project/Arts/UI/Recipe/Recipe_Day2.png", ""),
+        ("recipe_day3", "蜜莓酱香煎玉米鱼", 3, "", "", ""),
+        ("recipe_day4", "幽灵布丁船", 4, "", "", ""),
+        ("recipe_day5", "海鲜杂烩饭", 5, "", "Assets/_Project/Arts/UI/Recipe/Recipe_Day5.png", ""),
+        ("recipe_day6", "鸟巢山药饼", 6, "", "", ""),
+        ("recipe_day7", "七日火锅", 7, "", "", ""),
     ],
 )
 
