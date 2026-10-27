@@ -15,8 +15,8 @@ MonoBehaviour:
   id: recipe_day3
   displayName: "\u871C\u8393\u9171\u9999\u714E\u7389\u7C73\u9C7C"
   unlockDay: 3
-  finishedSprite: {fileID: 0}
-  pageSpriteZh: {fileID: 0}
+  finishedSprite: {fileID: 21300000, guid: 610a3c9ae3143af4696c935d09c67ae5, type: 3}
+  pageSpriteZh: {fileID: 21300000, guid: d564cf91e072cf04e9a88f8c1d55c83f, type: 3}
   pageSpriteEn: {fileID: 0}
   ingredients:
   - ingredientId: ing_cornfish

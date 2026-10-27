@@ -15,7 +15,7 @@ MonoBehaviour:
   id: recipe_day1
   displayName: "\u4EC0\u9526\u8611\u83C7\u6D53\u6C64"
   unlockDay: 1
-  finishedSprite: {fileID: 0}
+  finishedSprite: {fileID: 21300000, guid: fbdad6419ae0eba4bbac53234f891023, type: 3}
   pageSpriteZh: {fileID: 21300000, guid: bcd6d300563c15041beac0d155553cee, type: 3}
   pageSpriteEn: {fileID: 0}
   ingredients:

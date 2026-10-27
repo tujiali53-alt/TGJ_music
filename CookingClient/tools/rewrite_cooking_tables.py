@@ -219,10 +219,20 @@ sheet(
     ingredients,
 )
 
+# 白蘑菇示例：整朵用生图/熟图；切开后切丁、切丝共用切片那一行。
 sheet(
     "IngredientVisualStates",
     ["ingredientId", "shape", "cookMethod", "sprite"],
-    [],
+    [
+        ("ing_mushroom", "Whole", "Raw", "Assets/_Project/Arts/Ingrediant/Food_Mushroom_Sliced.png"),
+        ("ing_mushroom", "Whole", "Boiled", "Assets/_Project/Arts/Ingrediant/Food_Mushroom_b.png"),
+        ("ing_mushroom", "Whole", "Fried", "Assets/_Project/Arts/Ingrediant/Food_Mushroom_b.png"),
+        ("ing_mushroom", "Whole", "BoiledAndFried", "Assets/_Project/Arts/Ingrediant/Food_Mushroom_b.png"),
+        ("ing_mushroom", "Slice", "Raw", "Assets/_Project/Arts/Ingrediant/Food_Mushroom_w.png"),
+        ("ing_mushroom", "Slice", "Boiled", "Assets/_Project/Arts/Ingrediant/Food_Mushroom_b.png"),
+        ("ing_mushroom", "Slice", "Fried", "Assets/_Project/Arts/Ingrediant/Food_Mushroom_b.png"),
+        ("ing_mushroom", "Slice", "BoiledAndFried", "Assets/_Project/Arts/Ingrediant/Food_Mushroom_b.png"),
+    ],
 )
 
 order = [

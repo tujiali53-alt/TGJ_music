@@ -15,8 +15,8 @@ MonoBehaviour:
   id: recipe_day4
   displayName: "\u5E7D\u7075\u5E03\u4E01\u8239"
   unlockDay: 4
-  finishedSprite: {fileID: 0}
-  pageSpriteZh: {fileID: 0}
+  finishedSprite: {fileID: 21300000, guid: 0dd9e81044eb53d4d8e13c8797708def, type: 3}
+  pageSpriteZh: {fileID: 21300000, guid: 14a63b57977ba114ba274c4acd1ace53, type: 3}
   pageSpriteEn: {fileID: 0}
   ingredients:
   - ingredientId: ing_pumpkin
