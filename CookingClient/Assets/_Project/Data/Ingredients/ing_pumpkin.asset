@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
   id: ing_pumpkin
   displayName: "\u5E7D\u7075\u5357\u74DC"
+  displayNameEn: Ghost Pumpkin
   description: "\u957F\u6709\u8138\u72B6\u82B1\u7EB9\u7684\u767D\u8272\u5357\u74DC\uFF0C\u7A76\u7ADF\u662F\u5929\u751F\u8FD8\u662F\u4EA1\u7075\u7684\u6267\u5FF5\u5462\uFF1F\u6CA1\u6709\u4EBA\u77E5\u9053\u7B54\u6848\u3002"
+  descriptionEn: A white pumpkin with face-like patterns. Is it born that way, or
+    is it the lingering will of the dead? No one knows the answer.
   kind: 1
   canEatRaw: 0
   canCut: 1

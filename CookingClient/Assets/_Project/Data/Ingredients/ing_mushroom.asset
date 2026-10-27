@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
   id: ing_mushroom
   displayName: "\u767D\u8611\u83C7"
+  displayNameEn: White Mushroom
   description: "\u751F\u957F\u5728\u68EE\u6797\u4E2D\u7684\u83CC\u7C7B\uFF0C\u5F62\u4F3C\u591C\u7A7A\u4E2D\u768E\u767D\u7684\u660E\u6708\u3002"
+  descriptionEn: A fungus that grows in the forest, shaped like a bright white moon
+    in the night sky.
   kind: 1
   canEatRaw: 0
   canCut: 1

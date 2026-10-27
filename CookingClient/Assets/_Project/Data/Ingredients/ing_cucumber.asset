@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
   id: ing_cucumber
   displayName: "\u9EC4\u74DC"
+  displayNameEn: Cucumber
   description: "\u723D\u53E3\u7684\u74DC\u7C7B\u690D\u7269\uFF0C\u4E3A\u6240\u6709\u4EBA\u5E26\u6765\u6E05\u65B0\u9999\u6C14\u7684\u51B2\u51FB\u3002"
+  descriptionEn: A crisp, refreshing gourd that brings a burst of fresh aroma to
+    everyone.
   kind: 1
   canEatRaw: 1
   canCut: 1

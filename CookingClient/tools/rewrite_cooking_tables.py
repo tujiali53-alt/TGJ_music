@@ -47,6 +47,8 @@ for i, line in enumerate(
         "RecipeSteps 为日记文案；暂可不参与判定。",
         "DAY7 火锅：ingredients/seasonings 留空。",
         "pageSpriteZh / pageSpriteEn：食谱页图。没有图时留空。",
+        "Ingredients 另有 displayNameEn、descriptionEn。英文名为空时界面回退中文。",
+        "AttributeNames：属性名和固定属性值的中英对照。id / textZh / textEn。",
     ],
     start=2,
 ):
@@ -198,25 +200,55 @@ sheet(
 
 # ---------- Ingredients（保留原有）----------
 ingredients = [
-    ("ing_beef", "虹彩牛肉", "散发着彩虹光彩的牛肉，最美味的精华都浓缩在此", "Meat", False, True, 90, 160, "", "#FFFFFF"),
-    ("ing_berry", "蜜莓果", "味道甘甜的果实，一口气吃太多小心牙疼。", "Vegetable", True, True, 70, 140, "", "#FFFFFF"),
-    ("ing_cornfish", "玉米鱼", "通体黄色的有鳞鱼，肉质鲜甜，难怪被比作玉米。", "Meat", False, True, 110, 180, "", "#FFFFFF"),
-    ("ing_cucumber", "黄瓜", "爽口的瓜类植物，为所有人带来清新香气的冲击。", "Vegetable", True, True, 60, 130, "", "#FFFFFF"),
-    ("ing_doneegg", "熟鸡蛋", "白水煮熟的鸡蛋，蛋白包裹着饱满的蛋黄，完美！", "Meat", True, True, 100, 120, "", "#FFFFFF"),
-    ("ing_egg", "鸡蛋", "不知道是哪种鸡下的蛋，看起来十分普通，希望味道也是。", "Meat", True, False, 100, 170, "", "#FFFFFF"),
-    ("ing_mushroom", "白蘑菇", "生长在森林中的菌类，形似夜空中皎白的明月。", "Vegetable", False, True, 120, 180, "Assets/_Project/Arts/AI/Mushroom.png", "#FFFFFF"),
-    ("ing_onion", "洋葱", "生长在森林中的野洋葱，味道辛甜。", "Vegetable", True, True, 110, 170, "", "#FFFFFF"),
-    ("ing_potato", "星土豆", "外形和普通土豆差不多，切开后内部有星状的花纹。", "Vegetable", False, True, 130, 190, "", "#FFFFFF"),
-    ("ing_pumpkin", "幽灵南瓜", "长有脸状花纹的白色南瓜，究竟是天生还是亡灵的执念呢？没有人知道答案。", "Vegetable", False, True, 125, 185, "", "#FFFFFF"),
-    ("ing_rice", "大米", "一种形似米的谷物，味道也很接近，不如就当成米吧。", "Other", False, False, 140, 200, "", "#FFFFFF"),
-    ("ing_shrimp", "红斑虾", "浑身长满斑纹的红褐色虾类，据说斑纹越多越美味。", "Meat", False, True, 95, 155, "", "#FFFFFF"),
-    ("ing_tomato", "番茄", "艳红色的果实，微微的酸味让人胃口大开。", "Vegetable", True, True, 80, 150, "", "#FFFFFF"),
-    ("ing_yam", "山药", "像长毛的树枝，有人说它是土豆的亲戚，反正我不信。", "Vegetable", False, True, 115, 175, "", "#FFFFFF"),
+    ("ing_beef", "虹彩牛肉", "散发着彩虹光彩的牛肉，最美味的精华都浓缩在此", "Meat", False, True, 90, 160, "", "#FFFFFF", "Rainbow Beef", "Beef that shimmers with rainbow colors, where the most delicious essence is concentrated."),
+    ("ing_berry", "蜜莓果", "味道甘甜的果实，一口气吃太多小心牙疼。", "Vegetable", True, True, 70, 140, "", "#FFFFFF", "Honeyberry", "A sweet fruit. Eat too many at once and you might get a toothache."),
+    ("ing_cornfish", "玉米鱼", "通体黄色的有鳞鱼，肉质鲜甜，难怪被比作玉米。", "Meat", False, True, 110, 180, "", "#FFFFFF", "Cornfish", "A yellow, scaly fish with sweet, tender flesh. No wonder it's likened to corn."),
+    ("ing_cucumber", "黄瓜", "爽口的瓜类植物，为所有人带来清新香气的冲击。", "Vegetable", True, True, 60, 130, "", "#FFFFFF", "Cucumber", "A crisp, refreshing gourd that brings a burst of fresh aroma to everyone."),
+    ("ing_doneegg", "熟鸡蛋", "白水煮熟的鸡蛋，蛋白包裹着饱满的蛋黄，完美！", "Meat", True, True, 100, 120, "", "#FFFFFF", "Boiled Egg", "An egg boiled in water, with the white wrapping around a plump yolk. Perfect!"),
+    ("ing_egg", "鸡蛋", "不知道是哪种鸡下的蛋，看起来十分普通，希望味道也是。", "Meat", True, False, 100, 170, "", "#FFFFFF", "Egg", "An egg laid by some unknown kind of chicken. It looks perfectly ordinary, and hopefully tastes that way too."),
+    ("ing_mushroom", "白蘑菇", "生长在森林中的菌类，形似夜空中皎白的明月。", "Vegetable", False, True, 120, 180, "Assets/_Project/Arts/AI/Mushroom.png", "#FFFFFF", "White Mushroom", "A fungus that grows in the forest, shaped like a bright white moon in the night sky."),
+    ("ing_onion", "洋葱", "生长在森林中的野洋葱，味道辛甜。", "Vegetable", True, True, 110, 170, "", "#FFFFFF", "Onion", "A wild onion that grows in the forest, with a pungent yet sweet taste."),
+    ("ing_potato", "星土豆", "外形和普通土豆差不多，切开后内部有星状的花纹。", "Vegetable", False, True, 130, 190, "", "#FFFFFF", "Star Potato", "It looks much like an ordinary potato, but the inside shows a star-shaped pattern when it is cut open."),
+    ("ing_pumpkin", "幽灵南瓜", "长有脸状花纹的白色南瓜，究竟是天生还是亡灵的执念呢？没有人知道答案。", "Vegetable", False, True, 125, 185, "", "#FFFFFF", "Ghost Pumpkin", "A white pumpkin with face-like patterns. Is it born that way, or is it the lingering will of the dead? No one knows the answer."),
+    ("ing_rice", "大米", "一种形似米的谷物，味道也很接近，不如就当成米吧。", "Other", False, False, 140, 200, "", "#FFFFFF", "Rice", "A grain that looks like rice and tastes pretty close to it too. Might as well just call it rice."),
+    ("ing_shrimp", "红斑虾", "浑身长满斑纹的红褐色虾类，据说斑纹越多越美味。", "Meat", False, True, 95, 155, "", "#FFFFFF", "Red-Spotted Shrimp", "A reddish-brown shrimp covered in spots. They say the more spots, the more delicious."),
+    ("ing_tomato", "番茄", "艳红色的果实，微微的酸味让人胃口大开。", "Vegetable", True, True, 80, 150, "", "#FFFFFF", "Tomato", "A bright red fruit with a slight sourness that whets the appetite."),
+    ("ing_yam", "山药", "像长毛的树枝，有人说它是土豆的亲戚，反正我不信。", "Vegetable", False, True, 115, 175, "", "#FFFFFF", "Yam", "Looks like a furry tree branch. Some say it's a cousin of the potato, but I don't buy it."),
 ]
 sheet(
     "Ingredients",
-    ["id", "displayName", "description", "kind", "canEatRaw", "canCut", "optimalDoneness", "maxDoneness", "spriteWhole", "baseColor"],
+    ["id", "displayName", "description", "kind", "canEatRaw", "canCut", "optimalDoneness", "maxDoneness", "spriteWhole", "baseColor", "displayNameEn", "descriptionEn"],
     ingredients,
+)
+
+sheet(
+    "AttributeNames",
+    ["id", "textZh", "textEn"],
+    [
+        ("label.description", "食物描述：", ""),
+        ("label.kind", "类别：", "Kind:"),
+        ("label.optimalDoneness", "最佳熟度：", "OptimalDoneness:"),
+        ("label.maxDoneness", "最大熟度：", "MaxDoneness:"),
+        ("label.state", "状态：", "State:"),
+        ("label.canEatRaw", "", "CanEatRaw:"),
+        ("label.canCut", "", "CanCut:"),
+        ("canEatRaw.true", "可煎煮", "True"),
+        ("canEatRaw.false", "不可煎煮", "False"),
+        ("canCut.true", "可切", "True"),
+        ("canCut.false", "不可切", "False"),
+        ("kind.Meat", "肉类", "Meat"),
+        ("kind.Vegetable", "蔬菜", "Vegetable"),
+        ("kind.Other", "其他", "Other"),
+        ("shape.Whole", "整块", "Whole"),
+        ("shape.Dice", "切丁状", "Dice"),
+        ("shape.Slice", "片状", "Slice"),
+        ("shape.Shred", "丝状", "Shred"),
+        ("cook.Raw", "生的", "Raw"),
+        ("cook.Boiled", "煮过", "Boiled"),
+        ("cook.Fried", "煎过", "Fried"),
+        ("cook.BoiledAndFried", "煎煮过", "BoiledAndFried"),
+        ("state.joiner", "；", "; "),
+    ],
 )
 
 # 白蘑菇示例：整朵用生图/熟图；切开后切丁、切丝共用切片那一行。
@@ -244,6 +276,7 @@ order = [
     "RecipeSteps",
     "Ingredients",
     "IngredientVisualStates",
+    "AttributeNames",
 ]
 for i, name in enumerate(order):
     wb.move_sheet(name, offset=i - wb.sheetnames.index(name))

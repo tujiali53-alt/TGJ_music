@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb2374147d5902545bb99d3bf8eee908, type: 3}
+  m_Name: IngredientAttributeCatalog
+  m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientAttributeCatalog
+  rows:
+  - id: label.description
+    textZh: "\u98DF\u7269\u63CF\u8FF0\uFF1A"
+    textEn: 
+  - id: label.kind
+    textZh: "\u7C7B\u522B\uFF1A"
+    textEn: 'Kind:'
+  - id: label.optimalDoneness
+    textZh: "\u6700\u4F73\u719F\u5EA6\uFF1A"
+    textEn: 'OptimalDoneness:'
+  - id: label.maxDoneness
+    textZh: "\u6700\u5927\u719F\u5EA6\uFF1A"
+    textEn: 'MaxDoneness:'
+  - id: label.state
+    textZh: "\u72B6\u6001\uFF1A"
+    textEn: 'State:'
+  - id: label.canEatRaw
+    textZh: 
+    textEn: 'CanEatRaw:'
+  - id: label.canCut
+    textZh: 
+    textEn: 'CanCut:'
+  - id: canEatRaw.true
+    textZh: "\u53EF\u714E\u716E"
+    textEn: True
+  - id: canEatRaw.false
+    textZh: "\u4E0D\u53EF\u714E\u716E"
+    textEn: False
+  - id: canCut.true
+    textZh: "\u53EF\u5207"
+    textEn: True
+  - id: canCut.false
+    textZh: "\u4E0D\u53EF\u5207"
+    textEn: False
+  - id: kind.Meat
+    textZh: "\u8089\u7C7B"
+    textEn: Meat
+  - id: kind.Vegetable
+    textZh: "\u852C\u83DC"
+    textEn: Vegetable
+  - id: kind.Other
+    textZh: "\u5176\u4ED6"
+    textEn: Other
+  - id: shape.Whole
+    textZh: "\u6574\u5757"
+    textEn: Whole
+  - id: shape.Dice
+    textZh: "\u5207\u4E01\u72B6"
+    textEn: Dice
+  - id: shape.Slice
+    textZh: "\u7247\u72B6"
+    textEn: Slice
+  - id: shape.Shred
+    textZh: "\u4E1D\u72B6"
+    textEn: Shred
+  - id: cook.Raw
+    textZh: "\u751F\u7684"
+    textEn: Raw
+  - id: cook.Boiled
+    textZh: "\u716E\u8FC7"
+    textEn: Boiled
+  - id: cook.Fried
+    textZh: "\u714E\u8FC7"
+    textEn: Fried
+  - id: cook.BoiledAndFried
+    textZh: "\u714E\u716E\u8FC7"
+    textEn: BoiledAndFried
+  - id: state.joiner
+    textZh: "\uFF1B"
+    textEn: '; '

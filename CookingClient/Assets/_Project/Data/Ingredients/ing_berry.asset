@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
   id: ing_berry
   displayName: "\u871C\u8393\u679C"
+  displayNameEn: Honeyberry
   description: "\u5473\u9053\u7518\u751C\u7684\u679C\u5B9E\uFF0C\u4E00\u53E3\u6C14\u5403\u592A\u591A\u5C0F\u5FC3\u7259\u75BC\u3002"
+  descriptionEn: A sweet fruit. Eat too many at once and you might get a toothache.
   kind: 1
   canEatRaw: 1
   canCut: 1

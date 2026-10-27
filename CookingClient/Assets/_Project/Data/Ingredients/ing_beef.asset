@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
   id: ing_beef
   displayName: "\u8679\u5F69\u725B\u8089"
+  displayNameEn: Rainbow Beef
   description: "\u6563\u53D1\u7740\u5F69\u8679\u5149\u5F69\u7684\u725B\u8089\uFF0C\u6700\u7F8E\u5473\u7684\u7CBE\u534E\u90FD\u6D53\u7F29\u5728\u6B64"
+  descriptionEn: Beef that shimmers with rainbow colors, where the most delicious
+    essence is concentrated.
   kind: 0
   canEatRaw: 0
   canCut: 1

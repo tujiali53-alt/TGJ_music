@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
   id: ing_doneegg
   displayName: "\u719F\u9E21\u86CB"
+  displayNameEn: Boiled Egg
   description: "\u767D\u6C34\u716E\u719F\u7684\u9E21\u86CB\uFF0C\u86CB\u767D\u5305\u88F9\u7740\u9971\u6EE1\u7684\u86CB\u9EC4\uFF0C\u5B8C\u7F8E\uFF01"
+  descriptionEn: An egg boiled in water, with the white wrapping around a plump yolk.
+    Perfect!
   kind: 0
   canEatRaw: 1
   canCut: 1

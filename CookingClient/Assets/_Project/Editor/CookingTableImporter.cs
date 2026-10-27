@@ -18,6 +18,7 @@ namespace Cooking.EditorTools
         const string IngredientsFolder = "Assets/_Project/Data/Ingredients";
         const string SeasoningsFolder = "Assets/_Project/Data/Seasonings";
         const string RecipesFolder = "Assets/_Project/Data/Recipes";
+        const string AttributeCatalogPath = "Assets/_Project/Data/IngredientAttributeCatalog.asset";
 
         static string ResolveTableAssetPath()
         {
@@ -239,6 +240,7 @@ namespace Cooking.EditorTools
             var visualByIngredient = new Dictionary<string, List<IngredientVisualState>>();
 
             ImportIngredients(RequireSheet(dataSet, "Ingredients", result), ingredientIds, result);
+            ImportAttributeNames(RequireSheet(dataSet, "AttributeNames", result), result);
             ImportIngredientVisualStates(
                 OptionalSheet(dataSet, "IngredientVisualStates"),
                 visualByIngredient,
@@ -278,7 +280,9 @@ namespace Cooking.EditorTools
                     IngredientsFolder, id, result);
                 asset.id = id;
                 asset.displayName = Cell(row, "displayName");
+                asset.displayNameEn = Cell(row, "displayNameEn");
                 asset.description = Cell(row, "description");
+                asset.descriptionEn = Cell(row, "descriptionEn");
 
                 if (!TryParseEnum(Cell(row, "kind"), out IngredientKind kind, "Ingredients/" + id + ".kind", result))
                     continue;
@@ -320,6 +324,59 @@ namespace Cooking.EditorTools
 
                 EditorUtility.SetDirty(asset);
             }
+        }
+
+        static void ImportAttributeNames(DataTable table, ImportResult result)
+        {
+            if (table == null)
+                return;
+
+            var rows = new List<IngredientAttributeString>();
+            var seen = new HashSet<string>();
+            foreach (DataRow row in table.Rows)
+            {
+                string id = Cell(row, "id");
+                if (string.IsNullOrWhiteSpace(id))
+                    continue;
+
+                id = id.Trim();
+                if (!seen.Add(id))
+                {
+                    Debug.LogError("AttributeNames id 重复：" + id);
+                    result.ErrorCount++;
+                    continue;
+                }
+
+                rows.Add(new IngredientAttributeString
+                {
+                    id = id,
+                    textZh = CellRaw(row, "textZh"),
+                    textEn = CellRaw(row, "textEn")
+                });
+            }
+
+            string[] required = IngredientDetailText.RequiredIds;
+            for (int i = 0; i < required.Length; i++)
+            {
+                if (seen.Contains(required[i]))
+                    continue;
+
+                Debug.LogError("AttributeNames 缺少 id：" + required[i]);
+                result.ErrorCount++;
+            }
+
+            IngredientAttributeCatalog catalog = AssetDatabase.LoadAssetAtPath<IngredientAttributeCatalog>(AttributeCatalogPath);
+            if (catalog == null)
+            {
+                catalog = ScriptableObject.CreateInstance<IngredientAttributeCatalog>();
+                AssetDatabase.CreateAsset(catalog, AttributeCatalogPath);
+                result.Created++;
+            }
+            else
+                result.Updated++;
+
+            catalog.rows = rows;
+            EditorUtility.SetDirty(catalog);
         }
 
         static void ImportIngredientVisualStates(
@@ -825,6 +882,11 @@ namespace Cooking.EditorTools
 
         static string Cell(DataRow row, string column)
         {
+            return CellRaw(row, column).Trim();
+        }
+
+        static string CellRaw(DataRow row, string column)
+        {
             if (!row.Table.Columns.Contains(column))
                 return "";
 
@@ -832,7 +894,7 @@ namespace Cooking.EditorTools
             if (value == null || value == DBNull.Value)
                 return "";
 
-            return Convert.ToString(value, CultureInfo.InvariantCulture)?.Trim() ?? "";
+            return Convert.ToString(value, CultureInfo.InvariantCulture) ?? "";
         }
 
         static bool TryParseEnum<T>(string text, out T value, string context, ImportResult result) where T : struct

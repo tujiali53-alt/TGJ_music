@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
   id: ing_yam
   displayName: "\u5C71\u836F"
+  displayNameEn: Yam
   description: "\u50CF\u957F\u6BDB\u7684\u6811\u679D\uFF0C\u6709\u4EBA\u8BF4\u5B83\u662F\u571F\u8C46\u7684\u4EB2\u621A\uFF0C\u53CD\u6B63\u6211\u4E0D\u4FE1\u3002"
+  descriptionEn: Looks like a furry tree branch. Some say it's a cousin of the potato,
+    but I don't buy it.
   kind: 1
   canEatRaw: 0
   canCut: 1

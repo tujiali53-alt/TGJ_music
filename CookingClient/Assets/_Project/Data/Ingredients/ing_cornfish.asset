@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
   id: ing_cornfish
   displayName: "\u7389\u7C73\u9C7C"
+  displayNameEn: Cornfish
   description: "\u901A\u4F53\u9EC4\u8272\u7684\u6709\u9CDE\u9C7C\uFF0C\u8089\u8D28\u9C9C\u751C\uFF0C\u96BE\u602A\u88AB\u6BD4\u4F5C\u7389\u7C73\u3002"
+  descriptionEn: A yellow, scaly fish with sweet, tender flesh. No wonder it's likened
+    to corn.
   kind: 0
   canEatRaw: 0
   canCut: 1

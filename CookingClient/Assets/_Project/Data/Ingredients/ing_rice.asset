@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
   id: ing_rice
   displayName: "\u5927\u7C73"
+  displayNameEn: Rice
   description: "\u4E00\u79CD\u5F62\u4F3C\u7C73\u7684\u8C37\u7269\uFF0C\u5473\u9053\u4E5F\u5F88\u63A5\u8FD1\uFF0C\u4E0D\u5982\u5C31\u5F53\u6210\u7C73\u5427\u3002"
+  descriptionEn: A grain that looks like rice and tastes pretty close to it too.
+    Might as well just call it rice.
   kind: 2
   canEatRaw: 0
   canCut: 0

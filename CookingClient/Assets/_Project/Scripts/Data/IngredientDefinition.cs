@@ -17,7 +17,9 @@ namespace Cooking.Data
     {
         public string id;
         public string displayName;
+        public string displayNameEn;
         public string description;
+        public string descriptionEn;
         public IngredientKind kind;
         public bool canEatRaw;
         public bool canCut;

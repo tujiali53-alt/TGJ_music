@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
   id: ing_potato
   displayName: "\u661F\u571F\u8C46"
+  displayNameEn: Star Potato
   description: "\u5916\u5F62\u548C\u666E\u901A\u571F\u8C46\u5DEE\u4E0D\u591A\uFF0C\u5207\u5F00\u540E\u5185\u90E8\u6709\u661F\u72B6\u7684\u82B1\u7EB9\u3002"
+  descriptionEn: It looks much like an ordinary potato, but the inside shows a star-shaped
+    pattern when it is cut open.
   kind: 1
   canEatRaw: 0
   canCut: 1
