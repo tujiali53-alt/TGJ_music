@@ -19,7 +19,7 @@ MonoBehaviour:
   ingredients:
   - ingredientId: ing_mushroom
     shape: 2
-    cookMethod: 1
+    cookMethod: 3
     count: 1
   seasonings:
   - seasoningId: season_oil

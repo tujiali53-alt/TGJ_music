@@ -135,9 +135,11 @@ namespace Cooking.UI
             switch (method)
             {
                 case CookMethod.Boiled:
-                case CookMethod.Fried:
-                case CookMethod.BoiledAndFried:
                     return " 煮";
+                case CookMethod.Fried:
+                    return " 煎";
+                case CookMethod.BoiledAndFried:
+                    return " 煎煮";
                 default:
                     return "";
             }

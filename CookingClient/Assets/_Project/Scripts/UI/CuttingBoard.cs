@@ -8,7 +8,7 @@ namespace Cooking.UI
 {
     public sealed class CuttingBoard : MonoBehaviour, IFoodStation
     {
-        public const int Capacity = 8;
+        public const int Capacity = 1;
 
         [SerializeField] IngredientDefinition[] definitions;
 
@@ -17,6 +17,10 @@ namespace Cooking.UI
         readonly List<IngredientInstance> held = new List<IngredientInstance>();
         FoodTokens tokens;
         Button cutButton;
+        GameObject shapePanel;
+        Button sliceButton;
+        Button diceButton;
+        Button shredButton;
 
         void Awake()
         {
@@ -28,13 +32,35 @@ namespace Cooking.UI
 
             cutButton = SceneButtons.Find("CuttingButton");
             if (cutButton != null)
-                cutButton.onClick.AddListener(CutHeld);
+                cutButton.onClick.AddListener(OpenShapePanel);
+
+            shapePanel = SceneButtons.FindObject("CuttingChooseShapePanel");
+            sliceButton = SceneButtons.Find("SliceButton");
+            diceButton = SceneButtons.Find("DiceButton");
+            shredButton = SceneButtons.Find("ShredButton");
+            if (shapePanel == null)
+                Debug.LogError("需要 CookingPanel/CuttingChooseShapePanel。", this);
+            else
+                shapePanel.SetActive(false);
+
+            if (sliceButton != null)
+                sliceButton.onClick.AddListener(ChooseSlice);
+            if (diceButton != null)
+                diceButton.onClick.AddListener(ChooseDice);
+            if (shredButton != null)
+                shredButton.onClick.AddListener(ChooseShred);
         }
 
         void OnDestroy()
         {
             if (cutButton != null)
-                cutButton.onClick.RemoveListener(CutHeld);
+                cutButton.onClick.RemoveListener(OpenShapePanel);
+            if (sliceButton != null)
+                sliceButton.onClick.RemoveListener(ChooseSlice);
+            if (diceButton != null)
+                diceButton.onClick.RemoveListener(ChooseDice);
+            if (shredButton != null)
+                shredButton.onClick.RemoveListener(ChooseShred);
         }
 
         public bool TryPlace(IngredientInstance item)
@@ -52,6 +78,9 @@ namespace Cooking.UI
                 tokens.Present(item, localPoint, definition);
                 return true;
             }
+
+            if (CookingPot.TryConvertLeavingEgg(item))
+                return false;
 
             IngredientDefinition resolved = definition != null ? definition : FindDefinition(item.DefinitionId);
             if (resolved == null || !resolved.canCut)
@@ -88,19 +117,45 @@ namespace Cooking.UI
             IngredientInventory.Add(item);
         }
 
-        public void CutHeld()
+        public void OpenShapePanel()
         {
+            if (shapePanel == null || held.Count == 0)
+                return;
+
+            shapePanel.SetActive(true);
+        }
+
+        void ChooseSlice()
+        {
+            Choose(CutShape.Slice);
+        }
+
+        void ChooseDice()
+        {
+            Choose(CutShape.Dice);
+        }
+
+        void ChooseShred()
+        {
+            Choose(CutShape.Shred);
+        }
+
+        void Choose(CutShape shape)
+        {
+            if (shapePanel != null)
+                shapePanel.SetActive(false);
+
             for (int i = 0; i < held.Count; i++)
             {
                 IngredientInstance item = held[i];
-                if (item == null || item.Shape != CutShape.Whole)
+                if (item == null)
                     continue;
 
                 IngredientDefinition definition = FindDefinition(item.DefinitionId);
                 if (definition == null || !definition.canCut)
                     continue;
 
-                item.Shape = CutShape.Slice;
+                item.Shape = shape;
             }
         }
 

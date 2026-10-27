@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ing_yam
   m_EditorClassIdentifier: Cooking::Cooking.Data.IngredientDefinition
   id: ing_yam
-  displayName: "\u5C71\u836F "
+  displayName: "\u5C71\u836F"
   description: "\u50CF\u957F\u6BDB\u7684\u6811\u679D\uFF0C\u6709\u4EBA\u8BF4\u5B83\u662F\u571F\u8C46\u7684\u4EB2\u621A\uFF0C\u53CD\u6B63\u6211\u4E0D\u4FE1\u3002"
   kind: 1
   canEatRaw: 0
@@ -22,3 +22,4 @@ MonoBehaviour:
   maxDoneness: 175
   spriteWhole: {fileID: 0}
   baseColor: {r: 1, g: 1, b: 1, a: 1}
+  stateSprites: []

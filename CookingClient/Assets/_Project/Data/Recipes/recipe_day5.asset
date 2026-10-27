@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09755a807a2b5304389e829d5a0953eb, type: 3}
+  m_Name: recipe_day5
+  m_EditorClassIdentifier: Cooking::Cooking.Data.RecipeDefinition
+  id: recipe_day5
+  displayName: "\u6D77\u9C9C\u6742\u70E9\u996D"
+  unlockDay: 5
+  finishedSprite: {fileID: 0}
+  ingredients:
+  - ingredientId: ing_onion
+    shape: 1
+    cookMethod: 3
+    count: 1
+  - ingredientId: ing_tomato
+    shape: 1
+    cookMethod: 3
+    count: 1
+  - ingredientId: ing_rice
+    shape: 0
+    cookMethod: 3
+    count: 1
+  - ingredientId: ing_cornfish
+    shape: 1
+    cookMethod: 1
+    count: 1
+  - ingredientId: ing_shrimp
+    shape: 0
+    cookMethod: 1
+    count: 1
+  seasonings:
+  - seasoningId: season_oil
+    targetIngredientId: ing_onion
+    count: 1
+  - seasoningId: season_pepper
+    targetIngredientId: ing_onion
+    count: 1
+  - seasoningId: season_oil
+    targetIngredientId: ing_tomato
+    count: 1
+  - seasoningId: season_pepper
+    targetIngredientId: ing_tomato
+    count: 1
+  - seasoningId: season_salt
+    targetIngredientId: ing_rice
+    count: 1
+  - seasoningId: season_pepper
+    targetIngredientId: ing_rice
+    count: 1
+  - seasoningId: season_pepper
+    targetIngredientId: ing_cornfish
+    count: 1
+  - seasoningId: season_pepper
+    targetIngredientId: ing_shrimp
+    count: 1
+  steps:
+  - order: 1
+    hintText: "\u9C7C\u5207\u5757\uFF0C\u5904\u7406\u597D\u867E\u3002"
+    action: 0
+    ingredientId: ing_cornfish
+    cookMethod: 0
+    seasoningId: 
+  - order: 2
+    hintText: "\u9505\u4E2D\u653E\u6CB9\uFF0C\u4F9D\u6B21\u52A0\u5165\u6D0B\u8471\u4E0E\u756A\u8304\uFF0C\u7092\u5230\u51FA\u6C41\u6210\u9171\u3002"
+    action: 2
+    ingredientId: ing_onion
+    cookMethod: 2
+    seasoningId: season_oil
+  - order: 3
+    hintText: "\u5012\u5165\u5927\u7C73\u7FFB\u7092\uFF0C\u52A0\u5165\u76D0\u62CC\u5300\u3002"
+    action: 2
+    ingredientId: ing_rice
+    cookMethod: 2
+    seasoningId: season_salt
+  - order: 4
+    hintText: "\u94FA\u4E0A\u5904\u7406\u597D\u7684\u9C7C\u548C\u867E\u8FDB\u884C\u7116\u716E\u3002"
+    action: 1
+    ingredientId: ing_cornfish
+    cookMethod: 1
+    seasoningId: 
+  - order: 5
+    hintText: "\u51FA\u9505\u524D\u53EF\u518D\u6B21\u8FDB\u884C\u8C03\u5473\u3002"
+    action: 3
+    ingredientId: ing_shrimp
+    cookMethod: 1
+    seasoningId: season_pepper

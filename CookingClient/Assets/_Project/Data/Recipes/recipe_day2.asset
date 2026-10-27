@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09755a807a2b5304389e829d5a0953eb, type: 3}
+  m_Name: recipe_day2
+  m_EditorClassIdentifier: Cooking::Cooking.Data.RecipeDefinition
+  id: recipe_day2
+  displayName: "\u8679\u5F69\u5317\u975E\u86CB"
+  unlockDay: 2
+  finishedSprite: {fileID: 0}
+  ingredients:
+  - ingredientId: ing_beef
+    shape: 1
+    cookMethod: 2
+    count: 1
+  - ingredientId: ing_onion
+    shape: 1
+    cookMethod: 2
+    count: 1
+  - ingredientId: ing_tomato
+    shape: 1
+    cookMethod: 2
+    count: 1
+  - ingredientId: ing_doneegg
+    shape: 0
+    cookMethod: 1
+    count: 1
+  seasonings:
+  - seasoningId: season_oil
+    targetIngredientId: ing_onion
+    count: 1
+  - seasoningId: season_salt
+    targetIngredientId: ing_onion
+    count: 1
+  - seasoningId: season_oil
+    targetIngredientId: ing_beef
+    count: 1
+  - seasoningId: season_salt
+    targetIngredientId: ing_beef
+    count: 1
+  - seasoningId: season_pepper
+    targetIngredientId: ing_doneegg
+    count: 1
+  - seasoningId: season_spice
+    targetIngredientId: ing_doneegg
+    count: 1
+  steps:
+  - order: 1
+    hintText: "\u725B\u8089\u3001\u6D0B\u8471\u3001\u756A\u8304\u5207\u4E01\u3002"
+    action: 0
+    ingredientId: ing_beef
+    cookMethod: 0
+    seasoningId: 
+  - order: 2
+    hintText: "\u9505\u4E2D\u653E\u6CB9\uFF0C\u5206\u522B\u52A0\u5165\u6D0B\u8471\u548C\u725B\u8089\u7092\u81F3\u51FA\u6C34\uFF0C\u52A0\u76D0\u3002"
+    action: 2
+    ingredientId: ing_beef
+    cookMethod: 2
+    seasoningId: season_oil
+  - order: 3
+    hintText: "\u5012\u5165\u756A\u8304\u4E01\uFF0C\u6536\u6D53\u6C64\u6C41\u3002"
+    action: 2
+    ingredientId: ing_tomato
+    cookMethod: 2
+    seasoningId: 
+  - order: 4
+    hintText: "\u6253\u5165\u9E21\u86CB\u7116\u716E\uFF0C\u51FA\u9505\u524D\u52A0\u5165\u9ED1\u80E1\u6912\u4E0E\u9999\u6599\u8C03\u5473\u3002"
+    action: 1
+    ingredientId: ing_egg
+    cookMethod: 1
+    seasoningId: season_pepper

@@ -7,7 +7,7 @@ namespace Cooking.UI
 {
     public sealed class Plate : MonoBehaviour, IFoodStation
     {
-        public const int Capacity = 8;
+        public const int Capacity = 4;
 
         static Plate current;
 
@@ -44,6 +44,9 @@ namespace Cooking.UI
                 tokens.Present(item, localPoint, definition);
                 return true;
             }
+
+            if (CookingPot.TryConvertLeavingEgg(item))
+                return false;
 
             if (session.HeldDish.Items.Count >= Capacity || !tokens.HasFree())
                 return false;

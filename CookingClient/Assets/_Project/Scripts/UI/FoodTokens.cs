@@ -156,6 +156,20 @@ namespace Cooking.UI
     {
         public static Button Find(string objectName)
         {
+            GameObject found = FindObject(objectName);
+            if (found == null)
+                return null;
+
+            Button button = found.GetComponent<Button>();
+            if (button != null)
+                return button;
+
+            Debug.LogError("场景里的 " + objectName + " 需要带 Button。");
+            return null;
+        }
+
+        public static GameObject FindObject(string objectName)
+        {
             Scene scene = SceneManager.GetActiveScene();
             GameObject[] roots = scene.GetRootGameObjects();
             for (int i = 0; i < roots.Length; i++)
@@ -163,12 +177,8 @@ namespace Cooking.UI
                 Transform[] transforms = roots[i].GetComponentsInChildren<Transform>(true);
                 for (int t = 0; t < transforms.Length; t++)
                 {
-                    if (transforms[t].name != objectName)
-                        continue;
-
-                    Button button = transforms[t].GetComponent<Button>();
-                    if (button != null)
-                        return button;
+                    if (transforms[t].name == objectName)
+                        return transforms[t].gameObject;
                 }
             }
 

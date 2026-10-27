@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09755a807a2b5304389e829d5a0953eb, type: 3}
+  m_Name: recipe_day3
+  m_EditorClassIdentifier: Cooking::Cooking.Data.RecipeDefinition
+  id: recipe_day3
+  displayName: "\u871C\u8393\u9171\u9999\u714E\u7389\u7C73\u9C7C"
+  unlockDay: 3
+  finishedSprite: {fileID: 0}
+  ingredients:
+  - ingredientId: ing_cornfish
+    shape: 1
+    cookMethod: 2
+    count: 1
+  - ingredientId: ing_berry
+    shape: 1
+    cookMethod: 1
+    count: 1
+  seasonings:
+  - seasoningId: season_sugar
+    targetIngredientId: ing_berry
+    count: 1
+  - seasoningId: season_oil
+    targetIngredientId: ing_cornfish
+    count: 1
+  - seasoningId: season_salt
+    targetIngredientId: ing_cornfish
+    count: 1
+  - seasoningId: season_pepper
+    targetIngredientId: ing_cornfish
+    count: 1
+  steps:
+  - order: 1
+    hintText: "\u7389\u7C73\u9C7C\u5207\u5757\uFF0C\u871C\u8393\u679C\u5207\u5C0F\u4E01\u3002"
+    action: 0
+    ingredientId: ing_cornfish
+    cookMethod: 0
+    seasoningId: 
+  - order: 2
+    hintText: "\u871C\u8393\u679C\u52A0\u7CD6\uFF0C\u716E\u5230\u6D53\u7A20\u3002"
+    action: 1
+    ingredientId: ing_berry
+    cookMethod: 1
+    seasoningId: season_sugar
+  - order: 3
+    hintText: "\u9505\u70ED\u653E\u6CB9\uFF0C\u7389\u7C73\u9C7C\u714E\u81F3\u4E24\u9762\u91D1\u9EC4\uFF0C\u52A0\u5165\u76D0\u548C\u9ED1\u80E1\u6912\u8C03\u5473\u3002"
+    action: 2
+    ingredientId: ing_cornfish
+    cookMethod: 2
+    seasoningId: season_oil
+  - order: 4
+    hintText: "\u9C7C\u8089\u88C5\u76D8\uFF0C\u6DCB\u4E0A\u871C\u8393\u9171\u3002"
+    action: 4
+    ingredientId: ing_cornfish
+    cookMethod: 2
+    seasoningId: 

@@ -106,8 +106,9 @@ namespace Cooking.UI
             if (station is CuttingBoard board && LocalOn(board.transform, eventData, out Vector2 boardPoint))
                 return board.TryPlace(item, boardPoint, definition);
 
-            if (station is CookingPot pot && LocalOn(pot.transform, eventData, out Vector2 potPoint))
-                return pot.TryPlace(item, potPoint, definition);
+            PotArea area = FindPotArea(eventData);
+            if (area != null && LocalOn(area.transform, eventData, out Vector2 areaPoint))
+                return CookingPot.PlaceOn(area, item, areaPoint, definition);
 
             return false;
         }
@@ -145,6 +146,27 @@ namespace Cooking.UI
                 IFoodStation station = hit.GetComponentInParent<IFoodStation>();
                 if (station != null)
                     return station;
+            }
+
+            return null;
+        }
+
+        PotArea FindPotArea(PointerEventData eventData)
+        {
+            if (EventSystem.current == null)
+                return null;
+
+            raycastResults.Clear();
+            EventSystem.current.RaycastAll(eventData, raycastResults);
+            for (int i = 0; i < raycastResults.Count; i++)
+            {
+                GameObject hit = raycastResults[i].gameObject;
+                if (hit == null || hit.transform.IsChildOf(transform) || hit == gameObject)
+                    continue;
+
+                PotArea area = hit.GetComponentInParent<PotArea>();
+                if (area != null)
+                    return area;
             }
 
             return null;

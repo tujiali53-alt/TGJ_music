@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09755a807a2b5304389e829d5a0953eb, type: 3}
+  m_Name: recipe_day6
+  m_EditorClassIdentifier: Cooking::Cooking.Data.RecipeDefinition
+  id: recipe_day6
+  displayName: "\u9E1F\u5DE2\u5C71\u836F\u997C"
+  unlockDay: 6
+  finishedSprite: {fileID: 0}
+  ingredients:
+  - ingredientId: ing_yam
+    shape: 3
+    cookMethod: 2
+    count: 1
+  - ingredientId: ing_doneegg
+    shape: 1
+    cookMethod: 1
+    count: 1
+  - ingredientId: ing_tomato
+    shape: 1
+    cookMethod: 0
+    count: 1
+  - ingredientId: ing_cucumber
+    shape: 2
+    cookMethod: 0
+    count: 1
+  seasonings:
+  - seasoningId: season_salt
+    targetIngredientId: ing_yam
+    count: 1
+  - seasoningId: season_pepper
+    targetIngredientId: ing_yam
+    count: 1
+  - seasoningId: season_oil
+    targetIngredientId: ing_yam
+    count: 1
+  - seasoningId: season_sauce
+    targetIngredientId: ing_doneegg
+    count: 1
+  - seasoningId: season_sauce
+    targetIngredientId: ing_tomato
+    count: 1
+  - seasoningId: season_sauce
+    targetIngredientId: ing_cucumber
+    count: 1
+  - seasoningId: season_pepper
+    targetIngredientId: ing_doneegg
+    count: 1
+  - seasoningId: season_pepper
+    targetIngredientId: ing_tomato
+    count: 1
+  - seasoningId: season_pepper
+    targetIngredientId: ing_cucumber
+    count: 1
+  steps:
+  - order: 1
+    hintText: "\u9E21\u86CB\u716E\u719F\u540E\u5207\u4E01\uFF0C\u756A\u8304\u5207\u4E01\u3001\u9EC4\u74DC\u5207\u7247\uFF0C\u5C71\u836F\u5207\u4E1D\u3002"
+    action: 0
+    ingredientId: ing_yam
+    cookMethod: 0
+    seasoningId: 
+  - order: 2
+    hintText: "\u5C71\u836F\u4E1D\u52A0\u5165\u76D0\u548C\u9ED1\u80E1\u6912\u8C03\u5473\uFF0C\u9505\u4E2D\u52A0\u6CB9\uFF0C\u5C06\u5C71\u836F\u4E1D\u714E\u6210\u997C\u3002"
+    action: 2
+    ingredientId: ing_yam
+    cookMethod: 2
+    seasoningId: season_oil
+  - order: 3
+    hintText: "\u5C06\u9E21\u86CB\u4E01\u3001\u756A\u8304\u4E01\u3001\u9EC4\u74DC\u7247\u4E0E\u6C99\u62C9\u9171\u3001\u9ED1\u80E1\u6912\u62CC\u5300\u3002"
+    action: 3
+    ingredientId: ing_doneegg
+    cookMethod: 0
+    seasoningId: season_sauce
+  - order: 4
+    hintText: "\u7EC4\u88C5\uFF1A\u53D6\u4E00\u5F20\u5C71\u836F\u997C\u56FA\u5B9A\u6210\u7897\u72B6\uFF0C\u4E2D\u95F4\u653E\u4E0A\u62CC\u597D\u7684\u6C99\u62C9\u3002"
+    action: 4
+    ingredientId: ing_yam
+    cookMethod: 2
+    seasoningId: 
