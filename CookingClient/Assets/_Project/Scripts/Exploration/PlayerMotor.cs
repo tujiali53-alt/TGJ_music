@@ -11,8 +11,7 @@ namespace Cooking.Exploration
         public float SpeedMultiplier { get; set; } = 1f;
 
         const float Skin = 0.02f;
-        readonly RaycastHit2D[] hits = new RaycastHit2D[8];
-        ContactFilter2D boundsFilter;
+        Collider2D boundary;
 
         void Awake()
         {
@@ -22,61 +21,66 @@ namespace Cooking.Exploration
             if (body == null)
                 Debug.LogError("Player 上需要已经放好碰撞体。", this);
 
-            if (FindFirstObjectByType<MapBoundary>() == null)
+            MapBoundary marker = FindFirstObjectByType<MapBoundary>();
+            if (marker == null)
                 Debug.LogError("场景里需要有 MapBounds，并带 MapBoundary。");
-
-            boundsFilter = new ContactFilter2D();
-            boundsFilter.useTriggers = true;
-            boundsFilter.useLayerMask = false;
+            else
+            {
+                boundary = marker.GetComponent<Collider2D>();
+                if (boundary == null)
+                    Debug.LogError("MapBounds 上需要已经放好碰撞体。", marker);
+            }
         }
 
         void Update()
         {
-            Keyboard keyboard = Keyboard.current;
-            if (keyboard == null)
-                return;
-
-            var direction = Vector2.zero;
-            if (keyboard.aKey.isPressed)
-                direction.x -= 1f;
-            if (keyboard.dKey.isPressed)
-                direction.x += 1f;
-            if (keyboard.sKey.isPressed)
-                direction.y -= 1f;
-            if (keyboard.wKey.isPressed)
-                direction.y += 1f;
-
-            if (direction.sqrMagnitude < 0.0001f)
-                return;
-
-            direction.Normalize();
-            Vector2 delta = direction * (moveSpeed * SpeedMultiplier * Time.deltaTime);
             Vector2 position = transform.position;
-            position += Move(new Vector2(delta.x, 0f));
-            position += Move(new Vector2(0f, delta.y));
+            Keyboard keyboard = Keyboard.current;
+            if (keyboard != null)
+            {
+                var direction = Vector2.zero;
+                if (keyboard.aKey.isPressed)
+                    direction.x -= 1f;
+                if (keyboard.dKey.isPressed)
+                    direction.x += 1f;
+                if (keyboard.sKey.isPressed)
+                    direction.y -= 1f;
+                if (keyboard.wKey.isPressed)
+                    direction.y += 1f;
+
+                if (direction.sqrMagnitude > 0.0001f)
+                {
+                    direction.Normalize();
+                    position += direction * (moveSpeed * SpeedMultiplier * Time.deltaTime);
+                }
+            }
+
+            position = ClampToMap(position);
             transform.position = new Vector3(position.x, position.y, 0f);
         }
 
-        Vector2 Move(Vector2 delta)
+        Vector2 ClampToMap(Vector2 position)
         {
-            if (delta.sqrMagnitude < 0.0000001f || body == null)
-                return delta;
+            if (boundary == null)
+                return position;
 
-            float distance = delta.magnitude;
-            int count = body.Cast(delta / distance, boundsFilter, hits, distance);
-            float allowed = distance;
-            for (int i = 0; i < count; i++)
+            Bounds area = boundary.bounds;
+            float padX = Skin;
+            float padY = Skin;
+            if (body != null)
             {
-                Collider2D other = hits[i].collider;
-                if (other == null || other == body || other.GetComponent<MapBoundary>() == null)
-                    continue;
-
-                float gap = hits[i].distance - Skin;
-                if (gap < allowed)
-                    allowed = Mathf.Max(0f, gap);
+                padX += body.bounds.extents.x;
+                padY += body.bounds.extents.y;
             }
 
-            return delta / distance * allowed;
+            float minX = area.min.x + padX;
+            float maxX = area.max.x - padX;
+            float minY = area.min.y + padY;
+            float maxY = area.max.y - padY;
+
+            position.x = minX > maxX ? area.center.x : Mathf.Clamp(position.x, minX, maxX);
+            position.y = minY > maxY ? area.center.y : Mathf.Clamp(position.y, minY, maxY);
+            return position;
         }
     }
 }

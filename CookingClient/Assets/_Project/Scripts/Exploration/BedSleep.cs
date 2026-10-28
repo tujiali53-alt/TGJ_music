@@ -75,7 +75,7 @@ namespace Cooking.Exploration
             if (!hitCollider.OverlapPoint(world))
                 return;
 
-            if (!hitCollider.OverlapPoint(player.position))
+            if (!PlayerAtBed())
                 return;
 
             GameRoot root = GameRoot.Instance;
@@ -86,6 +86,25 @@ namespace Cooking.Exploration
                 return;
 
             bedPanel.SetActive(true);
+        }
+
+        bool PlayerAtBed()
+        {
+            if (hitCollider.OverlapPoint(player.position))
+                return true;
+
+            Collider2D body = player.GetComponent<Collider2D>();
+            if (body != null && body.bounds.Intersects(hitCollider.bounds))
+                return true;
+
+            SpriteRenderer sprite = player.GetComponent<SpriteRenderer>();
+            if (sprite == null)
+                return false;
+
+            Bounds area = hitCollider.bounds;
+            Bounds drawn = sprite.bounds;
+            return drawn.min.x <= area.max.x && drawn.max.x >= area.min.x
+                && drawn.min.y <= area.max.y && drawn.max.y >= area.min.y;
         }
 
         void ConfirmSleep()
