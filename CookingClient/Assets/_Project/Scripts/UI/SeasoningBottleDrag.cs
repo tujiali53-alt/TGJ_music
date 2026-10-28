@@ -89,7 +89,10 @@ namespace Cooking.UI
                 if (view == null || view.InventorySlot || view.Shown == null)
                     continue;
 
-                if (view.GetComponentInParent<CuttingBoard>() == null && view.GetComponentInParent<CookingPot>() == null)
+                bool onBoard = view.GetComponentInParent<CuttingBoard>() != null;
+                bool inPot = view.GetComponentInParent<CookingPot>() != null;
+                bool onPlate = view.GetComponentInParent<Plate>() != null;
+                if (!onBoard && !inPot && !onPlate)
                     continue;
 
                 return view.Shown;
