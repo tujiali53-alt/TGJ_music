@@ -34,7 +34,7 @@ MonoBehaviour:
     successFaces: 6
     rewards:
     - pickMode: 0
-      ingredientId: ing_potato
+      ingredientId: ing_yam
       count: 5
     - pickMode: 0
       ingredientId: ing_onion

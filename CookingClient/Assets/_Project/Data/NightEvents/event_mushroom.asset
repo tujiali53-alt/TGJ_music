@@ -27,7 +27,7 @@ MonoBehaviour:
       ingredientId: ing_mushroom
       count: 10
     - pickMode: 0
-      ingredientId: ing_potato
+      ingredientId: ing_yam
       count: 1
   - optionId: opt_mushroom_pinch
     order: 2
