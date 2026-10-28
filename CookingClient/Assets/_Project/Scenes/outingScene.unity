@@ -1168,7 +1168,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.18
+      scalar: 0.05
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1222,7 +1222,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.9795721, b: 0.89622635, a: 0.7}
+      maxColor: {r: 1, g: 0.96, b: 0.86, a: 0.4}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1286,7 +1286,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.09
+      scalar: 0.045
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1869,7 +1869,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 12
+      scalar: 4
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -3688,7 +3688,7 @@ ParticleSystem:
     strength:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.12
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -6238,7 +6238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &576017040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8502,7 +8502,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 16}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1243150930
 MonoBehaviour:
@@ -122807,7 +122807,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.9406333, b: 0.77672946, a: 0.95}
+      maxColor: {r: 1, g: 0.93, b: 0.72, a: 0.7}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -122871,7 +122871,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.11
+      scalar: 0.07
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -123454,7 +123454,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 8
+      scalar: 3
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -124344,7 +124344,7 @@ ParticleSystem:
     orbitalZ:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.15
+      scalar: 0.55
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -128045,11 +128045,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af34d4c71c2168745bb4edcfb4d754be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Cooking::Cooking.Exploration.PlayerLight
-  initialRadius: 2
+  initialRadius: 1.65
   radiusPerLight: 0.45
   buffRadiusBonus: 0
   bed: {fileID: 817313458}
-  bedRadius: 2.2
+  bedRadius: 1.55
   glowMask: {fileID: 102359037}
   orbitParticles: {fileID: 1921382568}
   driftParticles: {fileID: 375169806}

@@ -2,15 +2,15 @@ Shader "Cooking/PlayerGlow"
 {
     Properties
     {
-        _InnerColor ("内层", Color) = (1, 0.96, 0.82, 0.22)
-        _GoldColor ("金边", Color) = (1, 0.86, 0.58, 0.47)
-        _OuterColor ("外层", Color) = (1, 0.55, 0.16, 0.5)
-        _EmberColor ("最外层", Color) = (0.62, 0.16, 0.04, 0.4)
+        _InnerColor ("内层", Color) = (1, 0.98, 0.92, 0.15)
+        _GoldColor ("金边", Color) = (1, 0.9, 0.68, 0.34)
+        _OuterColor ("外层", Color) = (1, 0.74, 0.58, 0.22)
+        _EmberColor ("最外层", Color) = (0.75, 0.48, 0.62, 0.16)
         _PlayerPos ("Player", Vector) = (0, 0, 0, 0)
         _BedPos ("Bed", Vector) = (0, 0, 0, 0)
-        _Radii ("Edge Width X", Vector) = (0.4, 2.5, 2.2, 0)
-        _LayerWidths ("层宽 内金外末", Vector) = (1.45, 0.85, 1.05, 1.25)
-        _InnerSpan ("内层起止", Vector) = (0.42, 0.78, 0, 0)
+        _Radii ("Edge Width X", Vector) = (0.28, 1.65, 1.55, 0)
+        _LayerWidths ("层宽 内金外末", Vector) = (1.7, 1.15, 1.85, 2.3)
+        _InnerSpan ("内层起止", Vector) = (0.48, 0.82, 0, 0)
     }
 
     SubShader
@@ -84,10 +84,10 @@ Shader "Cooking/PlayerGlow"
                 float s = max(sigma, 0.001);
 
                 float4 width = max(_LayerWidths, 0.05);
-                float inner = Band(fromEdge, -1.2 * s, width.x * s);
-                float gold = Band(fromEdge, -0.2 * s, width.y * s);
-                float outer = Band(fromEdge, 0.7 * s, width.z * s);
-                float ember = Band(fromEdge, 1.7 * s, width.w * s);
+                float inner = Band(fromEdge, -0.9 * s, width.x * s);
+                float gold = Band(fromEdge, 0.0 * s, width.y * s);
+                float outer = Band(fromEdge, 0.65 * s, width.z * s);
+                float ember = Band(fromEdge, 1.25 * s, width.w * s);
 
                 float innerA = inner * _InnerColor.a;
                 float goldA = gold * _GoldColor.a;
@@ -105,8 +105,8 @@ Shader "Cooking/PlayerGlow"
                 float spanEnd = max(_InnerSpan.x, _InnerSpan.y);
                 glowAlpha *= smoothstep(radius * spanStart, radius * spanEnd, dist);
 
-                float outside = max(fromEdge - 0.45 * s, 0.0);
-                float darkSigma = max(2.4 * s, 0.05);
+                float outside = max(fromEdge - 0.15 * s, 0.0);
+                float darkSigma = max(1.35 * s, 0.05);
                 darkness = 1.0 - exp(-(outside * outside) / max(2.0 * darkSigma * darkSigma, 1e-5));
             }
 
