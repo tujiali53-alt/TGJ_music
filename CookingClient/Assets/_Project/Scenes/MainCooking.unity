@@ -2424,7 +2424,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cooking.UI.TrayToggle
   trayPanel: {fileID: 792903089}
-  inventoryButton: {fileID: 930010015}
   closeButton: {fileID: 930010035}
 --- !u!114 &364117977
 MonoBehaviour:

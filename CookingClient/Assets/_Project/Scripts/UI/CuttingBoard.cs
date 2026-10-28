@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using Cooking.Data;
 using Cooking.Runtime;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Cooking.UI
 {
-    public sealed class CuttingBoard : MonoBehaviour, IFoodStation
+    public sealed class CuttingBoard : MonoBehaviour, IFoodStation, IPointerClickHandler
     {
         public const int Capacity = 1;
 
@@ -66,6 +67,12 @@ namespace Cooking.UI
         public bool TryPlace(IngredientInstance item)
         {
             return TryPlace(item, Vector2.zero, null);
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData.button == PointerEventData.InputButton.Left)
+                TrayToggle.OpenCurrent();
         }
 
         public bool TryPlace(IngredientInstance item, Vector2 localPoint, IngredientDefinition definition)

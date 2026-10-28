@@ -6,11 +6,14 @@ namespace Cooking.UI
     public sealed class TrayToggle : MonoBehaviour
     {
         [SerializeField] GameObject trayPanel;
-        [SerializeField] Button inventoryButton;
         [SerializeField] Button closeButton;
+
+        static TrayToggle current;
 
         void Awake()
         {
+            current = this;
+
             if (trayPanel == null)
             {
                 Transform found = transform.Find("TrayPanel");
@@ -18,19 +21,11 @@ namespace Cooking.UI
                     trayPanel = found.gameObject;
             }
 
-            if (inventoryButton == null)
-                inventoryButton = FindButton("InteractionPanel/InventoryButton");
-
             if (closeButton == null)
                 closeButton = FindButton("TrayPanel/closeButton");
 
             if (trayPanel == null)
                 Debug.LogError("Canvas 下需要有 TrayPanel。", this);
-
-            if (inventoryButton == null)
-                Debug.LogError("需要 InteractionPanel/InventoryButton，并且带 Button。", this);
-            else
-                inventoryButton.onClick.AddListener(OpenTray);
 
             if (closeButton == null)
                 Debug.LogError("需要 TrayPanel/closeButton，并且带 Button。", this);
@@ -41,6 +36,15 @@ namespace Cooking.UI
                 trayPanel.SetActive(false);
         }
 
+        void OnDestroy()
+        {
+            if (closeButton != null)
+                closeButton.onClick.RemoveListener(CloseTray);
+
+            if (current == this)
+                current = null;
+        }
+
         Button FindButton(string path)
         {
             Transform found = transform.Find(path);
@@ -48,6 +52,12 @@ namespace Cooking.UI
                 return null;
 
             return found.GetComponent<Button>();
+        }
+
+        public static void OpenCurrent()
+        {
+            if (current != null)
+                current.OpenTray();
         }
 
         public void OpenTray()
