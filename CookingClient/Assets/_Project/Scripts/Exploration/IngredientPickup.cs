@@ -3,7 +3,6 @@ using Cooking.Core;
 using Cooking.Data;
 using Cooking.Runtime;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Cooking.Exploration
 {
@@ -40,7 +39,10 @@ namespace Cooking.Exploration
             if (collected || definition == null || hitCollider == null || player == null)
                 return;
 
-            if (!WasClicked(out Vector2 world))
+            if (GetComponent<InteractionPoint>() != null)
+                return;
+
+            if (!ScenePointer.TryGetClick(out Vector2 world))
                 return;
 
             if (!hitCollider.OverlapPoint(world))
@@ -84,23 +86,6 @@ namespace Cooking.Exploration
 
             collected = true;
             gameObject.SetActive(false);
-        }
-
-        static bool WasClicked(out Vector2 world)
-        {
-            world = default;
-            Mouse mouse = Mouse.current;
-            if (mouse == null || !mouse.leftButton.wasPressedThisFrame)
-                return false;
-
-            Camera cam = Camera.main;
-            if (cam == null)
-                return false;
-
-            Vector2 screenPos = mouse.position.ReadValue();
-            var screen = new Vector3(screenPos.x, screenPos.y, Mathf.Abs(cam.transform.position.z));
-            world = cam.ScreenToWorldPoint(screen);
-            return true;
         }
     }
 }

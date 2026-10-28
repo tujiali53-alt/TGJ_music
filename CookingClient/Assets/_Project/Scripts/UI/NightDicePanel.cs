@@ -97,7 +97,10 @@ namespace Cooking.UI
             if (confirmButton != null)
                 confirmButton.gameObject.SetActive(false);
             if (panel != null)
+            {
                 panel.SetActive(true);
+                Canvas.ForceUpdateCanvases();
+            }
         }
 
         public bool IsOpen => panel != null && panel.activeSelf;

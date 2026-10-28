@@ -1,8 +1,6 @@
 using Cooking.Core;
 using Cooking.Data;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Cooking.Exploration
@@ -69,7 +67,7 @@ namespace Cooking.Exploration
             if (bedPanel.activeSelf)
                 return;
 
-            if (!WasClicked(out Vector2 world) || PointerIsOverUi())
+            if (!ScenePointer.TryGetClick(out Vector2 world))
                 return;
 
             if (!hitCollider.OverlapPoint(world))
@@ -139,53 +137,6 @@ namespace Cooking.Exploration
                 return null;
 
             return found.GetComponent<Button>();
-        }
-
-        static bool PointerIsOverUi()
-        {
-            if (EventSystem.current == null)
-                return false;
-
-            if (Mouse.current != null && EventSystem.current.IsPointerOverGameObject(Mouse.current.deviceId))
-                return true;
-
-            Pointer pointer = Pointer.current;
-            return pointer != null && EventSystem.current.IsPointerOverGameObject(pointer.deviceId);
-        }
-
-        static bool WasClicked(out Vector2 world)
-        {
-            world = default;
-            if (!TryGetPointerPress(out Vector2 screenPos))
-                return false;
-
-            Camera cam = Camera.main;
-            if (cam == null)
-                return false;
-
-            var screen = new Vector3(screenPos.x, screenPos.y, Mathf.Abs(cam.transform.position.z));
-            world = cam.ScreenToWorldPoint(screen);
-            return true;
-        }
-
-        static bool TryGetPointerPress(out Vector2 screenPos)
-        {
-            screenPos = default;
-            Mouse mouse = Mouse.current;
-            if (mouse != null && mouse.leftButton.wasPressedThisFrame)
-            {
-                screenPos = mouse.position.ReadValue();
-                return true;
-            }
-
-            Pointer pointer = Pointer.current;
-            if (pointer != null && pointer.press.wasPressedThisFrame)
-            {
-                screenPos = pointer.position.ReadValue();
-                return true;
-            }
-
-            return false;
         }
     }
 }

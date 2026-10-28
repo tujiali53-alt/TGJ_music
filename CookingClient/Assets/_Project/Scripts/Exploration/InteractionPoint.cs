@@ -2,8 +2,6 @@ using Cooking.Core;
 using Cooking.Data;
 using Cooking.UI;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
 namespace Cooking.Exploration
 {
@@ -64,7 +62,7 @@ namespace Cooking.Exploration
             if (hitCollider == null || player == null || dialog == null || definition == null)
                 return;
 
-            if (!WasClicked(out Vector2 world) || PointerIsOverUi())
+            if (!ScenePointer.TryGetClick(out Vector2 world))
                 return;
 
             TryOpen(world);
@@ -121,53 +119,6 @@ namespace Cooking.Exploration
 
             if (root.Session.DayIndex < definition.unlockNight)
                 gameObject.SetActive(false);
-        }
-
-        static bool PointerIsOverUi()
-        {
-            if (EventSystem.current == null)
-                return false;
-
-            if (Mouse.current != null && EventSystem.current.IsPointerOverGameObject(Mouse.current.deviceId))
-                return true;
-
-            Pointer pointer = Pointer.current;
-            return pointer != null && EventSystem.current.IsPointerOverGameObject(pointer.deviceId);
-        }
-
-        static bool WasClicked(out Vector2 world)
-        {
-            world = default;
-            if (!TryGetPointerPress(out Vector2 screenPos))
-                return false;
-
-            Camera cam = Camera.main;
-            if (cam == null)
-                return false;
-
-            var screen = new Vector3(screenPos.x, screenPos.y, Mathf.Abs(cam.transform.position.z));
-            world = cam.ScreenToWorldPoint(screen);
-            return true;
-        }
-
-        static bool TryGetPointerPress(out Vector2 screenPos)
-        {
-            screenPos = default;
-            Mouse mouse = Mouse.current;
-            if (mouse != null && mouse.leftButton.wasPressedThisFrame)
-            {
-                screenPos = mouse.position.ReadValue();
-                return true;
-            }
-
-            Pointer pointer = Pointer.current;
-            if (pointer != null && pointer.press.wasPressedThisFrame)
-            {
-                screenPos = pointer.position.ReadValue();
-                return true;
-            }
-
-            return false;
         }
     }
 }

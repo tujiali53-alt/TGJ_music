@@ -146,7 +146,10 @@ namespace Cooking.UI
             }
 
             if (panel != null)
+            {
                 panel.SetActive(true);
+                Canvas.ForceUpdateCanvases();
+            }
 
             lineIndex = 0;
             optionsVisible = false;
@@ -397,22 +400,6 @@ namespace Cooking.UI
         static int CompareLine(NightLine a, NightLine b)
         {
             return a.order.CompareTo(b.order);
-        }
-    }
-
-    public sealed class NightDialogClick : MonoBehaviour, IPointerClickHandler
-    {
-        [SerializeField] NightDialogPanel panel;
-
-        public void Bind(NightDialogPanel owner)
-        {
-            panel = owner;
-        }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if (panel != null)
-                panel.OnPanelClick(eventData);
         }
     }
 }
