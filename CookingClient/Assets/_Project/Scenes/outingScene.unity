@@ -7084,6 +7084,7 @@ GameObject:
   - component: {fileID: 880002002}
   - component: {fileID: 880002003}
   - component: {fileID: 880002004}
+  - component: {fileID: 880002005}
   m_Layer: 0
   m_Name: GameRoot
   m_TagString: Untagged
@@ -7130,6 +7131,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0f61c3e7097251af48d90c3e61a244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cooking.Core.SceneFlow
+--- !u!114 &880002005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880002001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb68e4e1f45cf401fa002b29ffb4e595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkState
+  triggerList: ae8d9d44
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 49b1abb2fcc424d159c79cfe090a8ec1, type: 2}
+  valueIdInternal: 0
+  groupIdInternal: 0
+  valueGuidInternal: 
+  groupGuidInternal: 
 --- !u!1 &927818393
 GameObject:
   m_ObjectHideFlags: 0
@@ -7805,10 +7830,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1133946435}
   - component: {fileID: 1133946434}
-  - component: {fileID: 1133946433}
   - component: {fileID: 830000010}
   - component: {fileID: 1133946436}
   - component: {fileID: 1133946490}
+  - component: {fileID: 1133946492}
+  - component: {fileID: 1133946491}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7816,14 +7842,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1133946433
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133946432}
-  m_Enabled: 1
 --- !u!20 &1133946434
 Camera:
   m_ObjectHideFlags: 0
@@ -7950,6 +7968,46 @@ MonoBehaviour:
   target: {fileID: 2079142421}
   min: {x: -9.6, y: -5.44}
   max: {x: 9.6, y: 5.44}
+--- !u!114 &1133946491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133946432}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa9b5b002d2944a6adb67250739a83b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkAudioListener
+  isDefaultListener: 1
+  bOverrideScalingFactor: 0
+  scalingFactor: -1
+  listenerId: 0
+--- !u!114 &1133946492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133946432}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02b58e13faef544f38d73c511a95d14f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkGameObj
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 0
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &1135237489
 GameObject:
   m_ObjectHideFlags: 0
@@ -8673,6 +8731,63 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1001 &1296793728
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 249417075032413708, guid: 2a3f7c83748e3483c98a689fe57dfa12, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 19.66761
+      objectReference: {fileID: 0}
+    - target: {fileID: 249417075032413708, guid: 2a3f7c83748e3483c98a689fe57dfa12, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 249417075032413708, guid: 2a3f7c83748e3483c98a689fe57dfa12, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 108.15278
+      objectReference: {fileID: 0}
+    - target: {fileID: 249417075032413708, guid: 2a3f7c83748e3483c98a689fe57dfa12, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 249417075032413708, guid: 2a3f7c83748e3483c98a689fe57dfa12, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 249417075032413708, guid: 2a3f7c83748e3483c98a689fe57dfa12, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 249417075032413708, guid: 2a3f7c83748e3483c98a689fe57dfa12, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 249417075032413708, guid: 2a3f7c83748e3483c98a689fe57dfa12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 249417075032413708, guid: 2a3f7c83748e3483c98a689fe57dfa12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 249417075032413708, guid: 2a3f7c83748e3483c98a689fe57dfa12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4303915481966905728, guid: 2a3f7c83748e3483c98a689fe57dfa12, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2a3f7c83748e3483c98a689fe57dfa12, type: 3}
 --- !u!1 &1311619991
 GameObject:
   m_ObjectHideFlags: 0
@@ -127705,6 +127820,63 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 560463178657317740, guid: 3dc55f955e849124585d16d96fdb01a6, type: 3}
   m_PrefabInstance: {fileID: 388274857578877923}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1979216715
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1979216717}
+  - component: {fileID: 1979216716}
+  m_Layer: 0
+  m_Name: WwiseGlobal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1979216716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979216715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e75f30bbeaf55426eac9c2c3a1dc9803, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkInitializer
+  InitializationSettings: {fileID: 11400000, guid: 0856029769e6a42639c670efc98b9207, type: 2}
+  basePath: 
+  language: 
+  defaultPoolSize: 0
+  lowerPoolSize: 0
+  streamingPoolSize: 0
+  memoryCutoffThreshold: 0
+  monitorPoolSize: 0
+  monitorQueuePoolSize: 0
+  callbackManagerBufferSize: 0
+  spatialAudioPoolSize: 0
+  maxSoundPropagationDepth: 0
+  engineLogging: 0
+--- !u!4 &1979216717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979216715}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1986871841
 GameObject:
   m_ObjectHideFlags: 0
@@ -129064,3 +129236,5 @@ SceneRoots:
   - {fileID: 880002002}
   - {fileID: 1986871843}
   - {fileID: 1470956245}
+  - {fileID: 1979216717}
+  - {fileID: 1296793728}

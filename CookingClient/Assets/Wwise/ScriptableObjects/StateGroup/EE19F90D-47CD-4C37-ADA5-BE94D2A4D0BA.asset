@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2173713e1e22d4ed98975f3686f75d82, type: 3}
+  m_Name: EE19F90D-47CD-4C37-ADA5-BE94D2A4D0BA
+  m_EditorClassIdentifier: AK.Wwise.Unity.API.WwiseTypes::WwiseStateGroupReference
+  objectName: Music_GamePhase
+  id: 524889184
+  guid: EE19F90D-47CD-4C37-ADA5-BE94D2A4D0BA
