@@ -56,7 +56,7 @@ MonoBehaviour:
     count: 1
   steps:
   - order: 1
-    hintText: "\u725B\u8089\u3001\u6D0B\u8471\u3001\u756A\u8304\u5207\u4E01\u3002"
+    hintText: "\u725B\u8089\u3001\u6D0B\u8471\u3001\u756A\u8304\u5207\u5F00\u3002"
     action: 0
     ingredientId: ing_beef
     cookMethod: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
     cookMethod: 2
     seasoningId: season_oil
   - order: 3
-    hintText: "\u5012\u5165\u756A\u8304\u4E01\uFF0C\u6536\u6D53\u6C64\u6C41\u3002"
+    hintText: "\u5012\u5165\u5207\u5F00\u7684\u756A\u8304\uFF0C\u6536\u6D53\u6C64\u6C41\u3002"
     action: 2
     ingredientId: ing_tomato
     cookMethod: 2

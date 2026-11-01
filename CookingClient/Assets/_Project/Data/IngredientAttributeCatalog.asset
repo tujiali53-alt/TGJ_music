@@ -58,15 +58,9 @@ MonoBehaviour:
   - id: shape.Whole
     textZh: "\u6574\u5757"
     textEn: Whole
-  - id: shape.Dice
-    textZh: "\u5207\u4E01\u72B6"
-    textEn: Dice
-  - id: shape.Slice
-    textZh: "\u7247\u72B6"
-    textEn: Slice
-  - id: shape.Shred
-    textZh: "\u4E1D\u72B6"
-    textEn: Shred
+  - id: shape.Cut
+    textZh: "\u5207\u8FC7"
+    textEn: Cut
   - id: cook.Raw
     textZh: "\u751F\u7684"
     textEn: Raw

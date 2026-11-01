@@ -83,13 +83,7 @@ namespace Cooking.EditorTools
             mismatch = Expect(catalog, "shape.Whole", "整块", "Whole");
             if (mismatch != null)
                 return mismatch;
-            mismatch = Expect(catalog, "shape.Dice", "切丁状", "Dice");
-            if (mismatch != null)
-                return mismatch;
-            mismatch = Expect(catalog, "shape.Slice", "片状", "Slice");
-            if (mismatch != null)
-                return mismatch;
-            mismatch = Expect(catalog, "shape.Shred", "丝状", "Shred");
+            mismatch = Expect(catalog, "shape.Cut", "切过", "Cut");
             if (mismatch != null)
                 return mismatch;
             mismatch = Expect(catalog, "cook.Raw", "生的", "Raw");
@@ -115,8 +109,8 @@ namespace Cooking.EditorTools
                 return "英文 CanEatRaw 拼接错误。";
             if (IngredientDetailText.State(catalog, CutShape.Whole, CookMethod.Raw, DiaryLanguage.Zh) != "整块；生的")
                 return "中文状态应为 整块；生的。";
-            if (IngredientDetailText.State(catalog, CutShape.Dice, CookMethod.Fried, DiaryLanguage.En) != "Dice; Fried")
-                return "英文状态应为 Dice; Fried。";
+            if (IngredientDetailText.State(catalog, CutShape.Cut, CookMethod.Fried, DiaryLanguage.En) != "Cut; Fried")
+                return "英文状态应为 Cut; Fried。";
             if (IngredientDetailText.Number(mushroom.optimalDoneness) != "120")
                 return "最佳熟度显示应为 120。";
             if (IngredientDetailText.Number(mushroom.maxDoneness) != "180")

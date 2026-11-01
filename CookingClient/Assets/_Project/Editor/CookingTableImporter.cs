@@ -94,8 +94,8 @@ namespace Cooking.EditorTools
             if (recipe.ingredients == null || recipe.ingredients.Count != 1)
                 return "ingredients 应有 1 条，实际 " + (recipe.ingredients == null ? 0 : recipe.ingredients.Count);
 
-            if (!HasIngredient(recipe, "ing_mushroom", CutShape.Slice, CookMethod.BoiledAndFried))
-                return "RecipeIngredients 与 Day1 期望不一致（白蘑菇切片后先煎后煮）。";
+            if (!HasIngredient(recipe, "ing_mushroom", CutShape.Cut, CookMethod.BoiledAndFried))
+                return "RecipeIngredients 与 Day1 期望不一致（白蘑菇切开后先煎后煮）。";
 
             string[] expectedSeasonings =
             {
@@ -394,7 +394,7 @@ namespace Cooking.EditorTools
                     continue;
 
                 ingredientId = ingredientId.Trim();
-                if (!TryParseEnum(Cell(row, "shape"), out CutShape shape, "IngredientVisualStates/" + ingredientId + ".shape", result))
+                if (!TryParseShape(Cell(row, "shape"), out CutShape shape, "IngredientVisualStates/" + ingredientId + ".shape", result))
                     continue;
                 if (!TryParseEnum(Cell(row, "cookMethod"), out CookMethod cookMethod, "IngredientVisualStates/" + ingredientId + ".cookMethod", result))
                     continue;
@@ -554,7 +554,7 @@ namespace Cooking.EditorTools
                     continue;
                 }
 
-                if (!TryParseEnum(
+                if (!TryParseShape(
                         FirstCell(row, "shape"),
                         out CutShape shape,
                         "RecipeIngredients/" + recipeId + ".shape",
@@ -895,6 +895,37 @@ namespace Cooking.EditorTools
                 return "";
 
             return Convert.ToString(value, CultureInfo.InvariantCulture) ?? "";
+        }
+
+        static bool TryParseShape(string text, out CutShape shape, string context, ImportResult result)
+        {
+            shape = CutShape.Whole;
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                Debug.LogError("缺少枚举值 @ " + context);
+                result.ErrorCount++;
+                return false;
+            }
+
+            string token = text.Trim();
+            if (token.Equals("Whole", StringComparison.OrdinalIgnoreCase))
+            {
+                shape = CutShape.Whole;
+                return true;
+            }
+
+            if (token.Equals("Cut", StringComparison.OrdinalIgnoreCase)
+                || token.Equals("Dice", StringComparison.OrdinalIgnoreCase)
+                || token.Equals("Slice", StringComparison.OrdinalIgnoreCase)
+                || token.Equals("Shred", StringComparison.OrdinalIgnoreCase))
+            {
+                shape = CutShape.Cut;
+                return true;
+            }
+
+            Debug.LogError("无法解析枚举 CutShape='" + text + "' @ " + context);
+            result.ErrorCount++;
+            return false;
         }
 
         static bool TryParseEnum<T>(string text, out T value, string context, ImportResult result) where T : struct

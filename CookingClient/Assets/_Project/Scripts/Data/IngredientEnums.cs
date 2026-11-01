@@ -12,9 +12,7 @@ namespace Cooking.Data
     public enum CutShape
     {
         Whole = 0,
-        Dice = 1,
-        Slice = 2,
-        Shred = 3
+        Cut = 1
     }
 
     public enum CookMethod

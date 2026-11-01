@@ -117,17 +117,10 @@ namespace Cooking.UI
 
         static string ShapeLabel(CutShape shape)
         {
-            switch (shape)
-            {
-                case CutShape.Dice:
-                    return " 切丁";
-                case CutShape.Slice:
-                    return " 切片";
-                case CutShape.Shred:
-                    return " 切丝";
-                default:
-                    return "";
-            }
+            if (shape == CutShape.Cut)
+                return " 切";
+
+            return "";
         }
 
         static string MethodLabel(CookMethod method)

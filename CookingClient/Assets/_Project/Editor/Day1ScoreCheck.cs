@@ -92,13 +92,13 @@ namespace Cooking.EditorTools
 
                 mushroom.stateSprites.Add(new IngredientVisualState
                 {
-                    shape = CutShape.Slice,
+                    shape = CutShape.Cut,
                     cookMethod = CookMethod.Raw,
                     sprite = slice
                 });
                 mushroom.stateSprites.Add(new IngredientVisualState
                 {
-                    shape = CutShape.Slice,
+                    shape = CutShape.Cut,
                     cookMethod = CookMethod.Boiled,
                     sprite = boiled
                 });
@@ -121,9 +121,9 @@ namespace Cooking.EditorTools
         {
             var plate = new List<IngredientInstance>
             {
-                Portion("ing_mushroom", CutShape.Slice, CookMethod.BoiledAndFried, 120f, "season_oil", "season_salt", "season_pepper"),
-                Portion("ing_onion", CutShape.Dice, CookMethod.BoiledAndFried, 110f, "season_oil", "season_salt", "season_pepper"),
-                Portion("ing_potato", CutShape.Dice, CookMethod.Boiled, 130f, "season_salt", "season_pepper")
+                Portion("ing_mushroom", CutShape.Cut, CookMethod.BoiledAndFried, 120f, "season_oil", "season_salt", "season_pepper"),
+                Portion("ing_onion", CutShape.Cut, CookMethod.BoiledAndFried, 110f, "season_oil", "season_salt", "season_pepper"),
+                Portion("ing_potato", CutShape.Cut, CookMethod.Boiled, 130f, "season_salt", "season_pepper")
             };
 
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, soup, presentation);
@@ -148,12 +148,12 @@ namespace Cooking.EditorTools
             {
                 Portion("ing_mushroom", CutShape.Whole, CookMethod.BoiledAndFried, 120f, "season_oil", "season_salt", "season_pepper"),
                 Portion("ing_onion", CutShape.Whole, CookMethod.BoiledAndFried, 110f, "season_oil", "season_salt", "season_pepper"),
-                Portion("ing_potato", CutShape.Shred, CookMethod.Boiled, 130f, "season_salt", "season_pepper")
+                Portion("ing_potato", CutShape.Cut, CookMethod.Boiled, 130f, "season_salt", "season_pepper")
             };
 
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, soup, presentation);
             if (!Near(result.Score, 60f) || result.Picture != DishPictureKind.Recipe)
-                return "上盘不看形状。原形或切丝仍应是成品，分数 60，实际 " + result.Score;
+                return "上盘不看形状。原形或切过仍应是成品，分数 60，实际 " + result.Score;
 
             return null;
         }
@@ -164,12 +164,12 @@ namespace Cooking.EditorTools
             List<IngredientDefinition> definitions,
             IngredientDefinition mushroom)
         {
-            IngredientInstance burnt = Portion("ing_mushroom", CutShape.Slice, CookMethod.BoiledAndFried, 180f, "season_oil", "season_salt", "season_pepper");
+            IngredientInstance burnt = Portion("ing_mushroom", CutShape.Cut, CookMethod.BoiledAndFried, 180f, "season_oil", "season_salt", "season_pepper");
             var plate = new List<IngredientInstance>
             {
                 burnt,
-                Portion("ing_onion", CutShape.Dice, CookMethod.BoiledAndFried, 110f, "season_oil", "season_salt", "season_pepper"),
-                Portion("ing_potato", CutShape.Dice, CookMethod.Boiled, 130f, "season_salt", "season_pepper")
+                Portion("ing_onion", CutShape.Cut, CookMethod.BoiledAndFried, 110f, "season_oil", "season_salt", "season_pepper"),
+                Portion("ing_potato", CutShape.Cut, CookMethod.Boiled, 130f, "season_salt", "season_pepper")
             };
 
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, soup, presentation);
@@ -195,9 +195,9 @@ namespace Cooking.EditorTools
         {
             var plate = new List<IngredientInstance>
             {
-                Portion("ing_mushroom", CutShape.Slice, CookMethod.BoiledAndFried, 120f, "season_oil", "season_pepper", "season_salt"),
-                Portion("ing_onion", CutShape.Dice, CookMethod.BoiledAndFried, 110f, "season_oil", "season_salt", "season_pepper"),
-                Portion("ing_potato", CutShape.Dice, CookMethod.Boiled, 130f, "season_salt", "season_pepper")
+                Portion("ing_mushroom", CutShape.Cut, CookMethod.BoiledAndFried, 120f, "season_oil", "season_pepper", "season_salt"),
+                Portion("ing_onion", CutShape.Cut, CookMethod.BoiledAndFried, 110f, "season_oil", "season_salt", "season_pepper"),
+                Portion("ing_potato", CutShape.Cut, CookMethod.Boiled, 130f, "season_salt", "season_pepper")
             };
 
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, soup, presentation);
@@ -214,9 +214,9 @@ namespace Cooking.EditorTools
         {
             var plate = new List<IngredientInstance>
             {
-                Portion("ing_mushroom", CutShape.Slice, CookMethod.BoiledAndFried, 120f, "season_oil", "season_salt", "season_pepper"),
-                Portion("ing_onion", CutShape.Dice, CookMethod.BoiledAndFried, 110f),
-                Portion("ing_potato", CutShape.Dice, CookMethod.Boiled, 130f)
+                Portion("ing_mushroom", CutShape.Cut, CookMethod.BoiledAndFried, 120f, "season_oil", "season_salt", "season_pepper"),
+                Portion("ing_onion", CutShape.Cut, CookMethod.BoiledAndFried, 110f),
+                Portion("ing_potato", CutShape.Cut, CookMethod.Boiled, 130f)
             };
 
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, hotpot, null);
@@ -233,8 +233,8 @@ namespace Cooking.EditorTools
         {
             var plate = new List<IngredientInstance>
             {
-                Portion("ing_beef", CutShape.Dice, CookMethod.Fried, 90f),
-                Portion("ing_onion", CutShape.Dice, CookMethod.BoiledAndFried, 110f)
+                Portion("ing_beef", CutShape.Cut, CookMethod.Fried, 90f),
+                Portion("ing_onion", CutShape.Cut, CookMethod.BoiledAndFried, 110f)
             };
 
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, null, null);
@@ -266,7 +266,7 @@ namespace Cooking.EditorTools
         {
             FoodVisual missing = FoodVisualResolver.Evaluate(mushroom, new IngredientInstance
             {
-                Shape = CutShape.Dice,
+                Shape = CutShape.Cut,
                 CookMethod = CookMethod.Fried,
                 Doneness = 120f
             });
@@ -275,16 +275,16 @@ namespace Cooking.EditorTools
 
             FoodVisual fallback = FoodVisualResolver.Evaluate(mushroom, new IngredientInstance
             {
-                Shape = CutShape.Dice,
+                Shape = CutShape.Cut,
                 CookMethod = CookMethod.Raw,
                 Doneness = 0f
             });
             if (fallback.Sprite != slice)
-                return "切过的形状没有专用图时，应使用同一烹饪方法下的切图。";
+                return "切过且生的食物应使用切开的生图。";
 
             FoodVisual exact = FoodVisualResolver.Evaluate(mushroom, new IngredientInstance
             {
-                Shape = CutShape.Slice,
+                Shape = CutShape.Cut,
                 CookMethod = CookMethod.Boiled,
                 Doneness = 120f
             });
@@ -293,7 +293,7 @@ namespace Cooking.EditorTools
 
             FoodVisual burnt = FoodVisualResolver.Evaluate(mushroom, new IngredientInstance
             {
-                Shape = CutShape.Slice,
+                Shape = CutShape.Cut,
                 CookMethod = CookMethod.Boiled,
                 Doneness = 180f
             });
@@ -350,7 +350,7 @@ namespace Cooking.EditorTools
             return new RecipeIngredient
             {
                 ingredientId = id,
-                shape = CutShape.Slice,
+                shape = CutShape.Cut,
                 cookMethod = method,
                 count = 1
             };

@@ -20,7 +20,7 @@ MonoBehaviour:
   pageSpriteEn: {fileID: 0}
   ingredients:
   - ingredientId: ing_mushroom
-    shape: 2
+    shape: 1
     cookMethod: 3
     count: 1
   seasonings:
@@ -32,7 +32,7 @@ MonoBehaviour:
     count: 1
   steps:
   - order: 1
-    hintText: "\u767D\u8611\u83C7\u5207\u7247\u3002"
+    hintText: "\u767D\u8611\u83C7\u5207\u5F00\u3002"
     action: 0
     ingredientId: ing_mushroom
     cookMethod: 0

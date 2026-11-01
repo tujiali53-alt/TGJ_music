@@ -20,7 +20,7 @@ MonoBehaviour:
   pageSpriteEn: {fileID: 0}
   ingredients:
   - ingredientId: ing_yam
-    shape: 3
+    shape: 1
     cookMethod: 2
     count: 1
   - ingredientId: ing_doneegg
@@ -32,7 +32,7 @@ MonoBehaviour:
     cookMethod: 0
     count: 1
   - ingredientId: ing_cucumber
-    shape: 2
+    shape: 1
     cookMethod: 0
     count: 1
   seasonings:
@@ -65,19 +65,19 @@ MonoBehaviour:
     count: 1
   steps:
   - order: 1
-    hintText: "\u9E21\u86CB\u716E\u719F\u540E\u5207\u4E01\uFF0C\u756A\u8304\u5207\u4E01\u3001\u9EC4\u74DC\u5207\u7247\uFF0C\u5C71\u836F\u5207\u4E1D\u3002"
+    hintText: "\u9E21\u86CB\u716E\u719F\u540E\u5207\u5F00\uFF0C\u756A\u8304\u3001\u9EC4\u74DC\u3001\u5C71\u836F\u90FD\u5207\u5F00\u3002"
     action: 0
     ingredientId: ing_yam
     cookMethod: 0
     seasoningId: 
   - order: 2
-    hintText: "\u5C71\u836F\u4E1D\u52A0\u5165\u76D0\u548C\u9ED1\u80E1\u6912\u8C03\u5473\uFF0C\u9505\u4E2D\u52A0\u6CB9\uFF0C\u5C06\u5C71\u836F\u4E1D\u714E\u6210\u997C\u3002"
+    hintText: "\u5207\u5F00\u7684\u5C71\u836F\u52A0\u5165\u76D0\u548C\u9ED1\u80E1\u6912\u8C03\u5473\uFF0C\u9505\u4E2D\u52A0\u6CB9\uFF0C\u5C06\u5C71\u836F\u714E\u6210\u997C\u3002"
     action: 2
     ingredientId: ing_yam
     cookMethod: 2
     seasoningId: season_oil
   - order: 3
-    hintText: "\u5C06\u9E21\u86CB\u4E01\u3001\u756A\u8304\u4E01\u3001\u9EC4\u74DC\u7247\u4E0E\u6C99\u62C9\u9171\u3001\u9ED1\u80E1\u6912\u62CC\u5300\u3002"
+    hintText: "\u5C06\u5207\u5F00\u7684\u9E21\u86CB\u3001\u756A\u8304\u3001\u9EC4\u74DC\u4E0E\u6C99\u62C9\u9171\u3001\u9ED1\u80E1\u6912\u62CC\u5300\u3002"
     action: 3
     ingredientId: ing_doneegg
     cookMethod: 0
