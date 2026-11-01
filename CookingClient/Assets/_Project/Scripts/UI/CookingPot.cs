@@ -14,6 +14,9 @@ namespace Cooking.UI
         [SerializeField] float donenessPerSecond = 40f;
         [SerializeField] Color cookedColor = new Color(0.22f, 0.12f, 0.08f, 1f);
         [SerializeField] float cookedAlpha = 1f;
+        [SerializeField] float fireKnobDegreesPerSecond = 90f;
+
+        const float FireOnAngle = -45f;
 
         static CookingPot current;
 
@@ -22,6 +25,10 @@ namespace Cooking.UI
         Button friedFireButton;
         bool boiling;
         bool frying;
+        float boiledKnobAngle;
+        float friedKnobAngle;
+        float boiledKnobTarget;
+        float friedKnobTarget;
 
         void Awake()
         {
@@ -180,6 +187,7 @@ namespace Cooking.UI
         public void ToggleBoiledFire()
         {
             boiling = !boiling;
+            boiledKnobTarget = boiling ? FireOnAngle : 0f;
             if (boiling)
                 Mark(CookMethod.Boiled);
         }
@@ -187,6 +195,7 @@ namespace Cooking.UI
         public void ToggleFriedFire()
         {
             frying = !frying;
+            friedKnobTarget = frying ? FireOnAngle : 0f;
             if (frying)
                 Mark(CookMethod.Fried);
         }
@@ -235,6 +244,9 @@ namespace Cooking.UI
 
         void Update()
         {
+            StepFireKnob(boiledFireButton, ref boiledKnobAngle, boiledKnobTarget);
+            StepFireKnob(friedFireButton, ref friedKnobAngle, friedKnobTarget);
+
             for (int z = 0; z < zones.Count; z++)
             {
                 Zone zone = zones[z];
@@ -258,10 +270,23 @@ namespace Cooking.UI
                     if (item.Doneness >= definition.maxDoneness)
                         continue;
 
-                    float next = item.Doneness + donenessPerSecond * Time.deltaTime;
-                    item.Doneness = Mathf.Min(definition.maxDoneness, next);
+                    float previous = item.Doneness;
+                    float next = Mathf.Min(definition.maxDoneness, previous + donenessPerSecond * Time.deltaTime);
+                    if (item.OptimalHitTime < 0f && previous < definition.optimalDoneness && next >= definition.optimalDoneness)
+                        item.OptimalHitTime = Time.time;
+                    item.Doneness = next;
                 }
             }
+        }
+
+        void StepFireKnob(Button button, ref float angle, float target)
+        {
+            if (button == null)
+                return;
+
+            float speed = fireKnobDegreesPerSecond > 0f ? fireKnobDegreesPerSecond : 90f;
+            angle = Mathf.MoveTowards(angle, target, speed * Time.deltaTime);
+            button.transform.localRotation = Quaternion.Euler(0f, 0f, angle);
         }
 
         bool Heating(Zone zone)
@@ -325,7 +350,8 @@ namespace Cooking.UI
                 Shape = CutShape.Whole,
                 CookMethod = CookMethod.Boiled,
                 SeasoningIds = seasonings,
-                IsCharcoal = false
+                IsCharcoal = false,
+                OptimalHitTime = egg.OptimalHitTime >= 0f ? egg.OptimalHitTime : Time.time
             };
         }
 

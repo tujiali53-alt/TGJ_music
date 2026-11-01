@@ -24,6 +24,9 @@ namespace Cooking.UI
         [SerializeField] TMP_Text ratingThirdText;
         [SerializeField] TMP_Text ratingFinalText;
         [SerializeField] TMP_Text commentsText;
+        [SerializeField] GameObject commentsArea;
+        [SerializeField] ScrollRect commentsScroll;
+        [SerializeField] float commentInterval = 0.5f;
         [SerializeField] Image finalFoodImage;
         [SerializeField] GameObject resultPanel;
         [SerializeField] float resultDelay = 1f;
@@ -32,6 +35,7 @@ namespace Cooking.UI
 
         DishResult lastResult;
         bool resolving;
+        Coroutine commentReveal;
 
         void Awake()
         {
@@ -64,6 +68,16 @@ namespace Cooking.UI
 
             if (commentsText == null)
                 commentsText = FindText("CommentsText");
+
+            if (commentsArea == null)
+            {
+                Transform found = FindNamed("CommentsArea");
+                if (found != null)
+                    commentsArea = found.gameObject;
+            }
+
+            if (commentsScroll == null && commentsArea != null)
+                commentsScroll = commentsArea.GetComponent<ScrollRect>();
 
             if (finalFoodImage == null)
             {
@@ -104,7 +118,12 @@ namespace Cooking.UI
                 Debug.LogError("需要 RatingFirstText、RatingSecondText、RatingThirdText 和 RatingFinalText。", this);
 
             if (commentsText == null)
-                Debug.LogError("需要 CommentsText。", this);
+                Debug.LogError("需要 CommentsArea/CommentsText。", this);
+
+            if (commentsArea == null)
+                Debug.LogError("需要 CheckPanel/CommentsArea。", this);
+            else if (commentsScroll == null)
+                Debug.LogError("CommentsArea 需要 ScrollRect，评语超出区域时才能用滚轮查看。", this);
 
             if (finalFoodImage == null)
                 Debug.LogError("需要 CheckPanel/FinalFoodImage。", this);
@@ -186,8 +205,11 @@ namespace Cooking.UI
                 session.RememberCorrectRecipe(today.id);
             if (session.AttemptScores == null || session.AttemptScores.Length < MealsPerDay)
                 session.AttemptScores = new float[MealsPerDay];
+            if (session.AttemptComments == null || session.AttemptComments.Length < MealsPerDay)
+                session.AttemptComments = new string[MealsPerDay][];
 
             session.AttemptScores[session.MealsEaten] = result.Score;
+            session.AttemptComments[session.MealsEaten] = CopyComments(result.Comments);
             session.MealsEaten += 1;
             session.TodayDeliciousness = DeliciousnessScore.Average(session.AttemptScores, session.MealsEaten);
             session.HeldDish.Items.Clear();
@@ -214,10 +236,13 @@ namespace Cooking.UI
             ApplySummary();
             if (resultPanel != null)
                 resultPanel.SetActive(true);
+
+            ResetCommentScroll();
         }
 
         public void ClosePanel()
         {
+            StopComments();
             if (resultPanel != null)
                 resultPanel.SetActive(false);
 
@@ -253,18 +278,126 @@ namespace Cooking.UI
             if (ratingFinalText != null)
                 ratingFinalText.text = meals > 0 ? DeliciousnessScore.FormatScore(session.TodayDeliciousness) : "";
 
-            if (commentsText != null)
-                commentsText.text = lastResult != null ? lastResult.Comment : "";
-
+            bool perfect = lastResult != null && lastResult.Picture == DishPictureKind.Recipe;
             if (finalFoodImage != null)
             {
-                finalFoodImage.sprite = lastResult != null ? lastResult.SummarySprite : null;
+                finalFoodImage.gameObject.SetActive(perfect);
+                finalFoodImage.sprite = perfect ? lastResult.SummarySprite : null;
                 finalFoodImage.color = Color.white;
                 finalFoodImage.preserveAspect = true;
             }
 
+            if (commentsArea != null)
+                commentsArea.SetActive(!perfect);
+
+            if (perfect)
+            {
+                StopComments();
+                if (commentsText != null)
+                    commentsText.text = "";
+            }
+            else
+                BeginComments(CommentsForLatest(session));
+
             if (oneMoreButton != null)
                 oneMoreButton.gameObject.SetActive(meals < MealsPerDay);
+        }
+
+        void BeginComments(string[] lines)
+        {
+            StopComments();
+            if (commentsText == null)
+                return;
+
+            commentsText.text = "";
+            commentReveal = StartCoroutine(RevealComments(lines));
+        }
+
+        static string[] CommentsForLatest(GameSession session)
+        {
+            if (session == null || session.MealsEaten <= 0 || session.AttemptComments == null)
+                return null;
+
+            int index = session.MealsEaten - 1;
+            if (index < 0 || index >= session.AttemptComments.Length)
+                return null;
+
+            return session.AttemptComments[index];
+        }
+
+        static string[] CopyComments(List<string> lines)
+        {
+            if (lines == null || lines.Count == 0)
+                return new string[0];
+
+            var copy = new string[lines.Count];
+            for (int i = 0; i < lines.Count; i++)
+                copy[i] = lines[i];
+
+            return copy;
+        }
+
+        void StopComments()
+        {
+            if (commentReveal == null)
+                return;
+
+            StopCoroutine(commentReveal);
+            commentReveal = null;
+        }
+
+        IEnumerator RevealComments(string[] lines)
+        {
+            var shown = new List<string>();
+            commentsText.text = "";
+            FitComments();
+            ResetCommentScroll();
+            int count = lines != null ? lines.Length : 0;
+            for (int i = 0; i < count; i++)
+            {
+                if (i > 0 && commentInterval > 0f)
+                    yield return new WaitForSeconds(commentInterval);
+
+                shown.Add("评语：" + lines[i]);
+                commentsText.text = string.Join("\n", shown);
+                FitComments();
+            }
+
+            commentReveal = null;
+        }
+
+        void FitComments()
+        {
+            if (commentsText == null)
+                return;
+
+            commentsText.ForceMeshUpdate();
+            float width = CommentWidth();
+            float height = commentsText.GetPreferredValues(commentsText.text, width, 0f).y;
+            commentsText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
+            if (commentsScroll != null)
+                LayoutRebuilder.ForceRebuildLayoutImmediate(commentsScroll.transform as RectTransform);
+        }
+
+        float CommentWidth()
+        {
+            RectTransform area = commentsArea != null ? commentsArea.transform as RectTransform : null;
+            if (area != null && area.rect.width > 1f)
+                return area.rect.width;
+
+            if (area != null && area.sizeDelta.x > 1f)
+                return area.sizeDelta.x;
+
+            return commentsText.rectTransform.rect.width > 1f ? commentsText.rectTransform.rect.width : 900f;
+        }
+
+        void ResetCommentScroll()
+        {
+            if (commentsScroll == null)
+                return;
+
+            commentsScroll.StopMovement();
+            commentsScroll.verticalNormalizedPosition = 1f;
         }
 
         static string ScoreAt(GameSession session, int index)

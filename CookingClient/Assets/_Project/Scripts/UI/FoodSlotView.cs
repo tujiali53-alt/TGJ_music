@@ -18,10 +18,18 @@ namespace Cooking.UI
         [SerializeField] bool inventorySlot = true;
 
         static readonly HashSet<string> missingCutSprites = new HashSet<string>();
+        static Sprite slotHighlight;
+        static bool missingHighlight;
+        static FoodSlotView hoveredSlot;
+        static FoodSlotView selectedSlot;
 
         IngredientInstance shown;
         IngredientDefinition shownDefinition;
         int shownQuantity;
+        Image background;
+        Sprite normalSprite;
+        bool hovered;
+        bool selected;
 
         public int StackIndex => stackIndex;
         public bool InventorySlot => inventorySlot;
@@ -59,12 +67,50 @@ namespace Cooking.UI
             if (drag == null)
                 drag = GetComponent<FoodSlotDrag>();
 
+            background = GetComponent<Image>();
+            if (background == icon)
+                background = null;
+            if (background != null)
+                normalSprite = background.sprite;
+
             if (!inventorySlot)
             {
-                Image background = GetComponent<Image>();
-                if (background != null && background != icon)
+                if (background != null)
                     background.enabled = false;
             }
+            else
+                ResolveHighlight();
+        }
+
+        void OnDisable()
+        {
+            if (hoveredSlot == this)
+                hoveredSlot = null;
+            if (selectedSlot == this)
+                selectedSlot = null;
+            hovered = false;
+            selected = false;
+            ApplyFrame();
+        }
+
+        public static void UpdatePointer(FoodSlotView under, bool click)
+        {
+            if (hoveredSlot != under)
+            {
+                if (hoveredSlot != null)
+                    hoveredSlot.SetHovered(false);
+                hoveredSlot = under;
+                if (hoveredSlot != null && hoveredSlot.inventorySlot)
+                    hoveredSlot.SetHovered(true);
+            }
+
+            if (!click || under == null || !under.inventorySlot || under == selectedSlot)
+                return;
+
+            if (selectedSlot != null)
+                selectedSlot.SetSelected(false);
+            selectedSlot = under;
+            selectedSlot.SetSelected(true);
         }
 
         void LateUpdate()
@@ -120,6 +166,43 @@ namespace Cooking.UI
                 countText.text = has
                     ? "x" + shownQuantity + ShapeLabel(shown.Shape) + MethodLabel(shown.CookMethod)
                     : "";
+        }
+
+        void SetHovered(bool value)
+        {
+            hovered = value;
+            ApplyFrame();
+        }
+
+        void SetSelected(bool value)
+        {
+            selected = value;
+            ApplyFrame();
+        }
+
+        void ApplyFrame()
+        {
+            if (!inventorySlot || background == null)
+                return;
+
+            bool show = (hovered || selected) && slotHighlight != null;
+            background.sprite = show ? slotHighlight : normalSprite;
+        }
+
+        static void ResolveHighlight()
+        {
+            if (slotHighlight != null || missingHighlight)
+                return;
+
+            SlotHighlight art = Resources.Load<SlotHighlight>("SlotHighlight");
+            if (art == null || art.sprite == null)
+            {
+                missingHighlight = true;
+                Debug.LogError("缺少 SlotHighlight，或未绑上 bag_01。");
+                return;
+            }
+
+            slotHighlight = art.sprite;
         }
 
         static string ShapeLabel(CutShape shape)

@@ -14,5 +14,6 @@ namespace Cooking.Runtime
         public CookMethod CookMethod;
         public List<string> SeasoningIds = new List<string>();
         public bool IsCharcoal;
+        public float OptimalHitTime = -1f;
     }
 }

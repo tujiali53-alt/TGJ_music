@@ -238,6 +238,7 @@ namespace Cooking.EditorTools
             var seasoningIds = new HashSet<string>();
             var recipeIds = new HashSet<string>();
             ImportIngredients(RequireSheet(dataSet, "Ingredients", result), ingredientIds, result);
+            ImportVisualStates(OptionalSheet(dataSet, "IngredientVisualStates"), result);
             ImportAttributeNames(RequireSheet(dataSet, "AttributeNames", result), result);
             ImportSeasonings(RequireSheet(dataSet, "Seasonings", result), seasoningIds, result);
             ImportRecipes(RequireSheet(dataSet, "Recipes", result), recipeIds, result);
@@ -307,6 +308,71 @@ namespace Cooking.EditorTools
                     ref asset.spriteCut,
                     "Ingredients/" + id + ".spriteCut",
                     result);
+
+                EditorUtility.SetDirty(asset);
+            }
+        }
+
+        static void ImportVisualStates(DataTable table, ImportResult result)
+        {
+            if (table == null)
+                return;
+
+            var cut = new Dictionary<string, string>();
+            var whole = new Dictionary<string, string>();
+            foreach (DataRow row in table.Rows)
+            {
+                string id = Cell(row, "ingredientId");
+                if (string.IsNullOrWhiteSpace(id))
+                    continue;
+
+                id = id.Trim();
+                string shape = Cell(row, "shape").Trim();
+                string path = FirstCell(row, "sprite", "spritePath").Trim();
+                if (string.IsNullOrEmpty(path))
+                    continue;
+
+                Dictionary<string, string> bucket;
+                if (string.Equals(shape, "Cut", StringComparison.OrdinalIgnoreCase))
+                    bucket = cut;
+                else if (string.Equals(shape, "Whole", StringComparison.OrdinalIgnoreCase))
+                    bucket = whole;
+                else
+                {
+                    Debug.LogError("IngredientVisualStates 形状无法识别：" + shape + " @ " + id);
+                    result.ErrorCount++;
+                    continue;
+                }
+
+                if (bucket.TryGetValue(id, out string existing) && existing != path)
+                {
+                    Debug.LogError(id + " 的 " + shape + " 外观在不同烹饪方法上不一致：" + existing + " / " + path);
+                    result.ErrorCount++;
+                }
+
+                bucket[id] = path;
+            }
+
+            ApplyVisualSprites(whole, false, result);
+            ApplyVisualSprites(cut, true, result);
+        }
+
+        static void ApplyVisualSprites(Dictionary<string, string> paths, bool cut, ImportResult result)
+        {
+            foreach (KeyValuePair<string, string> pair in paths)
+            {
+                IngredientDefinition asset = FindById<IngredientDefinition>(IngredientsFolder, pair.Key);
+                if (asset == null)
+                {
+                    Debug.LogError("IngredientVisualStates 找不到食材：" + pair.Key);
+                    result.ErrorCount++;
+                    continue;
+                }
+
+                if (cut)
+                    ApplySprite(pair.Value, ref asset.spriteCut, "IngredientVisualStates/" + pair.Key + ".Cut", result);
+                else
+                    ApplySprite(pair.Value, ref asset.spriteWhole, "IngredientVisualStates/" + pair.Key + ".Whole", result);
 
                 EditorUtility.SetDirty(asset);
             }

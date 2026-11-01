@@ -18,6 +18,9 @@ namespace Cooking.UI
         [SerializeField] RectTransform slotContent;
 
         TMP_Text displayNameText;
+        TMP_Text displayNameCh;
+        TMP_Text displayNameEn;
+        Image foodImage;
         TMP_Text descriptionLabel;
         TMP_Text descriptionValue;
         TMP_Text kindLabel;
@@ -57,6 +60,8 @@ namespace Cooking.UI
                 return;
 
             FoodSlotView slot = SlotUnderPointer();
+            bool click = Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame;
+            FoodSlotView.UpdatePointer(slot, click);
             if (slot == null || slot.Shown == null || slot.ShownDefinition == null)
             {
                 Hide();
@@ -91,6 +96,16 @@ namespace Cooking.UI
                 panel.SetActive(true);
 
             SetText(displayNameText, IngredientDetailText.DisplayName(definition, language));
+            SetText(displayNameCh, definition.displayName);
+            SetText(displayNameEn, definition.displayNameEn);
+            if (foodImage != null)
+            {
+                Sprite sprite = FoodVisualResolver.SpriteFor(definition, item.Shape);
+                foodImage.sprite = sprite;
+                foodImage.enabled = sprite != null;
+                foodImage.preserveAspect = true;
+                foodImage.color = Color.white;
+            }
             SetFromTable(descriptionLabel, "label.description");
             SetText(descriptionValue, IngredientDetailText.Description(definition, language));
             SetFromTable(kindLabel, "label.kind");
@@ -150,7 +165,18 @@ namespace Cooking.UI
                 return;
             }
 
-            displayNameText = Require(names, "DisplayName");
+            displayNameText = FindText(names, "DisplayName");
+            displayNameCh = Require(names, "DisplayName_ch");
+            displayNameEn = Require(names, "DisplayName_eng");
+            Transform food = panel.transform.Find("FoodImage");
+            if (food == null)
+                Debug.LogError("DetailsPanel 下需要有 FoodImage。", panel);
+            else
+            {
+                foodImage = food.GetComponent<Image>();
+                if (foodImage == null)
+                    Debug.LogError("DetailsPanel/FoodImage 需要有 Image。", food);
+            }
             descriptionLabel = Require(names, "Description");
             kindLabel = Require(names, "kind");
             optimalLabel = Require(names, "OpyimalDoneness");
@@ -181,6 +207,15 @@ namespace Cooking.UI
                 Debug.LogError(parent.name + "/" + childName + " 需要有 TextMeshPro 文字。", found);
 
             return text;
+        }
+
+        static TMP_Text FindText(Transform parent, string childName)
+        {
+            Transform found = parent.Find(childName);
+            if (found == null)
+                return null;
+
+            return found.GetComponent<TMP_Text>();
         }
 
         void SetFlag(TMP_Text target, string key, bool value)

@@ -97,38 +97,40 @@ namespace Cooking.Runtime
 
         public static bool SameSeasonings(IList<string> actual, IList<string> expected)
         {
-            var counts = new Dictionary<string, int>();
-            Count(counts, expected, 1);
-            Count(counts, actual, -1);
-            foreach (KeyValuePair<string, int> pair in counts)
+            var expectedIds = new HashSet<string>();
+            var actualIds = new HashSet<string>();
+            Collect(expectedIds, expected);
+            Collect(actualIds, actual);
+            if (expectedIds.Count != actualIds.Count)
+                return false;
+
+            foreach (string id in expectedIds)
             {
-                if (pair.Value != 0)
+                if (!actualIds.Contains(id))
                     return false;
             }
 
             return true;
         }
 
-        static void Count(Dictionary<string, int> counts, IList<string> ids, int sign)
+        static void Collect(HashSet<string> ids, IList<string> source)
         {
-            if (ids == null)
+            if (source == null)
                 return;
 
-            for (int i = 0; i < ids.Count; i++)
+            for (int i = 0; i < source.Count; i++)
             {
-                string id = ids[i];
-                if (string.IsNullOrEmpty(id))
-                    continue;
-
-                counts.TryGetValue(id, out int have);
-                counts[id] = have + sign;
+                string id = source[i];
+                if (!string.IsNullOrEmpty(id))
+                    ids.Add(id);
             }
         }
 
         static bool SameBody(IngredientInstance item, RecipeIngredient requirement)
         {
             return item.DefinitionId == requirement.ingredientId
-                && item.CookMethod == requirement.cookMethod;
+                && item.CookMethod == requirement.cookMethod
+                && item.Shape == requirement.shape;
         }
 
         static int RequirementCount(int count)

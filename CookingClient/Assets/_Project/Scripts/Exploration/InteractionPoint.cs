@@ -7,12 +7,17 @@ namespace Cooking.Exploration
 {
     public sealed class InteractionPoint : MonoBehaviour
     {
+        static readonly Color SpentTint = new Color(0.45f, 0.45f, 0.45f, 1f);
+        const string SpentMessage = "该交互点已经没什么好看的了。";
+
         [SerializeField] string eventId;
         [SerializeField] NightEventDefinition definition;
         [SerializeField] Collider2D hitCollider;
         [SerializeField] Transform player;
 
         NightDialogPanel dialog;
+        SpriteRenderer[] pictures;
+        Color[] pictureColors;
 
         void Awake()
         {
@@ -44,6 +49,11 @@ namespace Cooking.Exploration
             if (dialog == null)
                 Debug.LogError("场景里需要有对话面板。", this);
 
+            pictures = GetComponentsInChildren<SpriteRenderer>(true);
+            pictureColors = new Color[pictures.Length];
+            for (int i = 0; i < pictures.Length; i++)
+                pictureColors[i] = pictures[i] != null ? pictures[i].color : Color.white;
+
             ApplyUnlock();
         }
 
@@ -66,6 +76,11 @@ namespace Cooking.Exploration
                 return;
 
             TryOpen(world);
+        }
+
+        void LateUpdate()
+        {
+            TintPictures(AllOptionsResolved());
         }
 
         public void TryOpen(Vector2 world)
@@ -93,7 +108,53 @@ namespace Cooking.Exploration
             if (root.Session.DayIndex < definition.unlockNight)
                 return;
 
+            if (AllOptionsResolved())
+            {
+                NightLogView.Append(NightLogKind.OptionBlocked, SpentMessage);
+                return;
+            }
+
             dialog.OpenIntro(definition, NightLayoutSelector.SuccessFaceDelta);
+        }
+
+        bool AllOptionsResolved()
+        {
+            if (definition == null || definition.options == null || definition.options.Count == 0)
+                return false;
+
+            GameRoot root = GameRoot.Instance;
+            if (root == null || root.Session == null || root.Session.ResolvedOptionIdsTonight == null)
+                return false;
+
+            var done = root.Session.ResolvedOptionIdsTonight;
+            for (int i = 0; i < definition.options.Count; i++)
+            {
+                string id = definition.options[i].optionId;
+                if (string.IsNullOrEmpty(id) || !done.Contains(id))
+                    return false;
+            }
+
+            return true;
+        }
+
+        void TintPictures(bool spent)
+        {
+            if (pictures == null)
+                return;
+
+            for (int i = 0; i < pictures.Length; i++)
+            {
+                SpriteRenderer picture = pictures[i];
+                if (picture == null)
+                    continue;
+
+                Color source = pictureColors != null && i < pictureColors.Length
+                    ? pictureColors[i]
+                    : Color.white;
+                picture.color = spent
+                    ? new Color(SpentTint.r, SpentTint.g, SpentTint.b, source.a)
+                    : source;
+            }
         }
 
         bool PlayerIsInside()

@@ -216,7 +216,8 @@ namespace Cooking.UI
                 Shape = source.Shape,
                 CookMethod = source.CookMethod,
                 SeasoningIds = seasonings,
-                IsCharcoal = source.IsCharcoal
+                IsCharcoal = source.IsCharcoal,
+                OptimalHitTime = source.OptimalHitTime
             };
         }
 

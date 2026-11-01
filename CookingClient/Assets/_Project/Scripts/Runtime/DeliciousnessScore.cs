@@ -15,10 +15,15 @@ namespace Cooking.Runtime
     public sealed class DishResult
     {
         public float Score;
-        public string Comment = "";
+        public readonly List<string> Comments = new List<string>();
         public DishPictureKind Picture;
         public Sprite SummarySprite;
         public readonly List<FoodVisual> LooseFoods = new List<FoodVisual>();
+
+        public string Comment
+        {
+            get { return string.Join("\n", Comments); }
+        }
     }
 
     public static class DeliciousnessScore
@@ -29,6 +34,10 @@ namespace Cooking.Runtime
         public const float UndercookedPenalty = 5f;
         public const float MeatVegetableBonus = 10f;
         public const float CharcoalPenalty = 5f;
+        public const float SeasoningMatchBonus = 5f;
+        public const float RecipeMatchBonus = 50f;
+        public const float SynergyBonusPerFood = 10f;
+        public const float SynergyWindow = 1f;
 
         public static bool IsOptimal(IngredientDefinition definition, float doneness)
         {
@@ -59,7 +68,10 @@ namespace Cooking.Runtime
             bool anyCharcoal = false;
             bool anyMeat = false;
             bool anyVegetable = false;
-            var comments = new List<string>();
+            bool seasoningMatched = false;
+            var optimalNames = new List<string>();
+            var undercookedNames = new List<string>();
+            var hitTimes = new List<float>();
 
             for (int i = 0; i < plate.Count; i++)
             {
@@ -77,36 +89,80 @@ namespace Cooking.Runtime
                 {
                     anyCharcoal = true;
                     result.Score -= CharcoalPenalty * item.Quantity;
-                    // 临时评语。以后按情况从 Excel 表读取，不要把这句当成最终文案。
-                    comments.Add("我把" + DisplayName(definition, item) + "烧过头了");
+                    result.Comments.Add("我把" + DisplayName(definition, item) + "烧过头了……");
                     continue;
                 }
 
                 if (definition == null)
                     continue;
 
+                string name = DisplayName(definition, item);
                 result.Score += BasePerPortion * item.Quantity;
                 if (IsOptimal(definition, item.Doneness))
+                {
                     result.Score += OptimalBonus * item.Quantity;
+                    optimalNames.Add(name);
+                }
 
                 if (!definition.canEatRaw && item.Doneness < 100f)
+                {
                     result.Score -= UndercookedPenalty * item.Quantity;
+                    undercookedNames.Add(name);
+                }
 
                 if (definition.kind == IngredientKind.Meat)
                     anyMeat = true;
                 else if (definition.kind == IngredientKind.Vegetable)
                     anyVegetable = true;
+
+                if (SeasoningMatches(recipe, item))
+                {
+                    result.Score += SeasoningMatchBonus * item.Quantity;
+                    seasoningMatched = true;
+                }
+
+                if (item.OptimalHitTime >= 0f)
+                {
+                    for (int n = 0; n < item.Quantity; n++)
+                        hitTimes.Add(item.OptimalHitTime);
+                }
             }
 
             if (anyMeat && anyVegetable)
+            {
                 result.Score += MeatVegetableBonus;
+                result.Comments.Add("荤素搭配的饮食能给我带来健康的身体——虽然我好像用不着它了。");
+            }
+
+            if (optimalNames.Count > 0)
+                result.Comments.Add(string.Join("、", optimalNames) + "的火候刚刚好！");
+
+            if (seasoningMatched)
+                result.Comments.Add("这一味调料看来是放对了。");
+
+            for (int i = 0; i < undercookedNames.Count; i++)
+                result.Comments.Add("哎呀，" + undercookedNames[i] + "是生的！希望不要拉肚子。");
+
+            int synergy = LargestCluster(hitTimes, SynergyWindow);
+            if (synergy > 1)
+            {
+                result.Score += SynergyBonusPerFood * synergy;
+                result.Comments.Add("食材的相性很好，味道完美地融合在一起。");
+            }
+
+            bool recipeMatch = RecipeMatcher.Matches(plate, definitions, recipe);
+            if (recipeMatch)
+            {
+                result.Score += RecipeMatchBonus;
+                result.Comments.Add("完美的复现。");
+            }
 
             if (anyCharcoal)
             {
                 result.Picture = DishPictureKind.Charcoal;
                 result.SummarySprite = presentation != null ? presentation.charcoalSprite : null;
             }
-            else if (RecipeMatcher.Matches(plate, definitions, recipe))
+            else if (recipeMatch)
             {
                 result.Picture = DishPictureKind.Recipe;
                 result.SummarySprite = recipe.finishedSprite;
@@ -125,8 +181,40 @@ namespace Cooking.Runtime
                 }
             }
 
-            result.Comment = string.Join("\n", comments);
             return result;
+        }
+
+        static bool SeasoningMatches(RecipeDefinition recipe, IngredientInstance item)
+        {
+            if (recipe == null || item == null)
+                return false;
+
+            List<string> expected = RecipeMatcher.ExpectedSeasonings(recipe, item.DefinitionId);
+            if (expected.Count == 0)
+                return false;
+
+            return RecipeMatcher.SameSeasonings(item.SeasoningIds, expected);
+        }
+
+        static int LargestCluster(List<float> times, float window)
+        {
+            if (times == null || times.Count == 0)
+                return 0;
+
+            times.Sort();
+            int best = 1;
+            int left = 0;
+            for (int right = 0; right < times.Count; right++)
+            {
+                while (times[right] - times[left] > window)
+                    left++;
+
+                int size = right - left + 1;
+                if (size > best)
+                    best = size;
+            }
+
+            return best;
         }
 
         public static float Average(float[] scores, int count)

@@ -28,10 +28,14 @@ namespace Cooking.UI
         [SerializeField] Image obtainFoodImage;
         [SerializeField] TMP_Text failBody;
         [SerializeField] TMP_Text failNameText;
+        [SerializeField] RectTransform choiceCursor;
+        [SerializeField] Sprite choiceIdle;
+        [SerializeField] Sprite choiceHighlight;
 
         readonly List<string> lines = new List<string>();
         readonly List<NightOption> choices = new List<NightOption>();
         Button[] buttons;
+        int aimedIndex;
         int lineIndex;
         bool resultMode;
         bool showingSuccess;
@@ -66,7 +70,19 @@ namespace Cooking.UI
                 dice = GetComponent<NightDicePanel>();
 
             ResolvePresentation();
+            ResolveChoiceArt();
             buttons = new[] { option1, option2, option3 };
+            if (choiceCursor == null)
+                choiceCursor = FindCursor(panel != null ? panel.transform : null);
+            if (choiceCursor == null)
+                Debug.LogError("DialogPanel 下需要有 Cursor。", this);
+            else
+            {
+                Image cursorImage = choiceCursor.GetComponent<Image>();
+                if (cursorImage != null)
+                    cursorImage.raycastTarget = false;
+                choiceCursor.gameObject.SetActive(false);
+            }
 
             if (panel == null)
                 Debug.LogError("InteractionPanel 下需要有 DialogPanel。", this);
@@ -232,19 +248,25 @@ namespace Cooking.UI
                     reward.text = SuccessPercent(option);
                 }
             }
+
+            aimedIndex = 0;
+            ApplyAim();
         }
 
         void HideOptions()
         {
             optionsVisible = false;
-            if (buttons == null)
-                return;
-
-            for (int i = 0; i < buttons.Length; i++)
+            if (buttons != null)
             {
-                if (buttons[i] != null)
-                    buttons[i].gameObject.SetActive(false);
+                for (int i = 0; i < buttons.Length; i++)
+                {
+                    if (buttons[i] != null)
+                        buttons[i].gameObject.SetActive(false);
+                }
             }
+
+            if (choiceCursor != null)
+                choiceCursor.gameObject.SetActive(false);
         }
 
         void ChooseFirst()
@@ -264,8 +286,15 @@ namespace Cooking.UI
 
         void Choose(int index)
         {
-            if (resultMode || index < 0 || index >= choices.Count)
+            if (resultMode || !optionsVisible || index < 0 || index >= choices.Count)
                 return;
+
+            if (index != aimedIndex)
+            {
+                aimedIndex = index;
+                ApplyAim();
+                return;
+            }
 
             NightOption option = choices[index];
             string blocked = BlockReason(option);
@@ -280,6 +309,110 @@ namespace Cooking.UI
 
             if (dice != null)
                 dice.Open(current, option, buffDelta);
+        }
+
+        void ResolveChoiceArt()
+        {
+            if (choiceIdle != null && choiceHighlight != null)
+                return;
+
+            NightChoiceSprites art = Resources.Load<NightChoiceSprites>("NightChoiceSprites");
+            if (art == null)
+            {
+                Debug.LogError("缺少 NightChoiceSprites。", this);
+                return;
+            }
+
+            if (choiceIdle == null)
+                choiceIdle = art.idle;
+            if (choiceHighlight == null)
+                choiceHighlight = art.highlight;
+
+            if (choiceIdle == null || choiceHighlight == null)
+                Debug.LogError("NightChoiceSprites 需要绑上 UI_ChoiceBG_a 和 UI_ChoiceBG_b。", this);
+        }
+
+        void ApplyAim()
+        {
+            if (buttons != null)
+            {
+                for (int i = 0; i < buttons.Length; i++)
+                {
+                    Button button = buttons[i];
+                    if (button == null || !button.gameObject.activeSelf)
+                        continue;
+
+                    Image image = button.targetGraphic as Image;
+                    if (image == null)
+                        image = button.GetComponent<Image>();
+                    if (image == null)
+                        continue;
+
+                    Sprite sprite = i == aimedIndex ? choiceHighlight : choiceIdle;
+                    if (sprite != null)
+                        image.sprite = sprite;
+                }
+            }
+
+            PlaceCursor();
+        }
+
+        void PlaceCursor()
+        {
+            if (choiceCursor == null || buttons == null)
+                return;
+            if (aimedIndex < 0 || aimedIndex >= buttons.Length)
+                return;
+
+            Button button = buttons[aimedIndex];
+            if (button == null || !button.gameObject.activeSelf)
+                return;
+
+            RectTransform option = button.transform as RectTransform;
+            RectTransform cursorParent = choiceCursor.parent as RectTransform;
+            if (option == null || cursorParent == null)
+                return;
+
+            choiceCursor.gameObject.SetActive(true);
+            float optionHeight = option.rect.height > 0f ? option.rect.height : option.sizeDelta.y;
+            float cursorHeight = choiceCursor.rect.height > 0f ? choiceCursor.rect.height : choiceCursor.sizeDelta.y;
+            Vector2 pos = choiceCursor.anchoredPosition;
+
+            if (cursorParent == option.parent)
+            {
+                // 枢轴在中心时，中线就是选项的 Pos Y。枢轴在顶边时，中线是 Pos Y 减去一半高度。
+                float optionMiddle = option.anchoredPosition.y + (0.5f - option.pivot.y) * optionHeight;
+                pos.y = optionMiddle - (0.5f - choiceCursor.pivot.y) * cursorHeight;
+            }
+            else
+            {
+                Vector3 local = cursorParent.InverseTransformPoint(option.TransformPoint(option.rect.center));
+                Vector2 anchor = (choiceCursor.anchorMin + choiceCursor.anchorMax) * 0.5f;
+                float anchorY = Mathf.Lerp(cursorParent.rect.yMin, cursorParent.rect.yMax, anchor.y);
+                float pivotY = local.y - (0.5f - choiceCursor.pivot.y) * cursorHeight;
+                pos.y = pivotY - anchorY;
+            }
+
+            choiceCursor.anchoredPosition = pos;
+        }
+
+        static RectTransform FindCursor(Transform root)
+        {
+            if (root == null)
+                return null;
+
+            for (int i = 0; i < root.childCount; i++)
+            {
+                Transform child = root.GetChild(i);
+                if (child.name == "Cursor")
+                    return child as RectTransform;
+
+                RectTransform nested = FindCursor(child);
+                if (nested != null)
+                    return nested;
+            }
+
+            return null;
         }
 
         string BlockReason(NightOption option)

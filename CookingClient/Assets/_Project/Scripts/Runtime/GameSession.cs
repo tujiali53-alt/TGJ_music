@@ -12,6 +12,7 @@ namespace Cooking.Runtime
         public Dish HeldDish = new Dish();
         public int MealsEaten;
         public float[] AttemptScores = new float[3];
+        public string[][] AttemptComments = new string[3][];
         public float TodayDeliciousness;
         public int LightsAbsorbedTonight;
         public List<string> ResolvedOptionIdsTonight = new List<string>();
@@ -31,6 +32,7 @@ namespace Cooking.Runtime
                 HeldDish = new Dish { DishId = 1, ExecutionScore = 1f },
                 MealsEaten = 0,
                 AttemptScores = new float[3],
+                AttemptComments = new string[3][],
                 TodayDeliciousness = 0f,
                 LightsAbsorbedTonight = 0,
                 ResolvedOptionIdsTonight = new List<string>(),
@@ -88,6 +90,7 @@ namespace Cooking.Runtime
             MealsEaten = 0;
             TodayDeliciousness = 0f;
             AttemptScores = new float[3];
+            AttemptComments = new string[3][];
         }
     }
 }

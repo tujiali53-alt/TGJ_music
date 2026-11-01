@@ -13,7 +13,7 @@ namespace Cooking.EditorTools
         {
             string error = Run();
             if (error == null)
-                Debug.Log("第 1 天计分通过：做对 60，一份焦炭 35。");
+                Debug.Log("第 1 天计分通过：做对 125，一份焦炭 45。");
             else
                 Debug.LogError(error);
         }
@@ -74,7 +74,15 @@ namespace Cooking.EditorTools
                 if (error != null)
                     return error;
 
+                error = CheckTwoCharcoalComments(definitions);
+                if (error != null)
+                    return error;
+
                 error = CheckSeasoningOrder(soup, presentation, definitions);
+                if (error != null)
+                    return error;
+
+                error = CheckSeasoningRepeat(soup, presentation, definitions);
                 if (error != null)
                     return error;
 
@@ -95,6 +103,10 @@ namespace Cooking.EditorTools
                     return error;
 
                 error = CheckOptimalWindow(definitions);
+                if (error != null)
+                    return error;
+
+                error = CheckSynergy(definitions);
                 if (error != null)
                     return error;
 
@@ -125,14 +137,14 @@ namespace Cooking.EditorTools
             };
 
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, soup, presentation);
-            if (!Near(result.Score, 60f))
-                return "第 1 天做对应为 60，实际 " + result.Score;
+            if (!Near(result.Score, 125f))
+                return "第 1 天做对应为 125，实际 " + result.Score;
 
             if (result.Picture != DishPictureKind.Recipe)
                 return "第 1 天做对时应使用成品图。";
 
-            if (result.Comment != "")
-                return "第 1 天做对时没有焦炭评语。";
+            if (result.Comment != "白蘑菇、洋葱、星土豆的火候刚刚好！\n这一味调料看来是放对了。\n完美的复现。")
+                return "第 1 天做对时评语不符，实际「" + result.Comment + "」。";
 
             return null;
         }
@@ -150,8 +162,8 @@ namespace Cooking.EditorTools
             };
 
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, soup, presentation);
-            if (!Near(result.Score, 60f) || result.Picture != DishPictureKind.Recipe)
-                return "上盘不看形状。原形或切过仍应是成品，分数 60，实际 " + result.Score;
+            if (!Near(result.Score, 75f) || result.Picture == DishPictureKind.Recipe)
+                return "切过与否要和食谱一致才算复现。原形不应是成品，分数 75，实际 " + result.Score;
 
             return null;
         }
@@ -171,8 +183,8 @@ namespace Cooking.EditorTools
             };
 
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, soup, presentation);
-            if (!Near(result.Score, 35f))
-                return "一份蘑菇焦炭时应为 35，实际 " + result.Score;
+            if (!Near(result.Score, 45f))
+                return "一份蘑菇焦炭时应为 45，实际 " + result.Score;
 
             if (!burnt.IsCharcoal)
                 return "熟度达到最大熟度时要标成焦炭。";
@@ -180,11 +192,41 @@ namespace Cooking.EditorTools
             if (result.Picture != DishPictureKind.Charcoal || result.SummarySprite != presentation.charcoalSprite)
                 return "有焦炭时总结图要用共用焦炭图。";
 
-            if (result.Comment != "我把白蘑菇烧过头了")
-                return "焦炭评语应为「我把白蘑菇烧过头了」，实际「" + result.Comment + "」。";
+            if (result.Comment != "我把白蘑菇烧过头了……\n洋葱、星土豆的火候刚刚好！\n这一味调料看来是放对了。")
+                return "焦炭评语不符，实际「" + result.Comment + "」。";
 
             if (mushroom == null)
                 return "缺少白蘑菇定义。";
+
+            return null;
+        }
+
+        static string CheckTwoCharcoalComments(List<IngredientDefinition> definitions)
+        {
+            var plate = new List<IngredientInstance>
+            {
+                Portion("ing_mushroom", CutShape.Cut, CookMethod.Boiled, 180f),
+                Portion("ing_onion", CutShape.Cut, CookMethod.Fried, 170f)
+            };
+
+            DishResult result = DeliciousnessScore.Evaluate(plate, definitions, null, null);
+            if (result.Comments.Count != 2)
+                return "两份焦炭应有两句评语，实际 " + result.Comments.Count + "。";
+
+            if (result.Comment != "我把白蘑菇烧过头了……\n我把洋葱烧过头了……")
+                return "两份焦炭评语应按盘子顺序各写一句，实际「" + result.Comment + "」。";
+
+            DishResult raw = DeliciousnessScore.Evaluate(
+                new List<IngredientInstance>
+                {
+                    Portion("ing_mushroom", CutShape.Whole, CookMethod.Raw, 0f),
+                    Portion("ing_beef", CutShape.Cut, CookMethod.Fried, 90f)
+                },
+                definitions,
+                null,
+                null);
+            if (raw.Comment != "荤素搭配的饮食能给我带来健康的身体——虽然我好像用不着它了。\n虹彩牛肉的火候刚刚好！\n哎呀，白蘑菇是生的！希望不要拉肚子。\n哎呀，虹彩牛肉是生的！希望不要拉肚子。")
+                return "未熟和荤素评语不符，实际「" + raw.Comment + "」。";
 
             return null;
         }
@@ -199,8 +241,24 @@ namespace Cooking.EditorTools
             };
 
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, soup, presentation);
-            if (!Near(result.Score, 60f) || result.Picture != DishPictureKind.Recipe)
-                return "调味不看顺序，颠倒后仍应是成品，分数 60，实际 " + result.Score;
+            if (!Near(result.Score, 125f) || result.Picture != DishPictureKind.Recipe)
+                return "调味不看顺序，颠倒后仍应是成品，分数 125，实际 " + result.Score;
+
+            return null;
+        }
+
+        static string CheckSeasoningRepeat(RecipeDefinition soup, DishPresentation presentation, List<IngredientDefinition> definitions)
+        {
+            var plate = new List<IngredientInstance>
+            {
+                Portion("ing_mushroom", CutShape.Cut, CookMethod.BoiledAndFried, 120f, "season_oil", "season_oil", "season_salt", "season_pepper"),
+                Portion("ing_onion", CutShape.Cut, CookMethod.BoiledAndFried, 110f, "season_oil", "season_salt", "season_salt", "season_pepper"),
+                Portion("ing_potato", CutShape.Cut, CookMethod.Boiled, 130f, "season_salt", "season_pepper", "season_pepper")
+            };
+
+            DishResult result = DeliciousnessScore.Evaluate(plate, definitions, soup, presentation);
+            if (!Near(result.Score, 125f) || result.Picture != DishPictureKind.Recipe)
+                return "同一种调味多倒几次仍应是成品，分数 125，实际 " + result.Score;
 
             return null;
         }
@@ -215,11 +273,11 @@ namespace Cooking.EditorTools
             };
 
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, soup, presentation);
-            if (!Near(result.Score, 60f))
-                return "调味不改变分数，少放一种时仍应为 60，实际 " + result.Score;
+            if (!Near(result.Score, 70f))
+                return "少放一种调味时不加这 5 分，也不加复现的 50，应为 70，实际 " + result.Score;
 
             if (result.Picture != DishPictureKind.Loose || result.LooseFoods.Count != 3)
-                return "调料种类或次数不对时总结图是三份散装食材。";
+                return "少放一种调味时不算成品。";
 
             return null;
         }
@@ -272,6 +330,33 @@ namespace Cooking.EditorTools
 
             if (!Near(under, 10f) || !Near(over, 10f))
                 return "离开最佳熟度上下 10 后不再加这 10 分，实际 " + under + " / " + over;
+
+            return null;
+        }
+
+        static string CheckSynergy(List<IngredientDefinition> definitions)
+        {
+            IngredientInstance mushroom = Portion("ing_mushroom", CutShape.Cut, CookMethod.Boiled, 120f);
+            IngredientInstance onion = Portion("ing_onion", CutShape.Whole, CookMethod.Boiled, 110f);
+            mushroom.OptimalHitTime = 1f;
+            onion.OptimalHitTime = 1.8f;
+            DishResult together = DeliciousnessScore.Evaluate(
+                new List<IngredientInstance> { mushroom, onion },
+                definitions,
+                null,
+                null);
+            if (!Near(together.Score, 60f) || together.Comment.IndexOf("食材的相性很好，味道完美地融合在一起。") < 0)
+                return "1 秒内先后达到最佳熟度应加 20 并写出相性评语，实际 " + together.Score + "「" + together.Comment + "」。";
+
+            mushroom.OptimalHitTime = 1f;
+            onion.OptimalHitTime = 2.2f;
+            DishResult apart = DeliciousnessScore.Evaluate(
+                new List<IngredientInstance> { mushroom, onion },
+                definitions,
+                null,
+                null);
+            if (!Near(apart.Score, 40f) || apart.Comment.IndexOf("食材的相性很好") >= 0)
+                return "超过 1 秒不算同时达到最佳熟度，实际 " + apart.Score + "「" + apart.Comment + "」。";
 
             return null;
         }
