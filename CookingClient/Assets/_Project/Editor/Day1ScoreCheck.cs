@@ -54,11 +54,10 @@ namespace Cooking.EditorTools
             Texture2D texture = new Texture2D(1, 1);
             Sprite charcoal = Sprite.Create(texture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f));
             Sprite slice = Sprite.Create(texture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f));
-            Sprite boiled = Sprite.Create(texture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f));
             presentation.charcoalSprite = charcoal;
             hotpot.id = "recipe_day7";
             var definitions = new List<IngredientDefinition> { mushroom, onion, potato, beef };
-            var created = new Object[] { mushroom, onion, potato, beef, soup, hotpot, presentation, texture, charcoal, slice, boiled };
+            var created = new Object[] { mushroom, onion, potato, beef, soup, hotpot, presentation, texture, charcoal, slice };
 
             try
             {
@@ -71,6 +70,10 @@ namespace Cooking.EditorTools
                     return error;
 
                 error = CheckCharcoal(soup, presentation, definitions, mushroom);
+                if (error != null)
+                    return error;
+
+                error = CheckSeasoningOrder(soup, presentation, definitions);
                 if (error != null)
                     return error;
 
@@ -90,19 +93,12 @@ namespace Cooking.EditorTools
                 if (error != null)
                     return error;
 
-                mushroom.stateSprites.Add(new IngredientVisualState
-                {
-                    shape = CutShape.Cut,
-                    cookMethod = CookMethod.Raw,
-                    sprite = slice
-                });
-                mushroom.stateSprites.Add(new IngredientVisualState
-                {
-                    shape = CutShape.Cut,
-                    cookMethod = CookMethod.Boiled,
-                    sprite = boiled
-                });
-                return CheckVisual(mushroom, slice, boiled);
+                error = CheckOptimalWindow(definitions);
+                if (error != null)
+                    return error;
+
+                mushroom.spriteWhole = slice;
+                return CheckVisual(mushroom, slice);
             }
             finally
             {
@@ -191,21 +187,37 @@ namespace Cooking.EditorTools
             return null;
         }
 
+        static string CheckSeasoningOrder(RecipeDefinition soup, DishPresentation presentation, List<IngredientDefinition> definitions)
+        {
+            var plate = new List<IngredientInstance>
+            {
+                Portion("ing_mushroom", CutShape.Cut, CookMethod.BoiledAndFried, 120f, "season_pepper", "season_oil", "season_salt"),
+                Portion("ing_onion", CutShape.Cut, CookMethod.BoiledAndFried, 110f, "season_pepper", "season_salt", "season_oil"),
+                Portion("ing_potato", CutShape.Cut, CookMethod.Boiled, 130f, "season_pepper", "season_salt")
+            };
+
+            DishResult result = DeliciousnessScore.Evaluate(plate, definitions, soup, presentation);
+            if (!Near(result.Score, 60f) || result.Picture != DishPictureKind.Recipe)
+                return "调味不看顺序，颠倒后仍应是成品，分数 60，实际 " + result.Score;
+
+            return null;
+        }
+
         static string CheckWrongSeasoning(RecipeDefinition soup, DishPresentation presentation, List<IngredientDefinition> definitions)
         {
             var plate = new List<IngredientInstance>
             {
-                Portion("ing_mushroom", CutShape.Cut, CookMethod.BoiledAndFried, 120f, "season_oil", "season_pepper", "season_salt"),
+                Portion("ing_mushroom", CutShape.Cut, CookMethod.BoiledAndFried, 120f, "season_oil", "season_salt"),
                 Portion("ing_onion", CutShape.Cut, CookMethod.BoiledAndFried, 110f, "season_oil", "season_salt", "season_pepper"),
                 Portion("ing_potato", CutShape.Cut, CookMethod.Boiled, 130f, "season_salt", "season_pepper")
             };
 
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, soup, presentation);
             if (!Near(result.Score, 60f))
-                return "调味不改变分数，顺序不对时仍应为 60，实际 " + result.Score;
+                return "调味不改变分数，少放一种时仍应为 60，实际 " + result.Score;
 
             if (result.Picture != DishPictureKind.Loose || result.LooseFoods.Count != 3)
-                return "调味顺序不对时总结图是三份散装食材。";
+                return "调料种类或次数不对时总结图是三份散装食材。";
 
             return null;
         }
@@ -247,6 +259,34 @@ namespace Cooking.EditorTools
             return null;
         }
 
+        static string CheckOptimalWindow(List<IngredientDefinition> definitions)
+        {
+            float low = ScoreOf(definitions, 110f);
+            float high = ScoreOf(definitions, 130f);
+            float under = ScoreOf(definitions, 109f);
+            float over = ScoreOf(definitions, 131f);
+            if (!Near(low, 20f) || !Near(high, 20f))
+                return "最佳熟度上下 10 应按最佳熟度加分，实际 " + low + " / " + high;
+
+            if (!Near(under, 10f) || !Near(over, 10f))
+                return "离开最佳熟度上下 10 后不再加这 10 分，实际 " + under + " / " + over;
+
+            return null;
+        }
+
+        static float ScoreOf(List<IngredientDefinition> definitions, float doneness)
+        {
+            DishResult result = DeliciousnessScore.Evaluate(
+                new List<IngredientInstance>
+                {
+                    Portion("ing_mushroom", CutShape.Cut, CookMethod.Boiled, doneness)
+                },
+                definitions,
+                null,
+                null);
+            return result.Score;
+        }
+
         static string CheckAverage()
         {
             float average = DeliciousnessScore.Average(new[] { 30f, 20f, 0f }, 2);
@@ -262,8 +302,9 @@ namespace Cooking.EditorTools
             return null;
         }
 
-        static string CheckVisual(IngredientDefinition mushroom, Sprite slice, Sprite boiled)
+        static string CheckVisual(IngredientDefinition mushroom, Sprite whole)
         {
+            mushroom.spriteWhole = null;
             FoodVisual missing = FoodVisualResolver.Evaluate(mushroom, new IngredientInstance
             {
                 Shape = CutShape.Cut,
@@ -271,34 +312,17 @@ namespace Cooking.EditorTools
                 Doneness = 120f
             });
             if (missing.Sprite != null || missing.Color != Color.white)
-                return "没绑到的状态应为白色。";
+                return "没有整颗图时应为白色。";
 
-            FoodVisual fallback = FoodVisualResolver.Evaluate(mushroom, new IngredientInstance
+            mushroom.spriteWhole = whole;
+            FoodVisual fried = FoodVisualResolver.Evaluate(mushroom, new IngredientInstance
             {
                 Shape = CutShape.Cut,
-                CookMethod = CookMethod.Raw,
-                Doneness = 0f
-            });
-            if (fallback.Sprite != slice)
-                return "切过且生的食物应使用切开的生图。";
-
-            FoodVisual exact = FoodVisualResolver.Evaluate(mushroom, new IngredientInstance
-            {
-                Shape = CutShape.Cut,
-                CookMethod = CookMethod.Boiled,
-                Doneness = 120f
-            });
-            if (exact.Sprite != boiled || exact.Color != mushroom.baseColor)
-                return "形状和烹饪方法都对上时用那一张图，最佳熟度用本色。";
-
-            FoodVisual burnt = FoodVisualResolver.Evaluate(mushroom, new IngredientInstance
-            {
-                Shape = CutShape.Cut,
-                CookMethod = CookMethod.Boiled,
+                CookMethod = CookMethod.Fried,
                 Doneness = 180f
             });
-            if (burnt.Sprite != boiled || burnt.Color != Color.black)
-                return "有精灵时，最大熟度的颜色是黑色。";
+            if (fried.Sprite != whole || fried.Color != Color.white)
+                return "锅上不换烹饪图，仍用整颗图。";
 
             return null;
         }
@@ -320,7 +344,6 @@ namespace Cooking.EditorTools
             definition.canCut = true;
             definition.optimalDoneness = optimal;
             definition.maxDoneness = max;
-            definition.baseColor = Color.white;
             return definition;
         }
 

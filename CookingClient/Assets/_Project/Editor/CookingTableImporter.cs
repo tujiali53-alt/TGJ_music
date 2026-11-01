@@ -237,15 +237,8 @@ namespace Cooking.EditorTools
             var ingredientIds = new HashSet<string>();
             var seasoningIds = new HashSet<string>();
             var recipeIds = new HashSet<string>();
-            var visualByIngredient = new Dictionary<string, List<IngredientVisualState>>();
-
             ImportIngredients(RequireSheet(dataSet, "Ingredients", result), ingredientIds, result);
             ImportAttributeNames(RequireSheet(dataSet, "AttributeNames", result), result);
-            ImportIngredientVisualStates(
-                OptionalSheet(dataSet, "IngredientVisualStates"),
-                visualByIngredient,
-                result);
-            ApplyVisualStates(visualByIngredient, result);
             ImportSeasonings(RequireSheet(dataSet, "Seasonings", result), seasoningIds, result);
             ImportRecipes(RequireSheet(dataSet, "Recipes", result), recipeIds, result);
             ImportRecipeIngredients(RequireSheet(dataSet, "RecipeIngredients", result), result);
@@ -310,18 +303,6 @@ namespace Cooking.EditorTools
                     "Ingredients/" + id + ".spriteWhole",
                     result);
 
-                string colorText = Cell(row, "baseColor");
-                if (!string.IsNullOrWhiteSpace(colorText))
-                {
-                    if (TryParseColor(colorText, out Color color))
-                        asset.baseColor = color;
-                    else
-                    {
-                        Debug.LogError("无法解析颜色：" + colorText + " @ Ingredients/" + id);
-                        result.ErrorCount++;
-                    }
-                }
-
                 EditorUtility.SetDirty(asset);
             }
         }
@@ -377,73 +358,6 @@ namespace Cooking.EditorTools
 
             catalog.rows = rows;
             EditorUtility.SetDirty(catalog);
-        }
-
-        static void ImportIngredientVisualStates(
-            DataTable table,
-            Dictionary<string, List<IngredientVisualState>> visualByIngredient,
-            ImportResult result)
-        {
-            if (table == null)
-                return;
-
-            foreach (DataRow row in table.Rows)
-            {
-                string ingredientId = Cell(row, "ingredientId");
-                if (string.IsNullOrWhiteSpace(ingredientId))
-                    continue;
-
-                ingredientId = ingredientId.Trim();
-                if (!TryParseShape(Cell(row, "shape"), out CutShape shape, "IngredientVisualStates/" + ingredientId + ".shape", result))
-                    continue;
-                if (!TryParseEnum(Cell(row, "cookMethod"), out CookMethod cookMethod, "IngredientVisualStates/" + ingredientId + ".cookMethod", result))
-                    continue;
-
-                Sprite sprite = null;
-                string spritePath = FirstCell(row, "sprite", "spritePath");
-                if (!string.IsNullOrWhiteSpace(spritePath))
-                {
-                    sprite = AssetDatabase.LoadAssetAtPath<Sprite>(spritePath.Trim());
-                    if (sprite == null)
-                    {
-                        Debug.LogError("找不到 Sprite：" + spritePath + " @ IngredientVisualStates/" + ingredientId);
-                        result.ErrorCount++;
-                        continue;
-                    }
-                }
-
-                if (!visualByIngredient.TryGetValue(ingredientId, out List<IngredientVisualState> list))
-                {
-                    list = new List<IngredientVisualState>();
-                    visualByIngredient[ingredientId] = list;
-                }
-
-                list.Add(new IngredientVisualState
-                {
-                    shape = shape,
-                    cookMethod = cookMethod,
-                    sprite = sprite
-                });
-            }
-        }
-
-        static void ApplyVisualStates(
-            Dictionary<string, List<IngredientVisualState>> visualByIngredient,
-            ImportResult result)
-        {
-            foreach (KeyValuePair<string, List<IngredientVisualState>> pair in visualByIngredient)
-            {
-                IngredientDefinition asset = FindById<IngredientDefinition>(IngredientsFolder, pair.Key);
-                if (asset == null)
-                {
-                    Debug.LogError("IngredientVisualStates 找不到食材：" + pair.Key);
-                    result.ErrorCount++;
-                    continue;
-                }
-
-                asset.stateSprites = new List<IngredientVisualState>(pair.Value);
-                EditorUtility.SetDirty(asset);
-            }
         }
 
         static void ImportSeasonings(DataTable table, HashSet<string> ids, ImportResult result)
@@ -1002,29 +916,6 @@ namespace Cooking.EditorTools
             Debug.LogError("无法解析整数='" + text + "' @ " + context);
             result.ErrorCount++;
             value = 0;
-            return false;
-        }
-
-        static bool TryParseColor(string text, out Color color)
-        {
-            text = text.Trim();
-            if (text.StartsWith("#", StringComparison.Ordinal) && ColorUtility.TryParseHtmlString(text, out color))
-                return true;
-
-            string[] parts = text.Split(',');
-            if (parts.Length >= 3
-                && float.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture, out float r)
-                && float.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture, out float g)
-                && float.TryParse(parts[2], NumberStyles.Float, CultureInfo.InvariantCulture, out float b))
-            {
-                float a = 1f;
-                if (parts.Length >= 4)
-                    float.TryParse(parts[3], NumberStyles.Float, CultureInfo.InvariantCulture, out a);
-                color = new Color(r, g, b, a);
-                return true;
-            }
-
-            color = Color.white;
             return false;
         }
 

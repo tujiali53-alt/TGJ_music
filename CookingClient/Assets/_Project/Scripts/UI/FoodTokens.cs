@@ -40,6 +40,57 @@ namespace Cooking.UI
             return Free() != null;
         }
 
+        public void WarnMissingAreas()
+        {
+            for (int i = 0; i < tokens.Count; i++)
+            {
+                FoodSlotView token = tokens[i];
+                if (token != null && Area(token) == null)
+                    Debug.LogError(token.name + " 下需要有 area。", token);
+            }
+        }
+
+        public bool TryHit(Vector2 screen, Camera cam, out FoodSlotView token)
+        {
+            for (int i = 0; i < tokens.Count; i++)
+            {
+                FoodSlotView view = tokens[i];
+                RectTransform area = Area(view);
+                if (area == null)
+                    continue;
+
+                if (!RectTransformUtility.RectangleContainsScreenPoint(area, screen, cam))
+                    continue;
+
+                token = view;
+                return true;
+            }
+
+            token = null;
+            return false;
+        }
+
+        public void ShowOn(FoodSlotView token, IngredientInstance item, IngredientDefinition definition)
+        {
+            if (token == null || item == null)
+                return;
+
+            if (definition == null)
+                definition = FoodTray.Lookup(item.DefinitionId);
+
+            token.ShowStack(item, item.Quantity, definition);
+            token.transform.SetAsLastSibling();
+        }
+
+        static RectTransform Area(FoodSlotView token)
+        {
+            if (token == null)
+                return null;
+
+            Transform found = token.transform.Find("area");
+            return found as RectTransform;
+        }
+
         public void Present(IngredientInstance item, Vector2 localPoint, IngredientDefinition definition)
         {
             if (item == null)

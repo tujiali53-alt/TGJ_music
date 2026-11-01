@@ -24,17 +24,3 @@ MonoBehaviour:
   optimalDoneness: 125
   maxDoneness: 185
   spriteWhole: {fileID: 21300000, guid: 39a828c08c1b35344965516ea96bd720, type: 3}
-  baseColor: {r: 1, g: 1, b: 1, a: 1}
-  stateSprites:
-  - shape: 1
-    cookMethod: 0
-    sprite: {fileID: 21300000, guid: d6507a7e4a0e3204e94d778ee7779b8a, type: 3}
-  - shape: 1
-    cookMethod: 1
-    sprite: {fileID: 21300000, guid: d6507a7e4a0e3204e94d778ee7779b8a, type: 3}
-  - shape: 1
-    cookMethod: 2
-    sprite: {fileID: 21300000, guid: d6507a7e4a0e3204e94d778ee7779b8a, type: 3}
-  - shape: 1
-    cookMethod: 3
-    sprite: {fileID: 21300000, guid: d6507a7e4a0e3204e94d778ee7779b8a, type: 3}

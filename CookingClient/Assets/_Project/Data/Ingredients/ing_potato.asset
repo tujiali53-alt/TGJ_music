@@ -24,5 +24,3 @@ MonoBehaviour:
   optimalDoneness: 130
   maxDoneness: 190
   spriteWhole: {fileID: 0}
-  baseColor: {r: 1, g: 1, b: 1, a: 1}
-  stateSprites: []

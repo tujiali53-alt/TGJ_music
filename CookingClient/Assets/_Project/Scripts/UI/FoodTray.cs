@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Cooking.Core;
@@ -104,14 +105,23 @@ namespace Cooking.UI
 
         static string StackKey(IngredientInstance item)
         {
-            string seasonings = item.SeasoningIds == null
-                ? ""
-                : string.Join(",", item.SeasoningIds);
+            string seasonings = "";
+            if (item.SeasoningIds != null && item.SeasoningIds.Count > 0)
+            {
+                var copy = new List<string>(item.SeasoningIds);
+                copy.Sort(CompareSeasoning);
+                seasonings = string.Join(",", copy);
+            }
             return item.DefinitionId
                 + "|" + item.Doneness.ToString("0.00", CultureInfo.InvariantCulture)
                 + "|" + (int)item.Shape
                 + "|" + (int)item.CookMethod
                 + "|" + seasonings;
+        }
+
+        static int CompareSeasoning(string a, string b)
+        {
+            return string.CompareOrdinal(a, b);
         }
 
         public static IngredientDefinition Lookup(string definitionId)

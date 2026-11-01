@@ -30,6 +30,8 @@ namespace Cooking.UI
             if (icon == null)
             {
                 Transform found = transform.Find("Image");
+                if (found == null)
+                    found = transform.Find("area");
                 if (found != null)
                     icon = found.GetComponent<Image>();
             }
@@ -94,17 +96,12 @@ namespace Cooking.UI
 
             if (icon != null)
             {
-                Sprite sprite = null;
-                if (has && shownDefinition != null)
-                {
-                    sprite = FoodVisualResolver.FindSprite(shownDefinition, shown.Shape, shown.CookMethod);
-                    if (sprite == null)
-                        sprite = shownDefinition.spriteWhole;
-                }
-
+                Sprite sprite = has && shownDefinition != null ? shownDefinition.spriteWhole : null;
                 icon.enabled = sprite != null;
                 icon.preserveAspect = true;
-                icon.color = Color.white;
+                icon.color = has && shownDefinition != null && GetComponentInParent<PotArea>() != null
+                    ? CookingPot.DonenessTint(shown.Doneness, shownDefinition.maxDoneness)
+                    : Color.white;
                 if (sprite != null)
                     icon.sprite = sprite;
             }

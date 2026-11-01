@@ -68,7 +68,7 @@ namespace Cooking.Runtime
                 if (item == null || item.Quantity <= 0)
                     continue;
 
-                if (!SameSequence(item.SeasoningIds, ExpectedSeasonings(recipe, item.DefinitionId)))
+                if (!SameSeasonings(item.SeasoningIds, ExpectedSeasonings(recipe, item.DefinitionId)))
                     return false;
             }
 
@@ -95,20 +95,34 @@ namespace Cooking.Runtime
             return expected;
         }
 
-        public static bool SameSequence(IList<string> actual, IList<string> expected)
+        public static bool SameSeasonings(IList<string> actual, IList<string> expected)
         {
-            int actualCount = actual == null ? 0 : actual.Count;
-            int expectedCount = expected == null ? 0 : expected.Count;
-            if (actualCount != expectedCount)
-                return false;
-
-            for (int i = 0; i < actualCount; i++)
+            var counts = new Dictionary<string, int>();
+            Count(counts, expected, 1);
+            Count(counts, actual, -1);
+            foreach (KeyValuePair<string, int> pair in counts)
             {
-                if (actual[i] != expected[i])
+                if (pair.Value != 0)
                     return false;
             }
 
             return true;
+        }
+
+        static void Count(Dictionary<string, int> counts, IList<string> ids, int sign)
+        {
+            if (ids == null)
+                return;
+
+            for (int i = 0; i < ids.Count; i++)
+            {
+                string id = ids[i];
+                if (string.IsNullOrEmpty(id))
+                    continue;
+
+                counts.TryGetValue(id, out int have);
+                counts[id] = have + sign;
+            }
         }
 
         static bool SameBody(IngredientInstance item, RecipeIngredient requirement)

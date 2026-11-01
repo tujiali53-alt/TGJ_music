@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.Data.SeasoningDefinition
   id: season_sauce
   displayName: "\u9171\u6599"
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: cbf38f57278f66941af207c5f0870f5c, type: 3}

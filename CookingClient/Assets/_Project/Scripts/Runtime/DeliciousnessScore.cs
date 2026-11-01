@@ -30,6 +30,22 @@ namespace Cooking.Runtime
         public const float MeatVegetableBonus = 10f;
         public const float CharcoalPenalty = 5f;
 
+        public static bool IsOptimal(IngredientDefinition definition, float doneness)
+        {
+            if (definition == null)
+                return false;
+
+            return Mathf.Abs(doneness - definition.optimalDoneness) <= OptimalWindow;
+        }
+
+        public static float OptimalStart(IngredientDefinition definition)
+        {
+            if (definition == null)
+                return 0f;
+
+            return definition.optimalDoneness - OptimalWindow;
+        }
+
         public static DishResult Evaluate(
             IList<IngredientInstance> plate,
             IList<IngredientDefinition> definitions,
@@ -70,7 +86,7 @@ namespace Cooking.Runtime
                     continue;
 
                 result.Score += BasePerPortion * item.Quantity;
-                if (Mathf.Abs(item.Doneness - definition.optimalDoneness) <= OptimalWindow)
+                if (IsOptimal(definition, item.Doneness))
                     result.Score += OptimalBonus * item.Quantity;
 
                 if (!definition.canEatRaw && item.Doneness < 100f)

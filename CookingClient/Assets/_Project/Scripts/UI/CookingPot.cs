@@ -12,6 +12,8 @@ namespace Cooking.UI
 
         [SerializeField] IngredientDefinition[] definitions;
         [SerializeField] float donenessPerSecond = 40f;
+        [SerializeField] Color cookedColor = new Color(0.22f, 0.12f, 0.08f, 1f);
+        [SerializeField] float cookedAlpha = 1f;
 
         static CookingPot current;
 
@@ -39,6 +41,7 @@ namespace Cooking.UI
 
                 var zone = new Zone(area);
                 zone.Tokens.Collect();
+                zone.Tokens.WarnMissingAreas();
                 if (zone.Tokens.TokenCount == 0)
                     Debug.LogError(area.name + " 下需要已经摆好的食物令牌。", area);
 
@@ -69,37 +72,54 @@ namespace Cooking.UI
             return false;
         }
 
-        public static bool PlaceOn(PotArea area, IngredientInstance item, Vector2 localPoint, IngredientDefinition definition)
+        public static bool PlaceAt(
+            Vector2 screen,
+            Camera cam,
+            IngredientInstance item,
+            IngredientDefinition definition,
+            out bool outsideArea)
         {
-            if (current == null || area == null)
-                return false;
-
-            return current.TryPlaceOn(area, item, localPoint, definition);
-        }
-
-        bool TryPlaceOn(PotArea area, IngredientInstance item, Vector2 localPoint, IngredientDefinition definition)
-        {
-            Zone zone = FindZone(area);
-            if (item == null || zone == null)
-                return false;
-
-            if (zone.Held.Contains(item))
+            outsideArea = false;
+            if (current == null || item == null)
             {
-                ApplyArea(item, zone.Area.Method);
-                zone.Tokens.Present(item, localPoint, definition);
-                return true;
+                outsideArea = true;
+                return false;
             }
 
-            if (zone.Held.Count >= zone.Tokens.TokenCount || !zone.Tokens.HasFree())
+            Zone zone = null;
+            FoodSlotView token = null;
+            for (int i = 0; i < current.zones.Count; i++)
+            {
+                if (!current.zones[i].Tokens.TryHit(screen, cam, out FoodSlotView hit))
+                    continue;
+
+                zone = current.zones[i];
+                token = hit;
+                break;
+            }
+
+            if (zone == null || token == null)
+            {
+                outsideArea = true;
+                return false;
+            }
+
+            if (token.Shown != null && token.Shown != item)
                 return false;
 
-            Detach(item);
-            Plate.Detach(item);
-            CuttingBoard.Detach(item);
-            IngredientInventory.Remove(item);
-            zone.Held.Add(item);
-            ApplyArea(item, zone.Area.Method);
-            zone.Tokens.Present(item, localPoint, definition);
+            if (token.Shown != item)
+            {
+                Detach(item);
+                Plate.Detach(item);
+                CuttingBoard.Detach(item);
+                IngredientInventory.Remove(item);
+                zone.Held.Add(item);
+                zone.Tokens.ShowOn(token, item, definition);
+            }
+
+            if (current.Heating(zone))
+                ApplyArea(item, zone.Area.Method);
+
             return true;
         }
 
@@ -140,7 +160,7 @@ namespace Cooking.UI
             if (item.CookMethod != CookMethod.Boiled)
                 return false;
 
-            if (item.Doneness < egg.optimalDoneness || item.Doneness >= egg.maxDoneness)
+            if (item.Doneness < DeliciousnessScore.OptimalStart(egg) || item.Doneness >= egg.maxDoneness)
                 return false;
 
             IngredientDefinition done = FoodTray.Lookup("ing_doneegg");
@@ -160,11 +180,57 @@ namespace Cooking.UI
         public void ToggleBoiledFire()
         {
             boiling = !boiling;
+            if (boiling)
+                Mark(CookMethod.Boiled);
         }
 
         public void ToggleFriedFire()
         {
             frying = !frying;
+            if (frying)
+                Mark(CookMethod.Fried);
+        }
+
+        public static Color DonenessTint(float doneness, float maxDoneness)
+        {
+            if (current == null || maxDoneness <= 0f)
+                return Color.white;
+
+            float t = Mathf.Clamp01(doneness / maxDoneness);
+            Color color = Color.Lerp(Color.white, current.cookedColor, t);
+            color.a = Mathf.Lerp(1f, Mathf.Clamp01(current.cookedAlpha), t);
+            return color;
+        }
+
+        void Mark(CookMethod method)
+        {
+            for (int z = 0; z < zones.Count; z++)
+            {
+                Zone zone = zones[z];
+                if (zone.Area == null || zone.Area.Method != method)
+                    continue;
+
+                List<IngredientInstance> held = zone.Held;
+                for (int i = 0; i < held.Count; i++)
+                {
+                    if (held[i] != null)
+                        ApplyArea(held[i], method);
+                }
+            }
+        }
+
+        public static bool IsHeating(CookMethod method)
+        {
+            if (current == null)
+                return false;
+
+            if (method == CookMethod.Boiled)
+                return current.boiling;
+
+            if (method == CookMethod.Fried)
+                return current.frying;
+
+            return false;
         }
 
         void Update()
@@ -227,17 +293,6 @@ namespace Cooking.UI
                 item.CookMethod = CookMethod.Fried;
             else if (boiled)
                 item.CookMethod = CookMethod.Boiled;
-        }
-
-        Zone FindZone(PotArea area)
-        {
-            for (int i = 0; i < zones.Count; i++)
-            {
-                if (zones[i].Area == area)
-                    return zones[i];
-            }
-
-            return null;
         }
 
         Zone FindHolding(IngredientInstance item)
