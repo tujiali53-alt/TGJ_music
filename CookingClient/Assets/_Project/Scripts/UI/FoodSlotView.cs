@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Globalization;
 using Cooking.Data;
 using Cooking.Runtime;
@@ -15,6 +16,8 @@ namespace Cooking.UI
         [SerializeField] FoodSlotDrag drag;
         [SerializeField] int stackIndex;
         [SerializeField] bool inventorySlot = true;
+
+        static readonly HashSet<string> missingCutSprites = new HashSet<string>();
 
         IngredientInstance shown;
         IngredientDefinition shownDefinition;
@@ -96,7 +99,14 @@ namespace Cooking.UI
 
             if (icon != null)
             {
-                Sprite sprite = has && shownDefinition != null ? shownDefinition.spriteWhole : null;
+                Sprite sprite = null;
+                if (has && shownDefinition != null)
+                {
+                    if (shown.Shape == CutShape.Cut && shownDefinition.spriteCut == null && missingCutSprites.Add(shownDefinition.id))
+                        Debug.LogError(shownDefinition.id + " 切开后需要 spriteCut。", shownDefinition);
+
+                    sprite = FoodVisualResolver.SpriteFor(shownDefinition, shown.Shape);
+                }
                 icon.enabled = sprite != null;
                 icon.preserveAspect = true;
                 icon.color = has && shownDefinition != null && GetComponentInParent<PotArea>() != null

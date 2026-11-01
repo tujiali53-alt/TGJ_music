@@ -24,3 +24,4 @@ MonoBehaviour:
   optimalDoneness: 100
   maxDoneness: 120
   spriteWhole: {fileID: 0}
+  spriteCut: {fileID: 21300000, guid: 57db5b990c822964791a407545953446, type: 3}

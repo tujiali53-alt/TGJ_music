@@ -54,10 +54,11 @@ namespace Cooking.EditorTools
             Texture2D texture = new Texture2D(1, 1);
             Sprite charcoal = Sprite.Create(texture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f));
             Sprite slice = Sprite.Create(texture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f));
+            Sprite cut = Sprite.Create(texture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f));
             presentation.charcoalSprite = charcoal;
             hotpot.id = "recipe_day7";
             var definitions = new List<IngredientDefinition> { mushroom, onion, potato, beef };
-            var created = new Object[] { mushroom, onion, potato, beef, soup, hotpot, presentation, texture, charcoal, slice };
+            var created = new Object[] { mushroom, onion, potato, beef, soup, hotpot, presentation, texture, charcoal, slice, cut };
 
             try
             {
@@ -98,7 +99,8 @@ namespace Cooking.EditorTools
                     return error;
 
                 mushroom.spriteWhole = slice;
-                return CheckVisual(mushroom, slice);
+                mushroom.spriteCut = cut;
+                return CheckVisual(mushroom, slice, cut);
             }
             finally
             {
@@ -302,27 +304,38 @@ namespace Cooking.EditorTools
             return null;
         }
 
-        static string CheckVisual(IngredientDefinition mushroom, Sprite whole)
+        static string CheckVisual(IngredientDefinition mushroom, Sprite whole, Sprite cut)
         {
             mushroom.spriteWhole = null;
+            mushroom.spriteCut = null;
             FoodVisual missing = FoodVisualResolver.Evaluate(mushroom, new IngredientInstance
             {
-                Shape = CutShape.Cut,
-                CookMethod = CookMethod.Fried,
-                Doneness = 120f
+                Shape = CutShape.Whole,
+                CookMethod = CookMethod.Raw,
+                Doneness = 0f
             });
             if (missing.Sprite != null || missing.Color != Color.white)
                 return "没有整颗图时应为白色。";
 
             mushroom.spriteWhole = whole;
+            mushroom.spriteCut = cut;
             FoodVisual fried = FoodVisualResolver.Evaluate(mushroom, new IngredientInstance
             {
-                Shape = CutShape.Cut,
+                Shape = CutShape.Whole,
                 CookMethod = CookMethod.Fried,
                 Doneness = 180f
             });
-            if (fried.Sprite != whole || fried.Color != Color.white)
-                return "锅上不换烹饪图，仍用整颗图。";
+            if (fried.Sprite != whole)
+                return "煎煮不换图，原形仍用整颗图。";
+
+            FoodVisual sliced = FoodVisualResolver.Evaluate(mushroom, new IngredientInstance
+            {
+                Shape = CutShape.Cut,
+                CookMethod = CookMethod.Boiled,
+                Doneness = 180f
+            });
+            if (sliced.Sprite != cut)
+                return "切开后用切开的图，煎煮不再另换一张。";
 
             return null;
         }

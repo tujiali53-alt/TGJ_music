@@ -16,5 +16,6 @@ namespace Cooking.Data
         public float optimalDoneness = 100f;
         public float maxDoneness = 140f;
         public Sprite spriteWhole;
+        public Sprite spriteCut;
     }
 }

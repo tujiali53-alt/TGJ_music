@@ -8,6 +8,10 @@ namespace Cooking.UI
     public sealed class DonenessBar : MonoBehaviour
     {
         Image fill;
+        RectTransform cursor;
+        float cursorFromX;
+        float cursorToX;
+        float cursorY;
         FoodSlotView slot;
         PotArea area;
 
@@ -17,9 +21,10 @@ namespace Cooking.UI
             slot = GetComponentInParent<FoodSlotView>();
             area = GetComponentInParent<PotArea>();
             HideGeneratedPieces();
-            if (fill == null || fill.sprite == null || slot == null || area == null)
+            BindCursor();
+            if (fill == null || fill.sprite == null || cursor == null || slot == null || area == null)
             {
-                Debug.LogError("DonenessBar 的 Fill 需要指定 UI_DonenessBar。", this);
+                Debug.LogError("DonenessBar 需要 Fill（UI_DonenessBar）和 Cursor。", this);
                 return;
             }
 
@@ -28,11 +33,12 @@ namespace Cooking.UI
             fill.fillOrigin = (int)Image.OriginHorizontal.Left;
             fill.color = Color.white;
             fill.enabled = false;
+            cursor.gameObject.SetActive(false);
         }
 
         void LateUpdate()
         {
-            if (fill == null || slot == null || area == null)
+            if (fill == null || cursor == null || slot == null || area == null)
                 return;
 
             IngredientInstance item = slot.Shown;
@@ -40,13 +46,33 @@ namespace Cooking.UI
             if (!show)
             {
                 fill.enabled = false;
+                cursor.gameObject.SetActive(false);
                 return;
             }
 
             IngredientDefinition definition = slot.ShownDefinition;
             float max = definition != null ? definition.maxDoneness : 0f;
-            fill.fillAmount = max <= 0f ? 0f : Mathf.Clamp01(item.Doneness / max);
+            float amount = max <= 0f ? 0f : Mathf.Clamp01(item.Doneness / max);
+            fill.fillAmount = amount;
             fill.enabled = true;
+            cursor.gameObject.SetActive(true);
+            cursor.anchoredPosition = new Vector2(Mathf.Lerp(cursorFromX, cursorToX, amount), cursorY);
+        }
+
+        void BindCursor()
+        {
+            Transform found = transform.Find("Cursor");
+            cursor = found as RectTransform;
+            if (cursor == null)
+                return;
+
+            Image image = found.GetComponent<Image>();
+            if (image != null)
+                image.raycastTarget = false;
+
+            cursorFromX = cursor.anchoredPosition.x;
+            cursorToX = -cursorFromX;
+            cursorY = cursor.anchoredPosition.y;
         }
 
         void HideGeneratedPieces()
