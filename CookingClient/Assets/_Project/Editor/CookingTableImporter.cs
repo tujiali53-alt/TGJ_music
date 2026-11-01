@@ -140,25 +140,25 @@ namespace Cooking.EditorTools
 
         public static string ValidateRecipePages()
         {
-            string mismatch = ExpectPage("recipe_day1", "Recipe_Day1", null);
+            string mismatch = ExpectPage("recipe_day1", "Recipe_Day01", "Recipe_Day01_eng");
             if (mismatch != null)
                 return mismatch;
-            mismatch = ExpectPage("recipe_day2", "Recipe_Day2", null);
+            mismatch = ExpectPage("recipe_day2", "Recipe_Day2", "Recipe_Day2_eng");
             if (mismatch != null)
                 return mismatch;
-            mismatch = ExpectPage("recipe_day5", "Recipe_Day5", null);
+            mismatch = ExpectPage("recipe_day3", "Recipe_Day3", "Recipe_Day3_eng");
             if (mismatch != null)
                 return mismatch;
-
-            string[] empty = { "recipe_day3", "recipe_day4", "recipe_day6", "recipe_day7" };
-            for (int i = 0; i < empty.Length; i++)
-            {
-                mismatch = ExpectPage(empty[i], null, null);
-                if (mismatch != null)
-                    return mismatch;
-            }
-
-            return null;
+            mismatch = ExpectPage("recipe_day4", "Recipe_Day4", "Recipe_Day4_eng");
+            if (mismatch != null)
+                return mismatch;
+            mismatch = ExpectPage("recipe_day5", "Recipe_Day5", "Recipe_Day05");
+            if (mismatch != null)
+                return mismatch;
+            mismatch = ExpectPage("recipe_day6", "Recipe_Day6", "Recipe_Day6_eng");
+            if (mismatch != null)
+                return mismatch;
+            return ExpectPage("recipe_day7", null, null);
         }
 
         static string ExpectPage(string id, string zhName, string enName)

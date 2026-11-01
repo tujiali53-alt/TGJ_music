@@ -17,7 +17,7 @@ MonoBehaviour:
   unlockDay: 4
   finishedSprite: {fileID: 21300000, guid: 0dd9e81044eb53d4d8e13c8797708def, type: 3}
   pageSpriteZh: {fileID: 21300000, guid: 14a63b57977ba114ba274c4acd1ace53, type: 3}
-  pageSpriteEn: {fileID: 0}
+  pageSpriteEn: {fileID: 21300000, guid: 6cafcfda218db774cb273bb9dfdf19eb, type: 3}
   ingredients:
   - ingredientId: ing_pumpkin
     shape: 1

@@ -17,7 +17,7 @@ MonoBehaviour:
   unlockDay: 3
   finishedSprite: {fileID: 21300000, guid: 610a3c9ae3143af4696c935d09c67ae5, type: 3}
   pageSpriteZh: {fileID: 21300000, guid: d564cf91e072cf04e9a88f8c1d55c83f, type: 3}
-  pageSpriteEn: {fileID: 0}
+  pageSpriteEn: {fileID: 21300000, guid: 55a60c858fac4a84ca51def6645785b1, type: 3}
   ingredients:
   - ingredientId: ing_cornfish
     shape: 1

@@ -16,8 +16,8 @@ MonoBehaviour:
   displayName: "\u4EC0\u9526\u8611\u83C7\u6D53\u6C64"
   unlockDay: 1
   finishedSprite: {fileID: 21300000, guid: fbdad6419ae0eba4bbac53234f891023, type: 3}
-  pageSpriteZh: {fileID: 21300000, guid: bcd6d300563c15041beac0d155553cee, type: 3}
-  pageSpriteEn: {fileID: 0}
+  pageSpriteZh: {fileID: 21300000, guid: e84bacfed5ce1674da9c1f2579f76c53, type: 3}
+  pageSpriteEn: {fileID: 21300000, guid: 20858c7495c925741a10015d55fad163, type: 3}
   ingredients:
   - ingredientId: ing_mushroom
     shape: 1
