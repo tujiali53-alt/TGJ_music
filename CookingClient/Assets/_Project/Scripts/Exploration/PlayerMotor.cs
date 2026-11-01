@@ -7,11 +7,21 @@ namespace Cooking.Exploration
     {
         [SerializeField] float moveSpeed = 4f;
         [SerializeField] Collider2D body;
+        [SerializeField] Animator animator;
 
         public float SpeedMultiplier { get; set; } = 1f;
 
         const float Skin = 0.02f;
+        const int FaceFront = 0;
+        const int FaceBack = 1;
+        const int FaceLeft = 2;
+        const int FaceRight = 3;
+
+        static readonly int FacingId = Animator.StringToHash("Facing");
+        static readonly int WalkingId = Animator.StringToHash("Walking");
+
         Collider2D boundary;
+        int facing = FaceFront;
 
         void Awake()
         {
@@ -20,6 +30,12 @@ namespace Cooking.Exploration
 
             if (body == null)
                 Debug.LogError("Player 上需要已经放好碰撞体。", this);
+
+            if (animator == null)
+                animator = GetComponent<Animator>();
+
+            if (animator == null)
+                Debug.LogError("Player 上需要已经放好 Animator。", this);
 
             MapBoundary marker = FindFirstObjectByType<MapBoundary>();
             if (marker == null)
@@ -36,6 +52,7 @@ namespace Cooking.Exploration
         {
             Vector2 position = transform.position;
             Keyboard keyboard = Keyboard.current;
+            bool walking = false;
             if (keyboard != null)
             {
                 var direction = Vector2.zero;
@@ -50,9 +67,24 @@ namespace Cooking.Exploration
 
                 if (direction.sqrMagnitude > 0.0001f)
                 {
+                    walking = true;
+                    if (!Mathf.Approximately(Mathf.Abs(direction.x), Mathf.Abs(direction.y)))
+                    {
+                        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+                            facing = direction.x > 0f ? FaceRight : FaceLeft;
+                        else
+                            facing = direction.y > 0f ? FaceBack : FaceFront;
+                    }
+
                     direction.Normalize();
                     position += direction * (moveSpeed * SpeedMultiplier * Time.deltaTime);
                 }
+            }
+
+            if (animator != null)
+            {
+                animator.SetInteger(FacingId, facing);
+                animator.SetBool(WalkingId, walking);
             }
 
             position = ClampToMap(position);
