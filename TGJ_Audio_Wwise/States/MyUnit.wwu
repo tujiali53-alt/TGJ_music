@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{FF1BAC81-0016-4BAC-A1B0-563C88B229BE}" SchemaVersion="133">
+	<States>
+		<WorkUnit Name="MyUnit" ID="{FF1BAC81-0016-4BAC-A1B0-563C88B229BE}" PersistMode="Standalone">
+			<ChildrenList>
+				<StateGroup Name="Music_GamePhase" ID="{EE19F90D-47CD-4C37-ADA5-BE94D2A4D0BA}">
+					<ChildrenList>
+						<State Name="None" ID="{B1F0C81E-2A23-4DC5-ABBB-79AE3D8B009C}"/>
+						<State Name="Menu" ID="{58AABCA7-0CE8-4D5B-AA20-7908793950AD}"/>
+						<State Name="Day" ID="{D1F5EEF1-B7F3-4D55-B174-B733DDE2011F}"/>
+						<State Name="Night" ID="{8170E1DF-E114-41BA-BB9F-25D384442167}"/>
+					</ChildrenList>
+				</StateGroup>
+				<StateGroup Name="Music_BGM_Stage" ID="{875345E3-CBD4-48E5-BE15-8A2B336F8A43}">
+					<ChildrenList>
+						<State Name="None" ID="{B0AC52E9-E360-4198-BC69-6EA8E5DD9092}"/>
+						<State Name="BGM_V1" ID="{BC7E74B6-EDEF-447B-A127-76E955F5F390}"/>
+						<State Name="BGM_V2" ID="{95F39562-D650-47F8-B8A9-2F25B7AC6456}"/>
+						<State Name="BGM_V3" ID="{44DE243B-9402-47E1-B03D-4434AE8E9CAB}"/>
+					</ChildrenList>
+				</StateGroup>
+			</ChildrenList>
+		</WorkUnit>
+	</States>
+</WwiseDocument>

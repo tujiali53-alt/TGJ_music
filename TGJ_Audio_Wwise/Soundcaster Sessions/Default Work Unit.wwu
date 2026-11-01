@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{402EAFE4-4210-45A9-86CF-620BC14A4365}" SchemaVersion="133">
+	<SoundcasterSessions>
+		<WorkUnit Name="Default Work Unit" ID="{402EAFE4-4210-45A9-86CF-620BC14A4365}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundcasterSession Name="My Soundcaster Session" ID="{DBF95D48-95EC-4379-912C-9CF02C8C1898}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="Play_Boiling" ID="{DAD1AF9B-2D43-4EFB-9981-A864D8DE87AA}" WorkUnitID="{3AC05089-BE33-4EA3-9E8D-2300E1314C9E}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Stop_Boiling" ID="{6E75FB32-8CC1-4C9C-BB24-B4C092D7C13E}" WorkUnitID="{3AC05089-BE33-4EA3-9E8D-2300E1314C9E}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_Frying" ID="{E847BDD9-9351-4599-853B-5655CB22AD6B}" WorkUnitID="{3AC05089-BE33-4EA3-9E8D-2300E1314C9E}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Stop_Frying" ID="{431B9F35-FABC-4E8D-A337-423920A320BA}" WorkUnitID="{3AC05089-BE33-4EA3-9E8D-2300E1314C9E}"/>
+							<Position X="3" Y="0"/>
+						</Module>
+					</ModuleList>
+				</SoundcasterSession>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundcasterSessions>
+</WwiseDocument>

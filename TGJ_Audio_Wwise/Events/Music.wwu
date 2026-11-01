@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{58DADCFD-53FF-4144-AC3F-74870486FA61}" SchemaVersion="133">
+	<Events>
+		<WorkUnit Name="Music" ID="{58DADCFD-53FF-4144-AC3F-74870486FA61}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_BGM" ID="{3DBFC372-D29B-4578-9A31-E3225FADF44A}">
+					<ChildrenList>
+						<Action Name="" ID="{82A03FFA-B872-4524-9087-5D40EC00215C}" ShortID="910100750">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Switch_BGM" ID="{CDA492C4-223B-4708-8717-E69B87D6E47C}" WorkUnitID="{E84B600A-2119-48E9-BE7E-22C9D29E9378}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_BGM" ID="{3CA5F101-4134-474A-97D7-2E7A54B95BFA}">
+					<ChildrenList>
+						<Action Name="" ID="{3CA89575-1806-41BB-8E73-1C66C43240C1}" ShortID="1051304425">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeOutCurve" Type="int16" Value="7"/>
+								<Property Name="FadeTime" Type="Real64" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Switch_BGM" ID="{CDA492C4-223B-4708-8717-E69B87D6E47C}" WorkUnitID="{E84B600A-2119-48E9-BE7E-22C9D29E9378}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

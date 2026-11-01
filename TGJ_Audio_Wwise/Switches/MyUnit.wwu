@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{C8E75DEB-126D-48FE-A6EB-A195C613D2A6}" SchemaVersion="133">
+	<Switches>
+		<WorkUnit Name="MyUnit" ID="{C8E75DEB-126D-48FE-A6EB-A195C613D2A6}" PersistMode="Standalone">
+			<ChildrenList>
+				<SwitchGroup Name="Ingredient" ID="{12CCB2FA-9F6D-4194-8C59-9E1BF6A3265A}">
+					<ChildrenList>
+						<Switch Name="Mushroom" ID="{DAA4B275-91AF-46F4-A89E-BBC7F6AB0112}"/>
+						<Switch Name="Tomato" ID="{70E58373-24B0-4726-9C9E-DA4C4D1CF20E}"/>
+						<Switch Name="DoneEgg" ID="{416E00DD-AA2C-4F6D-8EAC-5E4E43054354}"/>
+						<Switch Name="CornFish" ID="{D021B8BF-A506-4E75-B287-D45F279667EF}"/>
+						<Switch Name="Berry" ID="{381D83EC-1F4D-44E9-96A4-913FFDAC53A1}"/>
+						<Switch Name="Pumpkin" ID="{CD1723A8-7C36-47B0-8783-B1063AD6BD6A}"/>
+						<Switch Name="Onion" ID="{E8DA1413-DC3B-43E3-9B1B-552DAE008860}"/>
+						<Switch Name="Beef" ID="{1B7CCBF1-AB3C-48AB-AC28-AB0D69DFC51F}"/>
+						<Switch Name="Cucumber" ID="{59D50F69-E135-4100-A34F-4A630D508219}"/>
+						<Switch Name="Yam" ID="{01282AE1-F2D8-4735-B7B6-4E6BC9671F20}"/>
+						<Switch Name="Shrimp" ID="{146E134E-475E-4F27-B4F5-B25D5F6D26E9}"/>
+					</ChildrenList>
+				</SwitchGroup>
+				<SwitchGroup Name="Dish" ID="{1E446B90-46F5-4617-9C24-475A5AEC3FFB}">
+					<ChildrenList>
+						<Switch Name="Food_Soup" ID="{BD4FBCFB-3AD6-4B20-81D9-B8A01F5794FA}"/>
+						<Switch Name="Food_RainbowEgg" ID="{43D15A45-FA4A-4400-9329-0872C488DEE1}"/>
+						<Switch Name="Food_FriedFish" ID="{42A766F1-60DA-48B5-9EF7-24E320441248}"/>
+						<Switch Name="Food_JellyShip" ID="{E67428C1-7687-48F1-9EE1-7D4FCECA394A}"/>
+						<Switch Name="Food_SeafoodRice" ID="{6F731820-8F40-4662-950F-D006A3AC358A}"/>
+						<Switch Name="Food_YamPie" ID="{02CE6BAF-0EA7-4F05-ADED-9F7CE91305D5}"/>
+						<Switch Name="Food_Hotpot" ID="{9E29E3FE-F1D3-4849-ADA5-AC6F0EAC903A}"/>
+					</ChildrenList>
+				</SwitchGroup>
+			</ChildrenList>
+		</WorkUnit>
+	</Switches>
+</WwiseDocument>

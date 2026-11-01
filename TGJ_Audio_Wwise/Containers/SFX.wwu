@@ -1,0 +1,1215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}" SchemaVersion="133" RootDocumentID="{BFB7300D-C66D-46CB-B5FA-D70F2D7A2ABA}" ParentDocumentID="{BFB7300D-C66D-46CB-B5FA-D70F2D7A2ABA}">
+	<Containers>
+		<WorkUnit Name="SFX" ID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}" OwnerID="{BFB7300D-C66D-46CB-B5FA-D70F2D7A2ABA}" PersistMode="Nested">
+			<ChildrenList>
+				<PropertyContainer Name="SFX_Cooking" ID="{CBF87ABA-5D47-4ACE-8E49-960D30A889ED}" ShortID="1006422481">
+					<PropertyList>
+						<Property Name="Pitch" Type="int32">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{D216C79B-6BDD-40B2-A1CE-787E7E14A997}">
+										<PropertyList>
+											<Property Name="Enabled" Type="bool" Value="True"/>
+											<Property Name="Max" Type="Real64" Value="50"/>
+											<Property Name="Min" Type="Real64" Value="-50"/>
+										</PropertyList>
+									</Modifier>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
+						<Property Name="Volume" Type="Real64">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{37C4439A-580A-4AE6-9BC6-354A1101A2C0}">
+										<PropertyList>
+											<Property Name="Enabled" Type="bool" Value="True"/>
+											<Property Name="Max" Type="Real64" Value="1"/>
+											<Property Name="Min" Type="Real64" Value="-1"/>
+										</PropertyList>
+									</Modifier>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX" ID="{1444E2D0-F1B5-4D29-9490-AE9CA3A398EC}" WorkUnitID="{5B963A53-AA54-4687-A0B9-112941ACC765}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<PropertyContainer Name="Pot" ID="{FA046276-6AF9-43B4-9F16-8B3C1A917856}" ShortID="409292775">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<RandomSequenceContainer Name="Random_Pot_Boil_Loop" ID="{3ED7BB01-F091-4AA2-B30C-C8FB786A852D}" ShortID="566785159">
+									<PropertyList>
+										<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="boiling_lp_01" ID="{C60E45A9-9EFB-40F3-A33D-4EFB39D23A83}" ShortID="557550636">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="boiling_lp_01" ID="{A7E5183E-F332-41F8-9845-CD4AADE269DD}">
+													<Language>SFX</Language>
+													<AudioFile>boiling_lp_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="461425161"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="boiling_lp_01" ID="{A7E5183E-F332-41F8-9845-CD4AADE269DD}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="boiling_lp_02" ID="{185A1058-6038-4F8E-B837-03646B4D7F84}" ShortID="971467858">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="boiling_lp_02" ID="{54ED2330-D5B5-439A-8159-093685A5F629}">
+													<Language>SFX</Language>
+													<AudioFile>boiling_lp_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="772437309"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="boiling_lp_02" ID="{54ED2330-D5B5-439A-8159-093685A5F629}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="Random_Pot_Fry_Loop" ID="{AEB3DF7A-051D-44FF-B5B2-F222EA3299D9}" ShortID="199059229">
+									<PropertyList>
+										<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="frying_lp_01" ID="{4F747AA0-AE7E-407D-8E28-D392D6D0C7D9}" ShortID="739757191">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="frying_lp_01" ID="{DC6E6770-3F23-4214-A97A-8393C3FC4354}">
+													<Language>SFX</Language>
+													<AudioFile>frying_lp_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="294930407"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="frying_lp_01" ID="{DC6E6770-3F23-4214-A97A-8393C3FC4354}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="frying_lp_02" ID="{EFF65CC2-2669-4F3D-AB20-BCB7B8B31917}" ShortID="1030775390">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="frying_lp_02" ID="{BFEBCC15-4344-4C90-B0D5-D0AB4A95015D}">
+													<Language>SFX</Language>
+													<AudioFile>frying_lp_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="702267986"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="frying_lp_02" ID="{BFEBCC15-4344-4C90-B0D5-D0AB4A95015D}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+							</ChildrenList>
+						</PropertyContainer>
+						<SwitchContainer Name="Switch_Cutting" ID="{EB63A520-9422-4DA2-903F-CD21E86EC503}" ShortID="704598579">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+								</Reference>
+								<Reference Name="SwitchGroupOrStateGroup">
+									<ObjectRef Name="Ingredient" ID="{12CCB2FA-9F6D-4194-8C59-9E1BF6A3265A}" WorkUnitID="{C8E75DEB-126D-48FE-A6EB-A195C613D2A6}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="Cut_Beef" ID="{29646BE8-2B5A-4C6C-94FA-AAA6F5D7210C}" ShortID="402703672">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Cut_Beef" ID="{4DACBF70-2144-4D16-AF66-34297FB4490E}">
+											<Language>SFX</Language>
+											<AudioFile>Cut_Beef.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="923872371"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Cut_Beef" ID="{4DACBF70-2144-4D16-AF66-34297FB4490E}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Cut_Berry" ID="{D9D12D3F-0310-499C-AD4C-83BB554C6178}" ShortID="218189286">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Cut_Berry" ID="{2D19A6D9-A469-4420-8353-9F2FD1E11DA1}">
+											<Language>SFX</Language>
+											<AudioFile>Cut_Berry.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="686269563"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Cut_Berry" ID="{2D19A6D9-A469-4420-8353-9F2FD1E11DA1}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Cut_CornFish" ID="{A9A583A9-24B2-45D8-8F66-F45ACD9F07C7}" ShortID="278010682">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Cut_CornFish" ID="{A4AF5269-59A2-41ED-B56F-2AA098090584}">
+											<Language>SFX</Language>
+											<AudioFile>Cut_CornFish.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="384185100"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Cut_CornFish" ID="{A4AF5269-59A2-41ED-B56F-2AA098090584}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Cut_Cucumber" ID="{F507D70D-92F4-4E4E-92BF-30A501E83002}" ShortID="235268767">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Cut_Cucumber" ID="{23C7863A-7C9A-4F75-8053-733591688CCD}">
+											<Language>SFX</Language>
+											<AudioFile>Cut_Cucumber.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="283535523"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Cut_Cucumber" ID="{23C7863A-7C9A-4F75-8053-733591688CCD}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Cut_DoneEgg" ID="{17A2A04A-BEAA-4682-854E-D770DAE9921E}" ShortID="679262662">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Cut_DoneEgg" ID="{B1FCCC09-7D68-4456-9F28-66F773BB842C}">
+											<Language>SFX</Language>
+											<AudioFile>Cut_DoneEgg.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="467365878"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Cut_DoneEgg" ID="{B1FCCC09-7D68-4456-9F28-66F773BB842C}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Cut_Mushroom" ID="{4978B223-8B60-43B2-9352-9ED1AAD682E0}" ShortID="698246878">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Cut_Mushroom" ID="{47010F87-BC29-44AB-B428-408CB87F9C51}">
+											<Language>SFX</Language>
+											<AudioFile>Cut_Mushroom.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="933676904"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Cut_Mushroom" ID="{47010F87-BC29-44AB-B428-408CB87F9C51}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Cut_Onion" ID="{23457FE3-2226-42F0-9F99-758E3B7AA19D}" ShortID="370837309">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Cut_Onion" ID="{FF67383C-C698-413A-BF19-F6016B41E9A5}">
+											<Language>SFX</Language>
+											<AudioFile>Cut_Onion.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="336913223"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Cut_Onion" ID="{FF67383C-C698-413A-BF19-F6016B41E9A5}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Cut_Pumpkin" ID="{2AA9385F-E20F-4361-8C86-ECAFE5D9B5CF}" ShortID="343240008">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Cut_Pumpkin" ID="{DE0C962F-1487-432C-A5EF-4DFF6FAD4C3D}">
+											<Language>SFX</Language>
+											<AudioFile>Cut_Pumpkin.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="341525343"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Cut_Pumpkin" ID="{DE0C962F-1487-432C-A5EF-4DFF6FAD4C3D}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Cut_Tomato" ID="{6A67EB1B-0D7F-470D-A362-0EEE614E1825}" ShortID="709832757">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Cut_Tomato" ID="{C7CFAA12-EF1B-4CB5-9ABD-C00AF7568FE3}">
+											<Language>SFX</Language>
+											<AudioFile>Cut_Tomato.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="80476432"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Cut_Tomato" ID="{C7CFAA12-EF1B-4CB5-9ABD-C00AF7568FE3}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Cut_Yam" ID="{E4F1DD8A-5441-406D-9863-1D50E3BA7951}" ShortID="445307943">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Cut_Yam" ID="{E544BAA2-9D38-484F-A8E3-63DAE80A6E92}">
+											<Language>SFX</Language>
+											<AudioFile>Cut_Yam.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="902235593"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Cut_Yam" ID="{E544BAA2-9D38-484F-A8E3-63DAE80A6E92}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Peel_Shrimp" ID="{FCDF1795-2FE7-47B4-931D-8D5D556AF6FF}" ShortID="819413554">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Peel_Shrimp" ID="{8E77507C-4FD8-49AB-B85B-CD1AF73528FB}">
+											<Language>SFX</Language>
+											<AudioFile>Peel_Shrimp.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="108766747"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Peel_Shrimp" ID="{8E77507C-4FD8-49AB-B85B-CD1AF73528FB}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+							<GroupingInfo>
+								<GroupingBehaviorList>
+									<GroupingBehavior>
+										<ItemRef Name="Cut_Cucumber" ID="{F507D70D-92F4-4E4E-92BF-30A501E83002}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Cut_Tomato" ID="{6A67EB1B-0D7F-470D-A362-0EEE614E1825}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Cut_Mushroom" ID="{4978B223-8B60-43B2-9352-9ED1AAD682E0}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Cut_Berry" ID="{D9D12D3F-0310-499C-AD4C-83BB554C6178}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Cut_DoneEgg" ID="{17A2A04A-BEAA-4682-854E-D770DAE9921E}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Cut_Pumpkin" ID="{2AA9385F-E20F-4361-8C86-ECAFE5D9B5CF}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Cut_Yam" ID="{E4F1DD8A-5441-406D-9863-1D50E3BA7951}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Peel_Shrimp" ID="{FCDF1795-2FE7-47B4-931D-8D5D556AF6FF}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Cut_CornFish" ID="{A9A583A9-24B2-45D8-8F66-F45ACD9F07C7}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Cut_Onion" ID="{23457FE3-2226-42F0-9F99-758E3B7AA19D}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Cut_Beef" ID="{29646BE8-2B5A-4C6C-94FA-AAA6F5D7210C}"/>
+									</GroupingBehavior>
+								</GroupingBehaviorList>
+								<GroupingList>
+									<Grouping>
+										<SwitchRef Name="Onion" ID="{E8DA1413-DC3B-43E3-9B1B-552DAE008860}"/>
+										<ItemList>
+											<ItemRef Name="Cut_Onion" ID="{23457FE3-2226-42F0-9F99-758E3B7AA19D}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Shrimp" ID="{146E134E-475E-4F27-B4F5-B25D5F6D26E9}"/>
+										<ItemList>
+											<ItemRef Name="Peel_Shrimp" ID="{FCDF1795-2FE7-47B4-931D-8D5D556AF6FF}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Cucumber" ID="{59D50F69-E135-4100-A34F-4A630D508219}"/>
+										<ItemList>
+											<ItemRef Name="Cut_Cucumber" ID="{F507D70D-92F4-4E4E-92BF-30A501E83002}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Tomato" ID="{70E58373-24B0-4726-9C9E-DA4C4D1CF20E}"/>
+										<ItemList>
+											<ItemRef Name="Cut_Tomato" ID="{6A67EB1B-0D7F-470D-A362-0EEE614E1825}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Mushroom" ID="{DAA4B275-91AF-46F4-A89E-BBC7F6AB0112}"/>
+										<ItemList>
+											<ItemRef Name="Cut_Mushroom" ID="{4978B223-8B60-43B2-9352-9ED1AAD682E0}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Pumpkin" ID="{CD1723A8-7C36-47B0-8783-B1063AD6BD6A}"/>
+										<ItemList>
+											<ItemRef Name="Cut_Pumpkin" ID="{2AA9385F-E20F-4361-8C86-ECAFE5D9B5CF}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="CornFish" ID="{D021B8BF-A506-4E75-B287-D45F279667EF}"/>
+										<ItemList>
+											<ItemRef Name="Cut_CornFish" ID="{A9A583A9-24B2-45D8-8F66-F45ACD9F07C7}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="DoneEgg" ID="{416E00DD-AA2C-4F6D-8EAC-5E4E43054354}"/>
+										<ItemList>
+											<ItemRef Name="Cut_DoneEgg" ID="{17A2A04A-BEAA-4682-854E-D770DAE9921E}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Yam" ID="{01282AE1-F2D8-4735-B7B6-4E6BC9671F20}"/>
+										<ItemList>
+											<ItemRef Name="Cut_Yam" ID="{E4F1DD8A-5441-406D-9863-1D50E3BA7951}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Berry" ID="{381D83EC-1F4D-44E9-96A4-913FFDAC53A1}"/>
+										<ItemList>
+											<ItemRef Name="Cut_Berry" ID="{D9D12D3F-0310-499C-AD4C-83BB554C6178}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Beef" ID="{1B7CCBF1-AB3C-48AB-AC28-AB0D69DFC51F}"/>
+										<ItemList>
+											<ItemRef Name="Cut_Beef" ID="{29646BE8-2B5A-4C6C-94FA-AAA6F5D7210C}"/>
+										</ItemList>
+									</Grouping>
+								</GroupingList>
+							</GroupingInfo>
+						</SwitchContainer>
+						<SwitchContainer Name="Switch_Eat" ID="{D49C859D-3F58-4AEA-92CC-9932B6C234D1}" ShortID="996747383">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+								</Reference>
+								<Reference Name="SwitchGroupOrStateGroup">
+									<ObjectRef Name="Dish" ID="{1E446B90-46F5-4617-9C24-475A5AEC3FFB}" WorkUnitID="{C8E75DEB-126D-48FE-A6EB-A195C613D2A6}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="Eat_Crispy" ID="{2AB44E44-2D26-4BC8-A07C-FE8B844239C2}" ShortID="372984962">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="eat_crispy" ID="{855E5966-0646-4392-9FB4-F68FD76493CA}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.804861917108449"/>
+												<Property Name="LoopBegin" Type="Real64" Value="0"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>eat_crispy.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="620702071"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="eat_crispy" ID="{855E5966-0646-4392-9FB4-F68FD76493CA}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Eat_Juicy" ID="{B1AA64B2-FF89-4D5E-B1DB-709C04FAA26F}" ShortID="793890885">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="eat_juicy" ID="{E546C0D8-17EC-4BA1-8F3D-FE8870BD6E15}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="1.14213874053632"/>
+												<Property Name="LoopBegin" Type="Real64" Value="0"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>eat_juicy.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="146405436"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="eat_juicy" ID="{E546C0D8-17EC-4BA1-8F3D-FE8870BD6E15}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Eat_Normal" ID="{B3737B3B-4396-4865-937A-67E31DEDE97C}" ShortID="1045705937">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="eat_normal" ID="{9D07514B-1B70-4E40-B819-B90A9160BAFD}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="1.14638193165994"/>
+												<Property Name="LoopBegin" Type="Real64" Value="0"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>eat_normal.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="455735761"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="eat_normal" ID="{9D07514B-1B70-4E40-B819-B90A9160BAFD}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Eat_Pudding" ID="{DC61FBA5-6E51-43D2-8635-FD9043777DDE}" ShortID="649152160">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="eat_pudding" ID="{29B5CA45-5003-4406-8F34-4FB5676757A7}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.977490619959565"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>eat_pudding.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="917614019"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="eat_pudding" ID="{29B5CA45-5003-4406-8F34-4FB5676757A7}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+							<GroupingInfo>
+								<GroupingBehaviorList>
+									<GroupingBehavior>
+										<ItemRef Name="Eat_Normal" ID="{B3737B3B-4396-4865-937A-67E31DEDE97C}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Eat_Crispy" ID="{2AB44E44-2D26-4BC8-A07C-FE8B844239C2}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Eat_Pudding" ID="{DC61FBA5-6E51-43D2-8635-FD9043777DDE}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Eat_Juicy" ID="{B1AA64B2-FF89-4D5E-B1DB-709C04FAA26F}"/>
+									</GroupingBehavior>
+								</GroupingBehaviorList>
+								<GroupingList>
+									<Grouping>
+										<SwitchRef Name="Food_SeafoodRice" ID="{6F731820-8F40-4662-950F-D006A3AC358A}"/>
+										<ItemList>
+											<ItemRef Name="Eat_Normal" ID="{B3737B3B-4396-4865-937A-67E31DEDE97C}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Food_RainbowEgg" ID="{43D15A45-FA4A-4400-9329-0872C488DEE1}"/>
+										<ItemList>
+											<ItemRef Name="Eat_Normal" ID="{B3737B3B-4396-4865-937A-67E31DEDE97C}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Food_YamPie" ID="{02CE6BAF-0EA7-4F05-ADED-9F7CE91305D5}"/>
+										<ItemList>
+											<ItemRef Name="Eat_Crispy" ID="{2AB44E44-2D26-4BC8-A07C-FE8B844239C2}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Food_JellyShip" ID="{E67428C1-7687-48F1-9EE1-7D4FCECA394A}"/>
+										<ItemList>
+											<ItemRef Name="Eat_Pudding" ID="{DC61FBA5-6E51-43D2-8635-FD9043777DDE}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Food_FriedFish" ID="{42A766F1-60DA-48B5-9EF7-24E320441248}"/>
+										<ItemList>
+											<ItemRef Name="Eat_Normal" ID="{B3737B3B-4396-4865-937A-67E31DEDE97C}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Food_Soup" ID="{BD4FBCFB-3AD6-4B20-81D9-B8A01F5794FA}"/>
+										<ItemList>
+											<ItemRef Name="Eat_Juicy" ID="{B1AA64B2-FF89-4D5E-B1DB-709C04FAA26F}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Food_Hotpot" ID="{9E29E3FE-F1D3-4849-ADA5-AC6F0EAC903A}"/>
+										<ItemList>
+											<ItemRef Name="Eat_Juicy" ID="{B1AA64B2-FF89-4D5E-B1DB-709C04FAA26F}"/>
+										</ItemList>
+									</Grouping>
+								</GroupingList>
+							</GroupingInfo>
+						</SwitchContainer>
+						<PropertyContainer Name="Seasoning" ID="{DB5B20EE-5558-46BA-A2F6-8AC2726D4C85}" ShortID="758114742">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<RandomSequenceContainer Name="Random_Oil" ID="{A63AA714-D740-42EB-BD9F-57D31603196F}" ShortID="258891012">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Pour_Oil_01" ID="{169F64E5-0C16-43AC-9E04-1573B96F1A31}" ShortID="266535568">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Pour_Oil_01" ID="{121D2ED0-C19D-4283-BF15-E210B473F370}">
+													<Language>SFX</Language>
+													<AudioFile>Pour_Oil_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="14457363"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Pour_Oil_01" ID="{121D2ED0-C19D-4283-BF15-E210B473F370}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Pour_Oil_02" ID="{C927E5EA-CC4B-4588-95B0-66539FFBD6C8}" ShortID="517191238">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Pour_Oil_02" ID="{48ED8BAE-4D76-4FC1-974D-50457CEAA502}">
+													<Language>SFX</Language>
+													<AudioFile>Pour_Oil_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="672191540"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Pour_Oil_02" ID="{48ED8BAE-4D76-4FC1-974D-50457CEAA502}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Pour_Oil_03" ID="{6913D2C1-D13F-4402-87BD-9968F43BE63A}" ShortID="989552313">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Pour_Oil_03" ID="{6D88B897-0BA7-4B42-8E39-B0DDAFFC1B66}">
+													<Language>SFX</Language>
+													<AudioFile>Pour_Oil_03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="429307745"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Pour_Oil_03" ID="{6D88B897-0BA7-4B42-8E39-B0DDAFFC1B66}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="Random_Slat" ID="{2CA8198D-2E4C-46EE-971F-C6A8FCE0AE5A}" ShortID="573418533">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Pour_Salt_Sugar_01_sugar" ID="{89814D5C-8939-4800-A38B-5EA748E4B952}" ShortID="174207520">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Pour_Salt_Sugar_01_sugar" ID="{782B264E-6751-4647-9B12-A6CEF334CBC6}">
+													<Language>SFX</Language>
+													<AudioFile>Pour_Salt_Sugar_01_sugar.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="248929665"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Pour_Salt_Sugar_01_sugar" ID="{782B264E-6751-4647-9B12-A6CEF334CBC6}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Pour_Salt_Sugar_02" ID="{BFF31C7B-9D80-4D47-BCE8-8ADC2A884535}" ShortID="196721726">
+											<PropertyList>
+												<Property Name="Weight" Type="Real64">
+													<ValueList>
+														<Value>70</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Pour_Salt_Sugar_02" ID="{04254980-4D66-4402-950C-A2B43F6BE8E1}">
+													<Language>SFX</Language>
+													<AudioFile>Pour_Salt_Sugar_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="456185262"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Pour_Salt_Sugar_02" ID="{04254980-4D66-4402-950C-A2B43F6BE8E1}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Pour_Salt_Sugar_03" ID="{51714454-91F6-418B-A16D-64B9B62A56CE}" ShortID="529125761">
+											<PropertyList>
+												<Property Name="Weight" Type="Real64">
+													<ValueList>
+														<Value>70</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Pour_Salt_Sugar_03" ID="{2BF8B78D-2620-4595-85B1-F3C49D950A18}">
+													<Language>SFX</Language>
+													<AudioFile>Pour_Salt_Sugar_03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="650090837"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Pour_Salt_Sugar_03" ID="{2BF8B78D-2620-4595-85B1-F3C49D950A18}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Pour_Salt_Sugar_04" ID="{D33AB407-6AB4-4852-98FF-DB5B84C447BE}" ShortID="756969244">
+											<PropertyList>
+												<Property Name="Weight" Type="Real64">
+													<ValueList>
+														<Value>30</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Pour_Salt_Sugar_04" ID="{8F466DD8-CDAD-4465-BA07-312044461846}">
+													<PropertyList>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Pour_Salt_Sugar_04.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="593162314"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Pour_Salt_Sugar_04" ID="{8F466DD8-CDAD-4465-BA07-312044461846}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="Random_Sugar" ID="{9C734AA5-E7CF-4450-8715-AA7E81988BB0}" ShortID="1048809357">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Pour_Salt_Sugar_01_sugar" ID="{73235E41-C0BE-4572-AE3B-F245A6377CCB}" ShortID="877032295">
+											<PropertyList>
+												<Property Name="Weight" Type="Real64">
+													<ValueList>
+														<Value>80</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Pour_Salt_Sugar_01_sugar" ID="{9A19A2CE-9289-43EF-B559-BAD5F4815091}">
+													<Language>SFX</Language>
+													<AudioFile>Pour_Salt_Sugar_01_sugar.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="248929665"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Pour_Salt_Sugar_01_sugar" ID="{9A19A2CE-9289-43EF-B559-BAD5F4815091}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Pour_Salt_Sugar_02" ID="{CA426887-FD87-4ACE-8088-9A7FB80399A6}" ShortID="801613932">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Pour_Salt_Sugar_02" ID="{48DC3C36-4265-498E-8CA8-697E0B49C0A6}">
+													<Language>SFX</Language>
+													<AudioFile>Pour_Salt_Sugar_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="456185262"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Pour_Salt_Sugar_02" ID="{48DC3C36-4265-498E-8CA8-697E0B49C0A6}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Pour_Salt_Sugar_03" ID="{F42E3FD5-287D-4B3F-B905-B9AE998638DE}" ShortID="198907083">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Pour_Salt_Sugar_03" ID="{C5A82046-F1E6-486C-AE4C-9285083B1BD4}">
+													<Language>SFX</Language>
+													<AudioFile>Pour_Salt_Sugar_03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="650090837"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Pour_Salt_Sugar_03" ID="{C5A82046-F1E6-486C-AE4C-9285083B1BD4}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Pour_Salt_Sugar_04" ID="{2A955FEF-6107-469B-9AA9-D9CF4D2B71CF}" ShortID="750892128">
+											<PropertyList>
+												<Property Name="Weight" Type="Real64">
+													<ValueList>
+														<Value>40</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Pour_Salt_Sugar_04" ID="{2ADBB056-4696-49E8-A157-B335DE73024A}">
+													<Language>SFX</Language>
+													<AudioFile>Pour_Salt_Sugar_04.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="593162314"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Pour_Salt_Sugar_04" ID="{2ADBB056-4696-49E8-A157-B335DE73024A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<PropertyContainer Name="SFX_Pepper" ID="{234FF07B-AED6-4F53-8807-B8409BE4FCFB}" ShortID="558459182">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Grinder_Pepper" ID="{34C9131C-0FFF-4152-AC0B-D3BF0622C78C}" ShortID="930215426">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Grinder_Pepper" ID="{FA76736D-082C-4910-AA73-A81697DDA32B}">
+													<Language>SFX</Language>
+													<AudioFile>Grinder_Pepper.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="6530863"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Grinder_Pepper" ID="{FA76736D-082C-4910-AA73-A81697DDA32B}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</PropertyContainer>
+								<RandomSequenceContainer Name="Random_Sauce" ID="{F9792F94-08F9-4786-B2B9-FCBE3E341EB2}" ShortID="892689338">
+									<PropertyList>
+										<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Squeeze_Sauce_01" ID="{793299F7-05B1-4F92-8442-46363341587D}" ShortID="751957862">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Squeeze_Sauce_01" ID="{9CF6C504-FE9B-4A11-9120-13ED60AB5BC6}">
+													<Language>SFX</Language>
+													<AudioFile>Squeeze_Sauce_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="786212875"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Squeeze_Sauce_01" ID="{9CF6C504-FE9B-4A11-9120-13ED60AB5BC6}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Squeeze_Sauce_02" ID="{5017AC54-0D0F-4ECB-828E-BC54E3DA1DE9}" ShortID="196924210">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Squeeze_Sauce_02" ID="{F91A825F-C359-4175-A01E-761E772860F9}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.299706182201502"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Squeeze_Sauce_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="235589139"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Squeeze_Sauce_02" ID="{F91A825F-C359-4175-A01E-761E772860F9}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<PropertyContainer Name="SFX_Spice_None" ID="{41413BF4-FA92-4E26-8DCC-0B2219DC5DF7}" ShortID="864673581">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="SFX_Spice_None" ID="{7425DF4F-007E-4214-A239-931AFCEEFE14}" ShortID="376280956">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+										</Sound>
+									</ChildrenList>
+								</PropertyContainer>
+							</ChildrenList>
+						</PropertyContainer>
+					</ChildrenList>
+				</PropertyContainer>
+				<PropertyContainer Name="SFX_Outing" ID="{64854DCA-1AC5-4A39-885A-6A44AE818FB2}" ShortID="784718509">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<RandomSequenceContainer Name="Random_Footstep" ID="{B26EBCB3-29C8-4D40-8E33-5607A3F8394E}" ShortID="325968245">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+								</Reference>
+							</ReferenceList>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="Random_Dice_Roll" ID="{51EDFF77-99F8-4FDA-BDD8-C80160FACEA3}" ShortID="491563980">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+								</Reference>
+							</ReferenceList>
+						</RandomSequenceContainer>
+					</ChildrenList>
+				</PropertyContainer>
+			</ChildrenList>
+		</WorkUnit>
+	</Containers>
+</WwiseDocument>

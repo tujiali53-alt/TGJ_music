@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{3AC05089-BE33-4EA3-9E8D-2300E1314C9E}" SchemaVersion="133">
+	<Events>
+		<WorkUnit Name="SFX" ID="{3AC05089-BE33-4EA3-9E8D-2300E1314C9E}" PersistMode="Standalone">
+			<ChildrenList>
+				<Folder Name="Cooking" ID="{821B1160-543E-4641-9AB0-40F990176D4C}" ShortID="63470364">
+					<ChildrenList>
+						<Event Name="Play_Cutting" ID="{A280A2E9-BB53-412F-B1A3-263CA91ADAB4}">
+							<ChildrenList>
+								<Action Name="" ID="{84A9D73C-1DE6-4C96-BFCB-46F6613E8652}" ShortID="177700278">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Switch_Cutting" ID="{EB63A520-9422-4DA2-903F-CD21E86EC503}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Eat" ID="{9E03A9B7-DDA6-4E96-AF63-21D67358DAA2}">
+							<ChildrenList>
+								<Action Name="" ID="{6122DB33-EF8B-4E40-B2BF-B57A972CB178}" ShortID="182705121">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Switch_Eat" ID="{D49C859D-3F58-4AEA-92CC-9932B6C234D1}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Folder Name="Boliling" ID="{6373231F-58F7-4425-83B6-E058CBFFB5C7}" ShortID="792538249">
+							<ChildrenList>
+								<Event Name="Play_Boiling" ID="{DAD1AF9B-2D43-4EFB-9981-A864D8DE87AA}">
+									<ChildrenList>
+										<Action Name="" ID="{16DE0762-4EAC-463E-A6C2-0654C281A7A8}" ShortID="139853611">
+											<PropertyList>
+												<Property Name="FadeInCurve" Type="int16" Value="7"/>
+												<Property Name="FadeTime" Type="Real64" Value="3"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Random_Pot_Boil_Loop" ID="{3ED7BB01-F091-4AA2-B30C-C8FB786A852D}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Stop_Boiling" ID="{6E75FB32-8CC1-4C9C-BB24-B4C092D7C13E}">
+									<ChildrenList>
+										<Action Name="" ID="{0ABDE8AC-722C-4274-AEBD-F26BD82180FF}" ShortID="679005456">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="2"/>
+												<Property Name="FadeOutCurve" Type="int16" Value="7"/>
+												<Property Name="FadeTime" Type="Real64" Value="2"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Random_Pot_Boil_Loop" ID="{3ED7BB01-F091-4AA2-B30C-C8FB786A852D}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="Frying" ID="{F326A2F9-F273-4304-AC3B-F4DE187D11AB}" ShortID="35414747">
+							<ChildrenList>
+								<Event Name="Play_Frying" ID="{E847BDD9-9351-4599-853B-5655CB22AD6B}">
+									<ChildrenList>
+										<Action Name="" ID="{4411AED3-DB44-41E7-B272-03081ED6A2E3}" ShortID="334116012">
+											<PropertyList>
+												<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Random_Pot_Fry_Loop" ID="{AEB3DF7A-051D-44FF-B5B2-F222EA3299D9}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Stop_Frying" ID="{431B9F35-FABC-4E8D-A337-423920A320BA}">
+									<ChildrenList>
+										<Action Name="" ID="{11210122-444F-4458-979C-97AFCEFA3EE8}" ShortID="341050702">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="2"/>
+												<Property Name="FadeOutCurve" Type="int16" Value="7"/>
+												<Property Name="FadeTime" Type="Real64" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Random_Pot_Fry_Loop" ID="{AEB3DF7A-051D-44FF-B5B2-F222EA3299D9}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="Season" ID="{06A25029-B220-446C-9B0D-293F78FE79B7}" ShortID="111369924">
+							<ChildrenList>
+								<Event Name="Play_Oil" ID="{6366AFA1-906A-43A8-A45F-14735012E304}">
+									<ChildrenList>
+										<Action Name="" ID="{78612FC8-528B-4925-92C5-5BBFA680E597}" ShortID="669497793">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Random_Oil" ID="{A63AA714-D740-42EB-BD9F-57D31603196F}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Salt" ID="{EECF62A5-ACC2-4753-8771-7FF8EA8B9406}">
+									<ChildrenList>
+										<Action Name="" ID="{F2C77BFA-F141-4F69-AD2C-AC9162212299}" ShortID="556760926">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Random_Slat" ID="{2CA8198D-2E4C-46EE-971F-C6A8FCE0AE5A}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Sugar" ID="{CA9E0BBC-033A-4779-838F-D438CA3E01D1}">
+									<ChildrenList>
+										<Action Name="" ID="{F3F1F6D9-8CBE-4CA5-8ABA-30171F5657E6}" ShortID="1039817831">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Random_Sugar" ID="{9C734AA5-E7CF-4450-8715-AA7E81988BB0}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Pepper" ID="{79744100-050F-404A-B448-64C306E927F6}">
+									<ChildrenList>
+										<Action Name="" ID="{A1ED3450-1834-4202-8FA4-1D61E4385F06}" ShortID="728530846">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Grinder_Pepper" ID="{34C9131C-0FFF-4152-AC0B-D3BF0622C78C}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Sauce" ID="{41C67D43-7EED-4298-85DE-A619D4BC0F10}">
+									<ChildrenList>
+										<Action Name="" ID="{0DD3D1D6-C2C5-4F20-8DCE-DB4F8BF28FDC}" ShortID="63820670">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Random_Sauce" ID="{F9792F94-08F9-4786-B2B9-FCBE3E341EB2}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Spice" ID="{8F57384F-46E8-403F-8099-9BB832694C78}">
+									<ChildrenList>
+										<Action Name="" ID="{84FAE3BD-8753-482F-8DE2-1882924FD9ED}" ShortID="154297806">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="SFX_Spice_None" ID="{7425DF4F-007E-4214-A239-931AFCEEFE14}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Outing" ID="{A77639A3-EEC6-4983-BA80-9A88AE55999F}" ShortID="621392312">
+					<ChildrenList>
+						<Event Name="Play_Footstep" ID="{47802D9B-527E-4333-AC1B-EE03F66B2DFD}">
+							<ChildrenList>
+								<Action Name="" ID="{FD5C2B7C-0873-4885-B5EA-364BD218314E}" ShortID="88192963">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Random_Footstep" ID="{B26EBCB3-29C8-4D40-8E33-5607A3F8394E}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Dice_Roll" ID="{EE54DB64-4CCB-4594-9E28-B440B9B5D86C}">
+							<ChildrenList>
+								<Action Name="" ID="{62D35437-E96E-404D-BC12-8C27C26A701C}" ShortID="257095170">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Random_Dice_Roll" ID="{51EDFF77-99F8-4FDA-BDD8-C80160FACEA3}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

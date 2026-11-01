@@ -112,3 +112,14 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 **/[Aa]ssets/[Ss]ceneDependencyCache*
+
+# Wwise: per-user settings and cache (do not commit)
+TGJ_Audio_Wwise/.cache/
+*.wsettings
+*.validationcache
+*.prof
+
+# macOS / editor clutter
+.DS_Store
+.vscode/
+logRunSetup.txt
