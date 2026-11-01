@@ -24,6 +24,7 @@ namespace Cooking.UI
         NightOption option;
         int buffDelta;
         bool rolled;
+        NightRollResult lastRoll;
         Coroutine confirmWait;
 
         void Awake()
@@ -87,6 +88,7 @@ namespace Cooking.UI
             option = chosen;
             buffDelta = buffFaceDelta;
             rolled = false;
+            lastRoll = null;
             StopConfirmWait();
             if (scoreText != null)
                 scoreText.text = "";
@@ -140,6 +142,7 @@ namespace Cooking.UI
                 beginButton.gameObject.SetActive(false);
 
             NightRollResult result = NightCheck.Roll(option, buffDelta);
+            lastRoll = result;
             rolled = true;
             if (scoreText != null)
                 scoreText.text = result.Face.ToString();
@@ -181,11 +184,12 @@ namespace Cooking.UI
         void OnConfirm()
         {
             StopConfirmWait();
-            bool success = LastSuccess();
+            bool success = lastRoll != null && lastRoll.Success;
+            List<NightReward> rewards = lastRoll != null ? lastRoll.Rewards : null;
             if (panel != null)
                 panel.SetActive(false);
             if (dialog != null)
-                dialog.OpenResult(current, option, success);
+                dialog.OpenResult(current, option, success, rewards);
         }
 
         void StopConfirmWait()
@@ -195,11 +199,6 @@ namespace Cooking.UI
 
             StopCoroutine(confirmWait);
             confirmWait = null;
-        }
-
-        bool LastSuccess()
-        {
-            return resultText != null && resultText.text == "成功";
         }
 
         void Grant(NightReward reward)

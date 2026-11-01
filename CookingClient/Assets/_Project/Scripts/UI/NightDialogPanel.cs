@@ -17,12 +17,24 @@ namespace Cooking.UI
         [SerializeField] Button option2;
         [SerializeField] Button option3;
         [SerializeField] NightDicePanel dice;
+        [SerializeField] DiaryLanguage language = DiaryLanguage.Zh;
+        [SerializeField] GameObject playerDialogue;
+        [SerializeField] GameObject judgment;
+        [SerializeField] GameObject successRoot;
+        [SerializeField] GameObject failRoot;
+        [SerializeField] TMP_Text successBody;
+        [SerializeField] TMP_Text obtainFoodNameText;
+        [SerializeField] TMP_Text obtainFoodAmountText;
+        [SerializeField] Image obtainFoodImage;
+        [SerializeField] TMP_Text failBody;
+        [SerializeField] TMP_Text failNameText;
 
         readonly List<string> lines = new List<string>();
         readonly List<NightOption> choices = new List<NightOption>();
         Button[] buttons;
         int lineIndex;
         bool resultMode;
+        bool showingSuccess;
         bool optionsVisible;
         int buffDelta;
         NightEventDefinition current;
@@ -53,6 +65,7 @@ namespace Cooking.UI
             if (dice == null)
                 dice = GetComponent<NightDicePanel>();
 
+            ResolvePresentation();
             buttons = new[] { option1, option2, option3 };
 
             if (panel == null)
@@ -63,6 +76,16 @@ namespace Cooking.UI
                 Debug.LogError("DialogPanel 下需要有 Option1、Option2、Option3，并且带 Button。", this);
             if (dice == null)
                 Debug.LogError("InteractionPanel 上需要有 NightDicePanel。", this);
+            if (playerDialogue == null)
+                Debug.LogError("DialogPanel 下需要有 PlayerDialogue。", this);
+            if (judgment == null)
+                Debug.LogError("DialogPanel 下需要有 DialogueJudgment。", this);
+            if (successRoot == null || failRoot == null)
+                Debug.LogError("DialogueJudgment 下需要有 DeterminationSuccessful 和 CheckFailed。", this);
+            if (successBody == null || obtainFoodNameText == null || obtainFoodAmountText == null || obtainFoodImage == null)
+                Debug.LogError("DeterminationSuccessful 下需要有 bodyText、ObtainFoodNameText、obtainFoodText、ObtainFoodImage。", this);
+            if (failBody == null || failNameText == null)
+                Debug.LogError("CheckFailed 下需要有 bodyText (1) 和 ObtainFoodNameText (1)。", this);
 
             if (option1 != null)
                 option1.onClick.AddListener(ChooseFirst);
@@ -86,7 +109,7 @@ namespace Cooking.UI
         {
             current = definition;
             buffDelta = buffFaceDelta;
-            resultMode = false;
+            UsePlayerDialogue();
             choices.Clear();
             if (definition != null && definition.options != null)
             {
@@ -100,11 +123,20 @@ namespace Cooking.UI
             OpenLines(CollectLines(definition, "", NightLinePhase.Intro));
         }
 
-        public void OpenResult(NightEventDefinition definition, NightOption option, bool success)
+        public void OpenResult(
+            NightEventDefinition definition,
+            NightOption option,
+            bool success,
+            IList<NightReward> rewards)
         {
             current = definition;
-            resultMode = true;
             choices.Clear();
+            UseJudgment(success);
+            if (success)
+                FillSuccess(rewards);
+            else
+                FillFail();
+
             NightLinePhase phase = success ? NightLinePhase.Success : NightLinePhase.Fail;
             string optionId = option.optionId;
             OpenLines(CollectLines(definition, optionId, phase));
@@ -138,13 +170,6 @@ namespace Cooking.UI
                     lines.Add(source[i]);
             }
 
-            if (lines.Count == 0 && resultMode)
-            {
-                if (panel != null)
-                    panel.SetActive(false);
-                return;
-            }
-
             if (panel != null)
             {
                 panel.SetActive(true);
@@ -154,10 +179,9 @@ namespace Cooking.UI
             lineIndex = 0;
             optionsVisible = false;
             HideOptions();
-            if (bodyText != null)
-                bodyText.text = lines.Count > 0 ? lines[0] : "";
+            WriteLine();
 
-            if (lines.Count == 0)
+            if (!resultMode && lines.Count == 0)
                 ShowOptions();
         }
 
@@ -166,8 +190,7 @@ namespace Cooking.UI
             if (lineIndex < lines.Count - 1)
             {
                 lineIndex++;
-                if (bodyText != null)
-                    bodyText.text = lines[lineIndex];
+                WriteLine();
                 return;
             }
 
@@ -204,7 +227,10 @@ namespace Cooking.UI
                 if (label != null)
                     label.text = option.displayName;
                 if (reward != null)
-                    reward.text = IsRevealed(option.optionId) && dice != null ? dice.Describe(option) : "";
+                {
+                    reward.gameObject.SetActive(true);
+                    reward.text = SuccessPercent(option);
+                }
             }
         }
 
@@ -254,15 +280,6 @@ namespace Cooking.UI
 
             if (dice != null)
                 dice.Open(current, option, buffDelta);
-        }
-
-        static bool IsRevealed(string optionId)
-        {
-            GameRoot root = GameRoot.Instance;
-            if (root == null || root.Session == null || root.Session.RevealedRewardOptionIds == null)
-                return false;
-
-            return root.Session.RevealedRewardOptionIds.Contains(optionId);
         }
 
         string BlockReason(NightOption option)
@@ -342,6 +359,185 @@ namespace Cooking.UI
             }
 
             return null;
+        }
+
+        void ResolvePresentation()
+        {
+            if (panel == null)
+                return;
+
+            if (playerDialogue == null)
+            {
+                Transform found = panel.transform.Find("PlayerDialogue");
+                if (found != null)
+                    playerDialogue = found.gameObject;
+            }
+
+            if (judgment == null)
+            {
+                Transform found = panel.transform.Find("DialogueJudgment");
+                if (found != null)
+                    judgment = found.gameObject;
+            }
+
+            Transform success = judgment != null ? judgment.transform.Find("DeterminationSuccessful") : null;
+            Transform failed = judgment != null ? judgment.transform.Find("CheckFailed") : null;
+            if (successRoot == null && success != null)
+                successRoot = success.gameObject;
+            if (failRoot == null && failed != null)
+                failRoot = failed.gameObject;
+
+            if (successBody == null && success != null)
+                successBody = FindChildText(success, "bodyText");
+            if (obtainFoodNameText == null && success != null)
+                obtainFoodNameText = FindChildText(success, "ObtainFoodNameText");
+            if (obtainFoodAmountText == null && success != null)
+                obtainFoodAmountText = FindChildText(success, "obtainFoodText");
+            if (obtainFoodImage == null && success != null)
+            {
+                Transform found = success.Find("ObtainFoodImage");
+                if (found != null)
+                    obtainFoodImage = found.GetComponent<Image>();
+            }
+
+            if (failBody == null && failed != null)
+                failBody = FindChildText(failed, "bodyText (1)");
+            if (failNameText == null && failed != null)
+                failNameText = FindChildText(failed, "ObtainFoodNameText (1)");
+        }
+
+        void UsePlayerDialogue()
+        {
+            resultMode = false;
+            showingSuccess = false;
+            if (playerDialogue != null)
+                playerDialogue.SetActive(true);
+            if (bodyText != null)
+                bodyText.gameObject.SetActive(true);
+            if (judgment != null)
+                judgment.SetActive(false);
+        }
+
+        void UseJudgment(bool success)
+        {
+            resultMode = true;
+            showingSuccess = success;
+            if (playerDialogue != null)
+                playerDialogue.SetActive(false);
+            if (bodyText != null)
+                bodyText.gameObject.SetActive(false);
+            if (judgment != null)
+                judgment.SetActive(true);
+            if (successRoot != null)
+                successRoot.SetActive(success);
+            if (failRoot != null)
+                failRoot.SetActive(!success);
+        }
+
+        void WriteLine()
+        {
+            TMP_Text target = resultMode ? (showingSuccess ? successBody : failBody) : bodyText;
+            if (target == null)
+                return;
+
+            target.text = lineIndex >= 0 && lineIndex < lines.Count ? lines[lineIndex] : "";
+        }
+
+        void FillSuccess(IList<NightReward> rewards)
+        {
+            bool english = language == DiaryLanguage.En;
+            string nameJoin = english ? ", " : "、";
+            string amountJoin = english ? ", " : "，";
+            string names = "";
+            string amounts = "";
+            Sprite sprite = null;
+            IngredientDefinition[] known = dice != null ? dice.Definitions : null;
+
+            if (rewards != null)
+            {
+                for (int i = 0; i < rewards.Count; i++)
+                {
+                    NightReward reward = rewards[i];
+                    if (string.IsNullOrEmpty(reward.ingredientId) || reward.count <= 0)
+                        continue;
+
+                    IngredientDefinition definition = FindKnown(known, reward.ingredientId);
+                    string name = IngredientDetailText.DisplayName(definition, language);
+                    if (string.IsNullOrEmpty(name))
+                        name = reward.ingredientId;
+                    if (sprite == null && definition != null && definition.spriteWhole != null)
+                        sprite = definition.spriteWhole;
+
+                    names = Join(names, name, nameJoin);
+                    string piece = english ? name + " × " + reward.count : name + "×" + reward.count;
+                    amounts = Join(amounts, piece, amountJoin);
+                }
+            }
+
+            if (obtainFoodImage != null)
+            {
+                obtainFoodImage.sprite = sprite;
+                obtainFoodImage.color = Color.white;
+            }
+
+            if (obtainFoodNameText != null)
+            {
+                obtainFoodNameText.text = names;
+                ApplyGlowOutline(obtainFoodNameText);
+            }
+
+            if (obtainFoodAmountText != null)
+                obtainFoodAmountText.text = amounts;
+        }
+
+        void FillFail()
+        {
+            if (failNameText == null)
+                return;
+
+            failNameText.text = language == DiaryLanguage.En
+                ? "Came away empty-handed"
+                : "一无所获";
+            ApplyGlowOutline(failNameText);
+        }
+
+        static void ApplyGlowOutline(TMP_Text text)
+        {
+            if (text == null)
+                return;
+
+            Material material = text.fontSharedMaterial;
+            if (material == null)
+                return;
+
+            material.EnableKeyword("OUTLINE_ON");
+            material.EnableKeyword("UNDERLAY_ON");
+            material.SetFloat("_OutlineWidth", 0.2f);
+            material.SetFloat("_OutlineSoftness", 0.28f);
+            material.SetColor("_OutlineColor", new Color(1f, 0.9254902f, 0.6666667f, 1f));
+            material.SetColor("_UnderlayColor", new Color(1f, 0.78f, 0.28f, 0.9f));
+            material.SetFloat("_UnderlayOffsetX", 0f);
+            material.SetFloat("_UnderlayOffsetY", 0f);
+            material.SetFloat("_UnderlayDilate", 0.55f);
+            material.SetFloat("_UnderlaySoftness", 0.5f);
+            if (text.isActiveAndEnabled)
+                text.UpdateMeshPadding();
+        }
+
+        string SuccessPercent(NightOption option)
+        {
+            int faces = NightCheck.EffectiveFaces(option.successFaces, buffDelta);
+            int percent = Mathf.RoundToInt(faces * 100f / 6f);
+            return "成功概率" + percent + "%";
+        }
+
+        static string Join(string left, string right, string separator)
+        {
+            if (string.IsNullOrEmpty(left))
+                return right;
+            if (string.IsNullOrEmpty(right))
+                return left;
+            return left + separator + right;
         }
 
         Button FindOption(string name)
