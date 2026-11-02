@@ -192,6 +192,35 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Plqy_Ambience" ID="{020431C9-D934-4C85-9E4A-6EF4F6730E5B}">
+							<ChildrenList>
+								<Action Name="" ID="{D214B66F-332B-4D53-A3B5-5F8BFDCDBCDF}" ShortID="35918739">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ambience" ID="{D86483AA-5DFA-4F07-8FF4-BE044ED4E95D}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_Ambience" ID="{EE93B1C7-5F0A-4FDD-B4DA-E03E5080249E}">
+							<ChildrenList>
+								<Action Name="" ID="{B0E98838-4927-40C4-8193-2593EDF04A2B}" ShortID="64904609">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ambience" ID="{D86483AA-5DFA-4F07-8FF4-BE044ED4E95D}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>

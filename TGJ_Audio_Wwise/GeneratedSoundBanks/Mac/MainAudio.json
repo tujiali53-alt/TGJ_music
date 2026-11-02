@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{95648A2A-8E9F-4C9B-8322-80C9450EF305}",
     "Language": "SFX",
-    "Hash": "{6F5D8ABC-CD1E-FF0B-89FD-43BBC03BB62A}",
+    "Hash": "{FDBD7BE8-3A64-E476-2DF8-F4270DBDFEE9}",
     "ObjectPath": "\\SoundBanks\\MyUnit\\MainAudio",
     "ShortName": "MainAudio",
     "Path": "MainAudio.bnk",
@@ -38,6 +38,38 @@
       "Location": "Memory",
       "ShortName": "Pour_Oil_01.wav",
       "CachePath": "A2/{A217062D-6748-FEB8-5CCA-929BF1E49C3C}.wem"
+     },
+     {
+      "Id": "23854224",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Footsteps_06.wav",
+      "CachePath": "33/{335DF52B-AB68-76FD-5361-99A83CE45843}.wem"
+     },
+     {
+      "Id": "37087844",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Footsteps_01.wav",
+      "CachePath": "B3/{B3F77397-5E50-355B-59BE-55AC29F8ED78}.wem"
+     },
+     {
+      "Id": "47054378",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Cricket_04.wav",
+      "CachePath": "41/{41326EB8-A51E-5BB6-B97C-F761F7F5F716}.wem"
+     },
+     {
+      "Id": "63820288",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Ambience_Night_LP.wav",
+      "CachePath": "00/{00ABF03C-A070-D6E8-ADE2-8515BB2DE53B}.wem"
      },
      {
       "Id": "80476432",
@@ -86,6 +118,14 @@
       "Location": "Memory",
       "ShortName": "Pour_Salt_Sugar_01_sugar.wav",
       "CachePath": "F2/{F2E72408-75BB-B5EF-A2D3-E0107EE7726D}.wem"
+     },
+     {
+      "Id": "273339741",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Cricket_02.wav",
+      "CachePath": "FB/{FBA0C073-42E4-A6E0-98C8-6873792C5DF9}.wem"
      },
      {
       "Id": "283535523",
@@ -176,12 +216,44 @@
       "CachePath": "A5/{A559E0A3-5EE1-BB5C-1FF2-F659077A126F}.wem"
      },
      {
+      "Id": "534508720",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Footsteps_04.wav",
+      "CachePath": "8B/{8BDE37C1-6637-DD8F-F287-918ADA4F4103}.wem"
+     },
+     {
+      "Id": "583561962",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Cricket_05.wav",
+      "CachePath": "A8/{A8585535-1B5B-493C-C52C-D5CB9B7F89D9}.wem"
+     },
+     {
       "Id": "593162314",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Pour_Salt_Sugar_04.wav",
       "CachePath": "E2/{E247DBDF-4085-D2D9-2C5F-893EDCD210E6}.wem"
+     },
+     {
+      "Id": "598483150",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Footsteps_02.wav",
+      "CachePath": "8B/{8B0A7976-DA53-C6D9-51E6-BBA52B21B6B0}.wem"
+     },
+     {
+      "Id": "618929528",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Cricket_07.wav",
+      "CachePath": "E4/{E48E3EA9-92D7-3FF2-4DE3-E9875C4EF768}.wem"
      },
      {
       "Id": "620702071",
@@ -232,6 +304,14 @@
       "CachePath": "47/{478BA96D-627D-22B5-8347-1283DD83D328}.wem"
      },
      {
+      "Id": "715819514",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Footsteps_03.wav",
+      "CachePath": "90/{90B2D884-BEB4-1651-AD46-6FF7929AFD6A}.wem"
+     },
+     {
       "Id": "772437309",
       "Language": "SFX",
       "Streaming": "false",
@@ -254,6 +334,14 @@
       "Location": "Memory",
       "ShortName": "BGM_v1_bpm83_44.wav",
       "CachePath": "11/{112BEB95-5C76-58AF-D337-F482E3FA8569}.wem"
+     },
+     {
+      "Id": "875078922",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Cricket_06.wav",
+      "CachePath": "FB/{FBD932AA-90C3-FF9C-E300-7D5F369E920F}.wem"
      },
      {
       "Id": "902235593",
@@ -288,14 +376,50 @@
       "CachePath": "54/{54DB86A0-7B6D-C090-A383-E644813AB369}.wem"
      },
      {
+      "Id": "979345559",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Cricket_03.wav",
+      "CachePath": "D8/{D8051A5C-1887-374F-115F-E8EAA1EF9D1F}.wem"
+     },
+     {
+      "Id": "982619370",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Cricket_01.wav",
+      "CachePath": "F7/{F7997EE8-3997-6DE9-F298-2C7EC7655DC7}.wem"
+     },
+     {
       "Id": "1006055603",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "UI_Cancel_synth.wav",
       "CachePath": "3A/{3A8D6BEF-D9A1-1DEE-10E4-6B0083F0A070}.wem"
+     },
+     {
+      "Id": "1055378720",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Footsteps_05.wav",
+      "CachePath": "7D/{7D1A4023-6AE4-727A-5F30-55718668139B}.wem"
      }
     ],
+    "Plugins": {
+     "Custom": [
+      {
+       "Id": "1007474679",
+       "Name": "Silence",
+       "ObjectPath": "\\Containers\\MyUnit\\SFX\\SFX_Outing\\Ambience\\Cricket\\Silence_10s\\Silence",
+       "GUID": "{EFAF1649-A70E-442F-8E52-2B009DE0AFCE}",
+       "LibName": "Wwise Silence",
+       "LibId": "6619138"
+      }
+     ]
+    },
     "Events": [
      {
       "Id": "3126765036",
@@ -845,8 +969,28 @@
       "ObjectPath": "\\Events\\SFX\\Outing\\Play_Footstep",
       "GUID": "{47802D9B-527E-4333-AC1B-EE03F66B2DFD}",
       "DurationType": "OneShot",
-      "DurationMin": "0",
-      "DurationMax": "0"
+      "DurationMin": "0.23764077",
+      "DurationMax": "0.3003847",
+      "MediaRefs": [
+       {
+        "Id": "23854224"
+       },
+       {
+        "Id": "37087844"
+       },
+       {
+        "Id": "534508720"
+       },
+       {
+        "Id": "598483150"
+       },
+       {
+        "Id": "715819514"
+       },
+       {
+        "Id": "1055378720"
+       }
+      ]
      },
      {
       "Id": "775664385",
@@ -1002,6 +1146,56 @@
       "Name": "Play_UI_PageTurn",
       "ObjectPath": "\\Events\\UI\\Play_UI_PageTurn",
       "GUID": "{48326C49-1D98-4359-BFE2-83555949A733}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
+      "Id": "4100364718",
+      "Name": "Plqy_Ambience",
+      "ObjectPath": "\\Events\\SFX\\Outing\\Plqy_Ambience",
+      "GUID": "{020431C9-D934-4C85-9E4A-6EF4F6730E5B}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "47054378"
+       },
+       {
+        "Id": "63820288"
+       },
+       {
+        "Id": "273339741"
+       },
+       {
+        "Id": "583561962"
+       },
+       {
+        "Id": "618929528"
+       },
+       {
+        "Id": "875078922"
+       },
+       {
+        "Id": "979345559"
+       },
+       {
+        "Id": "982619370"
+       }
+      ],
+      "PluginRefs": {
+       "Custom": [
+        {
+         "Id": "1007474679"
+        }
+       ]
+      }
+     },
+     {
+      "Id": "2477713992",
+      "Name": "Stop_Ambience",
+      "ObjectPath": "\\Events\\SFX\\Outing\\Stop_Ambience",
+      "GUID": "{EE93B1C7-5F0A-4FDD-B4DA-E03E5080249E}",
       "MaxAttenuation": "0",
       "DurationType": "OneShot",
       "DurationMin": "0",
@@ -1232,6 +1426,6 @@
     ]
    }
   ],
-  "FileHash": "{952BB4FB-2675-61B2-084D-93B1BADB9E1F}"
+  "FileHash": "{D3F39FF1-F298-C7FD-7821-F008BA447DD5}"
  }
 }

@@ -1188,6 +1188,48 @@
 					</ReferenceList>
 					<ChildrenList>
 						<RandomSequenceContainer Name="Random_Footstep" ID="{B26EBCB3-29C8-4D40-8E33-5607A3F8394E}" ShortID="325968245">
+							<PropertyList>
+								<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
+								<Property Name="MaxSoundPerInstance" Type="int16">
+									<ValueList>
+										<Value>2</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{B69A4DCA-A003-4F87-8919-205ECDCF94CE}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="50"/>
+													<Property Name="Min" Type="Real64" Value="-50"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
+								<Property Name="UseMaxSoundPerInstance" Type="bool">
+									<ValueList>
+										<Value>True</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-3</Value>
+									</ValueList>
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{CD794CAA-2BCA-457E-8397-323BD022B21E}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Min" Type="Real64" Value="-0.5"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
@@ -1196,6 +1238,140 @@
 									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
 								</Reference>
 							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="Footsteps_01" ID="{CBBFB046-3D18-4483-9582-33D4FB270BAB}" ShortID="270155869">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Footsteps_01" ID="{62B8739E-3CF3-40C6-98C9-5387733DD33A}">
+											<Language>SFX</Language>
+											<AudioFile>Footsteps_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="37087844"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Footsteps_01" ID="{62B8739E-3CF3-40C6-98C9-5387733DD33A}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Footsteps_02" ID="{771D8078-26FA-413F-8272-1E6A16832377}" ShortID="993707236">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Footsteps_02" ID="{4D75CCDE-6751-495B-BAE6-C34CFC8B220F}">
+											<Language>SFX</Language>
+											<AudioFile>Footsteps_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="598483150"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Footsteps_02" ID="{4D75CCDE-6751-495B-BAE6-C34CFC8B220F}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Footsteps_03" ID="{934925BD-C9B3-4371-8B8C-D9499EDCE87A}" ShortID="948300213">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Footsteps_03" ID="{158B84BC-0F74-439F-A736-F65680FD2961}">
+											<Language>SFX</Language>
+											<AudioFile>Footsteps_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="715819514"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Footsteps_03" ID="{158B84BC-0F74-439F-A736-F65680FD2961}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Footsteps_04" ID="{AE64E9FF-5312-427A-A3B3-4B952E9F3344}" ShortID="946576076">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Footsteps_04" ID="{A6E128ED-12E6-4EE4-A093-12D12C185B19}">
+											<Language>SFX</Language>
+											<AudioFile>Footsteps_04.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="534508720"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Footsteps_04" ID="{A6E128ED-12E6-4EE4-A093-12D12C185B19}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Footsteps_05" ID="{08727B7C-F1B4-4C44-86A0-D4740FF41956}" ShortID="738049689">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Footsteps_05" ID="{1AED3CAC-8162-40E8-91F3-F9C07CF22605}">
+											<Language>SFX</Language>
+											<AudioFile>Footsteps_05.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1055378720"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Footsteps_05" ID="{1AED3CAC-8162-40E8-91F3-F9C07CF22605}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Footsteps_06" ID="{37A44E06-5F5E-4673-9B33-2999C97CAA84}" ShortID="1062818158">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Footsteps_06" ID="{49E0518F-DBC5-43FF-83AD-BBB5616AE7D7}">
+											<Language>SFX</Language>
+											<AudioFile>Footsteps_06.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="23854224"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Footsteps_06" ID="{49E0518F-DBC5-43FF-83AD-BBB5616AE7D7}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="Random_Dice_Roll" ID="{51EDFF77-99F8-4FDA-BDD8-C80160FACEA3}" ShortID="491563980">
 							<ReferenceList>
@@ -1207,6 +1383,294 @@
 								</Reference>
 							</ReferenceList>
 						</RandomSequenceContainer>
+						<BlendContainer Name="Ambience" ID="{D86483AA-5DFA-4F07-8FF4-BE044ED4E95D}" ShortID="106257424">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<RandomSequenceContainer Name="Cricket" ID="{768A06A0-FFC6-434D-8EFD-7CD012E23860}" ShortID="640122157">
+									<PropertyList>
+										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+										<Property Name="RandomOrSequence" Type="int16" Value="0"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<RandomSequenceContainer Name="Cricket" ID="{EF2E12AD-1A3E-4565-8F53-C847B27F0EC1}" ShortID="547002881">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{24420D11-7214-4260-92C6-21DF513966FE}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="50"/>
+																	<Property Name="Min" Type="Real64" Value="-50"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="3"/>
+												<Property Name="Volume" Type="Real64">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{BAA3D2F2-1EFB-452D-9856-B89D8D7C255F}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Min" Type="Real64" Value="-1"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="Cricket_01" ID="{14E0CA25-468A-4BD9-AAD8-1C44AE9723BA}" ShortID="306315493">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Cricket_01" ID="{B56CA127-AF07-40EC-B441-225091853A72}">
+															<Language>SFX</Language>
+															<AudioFile>Cricket_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="982619370"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Cricket_01" ID="{B56CA127-AF07-40EC-B441-225091853A72}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Cricket_02" ID="{DFDF118A-BD24-4DEB-8C1A-88F98239B264}" ShortID="524552168">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Cricket_02" ID="{DCE78C03-B793-4FFA-9111-1244BD767BB8}">
+															<Language>SFX</Language>
+															<AudioFile>Cricket_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="273339741"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Cricket_02" ID="{DCE78C03-B793-4FFA-9111-1244BD767BB8}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Cricket_03" ID="{FE4BC423-34C9-4C46-AD80-09877D745B4C}" ShortID="779693344">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Cricket_03" ID="{E97A1FCD-6821-4B03-B390-0B738F00065A}">
+															<Language>SFX</Language>
+															<AudioFile>Cricket_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="979345559"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Cricket_03" ID="{E97A1FCD-6821-4B03-B390-0B738F00065A}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Cricket_04" ID="{78FC1E8F-6521-4249-A3DF-C8C5E71A299A}" ShortID="233022820">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Cricket_04" ID="{7205CD80-6674-499E-B59D-3A9F75D39550}">
+															<Language>SFX</Language>
+															<AudioFile>Cricket_04.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="47054378"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Cricket_04" ID="{7205CD80-6674-499E-B59D-3A9F75D39550}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Cricket_05" ID="{96BDD25F-101D-4C1A-8A48-BABCEF4DC4A2}" ShortID="483352644">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Cricket_05" ID="{5CBB8E47-5A3D-4CA4-B3FC-9F313C5C4F81}">
+															<Language>SFX</Language>
+															<AudioFile>Cricket_05.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="583561962"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Cricket_05" ID="{5CBB8E47-5A3D-4CA4-B3FC-9F313C5C4F81}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Cricket_06" ID="{A1BE0273-3F40-44D2-89DB-E533045D885B}" ShortID="1013026285">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Cricket_06" ID="{B949B033-6B04-4409-94D5-801317CF0AEE}">
+															<Language>SFX</Language>
+															<AudioFile>Cricket_06.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="875078922"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Cricket_06" ID="{B949B033-6B04-4409-94D5-801317CF0AEE}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Cricket_07" ID="{322A4089-7E9D-4913-84AB-476CEA2A6DF4}" ShortID="591131885">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Cricket_07" ID="{981EE5D5-ED01-4E8D-8AD3-86E102D0FB66}">
+															<Language>SFX</Language>
+															<AudioFile>Cricket_07.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="618929528"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Cricket_07" ID="{981EE5D5-ED01-4E8D-8AD3-86E102D0FB66}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<Sound Name="Silence_10s" ID="{0239E60F-5CAF-427C-8D85-F987BF94D8E0}" ShortID="927903556">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<SourcePlugin Name="Silence" ID="{EFAF1649-A70E-442F-8E52-2B009DE0AFCE}" ShortID="1007474679" PluginName="Wwise Silence" CompanyID="0" PluginID="101">
+													<PropertyList>
+														<Property Name="Length" Type="Real32" Value="20"/>
+														<Property Name="LengthMax" Type="Real32" Value="10"/>
+														<Property Name="LengthMin" Type="Real32" Value="-10"/>
+													</PropertyList>
+													<Language>SFX</Language>
+												</SourcePlugin>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Silence" ID="{EFAF1649-A70E-442F-8E52-2B009DE0AFCE}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Playlist">
+											<PluginInnerObject Name="" ID="{04730B8C-7776-4673-BA6D-AE0EE0DA3EF4}" PluginName="PlaylistSlot" CompanyID="0" PluginID="86">
+												<ReferenceList>
+													<Reference Name="PlaylistObject">
+														<ObjectRef Name="Silence_10s" ID="{0239E60F-5CAF-427C-8D85-F987BF94D8E0}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+													</Reference>
+												</ReferenceList>
+											</PluginInnerObject>
+											<PluginInnerObject Name="" ID="{BEFA9565-D15C-438A-98E5-78EC1C2D5271}" PluginName="PlaylistSlot" CompanyID="0" PluginID="86">
+												<ReferenceList>
+													<Reference Name="PlaylistObject">
+														<ObjectRef Name="Cricket" ID="{EF2E12AD-1A3E-4565-8F53-C847B27F0EC1}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
+													</Reference>
+												</ReferenceList>
+											</PluginInnerObject>
+										</ObjectList>
+									</ObjectLists>
+								</RandomSequenceContainer>
+								<Sound Name="Ambience_Night_LP" ID="{75192B0A-AB73-4DDE-B79E-CF56017259B3}" ShortID="605998161">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Ambience_Night_LP" ID="{14F45A10-D223-4CA0-8AB7-902382C6F61E}">
+											<Language>SFX</Language>
+											<AudioFile>Ambience_Night_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="63820288"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Ambience_Night_LP" ID="{14F45A10-D223-4CA0-8AB7-902382C6F61E}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</BlendContainer>
 					</ChildrenList>
 				</PropertyContainer>
 			</ChildrenList>

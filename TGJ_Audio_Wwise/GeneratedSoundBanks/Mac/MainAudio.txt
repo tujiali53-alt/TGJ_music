@@ -10,6 +10,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	1873669494	Play_Cutting			\SFX\Cooking\Play_Cutting	
 	2016713342	Stop_Boiling			\SFX\Cooking\Boliling\Stop_Boiling	
 	2244506081	Play_UI_Cancel			\UI\Play_UI_Cancel	
+	2477713992	Stop_Ambience			\SFX\Outing\Stop_Ambience	
 	2489068396	Play_Eat			\SFX\Cooking\Play_Eat	
 	2718239607	Stop_Frying			\SFX\Cooking\Frying\Stop_Frying	
 	2775506426	Play_Pepper			\SFX\Cooking\Season\Play_Pepper	
@@ -18,6 +19,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3281736991	Play_Sauce			\SFX\Cooking\Season\Play_Sauce	
 	3475817107	Play_Dice_Roll			\SFX\Outing\Play_Dice_Roll	
 	3626504988	Play_Boiling			\SFX\Cooking\Boliling\Play_Boiling	
+	4100364718	Plqy_Ambience			\SFX\Outing\Plqy_Ambience	
 
 Switch Group	ID	Name			Wwise Object Path	Notes
 	1746288848	Ingredient			\MyUnit\Ingredient	
@@ -57,40 +59,57 @@ State	ID	Name	State Group			Notes
 	1011622525	Night	Music_GamePhase			
 	2607556080	Menu	Music_GamePhase			
 
+Source plug-ins	ID	Name	Type		Wwise Object Path	Notes
+	1007474679	Silence	Wwise Silence		\Containers\MyUnit\SFX\SFX_Outing\Ambience\Cricket\Silence_10s\Silence	
+
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	3976936	BGM_v2_bpm83_44	.cache\3A\{3AF5968C-A577-E38E-9B13-02E4E70DD499}.wem		\Containers\MyUnit\Music\Switch_BGM\BGM_Day_V2\BGM_v2_bpm83_44\BGM_v2_bpm83_44		12769252
 	6530863	Grinder_Pepper	.cache\3F\{3F687B03-1FA6-245E-F098-F070EC3BDECD}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\SFX_Pepper\Grinder_Pepper		281964
 	14457363	Pour_Oil_01	.cache\A2\{A217062D-6748-FEB8-5CCA-929BF1E49C3C}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Oil\Pour_Oil_01		223160
+	23854224	Footsteps_06	.cache\33\{335DF52B-AB68-76FD-5361-99A83CE45843}.wem		\Containers\MyUnit\SFX\SFX_Outing\Random_Footstep\Footsteps_06		56128
+	37087844	Footsteps_01	.cache\B3\{B3F77397-5E50-355B-59BE-55AC29F8ED78}.wem		\Containers\MyUnit\SFX\SFX_Outing\Random_Footstep\Footsteps_01		55344
+	47054378	Cricket_04	.cache\41\{41326EB8-A51E-5BB6-B97C-F761F7F5F716}.wem		\Containers\MyUnit\SFX\SFX_Outing\Ambience\Cricket\Cricket\Cricket_04		1585040
+	63820288	Ambience_Night_LP	.cache\00\{00ABF03C-A070-D6E8-ADE2-8515BB2DE53B}.wem		\Containers\MyUnit\SFX\SFX_Outing\Ambience\Ambience_Night_LP		14571760
 	80476432	Cut_Tomato	.cache\9A\{9AE4B2AB-F87B-95BC-573B-4B2A8CBC8D2E}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Tomato		276932
 	108766747	Peel_Shrimp	.cache\89\{894CC11F-F544-F3E1-BF36-E47318C5955F}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Peel_Shrimp		318968
 	146405436	Eat_Juicy	.cache\DF\{DF22ADD6-CB06-B34E-7B38-C24FFA4F6DD4}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Eat\Eat_Juicy		512352
 	217892742	BGM_v3_bpm83_44	.cache\4A\{4A5C36D0-9886-4809-61FD-A90DCE1FCB73}.wem		\Containers\MyUnit\Music\Switch_BGM\BGM_Day_V3\BGM_v3_bpm83_44\BGM_v3_bpm83_44		12769252
 	235589139	Squeeze_Sauce_02	.cache\94\{94064B67-25A2-B806-0E57-8B465CD18748}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Sauce\Squeeze_Sauce_02		144812
 	248929665	Pour_Salt_Sugar_01_sugar	.cache\F2\{F2E72408-75BB-B5EF-A2D3-E0107EE7726D}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Sugar\Pour_Salt_Sugar_01_sugar		264248
+	273339741	Cricket_02	.cache\FB\{FBA0C073-42E4-A6E0-98C8-6873792C5DF9}.wem		\Containers\MyUnit\SFX\SFX_Outing\Ambience\Cricket\Cricket\Cricket_02		819068
 	283535523	Cut_Cucumber	.cache\99\{993C764C-C4BB-15AE-0914-EBC103A7B6FB}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Cucumber		310640
 	294930407	frying_lp_01	.cache\61\{612841B2-35BC-8C30-2E6E-90EC35CDC274}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Pot\Random_Pot_Fry_Loop\frying_lp_01		921772
 	336913223	Cut_Onion	.cache\23\{23D4AB08-EE5B-4029-2CD4-1F353B45E199}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Onion		384096
 	341525343	Cut_Pumpkin	.cache\E3\{E3329CAD-A422-D73B-DF5D-7BFE64DF591C}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Pumpkin		478804
 	384185100	Cut_CornFish	.cache\34\{34DFB3C3-09D3-2E79-8DB6-913986414237}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_CornFish		384096
-	420747195	UI_Click	.cache\18\{189A5522-6CC0-EE22-CBE8-258E282DCF19}.wem		\Containers\MyUnit\UI_Button\UI_Click		123692
+	420747195	UI_Click	.cache\18\{189A5522-6CC0-EE22-CBE8-258E282DCF19}.wem		\Containers\MyUnit\UI\UI_Button\UI_Click		123692
 	429307745	Pour_Oil_03	.cache\0F\{0F1A4335-26DB-94F8-66E6-A84D5DADCFD4}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Oil\Pour_Oil_03		244884
 	455735761	Eat_Normal	.cache\AB\{AB6AD8EE-5FA5-1150-038B-C599B637A7CE}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Eat\Eat_Normal		474240
 	456185262	Pour_Salt_Sugar_02	.cache\E2\{E2DFDA5E-3B51-0E3B-09DC-7637C8F16708}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Slat\Pour_Salt_Sugar_02		162552
 	461425161	boiling_lp_01	.cache\FD\{FD62CFCB-625E-7365-11CD-3F8DED18B5CB}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Pot\Random_Pot_Boil_Loop\boiling_lp_01		1165880
 	467365878	Cut_DoneEgg	.cache\A5\{A559E0A3-5EE1-BB5C-1FF2-F659077A126F}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_DoneEgg		384096
+	534508720	Footsteps_04	.cache\8B\{8BDE37C1-6637-DD8F-F287-918ADA4F4103}.wem		\Containers\MyUnit\SFX\SFX_Outing\Random_Footstep\Footsteps_04		54256
+	583561962	Cricket_05	.cache\A8\{A8585535-1B5B-493C-C52C-D5CB9B7F89D9}.wem		\Containers\MyUnit\SFX\SFX_Outing\Ambience\Cricket\Cricket\Cricket_05		852788
 	593162314	Pour_Salt_Sugar_04	.cache\E2\{E247DBDF-4085-D2D9-2C5F-893EDCD210E6}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Slat\Pour_Salt_Sugar_04		111476
+	598483150	Footsteps_02	.cache\8B\{8B0A7976-DA53-C6D9-51E6-BBA52B21B6B0}.wem		\Containers\MyUnit\SFX\SFX_Outing\Random_Footstep\Footsteps_02		47060
+	618929528	Cricket_07	.cache\E4\{E48E3EA9-92D7-3FF2-4DE3-E9875C4EF768}.wem		\Containers\MyUnit\SFX\SFX_Outing\Ambience\Cricket\Cricket\Cricket_07		1302516
 	620702071	Eat_Crispy	.cache\6A\{6A4965DC-89D2-2F48-6D4F-85F73EBFD002}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Eat\Eat_Crispy		428872
 	650090837	Pour_Salt_Sugar_03	.cache\91\{91CCB6A7-AC22-F794-7897-8E90C95F3372}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Slat\Pour_Salt_Sugar_03		222616
 	672191540	Pour_Oil_02	.cache\0E\{0E7384D6-CB3C-1FBE-F2C2-8E215030847D}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Oil\Pour_Oil_02		261508
 	686269563	Cut_Berry	.cache\91\{91960437-E4DE-0D0B-98A3-21BC6AFCB6C0}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Berry		384096
 	690360993	BGM_night_bpm83_44	.cache\57\{5786B1F3-CC72-2864-2609-A96612D8A603}.wem		\Containers\MyUnit\Music\Switch_BGM\Menu_None\BGM_night_bpm83_44\BGM_night_bpm83_44		12769252
 	702267986	frying_lp_02	.cache\47\{478BA96D-627D-22B5-8347-1283DD83D328}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Pot\Random_Pot_Fry_Loop\frying_lp_02		916100
+	715819514	Footsteps_03	.cache\90\{90B2D884-BEB4-1651-AD46-6FF7929AFD6A}.wem		\Containers\MyUnit\SFX\SFX_Outing\Random_Footstep\Footsteps_03		48400
 	772437309	boiling_lp_02	.cache\2F\{2F8723DD-531A-B0EB-6E23-E7B23FE6DF30}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Pot\Random_Pot_Boil_Loop\boiling_lp_02		1092584
 	786212875	Squeeze_Sauce_01	.cache\2A\{2A54FF1D-45DA-1707-630A-67D92511E1A8}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Sauce\Squeeze_Sauce_01		142824
 	816575036	BGM_v1_bpm83_44	.cache\11\{112BEB95-5C76-58AF-D337-F482E3FA8569}.wem		\Containers\MyUnit\Music\Switch_BGM\BGM_Day_V1\BGM_v1_bpm83_44\BGM_v1_bpm83_44		12769252
+	875078922	Cricket_06	.cache\FB\{FBD932AA-90C3-FF9C-E300-7D5F369E920F}.wem		\Containers\MyUnit\SFX\SFX_Outing\Ambience\Cricket\Cricket\Cricket_06		1386440
 	902235593	Cut_Yam	.cache\04\{0492584C-09D5-E2A7-B6DE-5AE9C2AB5B2B}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Yam		288096
 	917614019	Eat_Pudding	.cache\F7\{F7C4B51E-6153-6FC3-8D83-6643FDD4ED8D}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Eat\Eat_Pudding		449156
 	923872371	Cut_Beef	.cache\E5\{E59A9938-763C-AE08-1B88-6657920B604C}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Beef		384096
 	933676904	Cut_Mushroom	.cache\54\{54DB86A0-7B6D-C090-A383-E644813AB369}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Mushroom		454136
-	1006055603	UI_Cancel	.cache\3A\{3A8D6BEF-D9A1-1DEE-10E4-6B0083F0A070}.wem		\Containers\MyUnit\UI_Button\UI_Cancel		60756
+	979345559	Cricket_03	.cache\D8\{D8051A5C-1887-374F-115F-E8EAA1EF9D1F}.wem		\Containers\MyUnit\SFX\SFX_Outing\Ambience\Cricket\Cricket\Cricket_03		1150336
+	982619370	Cricket_01	.cache\F7\{F7997EE8-3997-6DE9-F298-2C7EC7655DC7}.wem		\Containers\MyUnit\SFX\SFX_Outing\Ambience\Cricket\Cricket\Cricket_01		809932
+	1006055603	UI_Cancel	.cache\3A\{3A8D6BEF-D9A1-1DEE-10E4-6B0083F0A070}.wem		\Containers\MyUnit\UI\UI_Button\UI_Cancel		60756
+	1055378720	Footsteps_05	.cache\7D\{7D1A4023-6AE4-727A-5F30-55718668139B}.wem		\Containers\MyUnit\SFX\SFX_Outing\Random_Footstep\Footsteps_05		53756
 

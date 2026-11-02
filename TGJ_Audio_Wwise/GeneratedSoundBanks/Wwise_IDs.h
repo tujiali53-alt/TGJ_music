@@ -29,6 +29,8 @@ namespace AK
         static const AkUniqueID PLAY_UI_CANCEL = 2244506081U;
         static const AkUniqueID PLAY_UI_CLICK = 1749424733U;
         static const AkUniqueID PLAY_UI_PAGETURN = 1290567879U;
+        static const AkUniqueID PLQY_AMBIENCE = 4100364718U;
+        static const AkUniqueID STOP_AMBIENCE = 2477713992U;
         static const AkUniqueID STOP_BGM = 1073466678U;
         static const AkUniqueID STOP_BOILING = 2016713342U;
         static const AkUniqueID STOP_FRYING = 2718239607U;
