@@ -1,0 +1,96 @@
+Event	ID	Name			Wwise Object Path	Notes
+	286864310	Play_Salt			\SFX\Cooking\Season\Play_Salt	
+	775664385	Play_Frying			\SFX\Cooking\Frying\Play_Frying	
+	1000563996	Play_Sugar			\SFX\Cooking\Season\Play_Sugar	
+	1073466678	Stop_BGM			\Music\Stop_BGM	
+	1290567879	Play_UI_PageTurn			\UI\Play_UI_PageTurn	
+	1602358412	Play_Footstep			\SFX\Outing\Play_Footstep	
+	1614754728	Play_Spice			\SFX\Cooking\Season\Play_Spice	
+	1749424733	Play_UI_Click			\UI\Play_UI_Click	
+	1873669494	Play_Cutting			\SFX\Cooking\Play_Cutting	
+	2016713342	Stop_Boiling			\SFX\Cooking\Boliling\Stop_Boiling	
+	2244506081	Play_UI_Cancel			\UI\Play_UI_Cancel	
+	2489068396	Play_Eat			\SFX\Cooking\Play_Eat	
+	2718239607	Stop_Frying			\SFX\Cooking\Frying\Stop_Frying	
+	2775506426	Play_Pepper			\SFX\Cooking\Season\Play_Pepper	
+	2959827418	Play_Oil			\SFX\Cooking\Season\Play_Oil	
+	3126765036	Play_BGM			\Music\Play_BGM	
+	3281736991	Play_Sauce			\SFX\Cooking\Season\Play_Sauce	
+	3475817107	Play_Dice_Roll			\SFX\Outing\Play_Dice_Roll	
+	3626504988	Play_Boiling			\SFX\Cooking\Boliling\Play_Boiling	
+
+Switch Group	ID	Name			Wwise Object Path	Notes
+	1746288848	Ingredient			\MyUnit\Ingredient	
+	2212414297	Dish			\MyUnit\Dish	
+
+Switch	ID	Name	Switch Group			Notes
+	302590163	Berry	Ingredient			
+	356833188	Shrimp	Ingredient			
+	774000112	DoneEgg	Ingredient			
+	912360420	Yam	Ingredient			
+	1123068863	Beef	Ingredient			
+	1837441353	Cucumber	Ingredient			
+	1941802987	Mushroom	Ingredient			
+	1977508817	CornFish	Ingredient			
+	2545240700	Onion	Ingredient			
+	2863832591	Pumpkin	Ingredient			
+	3220806263	Tomato	Ingredient			
+	975081307	Food_YamPie	Dish			
+	1053467246	Food_Hotpot	Dish			
+	1887427020	Food_FriedFish	Dish			
+	2824318541	Food_Soup	Dish			
+	2870899870	Food_SeafoodRice	Dish			
+	3493444713	Food_RainbowEgg	Dish			
+	3530175662	Food_JellyShip	Dish			
+
+State Group	ID	Name			Wwise Object Path	Notes
+	478818154	Music_BGM_Stage			\MyUnit\Music_BGM_Stage	
+	524889184	Music_GamePhase			\MyUnit\Music_GamePhase	
+
+State	ID	Name	State Group			Notes
+	748895195	None	Music_BGM_Stage			
+	2962601784	BGM_V2	Music_BGM_Stage			
+	2962601785	BGM_V3	Music_BGM_Stage			
+	2962601787	BGM_V1	Music_BGM_Stage			
+	311764537	Day	Music_GamePhase			
+	748895195	None	Music_GamePhase			
+	1011622525	Night	Music_GamePhase			
+	2607556080	Menu	Music_GamePhase			
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	3976936	BGM_v2_bpm83_44	.cache\3A\{3AF5968C-A577-E38E-9B13-02E4E70DD499}.wem		\Containers\MyUnit\Music\Switch_BGM\BGM_Day_V2\BGM_v2_bpm83_44\BGM_v2_bpm83_44		12769252
+	6530863	Grinder_Pepper	.cache\3F\{3F687B03-1FA6-245E-F098-F070EC3BDECD}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\SFX_Pepper\Grinder_Pepper		281964
+	14457363	Pour_Oil_01	.cache\A2\{A217062D-6748-FEB8-5CCA-929BF1E49C3C}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Oil\Pour_Oil_01		223160
+	80476432	Cut_Tomato	.cache\9A\{9AE4B2AB-F87B-95BC-573B-4B2A8CBC8D2E}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Tomato		276932
+	108766747	Peel_Shrimp	.cache\89\{894CC11F-F544-F3E1-BF36-E47318C5955F}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Peel_Shrimp		318968
+	146405436	Eat_Juicy	.cache\DF\{DF22ADD6-CB06-B34E-7B38-C24FFA4F6DD4}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Eat\Eat_Juicy		512352
+	217892742	BGM_v3_bpm83_44	.cache\4A\{4A5C36D0-9886-4809-61FD-A90DCE1FCB73}.wem		\Containers\MyUnit\Music\Switch_BGM\BGM_Day_V3\BGM_v3_bpm83_44\BGM_v3_bpm83_44		12769252
+	235589139	Squeeze_Sauce_02	.cache\94\{94064B67-25A2-B806-0E57-8B465CD18748}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Sauce\Squeeze_Sauce_02		144812
+	248929665	Pour_Salt_Sugar_01_sugar	.cache\F2\{F2E72408-75BB-B5EF-A2D3-E0107EE7726D}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Sugar\Pour_Salt_Sugar_01_sugar		264248
+	283535523	Cut_Cucumber	.cache\99\{993C764C-C4BB-15AE-0914-EBC103A7B6FB}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Cucumber		310640
+	294930407	frying_lp_01	.cache\61\{612841B2-35BC-8C30-2E6E-90EC35CDC274}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Pot\Random_Pot_Fry_Loop\frying_lp_01		921772
+	336913223	Cut_Onion	.cache\23\{23D4AB08-EE5B-4029-2CD4-1F353B45E199}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Onion		384096
+	341525343	Cut_Pumpkin	.cache\E3\{E3329CAD-A422-D73B-DF5D-7BFE64DF591C}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Pumpkin		478804
+	384185100	Cut_CornFish	.cache\34\{34DFB3C3-09D3-2E79-8DB6-913986414237}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_CornFish		384096
+	420747195	UI_Click	.cache\18\{189A5522-6CC0-EE22-CBE8-258E282DCF19}.wem		\Containers\MyUnit\UI_Button\UI_Click		123692
+	429307745	Pour_Oil_03	.cache\0F\{0F1A4335-26DB-94F8-66E6-A84D5DADCFD4}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Oil\Pour_Oil_03		244884
+	455735761	Eat_Normal	.cache\AB\{AB6AD8EE-5FA5-1150-038B-C599B637A7CE}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Eat\Eat_Normal		474240
+	456185262	Pour_Salt_Sugar_02	.cache\E2\{E2DFDA5E-3B51-0E3B-09DC-7637C8F16708}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Slat\Pour_Salt_Sugar_02		162552
+	461425161	boiling_lp_01	.cache\FD\{FD62CFCB-625E-7365-11CD-3F8DED18B5CB}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Pot\Random_Pot_Boil_Loop\boiling_lp_01		1165880
+	467365878	Cut_DoneEgg	.cache\A5\{A559E0A3-5EE1-BB5C-1FF2-F659077A126F}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_DoneEgg		384096
+	593162314	Pour_Salt_Sugar_04	.cache\E2\{E247DBDF-4085-D2D9-2C5F-893EDCD210E6}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Slat\Pour_Salt_Sugar_04		111476
+	620702071	Eat_Crispy	.cache\6A\{6A4965DC-89D2-2F48-6D4F-85F73EBFD002}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Eat\Eat_Crispy		428872
+	650090837	Pour_Salt_Sugar_03	.cache\91\{91CCB6A7-AC22-F794-7897-8E90C95F3372}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Slat\Pour_Salt_Sugar_03		222616
+	672191540	Pour_Oil_02	.cache\0E\{0E7384D6-CB3C-1FBE-F2C2-8E215030847D}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Oil\Pour_Oil_02		261508
+	686269563	Cut_Berry	.cache\91\{91960437-E4DE-0D0B-98A3-21BC6AFCB6C0}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Berry		384096
+	690360993	BGM_night_bpm83_44	.cache\57\{5786B1F3-CC72-2864-2609-A96612D8A603}.wem		\Containers\MyUnit\Music\Switch_BGM\Menu_None\BGM_night_bpm83_44\BGM_night_bpm83_44		12769252
+	702267986	frying_lp_02	.cache\47\{478BA96D-627D-22B5-8347-1283DD83D328}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Pot\Random_Pot_Fry_Loop\frying_lp_02		916100
+	772437309	boiling_lp_02	.cache\2F\{2F8723DD-531A-B0EB-6E23-E7B23FE6DF30}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Pot\Random_Pot_Boil_Loop\boiling_lp_02		1092584
+	786212875	Squeeze_Sauce_01	.cache\2A\{2A54FF1D-45DA-1707-630A-67D92511E1A8}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Sauce\Squeeze_Sauce_01		142824
+	816575036	BGM_v1_bpm83_44	.cache\11\{112BEB95-5C76-58AF-D337-F482E3FA8569}.wem		\Containers\MyUnit\Music\Switch_BGM\BGM_Day_V1\BGM_v1_bpm83_44\BGM_v1_bpm83_44		12769252
+	902235593	Cut_Yam	.cache\04\{0492584C-09D5-E2A7-B6DE-5AE9C2AB5B2B}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Yam		288096
+	917614019	Eat_Pudding	.cache\F7\{F7C4B51E-6153-6FC3-8D83-6643FDD4ED8D}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Eat\Eat_Pudding		449156
+	923872371	Cut_Beef	.cache\E5\{E59A9938-763C-AE08-1B88-6657920B604C}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Beef		384096
+	933676904	Cut_Mushroom	.cache\54\{54DB86A0-7B6D-C090-A383-E644813AB369}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Mushroom		454136
+	1006055603	UI_Cancel	.cache\3A\{3A8D6BEF-D9A1-1DEE-10E4-6B0083F0A070}.wem		\Containers\MyUnit\UI_Button\UI_Cancel		60756
+
