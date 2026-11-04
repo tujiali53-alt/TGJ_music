@@ -41,9 +41,10 @@ namespace Cooking.UI
         int aimedIndex;
         int lineIndex;
         bool resultMode;
-        bool showingSuccess;
         bool optionsVisible;
+        bool awaitingPlayerLine;
         bool loggedMissingShocked;
+        Sprite pendingPortrait;
         int buffDelta;
         NightEventDefinition current;
 
@@ -91,7 +92,7 @@ namespace Cooking.UI
             if (panel == null)
                 Debug.LogError("InteractionPanel 下需要有 DialogPanel。", this);
             if (bodyText == null)
-                Debug.LogError("DialogPanel 下需要有 BodyText。", this);
+                Debug.LogError("PlayerDialogue 下需要有 BodyText。", this);
             if (option1 == null || option2 == null || option3 == null)
                 Debug.LogError("DialogPanel 下需要有 Option1、Option2、Option3，并且带 Button。", this);
             if (dice == null)
@@ -125,6 +126,7 @@ namespace Cooking.UI
             }
 
             HideOptions();
+            SilenceJudgmentBody();
         }
 
         public void OpenIntro(NightEventDefinition definition, int buffFaceDelta)
@@ -161,19 +163,29 @@ namespace Cooking.UI
         {
             current = definition;
             choices.Clear();
-            UseJudgment(success);
-            Sprite face = success ? option.successPortrait : option.failPortrait;
-            if (face == null && success && option.optionId == "opt_grave_mourn")
+            pendingPortrait = success ? option.successPortrait : option.failPortrait;
+            if (pendingPortrait == null && success && option.optionId == "opt_grave_mourn")
                 NoteMissingShocked();
-            ApplyPortrait(face);
+            UseJudgment(success);
             if (success)
                 FillSuccess(rewards);
             else
                 FillFail();
 
             NightLinePhase phase = success ? NightLinePhase.Success : NightLinePhase.Fail;
-            string optionId = option.optionId;
-            OpenLines(CollectLines(definition, optionId, phase));
+            lines.Clear();
+            List<string> source = CollectLines(definition, option.optionId, phase);
+            for (int i = 0; i < source.Count; i++)
+                lines.Add(source[i]);
+            lineIndex = 0;
+            optionsVisible = false;
+            awaitingPlayerLine = true;
+            HideOptions();
+            if (panel != null)
+            {
+                panel.SetActive(true);
+                Canvas.ForceUpdateCanvases();
+            }
         }
 
         public bool IsOpen => panel != null && panel.activeSelf;
@@ -212,6 +224,7 @@ namespace Cooking.UI
 
             lineIndex = 0;
             optionsVisible = false;
+            awaitingPlayerLine = false;
             HideOptions();
             WriteLine();
 
@@ -221,6 +234,23 @@ namespace Cooking.UI
 
         void Advance()
         {
+            if (awaitingPlayerLine)
+            {
+                awaitingPlayerLine = false;
+                if (lines.Count == 0)
+                {
+                    if (panel != null)
+                        panel.SetActive(false);
+                    return;
+                }
+
+                ShowPlayerChrome();
+                ApplyPortrait(pendingPortrait);
+                lineIndex = 0;
+                WriteLine();
+                return;
+            }
+
             if (lineIndex < lines.Count - 1)
             {
                 lineIndex++;
@@ -553,6 +583,13 @@ namespace Cooking.UI
                     playerDialogue = found.gameObject;
             }
 
+            if (bodyText == null && playerDialogue != null)
+            {
+                Transform found = playerDialogue.transform.Find("BodyText");
+                if (found != null)
+                    bodyText = found.GetComponent<TMP_Text>();
+            }
+
             if (playerDialogue != null)
             {
                 if (profileImage == null)
@@ -613,7 +650,12 @@ namespace Cooking.UI
         void UsePlayerDialogue()
         {
             resultMode = false;
-            showingSuccess = false;
+            awaitingPlayerLine = false;
+            ShowPlayerChrome();
+        }
+
+        void ShowPlayerChrome()
+        {
             if (playerDialogue != null)
                 playerDialogue.SetActive(true);
             if (dialogueFrame != null)
@@ -631,15 +673,8 @@ namespace Cooking.UI
         void UseJudgment(bool success)
         {
             resultMode = true;
-            showingSuccess = success;
             if (playerDialogue != null)
-                playerDialogue.SetActive(true);
-            if (dialogueFrame != null)
-                dialogueFrame.SetActive(false);
-            if (dialogueName != null)
-                dialogueName.SetActive(false);
-            if (profileImage != null)
-                profileImage.gameObject.SetActive(true);
+                playerDialogue.SetActive(false);
             if (bodyText != null)
                 bodyText.gameObject.SetActive(false);
             if (judgment != null)
@@ -648,6 +683,22 @@ namespace Cooking.UI
                 successRoot.SetActive(success);
             if (failRoot != null)
                 failRoot.SetActive(!success);
+            SilenceJudgmentBody();
+        }
+
+        void SilenceJudgmentBody()
+        {
+            if (successBody != null)
+            {
+                successBody.text = "";
+                successBody.gameObject.SetActive(false);
+            }
+
+            if (failBody != null)
+            {
+                failBody.text = "";
+                failBody.gameObject.SetActive(false);
+            }
         }
 
         void NoteMissingShocked()
@@ -670,11 +721,10 @@ namespace Cooking.UI
 
         void WriteLine()
         {
-            TMP_Text target = resultMode ? (showingSuccess ? successBody : failBody) : bodyText;
-            if (target == null)
+            if (bodyText == null)
                 return;
 
-            target.text = lineIndex >= 0 && lineIndex < lines.Count ? lines[lineIndex] : "";
+            bodyText.text = lineIndex >= 0 && lineIndex < lines.Count ? lines[lineIndex] : "";
         }
 
         void FillSuccess(IList<NightReward> rewards)
