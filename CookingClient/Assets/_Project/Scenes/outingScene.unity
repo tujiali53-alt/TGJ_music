@@ -8785,7 +8785,7 @@ MonoBehaviour:
   m_text: "\u8089\u5757\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a17d3da4e4fc8e48ae02434f070ac7c, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 8f4c2a91b7e64d0c9a3e5f17c6b8d240, type: 2}
+  m_sharedMaterial: {fileID: 5034960185866848995, guid: 2a17d3da4e4fc8e48ae02434f070ac7c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8922,7 +8922,7 @@ MonoBehaviour:
   m_text: "\u4E00\u65E0\u6240\u83B7"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a17d3da4e4fc8e48ae02434f070ac7c, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 8f4c2a91b7e64d0c9a3e5f17c6b8d240, type: 2}
+  m_sharedMaterial: {fileID: 5034960185866848995, guid: 2a17d3da4e4fc8e48ae02434f070ac7c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -18436,7 +18436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1044244486815229756, guid: 1cdaba5889028024a8dd5d00170d7900, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1444004137601544924, guid: 1cdaba5889028024a8dd5d00170d7900, type: 3}
       propertyPath: m_LocalPosition.x

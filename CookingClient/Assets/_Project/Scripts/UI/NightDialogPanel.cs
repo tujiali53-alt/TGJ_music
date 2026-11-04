@@ -715,10 +715,7 @@ namespace Cooking.UI
             }
 
             if (obtainFoodNameText != null)
-            {
                 obtainFoodNameText.text = names;
-                ApplyGlowOutline(obtainFoodNameText);
-            }
 
             if (obtainFoodAmountText != null)
                 obtainFoodAmountText.text = amounts;
@@ -732,30 +729,6 @@ namespace Cooking.UI
             failNameText.text = language == DiaryLanguage.En
                 ? "Came away empty-handed"
                 : "一无所获";
-            ApplyGlowOutline(failNameText);
-        }
-
-        static void ApplyGlowOutline(TMP_Text text)
-        {
-            if (text == null)
-                return;
-
-            Material material = text.fontSharedMaterial;
-            if (material == null)
-                return;
-
-            material.EnableKeyword("OUTLINE_ON");
-            material.EnableKeyword("UNDERLAY_ON");
-            material.SetFloat("_OutlineWidth", 0.2f);
-            material.SetFloat("_OutlineSoftness", 0.28f);
-            material.SetColor("_OutlineColor", new Color(1f, 0.9254902f, 0.6666667f, 1f));
-            material.SetColor("_UnderlayColor", new Color(1f, 0.78f, 0.28f, 0.9f));
-            material.SetFloat("_UnderlayOffsetX", 0f);
-            material.SetFloat("_UnderlayOffsetY", 0f);
-            material.SetFloat("_UnderlayDilate", 0.55f);
-            material.SetFloat("_UnderlaySoftness", 0.5f);
-            if (text.isActiveAndEnabled)
-                text.UpdateMeshPadding();
         }
 
         string SuccessPercent(NightOption option)
