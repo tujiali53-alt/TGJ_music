@@ -217,7 +217,35 @@ namespace Cooking.UI
             }
 
             if (resultMode && panel != null)
+            {
                 panel.SetActive(false);
+                return;
+            }
+
+            if (!resultMode && optionsVisible && !HasActionable(choices) && panel != null)
+                panel.SetActive(false);
+        }
+
+        public bool HasActionableOption(NightEventDefinition definition)
+        {
+            if (definition == null)
+                return false;
+
+            return HasActionable(definition.options);
+        }
+
+        bool HasActionable(IList<NightOption> options)
+        {
+            if (options == null)
+                return false;
+
+            for (int i = 0; i < options.Count; i++)
+            {
+                if (string.IsNullOrEmpty(BlockReason(options[i])))
+                    return true;
+            }
+
+            return false;
         }
 
         void ShowOptions()

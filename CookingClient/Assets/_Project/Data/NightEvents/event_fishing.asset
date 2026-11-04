@@ -19,8 +19,8 @@ MonoBehaviour:
   - optionId: opt_fishing_cast
     order: 1
     displayName: "\u62C9\u7AFF\uFF01"
-    conditionType: 4
-    conditionValue: 60
+    conditionType: 0
+    conditionValue: 0
     successFaces: 5
     rewards:
     - pickMode: 1

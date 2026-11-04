@@ -18,6 +18,8 @@ namespace Cooking.Exploration
         NightDialogPanel dialog;
         SpriteRenderer[] pictures;
         Color[] pictureColors;
+        Vector3 homePosition;
+        bool homeReady;
 
         void Awake()
         {
@@ -54,6 +56,8 @@ namespace Cooking.Exploration
             for (int i = 0; i < pictures.Length; i++)
                 pictureColors[i] = pictures[i] != null ? pictures[i].color : Color.white;
 
+            homePosition = transform.position;
+            homeReady = true;
             ApplyUnlock();
         }
 
@@ -80,7 +84,22 @@ namespace Cooking.Exploration
 
         void LateUpdate()
         {
-            TintPictures(AllOptionsResolved());
+            TintPictures(dialog != null && !dialog.HasActionableOption(definition));
+        }
+
+        public void PlaceForNight(float radius)
+        {
+            if (!homeReady)
+            {
+                homePosition = transform.position;
+                homeReady = true;
+            }
+
+            Vector2 offset = radius > 0f ? Random.insideUnitCircle * radius : Vector2.zero;
+            Vector3 position = homePosition;
+            position.x += offset.x;
+            position.y += offset.y;
+            transform.position = position;
         }
 
         public void TryOpen(Vector2 world)
@@ -108,33 +127,13 @@ namespace Cooking.Exploration
             if (root.Session.DayIndex < definition.unlockNight)
                 return;
 
-            if (AllOptionsResolved())
+            if (!dialog.HasActionableOption(definition))
             {
                 NightLogView.Append(NightLogKind.OptionBlocked, SpentMessage);
                 return;
             }
 
             dialog.OpenIntro(definition, NightLayoutSelector.SuccessFaceDelta);
-        }
-
-        bool AllOptionsResolved()
-        {
-            if (definition == null || definition.options == null || definition.options.Count == 0)
-                return false;
-
-            GameRoot root = GameRoot.Instance;
-            if (root == null || root.Session == null || root.Session.ResolvedOptionIdsTonight == null)
-                return false;
-
-            var done = root.Session.ResolvedOptionIdsTonight;
-            for (int i = 0; i < definition.options.Count; i++)
-            {
-                string id = definition.options[i].optionId;
-                if (string.IsNullOrEmpty(id) || !done.Contains(id))
-                    return false;
-            }
-
-            return true;
         }
 
         void TintPictures(bool spent)

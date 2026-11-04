@@ -49,6 +49,22 @@ namespace Cooking.EditorTools
             if (!shrimp.Success || shrimp.Rewards.Count != 1 || !HasReward(shrimp.Rewards, "ing_shrimp", 3))
                 return "拉竿选取第 2 行时应只给红斑虾 3。";
 
+            NightOption guaranteed = new NightOption
+            {
+                optionId = "opt_full",
+                successFaces = 6,
+                rewards = new List<NightReward>()
+            };
+            NightRollResult full = NightCheck.Resolve(guaranteed, 6, -1, 0);
+            if (!full.Success)
+                return "6/6 在成功率减 1 时掷出 6 仍应成功。";
+            if (NightCheck.EffectiveFaces(6, -1) != 6)
+                return "6/6 的负向 buff 不应把有效面数降到 6 以下。";
+
+            NightRollResult weakenedFive = NightCheck.Resolve(cast, 6, -1, 0);
+            if (weakenedFive.Success)
+                return "5/6 在成功率减 1 时掷出 6 应失败。";
+
             return null;
         }
 
@@ -75,8 +91,8 @@ namespace Cooking.EditorTools
                 optionId = "opt_fishing_cast",
                 order = 1,
                 displayName = "拉竿！",
-                conditionType = NightConditionType.DeliciousnessAbove,
-                conditionValue = 60f,
+                conditionType = NightConditionType.None,
+                conditionValue = 0f,
                 successFaces = 5,
                 rewards = new List<NightReward>
                 {

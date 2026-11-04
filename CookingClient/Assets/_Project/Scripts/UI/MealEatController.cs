@@ -199,7 +199,7 @@ namespace Cooking.UI
             }
 
             var plate = new List<IngredientInstance>(session.HeldDish.Items);
-            RecipeDefinition today = TodayRecipe(session);
+            RecipeDefinition today = MatchUnlocked(plate, session);
             DishResult result = DeliciousnessScore.Evaluate(plate, DefinitionsFor(plate), today, presentation);
             if (result.Picture == DishPictureKind.Recipe && today != null)
                 session.RememberCorrectRecipe(today.id);
@@ -408,19 +408,25 @@ namespace Cooking.UI
             return DeliciousnessScore.FormatScore(session.AttemptScores[index]);
         }
 
-        RecipeDefinition TodayRecipe(GameSession session)
+        RecipeDefinition MatchUnlocked(List<IngredientInstance> plate, GameSession session)
         {
             if (session == null || recipes == null)
                 return null;
 
+            List<IngredientDefinition> definitions = DefinitionsFor(plate);
+            RecipeDefinition best = null;
             for (int i = 0; i < recipes.Length; i++)
             {
                 RecipeDefinition recipe = recipes[i];
-                if (recipe != null && recipe.unlockDay == session.DayIndex)
-                    return recipe;
+                if (recipe == null || recipe.unlockDay < 1 || recipe.unlockDay > session.DayIndex)
+                    continue;
+                if (!RecipeMatcher.Matches(plate, definitions, recipe))
+                    continue;
+                if (best == null || recipe.unlockDay > best.unlockDay)
+                    best = recipe;
             }
 
-            return null;
+            return best;
         }
 
         static List<IngredientDefinition> DefinitionsFor(List<IngredientInstance> plate)

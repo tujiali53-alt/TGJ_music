@@ -73,6 +73,18 @@ namespace Cooking.EditorTools
             if (!IsPlacedMushroom(go))
                 return 0;
 
+            if (go.GetComponent<InteractionPoint>() != null)
+            {
+                IngredientPickup extra = go.GetComponent<IngredientPickup>();
+                if (extra == null)
+                    return 0;
+
+                Undo.DestroyObjectImmediate(extra);
+                EditorSceneManager.MarkSceneDirty(scene);
+                Debug.Log("交互点不再挂采集脚本：" + go.name, go);
+                return 1;
+            }
+
             bool changed = false;
             IngredientPickup pickup = go.GetComponent<IngredientPickup>();
             if (pickup == null)

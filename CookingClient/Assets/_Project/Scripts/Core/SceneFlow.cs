@@ -32,6 +32,8 @@ namespace Cooking.Core
         void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             IsLoading = false;
+            if (AudioManager.I != null)
+                AudioManager.I.ApplyPhaseFor(scene.name);
         }
     }
 }

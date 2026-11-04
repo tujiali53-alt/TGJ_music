@@ -1,4 +1,7 @@
+using System.Collections;
+using Cooking.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -7,26 +10,60 @@ public class AudioManager : MonoBehaviour
     public AK.Wwise.Event playBGM;
     public AK.Wwise.Event stopBGM;
 
+    bool bgmStarted;
+
     void Awake()
     {
-        if (I != null) { Destroy(gameObject); return; }  // 防止重复保留多个AudioManager
+        if (I != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         I = this;
-        DontDestroyOnLoad(gameObject);                   // 切换Scene不销毁AudioManager，以便音乐不中断
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
-        if (I == this) playBGM.Post(gameObject);          // 整局只发这一次
+        if (I == this)
+            StartCoroutine(StartWhenBankReady());
     }
 
-    // 所有音频都挂在AudioManager上，防止原物体被销毁中断音频
+    IEnumerator StartWhenBankReady()
+    {
+        yield return null;
+        if (I != this)
+            yield break;
+
+        ApplyPhaseFor(SceneManager.GetActiveScene().name);
+    }
+
+    public void ApplyPhaseFor(string sceneName)
+    {
+        string state = "Menu";
+        if (sceneName == SceneNames.Cooking)
+            state = "Day";
+        else if (sceneName == SceneNames.Outing)
+            state = "Night";
+
+        AkUnitySoundEngine.SetState("Music_GamePhase", state);
+        if (bgmStarted || !playBGM.IsValid())
+            return;
+
+        playBGM.Post(gameObject);
+        bgmStarted = true;
+    }
+
     public static void Post(AK.Wwise.Event e)
     {
-        if (I != null && e != null && e.IsValid()) e.Post(I.gameObject);  // 防止Event没填时报错
+        if (I != null && e != null && e.IsValid())
+            e.Post(I.gameObject);
     }
 
     public static void SetSwitch(string group, string value)
     {
-        if (I != null) AkUnitySoundEngine.SetSwitch(group, value, I.gameObject);
+        if (I != null)
+            AkUnitySoundEngine.SetSwitch(group, value, I.gameObject);
     }
 }

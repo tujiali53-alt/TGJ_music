@@ -15,7 +15,11 @@ namespace Cooking.Runtime
     {
         public static int EffectiveFaces(int successFaces, int buffDelta)
         {
-            int faces = successFaces + buffDelta;
+            int delta = buffDelta;
+            if (successFaces >= 6 && delta < 0)
+                delta = 0;
+
+            int faces = successFaces + delta;
             if (faces < 1)
                 faces = 1;
             if (faces > 6)

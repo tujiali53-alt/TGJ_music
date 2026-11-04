@@ -39,8 +39,8 @@ MonoBehaviour:
   - optionId: opt_beasts_side
     order: 3
     displayName: "\u62C9\u504F\u67B6"
-    conditionType: 3
-    conditionValue: 40
+    conditionType: 0
+    conditionValue: 0
     successFaces: 4
     rewards:
     - pickMode: 0

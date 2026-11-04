@@ -19,6 +19,11 @@ namespace Cooking.UI
         [SerializeField] TMP_Text resultText;
         [SerializeField] IngredientDefinition[] definitions;
         [SerializeField] NightDialogPanel dialog;
+        [SerializeField] Image diceImage;
+        [SerializeField] Animator diceAnimator;
+        [SerializeField] Sprite[] faceSprites;
+
+        const string RollState = "Dice_anim";
 
         NightEventDefinition current;
         NightOption option;
@@ -26,6 +31,7 @@ namespace Cooking.UI
         bool rolled;
         NightRollResult lastRoll;
         Coroutine confirmWait;
+        Coroutine rollPlay;
 
         void Awake()
         {
@@ -56,6 +62,16 @@ namespace Cooking.UI
             if (panel != null && resultText == null)
                 resultText = FindText(panel.transform, "DiceResultText");
 
+            if (panel != null && diceImage == null)
+            {
+                Transform found = panel.transform.Find("Dice");
+                if (found != null)
+                    diceImage = found.GetComponent<Image>();
+            }
+
+            if (diceImage != null && diceAnimator == null)
+                diceAnimator = diceImage.GetComponent<Animator>();
+
             if (dialog == null)
                 dialog = GetComponent<NightDialogPanel>();
 
@@ -75,9 +91,16 @@ namespace Cooking.UI
                 Debug.LogError("DicePanel 下需要有 scoreText。", this);
             if (resultText == null)
                 Debug.LogError("DicePanel 下需要有 DiceResultText。", this);
+            if (diceImage == null)
+                Debug.LogError("DicePanel 下需要有 Dice，并且带 Image。", this);
+            if (diceAnimator == null)
+                Debug.LogError("Dice 上需要有 Animator，并使用 Dice 控制器。", this);
+            if (faceSprites == null || faceSprites.Length < 6)
+                Debug.LogError("NightDicePanel 需要按 1 到 6 绑上骰子图。", this);
             if (definitions == null || definitions.Length == 0)
                 Debug.LogError("NightDicePanel 需要绑上食材定义。", this);
 
+            HoldDice();
             if (panel != null)
                 panel.SetActive(false);
         }
@@ -90,6 +113,8 @@ namespace Cooking.UI
             rolled = false;
             lastRoll = null;
             StopConfirmWait();
+            StopRoll();
+            HoldDice();
             if (scoreText != null)
                 scoreText.text = "";
             if (resultText != null)
@@ -135,15 +160,42 @@ namespace Cooking.UI
 
         void OnBegin()
         {
-            if (rolled || panel == null || !panel.activeSelf)
+            if (rolled || rollPlay != null || panel == null || !panel.activeSelf)
                 return;
 
             if (beginButton != null)
                 beginButton.gameObject.SetActive(false);
 
+            rollPlay = StartCoroutine(RollAfterAnimation());
+        }
+
+        IEnumerator RollAfterAnimation()
+        {
             NightRollResult result = NightCheck.Roll(option, buffDelta);
+            if (diceAnimator != null)
+            {
+                diceAnimator.enabled = true;
+                diceAnimator.Play(RollState, 0, 0f);
+                diceAnimator.Update(0f);
+                float length = diceAnimator.GetCurrentAnimatorStateInfo(0).length;
+                if (length <= 0f)
+                    length = 1.0166667f;
+                yield return new WaitForSeconds(length);
+                diceAnimator.enabled = false;
+            }
+
+            rollPlay = null;
+            if (panel == null || !panel.activeSelf)
+                yield break;
+
+            Present(result);
+        }
+
+        void Present(NightRollResult result)
+        {
             lastRoll = result;
             rolled = true;
+            ShowFace(result.Face);
             if (scoreText != null)
                 scoreText.text = result.Face.ToString();
             if (resultText != null)
@@ -160,6 +212,36 @@ namespace Cooking.UI
 
             for (int i = 0; i < result.Rewards.Count; i++)
                 Grant(result.Rewards[i]);
+        }
+
+        void HoldDice()
+        {
+            if (diceAnimator != null)
+                diceAnimator.enabled = false;
+            ShowFace(1);
+        }
+
+        void ShowFace(int face)
+        {
+            if (diceImage == null || faceSprites == null)
+                return;
+
+            int index = face - 1;
+            if (index < 0 || index >= faceSprites.Length || faceSprites[index] == null)
+                return;
+
+            diceImage.sprite = faceSprites[index];
+        }
+
+        void StopRoll()
+        {
+            if (rollPlay == null)
+                return;
+
+            StopCoroutine(rollPlay);
+            rollPlay = null;
+            if (diceAnimator != null)
+                diceAnimator.enabled = false;
         }
 
         void ScheduleConfirm()
@@ -184,6 +266,7 @@ namespace Cooking.UI
         void OnConfirm()
         {
             StopConfirmWait();
+            StopRoll();
             bool success = lastRoll != null && lastRoll.Success;
             List<NightReward> rewards = lastRoll != null ? lastRoll.Rewards : null;
             if (panel != null)

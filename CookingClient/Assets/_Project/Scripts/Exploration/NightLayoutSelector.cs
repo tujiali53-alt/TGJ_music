@@ -10,6 +10,7 @@ namespace Cooking.Exploration
     public sealed class NightLayoutSelector : MonoBehaviour
     {
         [SerializeField] NightBuffTable buffs;
+        [SerializeField] float interactionOffsetRadius = 0.3f;
 
         public static int SuccessFaceDelta { get; private set; }
 
@@ -77,6 +78,22 @@ namespace Cooking.Exploration
 
             ApplyLayout(session.DayIndex);
             RestoreLights();
+            OffsetInteractions();
+            if (AudioManager.I != null)
+                AudioManager.I.ApplyPhaseFor(gameObject.scene.name);
+        }
+
+        void OffsetInteractions()
+        {
+            InteractionPoint[] points = GetComponentsInChildren<InteractionPoint>(true);
+            for (int i = 0; i < points.Length; i++)
+            {
+                InteractionPoint point = points[i];
+                if (point == null || !point.gameObject.activeInHierarchy)
+                    continue;
+
+                point.PlaceForNight(interactionOffsetRadius);
+            }
         }
 
         void ApplyLayout(int dayIndex)

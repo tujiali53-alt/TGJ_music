@@ -15,7 +15,7 @@ namespace Cooking.UI
         {
             Resolve();
             if (redPoint == null)
-                Debug.LogError("需要 InteractionPanel/RedPoint。", this);
+                Debug.LogError("需要 InteractionPanel/RedPoint_Diary。", this);
             if (catalog == null)
                 Debug.LogError("DiaryPanel 上需要 DiaryPanelView，并且绑上 DiaryCatalog。", this);
         }
@@ -41,7 +41,7 @@ namespace Cooking.UI
         {
             if (redPoint == null)
             {
-                Transform found = transform.Find("RedPoint");
+                Transform found = transform.Find("RedPoint_Diary");
                 if (found != null)
                     redPoint = found.gameObject;
             }

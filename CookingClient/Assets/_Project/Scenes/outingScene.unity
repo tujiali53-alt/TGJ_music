@@ -197,32 +197,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18149680}
   m_CullTransparentMesh: 1
---- !u!1 &32233377 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4512182409124099545, guid: 84b9e4e3015aebf49908893f3c320774, type: 3}
-  m_PrefabInstance: {fileID: 111699495685511198}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &32233379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 32233377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d93e40b26c816130ad57e8f92c1b6043, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Cooking::Cooking.Exploration.IngredientPickup
-  definition: {fileID: 11400000, guid: c82d3fa15b70502f9c46d7e81b0a5f32, type: 2}
-  player: {fileID: 2079142421}
-  hitCollider: {fileID: 32233382}
-  collectDistance: 2.5
---- !u!61 &32233382 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 4601671884185079924, guid: 84b9e4e3015aebf49908893f3c320774, type: 3}
-  m_PrefabInstance: {fileID: 111699495685511198}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &39010067
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,32 +310,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &93258563 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8092285051053406148, guid: 7c959193acd45ff4c982fff11cdfd3dd, type: 3}
-  m_PrefabInstance: {fileID: 7200048989106969119}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &93258565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 93258563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d93e40b26c816130ad57e8f92c1b6043, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Cooking::Cooking.Exploration.IngredientPickup
-  definition: {fileID: 11400000, guid: c82d3fa15b70502f9c46d7e81b0a5f32, type: 2}
-  player: {fileID: 2079142421}
-  hitCollider: {fileID: 93258568}
-  collectDistance: 2.5
---- !u!61 &93258568 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 4118703820499428993, guid: 7c959193acd45ff4c982fff11cdfd3dd, type: 3}
-  m_PrefabInstance: {fileID: 7200048989106969119}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &102359036
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,32 +628,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171428050}
   m_CullTransparentMesh: 1
---- !u!1 &186993449 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2347774650525765036, guid: f7322b85587f2f44d81198cd63871b76, type: 3}
-  m_PrefabInstance: {fileID: 2556832048232491358}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &186993451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186993449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d93e40b26c816130ad57e8f92c1b6043, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Cooking::Cooking.Exploration.IngredientPickup
-  definition: {fileID: 11400000, guid: c82d3fa15b70502f9c46d7e81b0a5f32, type: 2}
-  player: {fileID: 2079142421}
-  hitCollider: {fileID: 186993454}
-  collectDistance: 2.5
---- !u!61 &186993454 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 5959655149674326712, guid: f7322b85587f2f44d81198cd63871b76, type: 3}
-  m_PrefabInstance: {fileID: 2556832048232491358}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &276683061
 GameObject:
   m_ObjectHideFlags: 0
@@ -6472,7 +6394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &546740533
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6824,32 +6746,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &636827922 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6863748497325931153, guid: 84b9e4e3015aebf49908893f3c320774, type: 3}
-  m_PrefabInstance: {fileID: 111699495685511198}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &636827924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 636827922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d93e40b26c816130ad57e8f92c1b6043, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Cooking::Cooking.Exploration.IngredientPickup
-  definition: {fileID: 11400000, guid: c82d3fa15b70502f9c46d7e81b0a5f32, type: 2}
-  player: {fileID: 2079142421}
-  hitCollider: {fileID: 636827927}
-  collectDistance: 2.5
---- !u!61 &636827927 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 7943910392018133837, guid: 84b9e4e3015aebf49908893f3c320774, type: 3}
-  m_PrefabInstance: {fileID: 111699495685511198}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &697698380
 GameObject:
   m_ObjectHideFlags: 0
@@ -6885,7 +6781,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 382}
-  m_SizeDelta: {x: 138.46, y: 58.75}
+  m_SizeDelta: {x: 240, y: 58.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &697698382
 MonoBehaviour:
@@ -6941,7 +6837,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -8019,32 +7915,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 981823715}
   m_CullTransparentMesh: 1
---- !u!1 &998271099 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5643461506013765378, guid: 3dc55f955e849124585d16d96fdb01a6, type: 3}
-  m_PrefabInstance: {fileID: 388274857578877923}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &998271101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 998271099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d93e40b26c816130ad57e8f92c1b6043, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Cooking::Cooking.Exploration.IngredientPickup
-  definition: {fileID: 11400000, guid: c82d3fa15b70502f9c46d7e81b0a5f32, type: 2}
-  player: {fileID: 2079142421}
-  hitCollider: {fileID: 998271104}
-  collectDistance: 2.5
---- !u!61 &998271104 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 4476650368941767134, guid: 3dc55f955e849124585d16d96fdb01a6, type: 3}
-  m_PrefabInstance: {fileID: 388274857578877923}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1025397911
 GameObject:
   m_ObjectHideFlags: 0
@@ -9334,6 +9204,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5052a2ab7300e5e458e746071461487d, type: 2}
   - {fileID: 11400000, guid: f7fd7c26fc0c4474ca1cee4c6c5cf07a, type: 2}
   dialog: {fileID: 0}
+  diceImage: {fileID: 2053676370}
+  diceAnimator: {fileID: 2053676372}
+  faceSprites:
+  - {fileID: 21300000, guid: 60ccff3113c013549827e7b97ab0f957, type: 3}
+  - {fileID: 21300000, guid: 4c0057b8cbaafa5449398121bbb95e59, type: 3}
+  - {fileID: 21300000, guid: 9d38cf16e09e08e409335ede44f042b8, type: 3}
+  - {fileID: 21300000, guid: 2bd8f3cf91fe29145ac01f7ddc30fdf3, type: 3}
+  - {fileID: 21300000, guid: 00a9be1b751255349800a4f74118bb30, type: 3}
+  - {fileID: 21300000, guid: 1dbdc59fe106758479cb63bfd55f1e9c, type: 3}
 --- !u!114 &1202550061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9442,32 +9321,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &1223732945 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5896733569264309956, guid: 1cdaba5889028024a8dd5d00170d7900, type: 3}
-  m_PrefabInstance: {fileID: 8697123206382313577}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1223732947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223732945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d93e40b26c816130ad57e8f92c1b6043, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Cooking::Cooking.Exploration.IngredientPickup
-  definition: {fileID: 11400000, guid: c82d3fa15b70502f9c46d7e81b0a5f32, type: 2}
-  player: {fileID: 2079142421}
-  hitCollider: {fileID: 1223732950}
-  collectDistance: 2.5
---- !u!61 &1223732950 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 7362370497411440837, guid: 1cdaba5889028024a8dd5d00170d7900, type: 3}
-  m_PrefabInstance: {fileID: 8697123206382313577}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1243150928
 GameObject:
   m_ObjectHideFlags: 0
@@ -10413,6 +10266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Cooking::Cooking.Exploration.NightLayoutSelector
   buffs: {fileID: 11400000, guid: 3f06c005eaf5c984fbb5fa9f218e7dea, type: 2}
+  interactionOffsetRadius: 0.3
 --- !u!4 &1470956245
 Transform:
   m_ObjectHideFlags: 0
@@ -10812,8 +10666,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 419, y: 370}
-  m_SizeDelta: {x: 360, y: 100}
+  m_AnchoredPosition: {x: 360, y: 370}
+  m_SizeDelta: {x: 236, y: 97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1638333214
 MonoBehaviour:
@@ -10934,8 +10788,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 419, y: 265}
-  m_SizeDelta: {x: 360, y: 100}
+  m_AnchoredPosition: {x: 360, y: 265}
+  m_SizeDelta: {x: 236, y: 97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1640529013
 MonoBehaviour:
@@ -11648,8 +11502,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 419, y: 475}
-  m_SizeDelta: {x: 360, y: 100}
+  m_AnchoredPosition: {x: 360, y: 475}
+  m_SizeDelta: {x: 236, y: 97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1798712568
 MonoBehaviour:
@@ -11768,7 +11622,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 475}
-  m_SizeDelta: {x: 206.38, y: 68.22}
+  m_SizeDelta: {x: 320, y: 68.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1830574082
 MonoBehaviour:
@@ -11790,7 +11644,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Day 0
+  m_text: DAY0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e39e053c512385438b69faf9eb97e04, type: 2}
   m_sharedMaterial: {fileID: 3494459750236936472, guid: 3e39e053c512385438b69faf9eb97e04, type: 2}
@@ -11824,7 +11678,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -16956,32 +16810,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1935419086}
   m_CullTransparentMesh: 1
---- !u!1 &1974529566 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1704081577915746566, guid: 3dc55f955e849124585d16d96fdb01a6, type: 3}
-  m_PrefabInstance: {fileID: 388274857578877923}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1974529568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1974529566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d93e40b26c816130ad57e8f92c1b6043, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Cooking::Cooking.Exploration.IngredientPickup
-  definition: {fileID: 11400000, guid: c82d3fa15b70502f9c46d7e81b0a5f32, type: 2}
-  player: {fileID: 2079142421}
-  hitCollider: {fileID: 1974529571}
-  collectDistance: 2.5
---- !u!61 &1974529571 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 560463178657317740, guid: 3dc55f955e849124585d16d96fdb01a6, type: 3}
-  m_PrefabInstance: {fileID: 388274857578877923}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1979216715
 GameObject:
   m_ObjectHideFlags: 0
@@ -17459,7 +17287,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2053676368}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: bbdfaed2ac1d0da4ab59299b07662bf8, type: 2}
   m_CullingMode: 0
@@ -18254,13 +18082,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6863748497325931153, guid: 84b9e4e3015aebf49908893f3c320774, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 636827924}
-    - targetCorrespondingSourceObject: {fileID: 4512182409124099545, guid: 84b9e4e3015aebf49908893f3c320774, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 32233379}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84b9e4e3015aebf49908893f3c320774, type: 3}
 --- !u!4 &111699495685511199 stripped
 Transform:
@@ -18326,13 +18148,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1704081577915746566, guid: 3dc55f955e849124585d16d96fdb01a6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1974529568}
-    - targetCorrespondingSourceObject: {fileID: 5643461506013765378, guid: 3dc55f955e849124585d16d96fdb01a6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 998271101}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dc55f955e849124585d16d96fdb01a6, type: 3}
 --- !u!4 &388274857578877924 stripped
 Transform:
@@ -18398,10 +18214,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2347774650525765036, guid: f7322b85587f2f44d81198cd63871b76, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 186993451}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7322b85587f2f44d81198cd63871b76, type: 3}
 --- !u!4 &2556832048232491359 stripped
 Transform:
@@ -18599,10 +18412,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8092285051053406148, guid: 7c959193acd45ff4c982fff11cdfd3dd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 93258565}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c959193acd45ff4c982fff11cdfd3dd, type: 3}
 --- !u!4 &7200048989106969120 stripped
 Transform:
@@ -18668,10 +18478,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5896733569264309956, guid: 1cdaba5889028024a8dd5d00170d7900, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1223732947}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cdaba5889028024a8dd5d00170d7900, type: 3}
 --- !u!4 &8697123206382313578 stripped
 Transform:

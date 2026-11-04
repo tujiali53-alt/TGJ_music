@@ -48,8 +48,8 @@ namespace Cooking.EditorTools
 
             NightEventDefinition fishing = FindEvent("event_fishing");
             NightOption cast = FindOption(fishing, "opt_fishing_cast");
-            if (cast.successFaces != 5 || cast.conditionType != NightConditionType.DeliciousnessAbove || cast.conditionValue != 60f)
-                return "拉竿的条件或成功面不对。";
+            if (cast.successFaces != 5 || cast.conditionType != NightConditionType.None || cast.conditionValue != 0f)
+                return "拉竿的成功面或条件不对。";
             if (cast.rewards == null || cast.rewards.Count != 2
                 || cast.rewards[0].pickMode != NightRewardPick.One
                 || cast.rewards[1].pickMode != NightRewardPick.One)

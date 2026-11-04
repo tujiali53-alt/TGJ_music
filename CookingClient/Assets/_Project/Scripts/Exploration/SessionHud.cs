@@ -47,7 +47,7 @@ namespace Cooking.Exploration
 
         public static string FormatDay(int dayIndex)
         {
-            return "Day " + dayIndex;
+            return "DAY" + dayIndex;
         }
 
         public static string FormatStatus(DayPhase phase)
