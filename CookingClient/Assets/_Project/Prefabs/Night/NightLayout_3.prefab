@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: 9103769555180388310}
   - component: {fileID: 5714263663692585454}
   m_Layer: 0
-  m_Name: Interaction_fishing
+  m_Name: Interaction_mushroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -640,8 +640,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e6c5cecf40cb241a5bbe70c4dd0de5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Cooking::Cooking.Exploration.InteractionPoint
-  eventId: event_fishing
-  definition: {fileID: 11400000, guid: f1d8a1e1054ce90498c8fc78613abcfd, type: 2}
+  eventId: event_mushroom
+  definition: {fileID: 11400000, guid: de5e9d49bf991b446a6383c13bbbf5ca, type: 2}
   hitCollider: {fileID: 6143435453452426780}
   player: {fileID: 0}
 --- !u!95 &5714263663692585454
@@ -685,7 +685,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5444389123515923854
 Transform:
   m_ObjectHideFlags: 0
@@ -863,7 +863,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2461233395180445285
 Transform:
   m_ObjectHideFlags: 0

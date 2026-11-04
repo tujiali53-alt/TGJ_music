@@ -31,6 +31,8 @@ namespace Cooking.Data
         public float conditionValue;
         public int successFaces;
         public List<NightReward> rewards;
+        public Sprite successPortrait;
+        public Sprite failPortrait;
     }
 
     [CreateAssetMenu(fileName = "NightEvent", menuName = "Cooking/Night Event")]
@@ -39,6 +41,7 @@ namespace Cooking.Data
         public string id;
         public string displayName;
         public int unlockNight;
+        public Sprite introPortrait;
         public List<NightOption> options;
         public List<NightLine> lines;
     }

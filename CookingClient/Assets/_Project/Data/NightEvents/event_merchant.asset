@@ -15,6 +15,7 @@ MonoBehaviour:
   id: event_merchant
   displayName: "\u6324\u7709\u5F04\u773C\u7684\u6295\u673A\u8005"
   unlockNight: 1
+  introPortrait: {fileID: 21300000, guid: e6589e813e571de449371da0961388b1, type: 3}
   options:
   - optionId: opt_merchant_trade
     order: 1
@@ -26,6 +27,8 @@ MonoBehaviour:
     - pickMode: 0
       ingredientId: ing_beef
       count: 5
+    successPortrait: {fileID: 21300000, guid: cfdf2882c7d3d1040bdea747af36b7ae, type: 3}
+    failPortrait: {fileID: 21300000, guid: a5532e74ddec65b4797fcd742d3cd65e, type: 3}
   - optionId: opt_merchant_leave
     order: 2
     displayName: "\u8F6C\u8EAB\u79BB\u5F00"
@@ -39,6 +42,8 @@ MonoBehaviour:
     - pickMode: 0
       ingredientId: ing_onion
       count: 5
+    successPortrait: {fileID: 21300000, guid: 5f47d63f54f417945b151124eea7898d, type: 3}
+    failPortrait: {fileID: 0}
   lines:
   - optionId: 
     phase: 0

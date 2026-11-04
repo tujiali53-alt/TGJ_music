@@ -61,6 +61,26 @@ namespace Cooking.EditorTools
             if (buffs.rows[0].successFaceDelta != -1 || buffs.rows[3].radiusBonus != 0.5f)
                 return "buff 首行应减 1 面，末行半径加 0.5。";
 
+            if (mushroom.introPortrait == null || mushroom.introPortrait.name != "Main_Normal")
+                return "蘑菇深埋于地的开场表情应为 Main_Normal。";
+            if (pull.successPortrait == null || pull.successPortrait.name != "Main_Happy"
+                || pull.failPortrait == null || pull.failPortrait.name != "Main_Worry")
+                return "连根拔起成功应为 Main_Happy，失败应为 Main_Worry。";
+            NightOption pinch = FindOption(mushroom, "opt_mushroom_pinch");
+            if (pinch.successPortrait == null || pinch.successPortrait.name != "Main_Smile" || pinch.failPortrait != null)
+                return "小心掰断成功应为 Main_Smile，没有失败表情。";
+
+            string shocked = PortraitOn(FindEvent("event_merchant"), true, "");
+            string mourn = PortraitOn(FindEvent("event_grave"), false, "opt_grave_mourn");
+            Sprite shockedSprite = FindPortraitSprite("Main_Shocked");
+            if (shockedSprite == null)
+            {
+                if (shocked != "" || mourn != "")
+                    return "Main_Shocked 不存在时，投机者开场和默哀成功应留空。";
+            }
+            else if (shocked != "Main_Shocked" || mourn != "Main_Shocked")
+                return "投机者开场和默哀成功应为 Main_Shocked。";
+
             string[] ids =
             {
                 "event_mushroom",
@@ -121,6 +141,7 @@ namespace Cooking.EditorTools
             ImportRewards(RequireSheet(dataSet, "NightRewards", result), events, result);
             ImportLines(RequireSheet(dataSet, "NightLines", result), events, result);
             ImportBuffs(RequireSheet(dataSet, "NightBuffs", result), result);
+            ImportPortraits(RequireSheet(dataSet, "NightPortraits", result), events, result);
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -369,6 +390,164 @@ namespace Cooking.EditorTools
             }
 
             EditorUtility.SetDirty(asset);
+        }
+
+        static readonly string[] PortraitFolders =
+        {
+            "Assets/_Project/Arts/player/emotion",
+            "Assets/_Project/Arts/player/Walking"
+        };
+
+        static void ImportPortraits(DataTable table, Dictionary<string, NightEventDefinition> events, ImportResult result)
+        {
+            if (table == null)
+                return;
+
+            foreach (DataRow row in table.Rows)
+            {
+                string eventId = Cell(row, "eventId");
+                if (string.IsNullOrWhiteSpace(eventId))
+                    continue;
+
+                eventId = eventId.Trim();
+                if (!events.TryGetValue(eventId, out NightEventDefinition asset))
+                {
+                    Debug.LogError("NightPortraits 找不到事件：" + eventId);
+                    result.ErrorCount++;
+                    continue;
+                }
+
+                string shown = Cell(row, "displayName");
+                if (!string.IsNullOrEmpty(shown) && shown != asset.displayName)
+                {
+                    Debug.LogError("NightPortraits 事件名不一致：" + eventId + " 表上是 " + shown);
+                    result.ErrorCount++;
+                }
+
+                if (TryLoadPortrait(Cell(row, "intro"), out Sprite intro, "NightPortraits/" + eventId + ".intro", result))
+                    asset.introPortrait = intro;
+                else
+                    asset.introPortrait = null;
+
+                AssignOptionPortrait(asset, 1, row, "option1Success", "option1Fail", result);
+                AssignOptionPortrait(asset, 2, row, "option2Success", "option2Fail", result);
+                AssignOptionPortrait(asset, 3, row, "option3Success", "option3Fail", result);
+                EditorUtility.SetDirty(asset);
+            }
+        }
+
+        static void AssignOptionPortrait(
+            NightEventDefinition asset,
+            int order,
+            DataRow row,
+            string successColumn,
+            string failColumn,
+            ImportResult result)
+        {
+            string successText = Cell(row, successColumn);
+            string failText = Cell(row, failColumn);
+            int index = FindOptionIndex(asset, order);
+            if (index < 0)
+            {
+                if (!IsBlankPortrait(successText) || !IsBlankPortrait(failText))
+                {
+                    Debug.LogError(asset.id + " 没有第 " + order + " 个选项，不能绑表情。");
+                    result.ErrorCount++;
+                }
+
+                return;
+            }
+
+            string context = "NightPortraits/" + asset.id + ".option" + order;
+            bool successOk = TryLoadPortrait(successText, out Sprite success, context + ".success", result);
+            bool failOk = TryLoadPortrait(failText, out Sprite fail, context + ".fail", result);
+            NightOption option = asset.options[index];
+            option.successPortrait = successOk ? success : null;
+            option.failPortrait = failOk ? fail : null;
+            asset.options[index] = option;
+        }
+
+        static int FindOptionIndex(NightEventDefinition asset, int order)
+        {
+            if (asset == null || asset.options == null)
+                return -1;
+
+            for (int i = 0; i < asset.options.Count; i++)
+            {
+                if (asset.options[i].order == order)
+                    return i;
+            }
+
+            return -1;
+        }
+
+        static bool IsBlankPortrait(string text)
+        {
+            return string.IsNullOrWhiteSpace(text) || text.Trim() == "-";
+        }
+
+        static bool TryLoadPortrait(string text, out Sprite sprite, string context, ImportResult result)
+        {
+            sprite = null;
+            if (IsBlankPortrait(text))
+                return true;
+
+            string name = text.Trim();
+            Sprite found = null;
+            int hits = 0;
+            for (int i = 0; i < PortraitFolders.Length; i++)
+            {
+                Sprite loaded = AssetDatabase.LoadAssetAtPath<Sprite>(PortraitFolders[i] + "/" + name + ".png");
+                if (loaded == null)
+                    continue;
+
+                hits++;
+                found = loaded;
+            }
+
+            if (hits == 0)
+            {
+                Debug.LogError("找不到表情 " + name + " @ " + context);
+                result.ErrorCount++;
+                return false;
+            }
+
+            if (hits > 1)
+            {
+                Debug.LogError("表情重名 " + name + " @ " + context);
+                result.ErrorCount++;
+                return false;
+            }
+
+            sprite = found;
+            return true;
+        }
+
+        static Sprite FindPortraitSprite(string name)
+        {
+            for (int i = 0; i < PortraitFolders.Length; i++)
+            {
+                Sprite loaded = AssetDatabase.LoadAssetAtPath<Sprite>(PortraitFolders[i] + "/" + name + ".png");
+                if (loaded != null)
+                    return loaded;
+            }
+
+            return null;
+        }
+
+        static string PortraitOn(NightEventDefinition asset, bool intro, string optionId)
+        {
+            if (asset == null)
+                return "";
+
+            if (intro)
+                return asset.introPortrait != null ? asset.introPortrait.name : "";
+
+            NightOption option = FindOption(asset, optionId);
+            if (option.successPortrait == null)
+                return "";
+
+            return option.successPortrait.name;
         }
 
         static NightEventDefinition FindOrCreateEvent(string id, ImportResult result)

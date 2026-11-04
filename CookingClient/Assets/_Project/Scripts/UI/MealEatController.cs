@@ -177,6 +177,8 @@ namespace Cooking.UI
             if (root.Flow.IsLoading)
                 return;
 
+            AudioManager.PlayClick();
+
             GameSession session = root.Session;
             bool hasFood = Plate.HasFood();
             if (session.MealsEaten >= MealsPerDay || !hasFood)
@@ -213,6 +215,7 @@ namespace Cooking.UI
             session.MealsEaten += 1;
             session.TodayDeliciousness = DeliciousnessScore.Average(session.AttemptScores, session.MealsEaten);
             session.HeldDish.Items.Clear();
+            AudioManager.PlayEat(today != null && result.Picture == DishPictureKind.Recipe ? today.id : "");
             Plate foundPlate = FindAnyObjectByType<Plate>(FindObjectsInactive.Include);
             if (foundPlate != null)
                 foundPlate.ClearAll();
@@ -242,6 +245,7 @@ namespace Cooking.UI
 
         public void ClosePanel()
         {
+            AudioManager.PlayCancel();
             StopComments();
             if (resultPanel != null)
                 resultPanel.SetActive(false);
@@ -258,6 +262,7 @@ namespace Cooking.UI
             if (root.Session.MealsEaten < 1)
                 return;
 
+            AudioManager.PlayClick();
             root.Session.Phase = DayPhase.Night;
             root.Flow.Load(SceneNames.Outing);
         }

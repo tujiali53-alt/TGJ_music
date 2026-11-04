@@ -23,6 +23,7 @@ public class MenuController : MonoBehaviour
 
     public void StartGame()
     {
+        AudioManager.PlayClick();
         GameRoot root = GameRoot.Instance;
         if (root == null || root.Flow == null)
         {
@@ -36,18 +37,21 @@ public class MenuController : MonoBehaviour
 
     public void OpenSettings()
     {
+        AudioManager.PlayClick();
         if (settingPanel != null)
             settingPanel.SetActive(true);
     }
 
     public void CloseSettings()
     {
+        AudioManager.PlayCancel();
         if (settingPanel != null)
             settingPanel.SetActive(false);
     }
 
     public void ExitGame()
     {
+        AudioManager.PlayClick();
         Application.Quit();
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;

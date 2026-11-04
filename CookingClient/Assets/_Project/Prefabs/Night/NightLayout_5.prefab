@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 1202565508102719458}
   - component: {fileID: 3294607232982847725}
   m_Layer: 0
-  m_Name: Interaction_merchant
+  m_Name: Interaction_grave_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -508,8 +508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e6c5cecf40cb241a5bbe70c4dd0de5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Cooking::Cooking.Exploration.InteractionPoint
-  eventId: event_merchant
-  definition: {fileID: 11400000, guid: 4c0c4d319f53d47429675b2127c8f19f, type: 2}
+  eventId: event_grave
+  definition: {fileID: 11400000, guid: b9684d33dfcd73d49b1efe50f0bd7c35, type: 2}
   hitCollider: {fileID: 7848747331835258303}
   player: {fileID: 0}
 --- !u!95 &3294607232982847725
@@ -909,7 +909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8958931390352581780
 Transform:
   m_ObjectHideFlags: 0
@@ -1087,7 +1087,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5979164731307156743
 Transform:
   m_ObjectHideFlags: 0

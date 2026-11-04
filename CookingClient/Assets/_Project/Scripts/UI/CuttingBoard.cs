@@ -104,6 +104,7 @@ namespace Cooking.UI
 
         public void CutHeld()
         {
+            AudioManager.PlayClick();
             for (int i = 0; i < held.Count; i++)
             {
                 IngredientInstance item = held[i];
@@ -115,6 +116,7 @@ namespace Cooking.UI
                     continue;
 
                 item.Shape = CutShape.Cut;
+                AudioManager.PlayCut(item.DefinitionId);
             }
         }
 

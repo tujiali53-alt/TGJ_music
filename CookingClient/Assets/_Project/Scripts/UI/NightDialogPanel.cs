@@ -19,6 +19,9 @@ namespace Cooking.UI
         [SerializeField] NightDicePanel dice;
         [SerializeField] DiaryLanguage language = DiaryLanguage.Zh;
         [SerializeField] GameObject playerDialogue;
+        [SerializeField] Image profileImage;
+        [SerializeField] GameObject dialogueFrame;
+        [SerializeField] GameObject dialogueName;
         [SerializeField] GameObject judgment;
         [SerializeField] GameObject successRoot;
         [SerializeField] GameObject failRoot;
@@ -40,6 +43,7 @@ namespace Cooking.UI
         bool resultMode;
         bool showingSuccess;
         bool optionsVisible;
+        bool loggedMissingShocked;
         int buffDelta;
         NightEventDefinition current;
 
@@ -94,6 +98,8 @@ namespace Cooking.UI
                 Debug.LogError("InteractionPanel 上需要有 NightDicePanel。", this);
             if (playerDialogue == null)
                 Debug.LogError("DialogPanel 下需要有 PlayerDialogue。", this);
+            if (profileImage == null)
+                Debug.LogError("PlayerDialogue 下需要有 PlayerProfileImage。", this);
             if (judgment == null)
                 Debug.LogError("DialogPanel 下需要有 DialogueJudgment。", this);
             if (successRoot == null || failRoot == null)
@@ -126,6 +132,14 @@ namespace Cooking.UI
             current = definition;
             buffDelta = buffFaceDelta;
             UsePlayerDialogue();
+            if (definition != null && definition.introPortrait == null)
+            {
+                if (definition.id == "event_merchant")
+                    NoteMissingShocked();
+                else
+                    Debug.LogError("事件缺少开场表情：" + definition.id, this);
+            }
+            ApplyPortrait(definition != null ? definition.introPortrait : null);
             choices.Clear();
             if (definition != null && definition.options != null)
             {
@@ -148,6 +162,10 @@ namespace Cooking.UI
             current = definition;
             choices.Clear();
             UseJudgment(success);
+            Sprite face = success ? option.successPortrait : option.failPortrait;
+            if (face == null && success && option.optionId == "opt_grave_mourn")
+                NoteMissingShocked();
+            ApplyPortrait(face);
             if (success)
                 FillSuccess(rewards);
             else
@@ -332,6 +350,7 @@ namespace Cooking.UI
                 return;
             }
 
+            AudioManager.PlayClick();
             if (panel != null)
                 panel.SetActive(false);
 
@@ -534,6 +553,30 @@ namespace Cooking.UI
                     playerDialogue = found.gameObject;
             }
 
+            if (playerDialogue != null)
+            {
+                if (profileImage == null)
+                {
+                    Transform found = playerDialogue.transform.Find("PlayerProfileImage");
+                    if (found != null)
+                        profileImage = found.GetComponent<Image>();
+                }
+
+                if (dialogueFrame == null)
+                {
+                    Transform found = playerDialogue.transform.Find("DialogueImage");
+                    if (found != null)
+                        dialogueFrame = found.gameObject;
+                }
+
+                if (dialogueName == null)
+                {
+                    Transform found = playerDialogue.transform.Find("UserNameText");
+                    if (found != null)
+                        dialogueName = found.gameObject;
+                }
+            }
+
             if (judgment == null)
             {
                 Transform found = panel.transform.Find("DialogueJudgment");
@@ -573,6 +616,12 @@ namespace Cooking.UI
             showingSuccess = false;
             if (playerDialogue != null)
                 playerDialogue.SetActive(true);
+            if (dialogueFrame != null)
+                dialogueFrame.SetActive(true);
+            if (dialogueName != null)
+                dialogueName.SetActive(true);
+            if (profileImage != null)
+                profileImage.gameObject.SetActive(true);
             if (bodyText != null)
                 bodyText.gameObject.SetActive(true);
             if (judgment != null)
@@ -584,7 +633,13 @@ namespace Cooking.UI
             resultMode = true;
             showingSuccess = success;
             if (playerDialogue != null)
-                playerDialogue.SetActive(false);
+                playerDialogue.SetActive(true);
+            if (dialogueFrame != null)
+                dialogueFrame.SetActive(false);
+            if (dialogueName != null)
+                dialogueName.SetActive(false);
+            if (profileImage != null)
+                profileImage.gameObject.SetActive(true);
             if (bodyText != null)
                 bodyText.gameObject.SetActive(false);
             if (judgment != null)
@@ -593,6 +648,24 @@ namespace Cooking.UI
                 successRoot.SetActive(success);
             if (failRoot != null)
                 failRoot.SetActive(!success);
+        }
+
+        void NoteMissingShocked()
+        {
+            if (loggedMissingShocked)
+                return;
+
+            loggedMissingShocked = true;
+            Debug.LogError("缺少表情 Main_Shocked。", this);
+        }
+
+        void ApplyPortrait(Sprite sprite)
+        {
+            if (profileImage == null || sprite == null)
+                return;
+
+            profileImage.sprite = sprite;
+            profileImage.color = Color.white;
         }
 
         void WriteLine()

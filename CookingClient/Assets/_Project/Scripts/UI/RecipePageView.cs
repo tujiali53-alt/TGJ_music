@@ -61,6 +61,7 @@ namespace Cooking.UI
             if (pageIndex <= 0)
                 return;
 
+            AudioManager.PlayPage();
             pageIndex--;
             ApplyPage();
         }
@@ -70,6 +71,7 @@ namespace Cooking.UI
             if (pageIndex >= pages.Count - 1)
                 return;
 
+            AudioManager.PlayPage();
             pageIndex++;
             ApplyPage();
         }

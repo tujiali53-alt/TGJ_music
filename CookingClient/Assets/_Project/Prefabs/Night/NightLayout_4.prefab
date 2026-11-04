@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8898938762992884605}
   - component: {fileID: 7061170708299553593}
   m_Layer: 0
-  m_Name: Interaction_grave
+  m_Name: Interaction_merchant_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e6c5cecf40cb241a5bbe70c4dd0de5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Cooking::Cooking.Exploration.InteractionPoint
-  eventId: event_grave
-  definition: {fileID: 11400000, guid: b9684d33dfcd73d49b1efe50f0bd7c35, type: 2}
+  eventId: event_merchant
+  definition: {fileID: 11400000, guid: 4c0c4d319f53d47429675b2127c8f19f, type: 2}
   hitCollider: {fileID: 886909227885784614}
   player: {fileID: 0}
 --- !u!95 &7061170708299553593
@@ -525,7 +525,7 @@ GameObject:
   - component: {fileID: 5204857301492731461}
   - component: {fileID: 3110116180819706215}
   m_Layer: 0
-  m_Name: Interaction_beasts
+  m_Name: Interaction_fishing_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -663,8 +663,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e6c5cecf40cb241a5bbe70c4dd0de5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Cooking::Cooking.Exploration.InteractionPoint
-  eventId: event_beasts
-  definition: {fileID: 11400000, guid: 31fbeb0098ee999479d6997d1874929a, type: 2}
+  eventId: event_fishing
+  definition: {fileID: 11400000, guid: f1d8a1e1054ce90498c8fc78613abcfd, type: 2}
   hitCollider: {fileID: 1863856662997502798}
   player: {fileID: 0}
 --- !u!95 &3110116180819706215
@@ -863,7 +863,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1748814945706756099
 Transform:
   m_ObjectHideFlags: 0
@@ -1094,7 +1094,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7600393750211858744
 Transform:
   m_ObjectHideFlags: 0

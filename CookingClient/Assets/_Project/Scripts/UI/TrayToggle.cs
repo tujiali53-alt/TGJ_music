@@ -68,6 +68,7 @@ namespace Cooking.UI
 
         public void CloseTray()
         {
+            AudioManager.PlayCancel();
             if (trayPanel != null)
                 trayPanel.SetActive(false);
         }

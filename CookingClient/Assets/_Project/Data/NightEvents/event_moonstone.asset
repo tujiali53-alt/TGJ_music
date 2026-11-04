@@ -15,6 +15,7 @@ MonoBehaviour:
   id: event_moonstone
   displayName: "\u6708\u5149\u6652\u5230\u7684\u77F3\u5934"
   unlockNight: 3
+  introPortrait: {fileID: 21300000, guid: cfdf2882c7d3d1040bdea747af36b7ae, type: 3}
   options:
   - optionId: opt_moon_look
     order: 1
@@ -26,6 +27,8 @@ MonoBehaviour:
     - pickMode: 0
       ingredientId: ing_shrimp
       count: 3
+    successPortrait: {fileID: 21300000, guid: e94ae6311ee3a3b41af55d8f4e9e88fc, type: 3}
+    failPortrait: {fileID: 0}
   - optionId: opt_moon_touch
     order: 2
     displayName: "\u89E6\u6478"
@@ -36,6 +39,8 @@ MonoBehaviour:
     - pickMode: 0
       ingredientId: ing_cucumber
       count: 5
+    successPortrait: {fileID: 21300000, guid: 8b356976984a41c4cb994867d0a90a79, type: 3}
+    failPortrait: {fileID: 0}
   lines:
   - optionId: 
     phase: 0

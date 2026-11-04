@@ -15,6 +15,7 @@ MonoBehaviour:
   id: event_grave
   displayName: "\u54C0\u60BC\u5730"
   unlockNight: 2
+  introPortrait: {fileID: 21300000, guid: 4923b551761e48244b270d507dcb11c2, type: 3}
   options:
   - optionId: opt_grave_mourn
     order: 1
@@ -26,6 +27,8 @@ MonoBehaviour:
     - pickMode: 0
       ingredientId: ing_pumpkin
       count: 5
+    successPortrait: {fileID: 21300000, guid: e6589e813e571de449371da0961388b1, type: 3}
+    failPortrait: {fileID: 0}
   - optionId: opt_grave_flower
     order: 2
     displayName: "\u732E\u82B1"
@@ -36,6 +39,8 @@ MonoBehaviour:
     - pickMode: 0
       ingredientId: ing_yam
       count: 5
+    successPortrait: {fileID: 21300000, guid: e94ae6311ee3a3b41af55d8f4e9e88fc, type: 3}
+    failPortrait: {fileID: 0}
   lines:
   - optionId: 
     phase: 0

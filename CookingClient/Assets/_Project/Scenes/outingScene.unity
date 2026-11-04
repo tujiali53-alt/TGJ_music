@@ -9232,8 +9232,11 @@ MonoBehaviour:
   option3: {fileID: 0}
   dice: {fileID: 0}
   language: 0
-  playerDialogue: {fileID: 0}
-  judgment: {fileID: 0}
+  playerDialogue: {fileID: 1836403794}
+  profileImage: {fileID: 1935419088}
+  dialogueFrame: {fileID: 1608266761}
+  dialogueName: {fileID: 1925775650}
+  judgment: {fileID: 1620501505}
   successRoot: {fileID: 0}
   failRoot: {fileID: 0}
   successBody: {fileID: 0}
@@ -10607,7 +10610,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1620501506
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11739,7 +11742,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1836403795
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16747,7 +16750,7 @@ GameObject:
   - component: {fileID: 1935419089}
   - component: {fileID: 1935419088}
   m_Layer: 5
-  m_Name: ProfilePicture
+  m_Name: PlayerProfileImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

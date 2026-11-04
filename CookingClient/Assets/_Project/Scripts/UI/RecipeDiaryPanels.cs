@@ -84,24 +84,28 @@ namespace Cooking.UI
 
         public void OpenRecipe()
         {
+            AudioManager.PlayClick();
             if (recipePanel != null)
                 recipePanel.SetActive(true);
         }
 
         public void CloseRecipe()
         {
+            AudioManager.PlayCancel();
             if (recipePanel != null)
                 recipePanel.SetActive(false);
         }
 
         public void OpenDiary()
         {
+            AudioManager.PlayClick();
             if (diaryPanel != null)
                 diaryPanel.SetActive(true);
         }
 
         public void CloseDiary()
         {
+            AudioManager.PlayCancel();
             if (diaryPanel != null)
                 diaryPanel.SetActive(false);
         }

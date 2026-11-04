@@ -107,6 +107,7 @@ namespace Cooking.Exploration
 
         void ConfirmSleep()
         {
+            AudioManager.PlayClick();
             GameRoot root = GameRoot.Instance;
             if (root == null)
                 return;
@@ -116,6 +117,7 @@ namespace Cooking.Exploration
 
         void ClosePanel()
         {
+            AudioManager.PlayCancel();
             if (bedPanel != null)
                 bedPanel.SetActive(false);
         }

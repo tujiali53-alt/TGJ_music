@@ -15,6 +15,7 @@ MonoBehaviour:
   id: event_fishing
   displayName: "\u9C7C\u94A9\u5F62\u72B6\u7684\u86AF\u8693"
   unlockNight: 2
+  introPortrait: {fileID: 21300000, guid: cfdf2882c7d3d1040bdea747af36b7ae, type: 3}
   options:
   - optionId: opt_fishing_cast
     order: 1
@@ -29,6 +30,8 @@ MonoBehaviour:
     - pickMode: 1
       ingredientId: ing_shrimp
       count: 3
+    successPortrait: {fileID: 21300000, guid: 0d9d4a104912594408a7937c4dd198fb, type: 3}
+    failPortrait: {fileID: 21300000, guid: 5f47d63f54f417945b151124eea7898d, type: 3}
   - optionId: opt_fishing_wait
     order: 2
     displayName: "\u9759\u5019\u65F6\u673A"
@@ -39,6 +42,8 @@ MonoBehaviour:
     - pickMode: 0
       ingredientId: ing_berry
       count: 2
+    successPortrait: {fileID: 21300000, guid: e94ae6311ee3a3b41af55d8f4e9e88fc, type: 3}
+    failPortrait: {fileID: 0}
   lines:
   - optionId: 
     phase: 0

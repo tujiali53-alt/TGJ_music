@@ -166,11 +166,13 @@ namespace Cooking.UI
             if (beginButton != null)
                 beginButton.gameObject.SetActive(false);
 
+            AudioManager.PlayClick();
             rollPlay = StartCoroutine(RollAfterAnimation());
         }
 
         IEnumerator RollAfterAnimation()
         {
+            AudioManager.Post("Play_Dice_Roll");
             NightRollResult result = NightCheck.Roll(option, buffDelta);
             if (diceAnimator != null)
             {
@@ -265,6 +267,7 @@ namespace Cooking.UI
 
         void OnConfirm()
         {
+            AudioManager.PlayClick();
             StopConfirmWait();
             StopRoll();
             bool success = lastRoll != null && lastRoll.Success;

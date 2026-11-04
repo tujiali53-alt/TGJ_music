@@ -92,6 +92,7 @@ namespace Cooking.UI
                     item.SeasoningIds = new List<string>();
 
                 item.SeasoningIds.Add(seasoning.id);
+                AudioManager.PlaySeasoning(seasoning.id);
                 BeginPour(food);
                 return;
             }
