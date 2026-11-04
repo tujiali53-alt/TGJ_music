@@ -53,7 +53,7 @@ namespace Cooking.Exploration
         public static string FormatStatus(DayPhase phase)
         {
             if (phase == DayPhase.Day)
-                return "daylight";
+                return "Daylight";
 
             return "Night";
         }

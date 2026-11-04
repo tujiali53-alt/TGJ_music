@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class MenuController : MonoBehaviour
 {
     [SerializeField] GameObject settingPanel;
+    [SerializeField] GameObject creditPanel;
 
     void Awake()
     {
@@ -15,10 +16,27 @@ public class MenuController : MonoBehaviour
                 settingPanel = panel.gameObject;
         }
 
+        if (creditPanel == null)
+        {
+            Transform panel = transform.Find("CreditPanel");
+            if (panel != null)
+                creditPanel = panel.gameObject;
+        }
+
+        if (creditPanel != null)
+            creditPanel.SetActive(false);
+        else
+            Debug.LogError("MeunScene 的 Canvas 下需要已经放好 CreditPanel。", this);
+
         Bind("HUDPanel/StartButton", StartGame);
         Bind("HUDPanel/SettingButton", OpenSettings);
         Bind("HUDPanel/ExitGameButton", ExitGame);
         Bind("SettingPanel/CloseButton", CloseSettings);
+
+        if (!Bind("HUDPanel/CreditButton", OpenCredits))
+            Debug.LogError("MeunScene 的 HUDPanel 下需要已经放好带 Button 的 CreditButton。", this);
+
+        Bind("CreditPanel/CloseButton", CloseCredits);
     }
 
     public void StartGame()
@@ -49,6 +67,20 @@ public class MenuController : MonoBehaviour
             settingPanel.SetActive(false);
     }
 
+    public void OpenCredits()
+    {
+        AudioManager.PlayClick();
+        if (creditPanel != null)
+            creditPanel.SetActive(true);
+    }
+
+    public void CloseCredits()
+    {
+        AudioManager.PlayCancel();
+        if (creditPanel != null)
+            creditPanel.SetActive(false);
+    }
+
     public void ExitGame()
     {
         AudioManager.PlayClick();
@@ -58,16 +90,17 @@ public class MenuController : MonoBehaviour
 #endif
     }
 
-    void Bind(string path, UnityEngine.Events.UnityAction action)
+    bool Bind(string path, UnityEngine.Events.UnityAction action)
     {
         Transform target = transform.Find(path);
         if (target == null)
-            return;
+            return false;
 
         Button button = target.GetComponent<Button>();
         if (button == null)
-            return;
+            return false;
 
         button.onClick.AddListener(action);
+        return true;
     }
 }
