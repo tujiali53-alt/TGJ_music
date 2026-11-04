@@ -110,6 +110,10 @@ namespace Cooking.Exploration
             if (dialog.IsOpen)
                 return;
 
+            NpcDialogPanel npcDialog = FindAnyObjectByType<NpcDialogPanel>(FindObjectsInactive.Include);
+            if (npcDialog != null && npcDialog.IsOpen)
+                return;
+
             NightDicePanel dice = dialog.GetComponent<NightDicePanel>();
             if (dice != null && dice.IsOpen)
                 return;

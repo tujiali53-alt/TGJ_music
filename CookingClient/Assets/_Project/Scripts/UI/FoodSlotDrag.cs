@@ -46,7 +46,7 @@ namespace Cooking.UI
                 return;
 
             FoodSlotView view = GetComponent<FoodSlotView>();
-            if (view == null || !view.InventorySlot || view.Shown == null)
+            if (view == null || !view.InventorySlot || view.ShowingProp || view.Shown == null)
                 return;
 
             takeOne = false;
@@ -86,7 +86,7 @@ namespace Cooking.UI
                 return;
 
             FoodSlotView view = GetComponent<FoodSlotView>();
-            if (view == null || view.Shown == null)
+            if (view == null || view.ShowingProp || view.Shown == null)
                 return;
 
             takeOne = view.InventorySlot;

@@ -26,6 +26,10 @@ namespace Cooking.UI
         IngredientInstance shown;
         IngredientDefinition shownDefinition;
         int shownQuantity;
+        bool showingProp;
+        string shownPropId;
+        Sprite shownPropSprite;
+        string shownPropDescription;
         Image background;
         Sprite normalSprite;
         bool hovered;
@@ -35,6 +39,10 @@ namespace Cooking.UI
         public bool InventorySlot => inventorySlot;
         public IngredientInstance Shown => shown;
         public IngredientDefinition ShownDefinition => shownDefinition;
+        public bool ShowingProp => showingProp;
+        public string ShownPropId => shownPropId;
+        public Sprite ShownPropSprite => shownPropSprite;
+        public string ShownPropDescription => shownPropDescription;
 
         void Awake()
         {
@@ -126,6 +134,10 @@ namespace Cooking.UI
 
         public void ShowStack(IngredientInstance item, int quantity, IngredientDefinition definition)
         {
+            showingProp = false;
+            shownPropId = null;
+            shownPropSprite = null;
+            shownPropDescription = "";
             shown = item;
             shownQuantity = quantity;
             shownDefinition = definition;
@@ -133,6 +145,21 @@ namespace Cooking.UI
                 return;
 
             Apply();
+        }
+
+        public void ShowProp(string propId, Sprite sprite, int quantity, string description)
+        {
+            showingProp = true;
+            shownPropId = propId;
+            shownPropSprite = sprite;
+            shownPropDescription = description ?? "";
+            shown = null;
+            shownDefinition = null;
+            shownQuantity = quantity;
+            if (drag != null && drag.IsDragging)
+                return;
+
+            ApplyProp();
         }
 
         void Apply()
@@ -166,6 +193,24 @@ namespace Cooking.UI
                 countText.text = has
                     ? "x" + shownQuantity + ShapeLabel(shown.Shape) + MethodLabel(shown.CookMethod)
                     : "";
+        }
+
+        void ApplyProp()
+        {
+            if (statusText != null)
+                statusText.text = "";
+
+            if (icon != null)
+            {
+                icon.enabled = shownPropSprite != null && shownQuantity > 0;
+                icon.preserveAspect = true;
+                icon.color = Color.white;
+                if (shownPropSprite != null)
+                    icon.sprite = shownPropSprite;
+            }
+
+            if (countText != null)
+                countText.text = shownQuantity > 0 ? "x" + shownQuantity : "";
         }
 
         void SetHovered(bool value)

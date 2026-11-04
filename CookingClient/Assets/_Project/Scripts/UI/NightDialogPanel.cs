@@ -22,6 +22,7 @@ namespace Cooking.UI
         [SerializeField] Image profileImage;
         [SerializeField] GameObject dialogueFrame;
         [SerializeField] GameObject dialogueName;
+        [SerializeField] TMP_Text nameText;
         [SerializeField] GameObject judgment;
         [SerializeField] GameObject successRoot;
         [SerializeField] GameObject failRoot;
@@ -44,6 +45,7 @@ namespace Cooking.UI
         bool optionsVisible;
         bool awaitingPlayerLine;
         bool loggedMissingShocked;
+        bool openForNight;
         Sprite pendingPortrait;
         int buffDelta;
         NightEventDefinition current;
@@ -131,6 +133,11 @@ namespace Cooking.UI
 
         public void OpenIntro(NightEventDefinition definition, int buffFaceDelta)
         {
+            NpcDialogPanel npcDialog = FindAnyObjectByType<NpcDialogPanel>(FindObjectsInactive.Include);
+            if (npcDialog != null)
+                npcDialog.YieldToNight();
+
+            openForNight = true;
             current = definition;
             buffDelta = buffFaceDelta;
             UsePlayerDialogue();
@@ -161,6 +168,7 @@ namespace Cooking.UI
             bool success,
             IList<NightReward> rewards)
         {
+            openForNight = true;
             current = definition;
             choices.Clear();
             pendingPortrait = success ? option.successPortrait : option.failPortrait;
@@ -188,11 +196,11 @@ namespace Cooking.UI
             }
         }
 
-        public bool IsOpen => panel != null && panel.activeSelf;
+        public bool IsOpen => openForNight && panel != null && panel.activeSelf;
 
         public void OnPanelClick(PointerEventData eventData)
         {
-            if (panel == null || !panel.activeSelf)
+            if (!openForNight || panel == null || !panel.activeSelf)
                 return;
 
             if (eventData != null)
@@ -239,8 +247,7 @@ namespace Cooking.UI
                 awaitingPlayerLine = false;
                 if (lines.Count == 0)
                 {
-                    if (panel != null)
-                        panel.SetActive(false);
+                    ClosePanel();
                     return;
                 }
 
@@ -264,14 +271,14 @@ namespace Cooking.UI
                 return;
             }
 
-            if (resultMode && panel != null)
+            if (resultMode)
             {
-                panel.SetActive(false);
+                ClosePanel();
                 return;
             }
 
-            if (!resultMode && optionsVisible && !HasActionable(choices) && panel != null)
-                panel.SetActive(false);
+            if (!resultMode && optionsVisible && !HasActionable(choices))
+                ClosePanel();
         }
 
         public bool HasActionableOption(NightEventDefinition definition)
@@ -362,7 +369,7 @@ namespace Cooking.UI
 
         void Choose(int index)
         {
-            if (resultMode || !optionsVisible || index < 0 || index >= choices.Count)
+            if (!openForNight || resultMode || !optionsVisible || index < 0 || index >= choices.Count)
                 return;
 
             if (index != aimedIndex)
@@ -381,8 +388,7 @@ namespace Cooking.UI
             }
 
             AudioManager.PlayClick();
-            if (panel != null)
-                panel.SetActive(false);
+            ClosePanel();
 
             if (dice != null)
                 dice.Open(current, option, buffDelta);
@@ -612,6 +618,9 @@ namespace Cooking.UI
                     if (found != null)
                         dialogueName = found.gameObject;
                 }
+
+                if (nameText == null && dialogueName != null)
+                    nameText = dialogueName.GetComponent<TMP_Text>();
             }
 
             if (judgment == null)
@@ -662,12 +671,21 @@ namespace Cooking.UI
                 dialogueFrame.SetActive(true);
             if (dialogueName != null)
                 dialogueName.SetActive(true);
+            if (openForNight && nameText != null)
+                nameText.text = "小鼻嘎";
             if (profileImage != null)
                 profileImage.gameObject.SetActive(true);
             if (bodyText != null)
                 bodyText.gameObject.SetActive(true);
             if (judgment != null)
                 judgment.SetActive(false);
+        }
+
+        void ClosePanel()
+        {
+            openForNight = false;
+            if (panel != null)
+                panel.SetActive(false);
         }
 
         void UseJudgment(bool success)

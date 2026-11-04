@@ -21,6 +21,10 @@ namespace Cooking.UI
         TMP_Text displayNameCh;
         TMP_Text displayNameEn;
         Image foodImage;
+        Image propImage;
+        TMP_Text propDescText;
+        GameObject attributeNames;
+        GameObject attributeValues;
         TMP_Text descriptionLabel;
         TMP_Text descriptionValue;
         TMP_Text kindLabel;
@@ -35,6 +39,7 @@ namespace Cooking.UI
         TMP_Text stateValue;
 
         bool bound;
+        bool loggedMissingPropChrome;
         readonly List<RaycastResult> hits = new List<RaycastResult>();
         readonly HashSet<string> missingIds = new HashSet<string>();
         PointerEventData pointerData;
@@ -75,6 +80,12 @@ namespace Cooking.UI
                 return;
             }
 
+            if (slot.ShowingProp)
+            {
+                ShowProp(slot);
+                return;
+            }
+
             Show(slot.Shown, slot.ShownDefinition);
         }
 
@@ -95,6 +106,7 @@ namespace Cooking.UI
             if (!panel.activeSelf)
                 panel.SetActive(true);
 
+            SetFoodChrome(true);
             SetText(displayNameText, IngredientDetailText.DisplayName(definition, language));
             SetText(displayNameCh, definition.displayName);
             SetText(displayNameEn, definition.displayNameEn);
@@ -121,6 +133,43 @@ namespace Cooking.UI
             WarnIfMissing("cook." + item.CookMethod);
             WarnIfMissing("state.joiner");
             SetText(stateValue, IngredientDetailText.State(catalog, item.Shape, item.CookMethod, language));
+        }
+
+        public void ShowProp(FoodSlotView slot)
+        {
+            if (slot == null || !slot.ShowingProp)
+            {
+                Hide();
+                return;
+            }
+
+            if (!bound)
+                Bind();
+
+            if (panel == null)
+                return;
+
+            if (propImage == null || propDescText == null)
+            {
+                if (!loggedMissingPropChrome)
+                {
+                    loggedMissingPropChrome = true;
+                    Debug.LogError("DetailsPanel 下需要有 PropImage 和 PropDescText。", panel);
+                }
+                return;
+            }
+
+            if (!panel.activeSelf)
+                panel.SetActive(true);
+
+            SetFoodChrome(false);
+            propImage.gameObject.SetActive(true);
+            propDescText.gameObject.SetActive(true);
+            propImage.sprite = slot.ShownPropSprite;
+            propImage.enabled = slot.ShownPropSprite != null;
+            propImage.preserveAspect = true;
+            propImage.color = Color.white;
+            propDescText.text = slot.ShownPropDescription ?? "";
         }
 
         public void Hide()
@@ -168,6 +217,29 @@ namespace Cooking.UI
             displayNameText = FindText(names, "DisplayName");
             displayNameCh = Require(names, "DisplayName_ch");
             displayNameEn = Require(names, "DisplayName_eng");
+            attributeNames = names.gameObject;
+            attributeValues = values.gameObject;
+
+            Transform propPicture = panel.transform.Find("PropImage");
+            if (propPicture == null)
+                Debug.LogError("DetailsPanel 下需要有 PropImage。", panel);
+            else
+            {
+                propImage = propPicture.GetComponent<Image>();
+                if (propImage == null)
+                    Debug.LogError("DetailsPanel/PropImage 需要有 Image。", propPicture);
+            }
+
+            Transform propText = panel.transform.Find("PropDescText");
+            if (propText == null)
+                Debug.LogError("DetailsPanel 下需要有 PropDescText。", panel);
+            else
+            {
+                propDescText = propText.GetComponent<TMP_Text>();
+                if (propDescText == null)
+                    Debug.LogError("DetailsPanel/PropDescText 需要有 TextMeshPro 文字。", propText);
+            }
+
             Transform food = panel.transform.Find("FoodImage");
             if (food == null)
                 Debug.LogError("DetailsPanel 下需要有 FoodImage。", panel);
@@ -247,6 +319,20 @@ namespace Cooking.UI
 
             if (missingIds.Add(id))
                 Debug.LogError("AttributeNames 缺少 id：" + id, catalog != null ? catalog : this);
+        }
+
+        void SetFoodChrome(bool food)
+        {
+            if (attributeNames != null)
+                attributeNames.SetActive(food);
+            if (attributeValues != null)
+                attributeValues.SetActive(food);
+            if (foodImage != null)
+                foodImage.gameObject.SetActive(food);
+            if (propImage != null)
+                propImage.gameObject.SetActive(!food);
+            if (propDescText != null)
+                propDescText.gameObject.SetActive(!food);
         }
 
         static void SetText(TMP_Text target, string value)

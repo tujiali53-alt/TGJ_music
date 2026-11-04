@@ -20,6 +20,8 @@ namespace Cooking.Runtime
         public List<NightLogEntry> NightLog = new List<NightLogEntry>();
         public List<string> CorrectRecipeIds = new List<string>();
         public List<string> DiarySeenIds = new List<string>();
+        public List<string> ResolvedNpcIds = new List<string>();
+        public List<PropStack> Props = new List<PropStack>();
 
         public static GameSession NewGame()
         {
@@ -39,7 +41,9 @@ namespace Cooking.Runtime
                 RevealedRewardOptionIds = new List<string>(),
                 NightLog = new List<NightLogEntry>(),
                 CorrectRecipeIds = new List<string>(),
-                DiarySeenIds = new List<string>()
+                DiarySeenIds = new List<string>(),
+                ResolvedNpcIds = new List<string>(),
+                Props = new List<PropStack>()
             };
         }
 
@@ -92,6 +96,12 @@ namespace Cooking.Runtime
             AttemptScores = new float[3];
             AttemptComments = new string[3][];
         }
+    }
+
+    public sealed class PropStack
+    {
+        public string PropId;
+        public int Quantity = 1;
     }
 }
 

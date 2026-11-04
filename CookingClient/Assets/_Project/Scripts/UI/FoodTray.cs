@@ -12,9 +12,11 @@ namespace Cooking.UI
     {
         [SerializeField] RectTransform content;
         [SerializeField] IngredientDefinition[] definitions;
+        [SerializeField] NpcCatalog npcCatalog;
 
         readonly List<FoodSlotView> slots = new List<FoodSlotView>();
         readonly List<Stack> stacks = new List<Stack>();
+        readonly List<PropStack> props = new List<PropStack>();
 
         void Awake()
         {
@@ -27,6 +29,9 @@ namespace Cooking.UI
 
             if (content == null)
                 Debug.LogError("TrayPanel 下需要有 InventoryScroll/Viewport/InventoryContent。", this);
+
+            if (npcCatalog == null)
+                Debug.LogError("TrayPanel 需要绑上 NpcCatalog。", this);
         }
 
         void LateUpdate()
@@ -36,6 +41,7 @@ namespace Cooking.UI
 
             CollectSlots();
             BuildStacks();
+            BuildProps();
             for (int i = 0; i < slots.Count; i++)
             {
                 FoodSlotView slot = slots[i];
@@ -47,6 +53,18 @@ namespace Cooking.UI
                 {
                     Stack stack = stacks[index];
                     slot.ShowStack(stack.Head, stack.Quantity, FindDefinition(stack.Head.DefinitionId));
+                }
+                else if (index >= stacks.Count && index - stacks.Count < props.Count)
+                {
+                    PropStack prop = props[index - stacks.Count];
+                    NpcProp definition = npcCatalog != null ? npcCatalog.FindProp(prop.PropId) : null;
+                    Sprite sprite = definition != null ? definition.sprite : null;
+                    string description = definition != null
+                        ? NpcCatalog.Pick(DiaryLanguage.Zh, definition.descriptionZh, definition.descriptionEn)
+                        : "";
+                    if (definition == null && npcCatalog != null)
+                        Debug.LogError("NpcCatalog 里没有道具 " + prop.PropId + "。", npcCatalog);
+                    slot.ShowProp(prop.PropId, sprite, prop.Quantity, description);
                 }
                 else
                     slot.ShowStack(null, 0, null);
@@ -95,6 +113,42 @@ namespace Cooking.UI
                     {
                         Key = key,
                         Head = item,
+                        Quantity = item.Quantity
+                    });
+                }
+                else
+                    match.Quantity += item.Quantity;
+            }
+        }
+
+        void BuildProps()
+        {
+            props.Clear();
+            GameRoot root = GameRoot.Instance;
+            if (root == null || root.Session == null || root.Session.Props == null)
+                return;
+
+            for (int i = 0; i < root.Session.Props.Count; i++)
+            {
+                PropStack item = root.Session.Props[i];
+                if (item == null || item.Quantity <= 0 || string.IsNullOrEmpty(item.PropId))
+                    continue;
+
+                PropStack match = null;
+                for (int s = 0; s < props.Count; s++)
+                {
+                    if (props[s].PropId == item.PropId)
+                    {
+                        match = props[s];
+                        break;
+                    }
+                }
+
+                if (match == null)
+                {
+                    props.Add(new PropStack
+                    {
+                        PropId = item.PropId,
                         Quantity = item.Quantity
                     });
                 }
