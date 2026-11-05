@@ -167,6 +167,7 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: ea355513fcbab4349bcca24524766206, type: 2}
+  legacyBusVolumeCurve: 1
 --- !u!114 &3388775302939993076
 MonoBehaviour:
   m_ObjectHideFlags: 0

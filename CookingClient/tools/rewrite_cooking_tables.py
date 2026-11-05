@@ -65,7 +65,6 @@ sheet(
         ("season_pepper", "黑胡椒", ""),
         ("season_sugar", "糖", ""),
         ("season_sauce", "酱料", ""),
-        ("season_spice", "香料", ""),
     ],
 )
 
@@ -80,7 +79,7 @@ sheet(
         ("recipe_day4", "幽灵布丁船", 4, "", "", ""),
         ("recipe_day5", "海鲜杂烩饭", 5, "", "Assets/_Project/Arts/UI/Recipe/Recipe_Day5.png", ""),
         ("recipe_day6", "鸟巢山药饼", 6, "", "", ""),
-        ("recipe_day7", "七日火锅", 7, "", "", ""),
+        ("recipe_day7", "七日火锅", 7, "Assets/_Project/Arts/Food/food_hotpot.png", "", ""),
     ],
 )
 
@@ -91,29 +90,29 @@ sheet(
     ["recipeId", "ingredientId", "shape", "cookMethod", "count"],
     [
         # DAY1：白蘑菇切片 → 炒至焦香 → 炖煮
-        ("recipe_day1", "ing_mushroom", "Slice", "BoiledAndFried", 1),
-        # DAY2：牛肉/洋葱/番茄切丁炒；鸡蛋焖煮
-        ("recipe_day2", "ing_beef", "Dice", "Fried", 1),
-        ("recipe_day2", "ing_onion", "Dice", "Fried", 1),
-        ("recipe_day2", "ing_tomato", "Dice", "Fried", 1),
-        ("recipe_day2", "ing_egg", "Whole", "Boiled", 1),
-        # DAY3：玉米鱼切块香煎；蜜莓果切丁熬酱
-        ("recipe_day3", "ing_cornfish", "Dice", "Fried", 1),
-        ("recipe_day3", "ing_berry", "Dice", "Boiled", 1),
+        ("recipe_day1", "ing_mushroom", "Cut", "BoiledAndFried", 1),
+        # DAY2：牛肉/洋葱/番茄切丁煎；熟鸡蛋煮
+        ("recipe_day2", "ing_beef", "Cut", "Fried", 1),
+        ("recipe_day2", "ing_onion", "Cut", "Fried", 1),
+        ("recipe_day2", "ing_tomato", "Cut", "Fried", 1),
+        ("recipe_day2", "ing_doneegg", "Whole", "Boiled", 1),
+        # DAY3：玉米鱼切块香煎；蜜莓果切小丁熬酱
+        ("recipe_day3", "ing_cornfish", "Cut", "Fried", 1),
+        ("recipe_day3", "ing_berry", "Cut", "Boiled", 1),
         # DAY4：南瓜切块煮泥；蜜莓装饰
-        ("recipe_day4", "ing_pumpkin", "Dice", "Boiled", 1),
+        ("recipe_day4", "ing_pumpkin", "Cut", "Boiled", 1),
         ("recipe_day4", "ing_berry", "Whole", "Raw", 1),
-        # DAY5：洋葱番茄炒酱；米炒；鱼虾焖
-        ("recipe_day5", "ing_onion", "Dice", "Fried", 1),
-        ("recipe_day5", "ing_tomato", "Dice", "Fried", 1),
-        ("recipe_day5", "ing_rice", "Whole", "Fried", 1),
-        ("recipe_day5", "ing_cornfish", "Dice", "Boiled", 1),
+        # DAY5：洋葱番茄炒酱后焖；米翻炒后焖；鱼虾焖
+        ("recipe_day5", "ing_onion", "Cut", "BoiledAndFried", 1),
+        ("recipe_day5", "ing_tomato", "Cut", "BoiledAndFried", 1),
+        ("recipe_day5", "ing_rice", "Whole", "BoiledAndFried", 1),
+        ("recipe_day5", "ing_cornfish", "Cut", "Boiled", 1),
         ("recipe_day5", "ing_shrimp", "Whole", "Boiled", 1),
         # DAY6：山药丝煎饼；熟蛋丁/番茄丁/黄瓜片生拌
-        ("recipe_day6", "ing_yam", "Shred", "Fried", 1),
-        ("recipe_day6", "ing_doneegg", "Dice", "Raw", 1),
-        ("recipe_day6", "ing_tomato", "Dice", "Raw", 1),
-        ("recipe_day6", "ing_cucumber", "Slice", "Raw", 1),
+        ("recipe_day6", "ing_yam", "Cut", "Fried", 1),
+        ("recipe_day6", "ing_doneegg", "Cut", "Raw", 1),
+        ("recipe_day6", "ing_tomato", "Cut", "Raw", 1),
+        ("recipe_day6", "ing_cucumber", "Cut", "Raw", 1),
         # DAY7：空
     ],
 )
@@ -126,13 +125,12 @@ sheet(
         # DAY1：锅中放油炒蘑菇 → 盐调味
         ("recipe_day1", "season_oil", "ing_mushroom", 1),
         ("recipe_day1", "season_salt", "ing_mushroom", 1),
-        # DAY2：油炒洋葱/牛肉加盐；出锅前蛋上黑胡椒与香料
+        # DAY2：油盐炒洋葱/牛肉；出锅前熟鸡蛋上黑胡椒
         ("recipe_day2", "season_oil", "ing_onion", 1),
         ("recipe_day2", "season_salt", "ing_onion", 1),
         ("recipe_day2", "season_oil", "ing_beef", 1),
         ("recipe_day2", "season_salt", "ing_beef", 1),
-        ("recipe_day2", "season_pepper", "ing_egg", 1),
-        ("recipe_day2", "season_spice", "ing_egg", 1),
+        ("recipe_day2", "season_pepper", "ing_doneegg", 1),
         # DAY3：蜜莓加糖；鱼煎时油/盐/黑胡椒
         ("recipe_day3", "season_sugar", "ing_berry", 1),
         ("recipe_day3", "season_oil", "ing_cornfish", 1),
@@ -171,10 +169,10 @@ sheet(
         ("recipe_day1", 3, "开始炖煮。", "Boil", "ing_mushroom", "BoiledAndFried", ""),
         ("recipe_day1", 4, "记得使用盐调味。", "Season", "ing_mushroom", "BoiledAndFried", "season_salt"),
         # DAY2
-        ("recipe_day2", 1, "牛肉、洋葱、番茄切丁。", "Cut", "ing_beef", "Raw", ""),
+        ("recipe_day2", 1, "牛肉、洋葱、番茄切丁", "Cut", "ing_beef", "Raw", ""),
         ("recipe_day2", 2, "锅中放油，分别加入洋葱和牛肉炒至出水，加盐。", "Fry", "ing_beef", "Fried", "season_oil"),
         ("recipe_day2", 3, "倒入番茄丁，收浓汤汁。", "Fry", "ing_tomato", "Fried", ""),
-        ("recipe_day2", 4, "打入鸡蛋焖煮，出锅前加入黑胡椒与香料调味。", "Boil", "ing_egg", "Boiled", "season_pepper"),
+        ("recipe_day2", 4, "打入鸡蛋焖煮，出锅前加入黑胡椒调味。", "Boil", "ing_egg", "Boiled", "season_pepper"),
         # DAY3
         ("recipe_day3", 1, "玉米鱼切块，蜜莓果切小丁。", "Cut", "ing_cornfish", "Raw", ""),
         ("recipe_day3", 2, "蜜莓果加糖，煮到浓稠。", "Boil", "ing_berry", "Boiled", "season_sugar"),
@@ -191,10 +189,10 @@ sheet(
         ("recipe_day5", 4, "铺上处理好的鱼和虾进行焖煮。", "Boil", "ing_cornfish", "Boiled", ""),
         ("recipe_day5", 5, "出锅前可再次进行调味。", "Season", "ing_shrimp", "Boiled", "season_pepper"),
         # DAY6
-        ("recipe_day6", 1, "鸡蛋煮熟后切丁，番茄切丁、黄瓜切片，山药切丝。", "Cut", "ing_yam", "Raw", ""),
-        ("recipe_day6", 2, "山药丝加入盐和黑胡椒调味，锅中加油，将山药丝煎成饼。", "Fry", "ing_yam", "Fried", "season_oil"),
-        ("recipe_day6", 3, "将鸡蛋丁、番茄丁、黄瓜片与沙拉酱、黑胡椒拌匀。", "Season", "ing_doneegg", "Raw", "season_sauce"),
-        ("recipe_day6", 4, "组装：取一张山药饼固定成碗状，中间放上拌好的沙拉。", "Plate", "ing_yam", "Fried", ""),
+        ("recipe_day6", 1, "鸡蛋煮熟后切丁，番茄切丁、黄瓜切片，山药切丝", "Cut", "ing_yam", "Raw", ""),
+        ("recipe_day6", 2, "山药丝加入盐和黑胡椒调味，锅中加油，将山药丝煎成饼", "Fry", "ing_yam", "Fried", "season_oil"),
+        ("recipe_day6", 3, "将鸡蛋丁、番茄丁、黄瓜片与沙拉酱、黑胡椒拌匀", "Season", "ing_doneegg", "Raw", "season_sauce"),
+        ("recipe_day6", 4, "组装，取一张山药饼固定成碗状，中间放上拌好的沙拉。", "Plate", "ing_yam", "Fried", ""),
     ],
 )
 

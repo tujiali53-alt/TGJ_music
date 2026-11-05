@@ -43,19 +43,10 @@ MonoBehaviour:
   - seasoningId: season_oil
     targetIngredientId: ing_onion
     count: 1
-  - seasoningId: season_pepper
-    targetIngredientId: ing_onion
-    count: 1
   - seasoningId: season_oil
     targetIngredientId: ing_tomato
     count: 1
-  - seasoningId: season_pepper
-    targetIngredientId: ing_tomato
-    count: 1
   - seasoningId: season_salt
-    targetIngredientId: ing_rice
-    count: 1
-  - seasoningId: season_pepper
     targetIngredientId: ing_rice
     count: 1
   - seasoningId: season_pepper
@@ -66,7 +57,7 @@ MonoBehaviour:
     count: 1
   steps:
   - order: 1
-    hintText: "\u9C7C\u5207\u5F00\uFF0C\u5904\u7406\u597D\u867E\u3002"
+    hintText: "\u9C7C\u5207\u5757\uFF0C\u5904\u7406\u597D\u867E\u3002"
     action: 0
     ingredientId: ing_cornfish
     cookMethod: 0

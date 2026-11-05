@@ -1,0 +1,6 @@
+Auxiliary Bus	ID	Name			Wwise Object Path	Notes
+	1290916568	Reverb_Kitchen			\MyUnit\Master Audio Bus\SFX\Reverb_Kitchen	
+
+Effect plug-ins	ID	Name	Type				Notes
+	1990128658	Room_Medium	Wwise RoomVerb			
+
