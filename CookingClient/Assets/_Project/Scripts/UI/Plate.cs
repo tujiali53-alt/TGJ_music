@@ -15,11 +15,26 @@ namespace Cooking.UI
 
         void Awake()
         {
-            current = this;
             tokens = new FoodTokens(transform);
             tokens.Collect();
             if (tokens.TokenCount == 0)
-                Debug.LogError("Plate 下需要已经摆好的食物令牌。", this);
+                Debug.LogError(name + " 下需要已经摆好的食物令牌。", this);
+        }
+
+        void OnEnable()
+        {
+            current = this;
+            if (tokens == null)
+            {
+                tokens = new FoodTokens(transform);
+                tokens.Collect();
+            }
+        }
+
+        void OnDisable()
+        {
+            if (current == this)
+                current = null;
         }
 
         public bool TryPlace(IngredientInstance item)
@@ -84,6 +99,12 @@ namespace Cooking.UI
         {
             if (tokens != null)
                 tokens.ClearAll();
+        }
+
+        public static void ClearActive()
+        {
+            if (current != null)
+                current.ClearAll();
         }
 
         public static bool HasFood()

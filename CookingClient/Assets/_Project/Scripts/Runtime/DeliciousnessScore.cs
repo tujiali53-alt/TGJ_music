@@ -151,6 +151,7 @@ namespace Cooking.Runtime
             }
 
             bool recipeMatch = RecipeMatcher.Matches(plate, definitions, recipe);
+            bool freeformPicture = RecipeMatcher.FreeformPicture(plate, definitions, recipe);
             if (recipeMatch)
             {
                 result.Score += RecipeMatchBonus;
@@ -162,10 +163,10 @@ namespace Cooking.Runtime
                 result.Picture = DishPictureKind.Charcoal;
                 result.SummarySprite = presentation != null ? presentation.charcoalSprite : null;
             }
-            else if (recipeMatch)
+            else if (recipeMatch || freeformPicture)
             {
                 result.Picture = DishPictureKind.Recipe;
-                result.SummarySprite = recipe.finishedSprite;
+                result.SummarySprite = recipe != null ? recipe.finishedSprite : null;
             }
             else
             {

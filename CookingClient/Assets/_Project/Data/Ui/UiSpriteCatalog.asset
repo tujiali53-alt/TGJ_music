@@ -73,3 +73,6 @@ MonoBehaviour:
   - id: ui.setting
     spriteZh: {fileID: 21300000, guid: 193a444680681d64b83af8fbfec91b1a, type: 3}
     spriteEn: {fileID: 21300000, guid: e5c2558ee647c7c4591fbfa23328f3a4, type: 3}
+  - id: ui.settingCooking
+    spriteZh: {fileID: 21300000, guid: 0ee178ce154178d4bbccaa77e22a3be0, type: 3}
+    spriteEn: {fileID: 21300000, guid: 0ab66431d39510e4b94a3ae02954bcb3, type: 3}

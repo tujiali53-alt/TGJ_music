@@ -216,9 +216,7 @@ namespace Cooking.UI
             session.TodayDeliciousness = DeliciousnessScore.Average(session.AttemptScores, session.MealsEaten);
             session.HeldDish.Items.Clear();
             AudioManager.PlayEat(today != null && result.Picture == DishPictureKind.Recipe ? today.id : "");
-            Plate foundPlate = FindAnyObjectByType<Plate>(FindObjectsInactive.Include);
-            if (foundPlate != null)
-                foundPlate.ClearAll();
+            Plate.ClearActive();
 
             lastResult = result;
             resolving = true;
@@ -435,7 +433,10 @@ namespace Cooking.UI
                 RecipeDefinition recipe = recipes[i];
                 if (recipe == null || recipe.unlockDay < 1 || recipe.unlockDay > session.DayIndex)
                     continue;
-                if (!RecipeMatcher.Matches(plate, definitions, recipe))
+                bool matched = RecipeMatcher.Matches(plate, definitions, recipe)
+                    || (recipe.unlockDay == session.DayIndex
+                        && RecipeMatcher.FreeformPicture(plate, definitions, recipe));
+                if (!matched)
                     continue;
                 if (best == null || recipe.unlockDay > best.unlockDay)
                     best = recipe;

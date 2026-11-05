@@ -5,6 +5,37 @@ namespace Cooking.Runtime
 {
     public static class RecipeMatcher
     {
+        public static bool IsFreeform(RecipeDefinition recipe)
+        {
+            return recipe != null
+                && (recipe.ingredients == null || recipe.ingredients.Count == 0)
+                && recipe.finishedSprite != null;
+        }
+
+        public static bool FreeformPicture(
+            IList<IngredientInstance> plate,
+            IList<IngredientDefinition> definitions,
+            RecipeDefinition recipe)
+        {
+            if (!IsFreeform(recipe) || plate == null)
+                return false;
+
+            bool anyFood = false;
+            for (int i = 0; i < plate.Count; i++)
+            {
+                IngredientInstance item = plate[i];
+                if (item == null || item.Quantity <= 0)
+                    continue;
+
+                anyFood = true;
+                IngredientDefinition definition = Find(definitions, item.DefinitionId);
+                if (definition != null && item.Doneness >= definition.maxDoneness)
+                    return false;
+            }
+
+            return anyFood;
+        }
+
         public static bool Matches(
             IList<IngredientInstance> plate,
             IList<IngredientDefinition> definitions,

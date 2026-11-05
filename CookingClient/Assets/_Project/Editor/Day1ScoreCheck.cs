@@ -291,14 +291,19 @@ namespace Cooking.EditorTools
                 Portion("ing_potato", CutShape.Cut, CookMethod.Boiled, 130f)
             };
 
+            Texture2D finishedTexture = new Texture2D(1, 1);
+            Sprite finished = Sprite.Create(finishedTexture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f));
+            hotpot.finishedSprite = finished;
             DishResult result = DeliciousnessScore.Evaluate(plate, definitions, hotpot, null);
+            string error = null;
             if (!Near(result.Score, 60f))
-                return "没有成菜要求的火锅不加调味分，应为 60，实际 " + result.Score;
+                error = "没有成菜要求的火锅不加调味分，应为 60，实际 " + result.Score;
+            else if (result.Picture != DishPictureKind.Recipe || result.SummarySprite != finished)
+                error = "火锅应使用成品图。";
 
-            if (result.Picture != DishPictureKind.Loose)
-                return "火锅不使用成品图。";
-
-            return null;
+            Object.DestroyImmediate(finished);
+            Object.DestroyImmediate(finishedTexture);
+            return error;
         }
 
         static string CheckMeatAndVegetable(List<IngredientDefinition> definitions, IngredientDefinition beef, IngredientDefinition onion)
