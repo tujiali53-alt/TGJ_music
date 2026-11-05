@@ -18,6 +18,13 @@
     "StaticLib": "AkRoomVerbFX"
    },
    {
+    "LibName": "Wwise Pitch Shifter",
+    "LibId": "8912899",
+    "Type": "Effect",
+    "DLL": "AkPitchShifter",
+    "StaticLib": "AkPitchShifterFX"
+   },
+   {
     "LibName": "System",
     "LibId": "11403271",
     "Type": "AudioDevice"
@@ -28,6 +35,6 @@
     "Type": "AudioDevice"
    }
   ],
-  "FileHash": "{8ADE3114-4BC6-16E2-44D8-539BD5111B3E}"
+  "FileHash": "{531C5599-1C5C-B8FC-86E7-41F316DC6850}"
  }
 }

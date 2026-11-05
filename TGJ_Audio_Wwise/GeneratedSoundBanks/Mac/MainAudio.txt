@@ -58,6 +58,9 @@ State	ID	Name	State Group			Notes
 	1011622525	Night	Music_GamePhase			
 	2607556080	Menu	Music_GamePhase			
 
+Effect plug-ins	ID	Name	Type				Notes
+	3948262040	Octave_Down	Wwise Pitch Shifter			
+
 Source plug-ins	ID	Name	Type		Wwise Object Path	Notes
 	1007474679	Silence	Wwise Silence		\Containers\MyUnit\SFX\SFX_Outing\Ambience\Cricket\Silence_10s\Silence	
 
@@ -75,13 +78,15 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	217892742	BGM_v3_bpm83_44	.cache\4A\{4A5C36D0-9886-4809-61FD-A90DCE1FCB73}.wem		\Containers\MyUnit\Music\Switch_BGM\BGM_Day_V3\BGM_v3_bpm83_44\BGM_v3_bpm83_44		12769252
 	235589139	Squeeze_Sauce_02	.cache\94\{94064B67-25A2-B806-0E57-8B465CD18748}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Sauce\Squeeze_Sauce_02		144812
 	248929665	Pour_Salt_Sugar_01_sugar	.cache\F2\{F2E72408-75BB-B5EF-A2D3-E0107EE7726D}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Sugar\Pour_Salt_Sugar_01_sugar		264248
+	270195829	Dice_Roll_02	.cache\C6\{C6A17212-925B-19D6-20C1-01CA7570A600}.wem		\Containers\MyUnit\SFX\SFX_Outing\Random_Dice_Roll\Dice_Roll_02		532192
 	273339741	Cricket_02	.cache\FB\{FBA0C073-42E4-A6E0-98C8-6873792C5DF9}.wem		\Containers\MyUnit\SFX\SFX_Outing\Ambience\Cricket\Cricket\Cricket_02		819068
+	275888584	Dice_Roll_03	.cache\3B\{3B56AB2A-F8B3-F5FE-26F3-F26117FC0D31}.wem		\Containers\MyUnit\SFX\SFX_Outing\Random_Dice_Roll\Dice_Roll_03		514940
 	283535523	Cut_Cucumber	.cache\99\{993C764C-C4BB-15AE-0914-EBC103A7B6FB}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Cucumber		310640
 	294930407	frying_lp_01	.cache\61\{612841B2-35BC-8C30-2E6E-90EC35CDC274}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Pot\Random_Pot_Fry_Loop\frying_lp_01		921772
 	336913223	Cut_Onion	.cache\23\{23D4AB08-EE5B-4029-2CD4-1F353B45E199}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Onion		384096
 	341525343	Cut_Pumpkin	.cache\E3\{E3329CAD-A422-D73B-DF5D-7BFE64DF591C}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Pumpkin		478804
 	384185100	Cut_CornFish	.cache\34\{34DFB3C3-09D3-2E79-8DB6-913986414237}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_CornFish		384096
-	420747195	UI_Click	.cache\18\{189A5522-6CC0-EE22-CBE8-258E282DCF19}.wem		\Containers\MyUnit\UI\UI_Button\UI_Click		123692
+	420747195	UI_Click	.cache\4A\{4AC0F483-A90B-D273-7E8C-EA17DC8A8A75}.wem		\Containers\MyUnit\UI\UI_Button\UI_Click		123692
 	429307745	Pour_Oil_03	.cache\0F\{0F1A4335-26DB-94F8-66E6-A84D5DADCFD4}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Oil\Pour_Oil_03		244884
 	455735761	Eat_Normal	.cache\AB\{AB6AD8EE-5FA5-1150-038B-C599B637A7CE}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Eat\Eat_Normal		474240
 	456185262	Pour_Salt_Sugar_02	.cache\E2\{E2DFDA5E-3B51-0E3B-09DC-7637C8F16708}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Slat\Pour_Salt_Sugar_02		162552
@@ -102,6 +107,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	772437309	boiling_lp_02	.cache\2F\{2F8723DD-531A-B0EB-6E23-E7B23FE6DF30}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Pot\Random_Pot_Boil_Loop\boiling_lp_02		1092584
 	786212875	Squeeze_Sauce_01	.cache\2A\{2A54FF1D-45DA-1707-630A-67D92511E1A8}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Seasoning\Random_Sauce\Squeeze_Sauce_01		142824
 	816575036	BGM_v1_bpm83_44	.cache\11\{112BEB95-5C76-58AF-D337-F482E3FA8569}.wem		\Containers\MyUnit\Music\Switch_BGM\BGM_Day_V1\BGM_v1_bpm83_44\BGM_v1_bpm83_44		12769252
+	841149416	Dice_Roll_01	.cache\A2\{A2C7777A-7DA9-AF40-B82B-4C9717704F33}.wem		\Containers\MyUnit\SFX\SFX_Outing\Random_Dice_Roll\Dice_Roll_01		492080
 	875078922	Cricket_06	.cache\FB\{FBD932AA-90C3-FF9C-E300-7D5F369E920F}.wem		\Containers\MyUnit\SFX\SFX_Outing\Ambience\Cricket\Cricket\Cricket_06		1386440
 	902235593	Cut_Yam	.cache\04\{0492584C-09D5-E2A7-B6DE-5AE9C2AB5B2B}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Yam		288096
 	917614019	Eat_Pudding	.cache\F7\{F7C4B51E-6153-6FC3-8D83-6643FDD4ED8D}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Eat\Eat_Pudding		449156

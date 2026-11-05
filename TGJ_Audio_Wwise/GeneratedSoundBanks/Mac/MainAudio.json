@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{95648A2A-8E9F-4C9B-8322-80C9450EF305}",
     "Language": "SFX",
-    "Hash": "{0B6B1BE7-449C-D5A6-63F0-FC9B8EC42256}",
+    "Hash": "{4F8C6475-3173-04A4-5559-864B240A3290}",
     "ObjectPath": "\\SoundBanks\\MyUnit\\MainAudio",
     "ShortName": "MainAudio",
     "Path": "MainAudio.bnk",
@@ -120,12 +120,28 @@
       "CachePath": "F2/{F2E72408-75BB-B5EF-A2D3-E0107EE7726D}.wem"
      },
      {
+      "Id": "270195829",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Dice_Roll_02.wav",
+      "CachePath": "C6/{C6A17212-925B-19D6-20C1-01CA7570A600}.wem"
+     },
+     {
       "Id": "273339741",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Cricket_02.wav",
       "CachePath": "FB/{FBA0C073-42E4-A6E0-98C8-6873792C5DF9}.wem"
+     },
+     {
+      "Id": "275888584",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Dice_Roll_03.wav",
+      "CachePath": "3B/{3B56AB2A-F8B3-F5FE-26F3-F26117FC0D31}.wem"
      },
      {
       "Id": "283535523",
@@ -173,7 +189,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "UI_Click_synth.wav",
-      "CachePath": "18/{189A5522-6CC0-EE22-CBE8-258E282DCF19}.wem"
+      "CachePath": "4A/{4AC0F483-A90B-D273-7E8C-EA17DC8A8A75}.wem"
      },
      {
       "Id": "429307745",
@@ -336,6 +352,14 @@
       "CachePath": "11/{112BEB95-5C76-58AF-D337-F482E3FA8569}.wem"
      },
      {
+      "Id": "841149416",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Dice_Roll_01.wav",
+      "CachePath": "A2/{A2C7777A-7DA9-AF40-B82B-4C9717704F33}.wem"
+     },
+     {
       "Id": "875078922",
       "Language": "SFX",
       "Streaming": "false",
@@ -417,6 +441,16 @@
        "GUID": "{EFAF1649-A70E-442F-8E52-2B009DE0AFCE}",
        "LibName": "Wwise Silence",
        "LibId": "6619138"
+      }
+     ],
+     "ShareSets": [
+      {
+       "Id": "3948262040",
+       "Name": "Octave_Down",
+       "ObjectPath": "\\Effects\\Factory Effects\\Pitch Shifter\\Harmonize\\Octave_Down",
+       "GUID": "{062EC4B1-5372-4D1E-917B-C757293F2B42}",
+       "LibName": "Wwise Pitch Shifter",
+       "LibId": "8912899"
       }
      ]
     },
@@ -922,8 +956,19 @@
       "ObjectPath": "\\Events\\SFX\\Outing\\Play_Dice_Roll",
       "GUID": "{EE54DB64-4CCB-4594-9E28-B440B9B5D86C}",
       "DurationType": "OneShot",
-      "DurationMin": "0",
-      "DurationMax": "0"
+      "DurationMin": "2.4894695",
+      "DurationMax": "2.8525395",
+      "MediaRefs": [
+       {
+        "Id": "270195829"
+       },
+       {
+        "Id": "275888584"
+       },
+       {
+        "Id": "841149416"
+       }
+      ]
      },
      {
       "Id": "2489068396",
@@ -1055,8 +1100,8 @@
       "ObjectPath": "\\Events\\SFX\\Outing\\Play_Footstep",
       "GUID": "{47802D9B-527E-4333-AC1B-EE03F66B2DFD}",
       "DurationType": "OneShot",
-      "DurationMin": "0.23764077",
-      "DurationMax": "0.3003847",
+      "DurationMin": "0.23087558",
+      "DurationMax": "0.30918667",
       "MediaRefs": [
        {
         "Id": "23854224"
@@ -1253,7 +1298,7 @@
       "GUID": "{D28F703F-5D56-474C-A508-66ED82A1D63A}",
       "DurationType": "OneShot",
       "DurationMin": "0.30694336",
-      "DurationMax": "0.43408343",
+      "DurationMax": "0.40972024",
       "MediaRefs": [
        {
         "Id": "1006055603"
@@ -1267,12 +1312,19 @@
       "GUID": "{DD43EF5A-F998-4571-86D9-BC1C1EACA391}",
       "DurationType": "OneShot",
       "DurationMin": "0.3509958",
-      "DurationMax": "0.6625919",
+      "DurationMax": "0.49638304",
       "MediaRefs": [
        {
         "Id": "420747195"
        }
-      ]
+      ],
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "3948262040"
+        }
+       ]
+      }
      },
      {
       "Id": "2477713992",
@@ -1515,6 +1567,6 @@
     ]
    }
   ],
-  "FileHash": "{84AFC7D9-4BF1-6F97-E14C-FCC2DEBD35DC}"
+  "FileHash": "{CD29D84E-5623-5A25-956D-31D84D92CD30}"
  }
 }

@@ -1174,6 +1174,19 @@
 				</PropertyContainer>
 				<PropertyContainer Name="SFX_Outing" ID="{64854DCA-1AC5-4A39-885A-6A44AE818FB2}" ShortID="784718509">
 					<PropertyList>
+						<Property Name="Pitch" Type="int32">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{86182A92-4641-4ABA-9F9A-0A45E5D6856E}">
+										<PropertyList>
+											<Property Name="Enabled" Type="bool" Value="True"/>
+											<Property Name="Max" Type="Real64" Value="50"/>
+											<Property Name="Min" Type="Real64" Value="-50"/>
+										</PropertyList>
+									</Modifier>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
 						<Property Name="UserAuxSendVolume0" Type="Real64">
 							<ValueList>
 								<Value>-12</Value>
@@ -1221,7 +1234,7 @@
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-4.5</Value>
+										<Value>-5</Value>
 									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
@@ -1390,6 +1403,74 @@
 									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
 								</Reference>
 							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="Dice_Roll_01" ID="{3C94C5E8-BE66-4BDA-98B3-08D0FBEFFE8B}" ShortID="240689587">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Dice_Roll_01" ID="{A4FFE903-2C53-4FB1-A92B-00E45443FA8B}">
+											<Language>SFX</Language>
+											<AudioFile>Dice_Roll_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="841149416"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Dice_Roll_01" ID="{A4FFE903-2C53-4FB1-A92B-00E45443FA8B}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Dice_Roll_02" ID="{0F5BCEB7-D701-4F89-B56F-6DF3E15804C1}" ShortID="74321550">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Dice_Roll_02" ID="{79A1C14B-0F53-4E3C-8725-AA1DE8D09EB7}">
+											<Language>SFX</Language>
+											<AudioFile>Dice_Roll_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="270195829"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Dice_Roll_02" ID="{79A1C14B-0F53-4E3C-8725-AA1DE8D09EB7}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Dice_Roll_03" ID="{9072FBCE-89EA-4D10-B4AB-A9EC666E3C2E}" ShortID="623846826">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Dice_Roll_03" ID="{9ABB328D-7C77-4420-95AF-1FA5D51047B2}">
+											<Language>SFX</Language>
+											<AudioFile>Dice_Roll_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="275888584"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Dice_Roll_03" ID="{9ABB328D-7C77-4420-95AF-1FA5D51047B2}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
 						</RandomSequenceContainer>
 						<BlendContainer Name="Ambience" ID="{D86483AA-5DFA-4F07-8FF4-BE044ED4E95D}" ShortID="106257424">
 							<ReferenceList>
