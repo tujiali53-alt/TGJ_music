@@ -3,19 +3,54 @@ using Cooking.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// 所有音频都挂在 AudioManager 上播放，防止原物体被销毁时中断音频。
+// 代码里不写 Wwise Event，在 Inspector 里选，防止改名失效。
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager I;
 
     const string MusicVolumePrefs = "cooking.volume.music";
     const string SfxVolumePrefs = "cooking.volume.sfx";
-    const string MusicVolumeRtpc = "Volume_Music";
-    const string SfxVolumeRtpc = "Volume_SFX";
 
+    [Header("BGM")]
     public AK.Wwise.Event playBGM;
     public AK.Wwise.Event stopBGM;
+    [Tooltip("Music_BGM_Stage：第 1 格 = 第 1 天，第 2 格 = 第 2 天……天数超过格数时沿用最后一格")]
+    public AK.Wwise.State[] dayStages;
+
+    [Header("夜晚环境音")]
+    public AK.Wwise.Event playAmbience;
+    public AK.Wwise.Event stopAmbience;
+
+    [Header("UI")]
+    public AK.Wwise.Event uiClick;
+    public AK.Wwise.Event uiCancel;
+    public AK.Wwise.Event uiPageTurn;
+
+    [Header("烹饪")]
+    public AK.Wwise.Event playCutting;
+    public AK.Wwise.Event playEat;
+    public AK.Wwise.Event playBoiling;
+    public AK.Wwise.Event stopBoiling;
+    public AK.Wwise.Event playFrying;
+    public AK.Wwise.Event stopFrying;
+
+    [Header("调料")]
+    public AK.Wwise.Event playOil;
+    public AK.Wwise.Event playSalt;
+    public AK.Wwise.Event playPepper;
+    public AK.Wwise.Event playSugar;
+    public AK.Wwise.Event playSauce;
+
+    [Header("夜晚探索")]
+    public AK.Wwise.Event playDiceRoll;
+
+    [Header("音量 RTPC（0–100）")]
+    public AK.Wwise.RTPC musicVolumeRtpc;
+    public AK.Wwise.RTPC sfxVolumeRtpc;
 
     bool bgmStarted;
+    bool ambienceOn;
     static float musicVolume = 1f;
     static float sfxVolume = 1f;
 
@@ -61,11 +96,30 @@ public class AudioManager : MonoBehaviour
         else if (sceneName == SceneNames.Outing)
             state = "Night";
 
-        AkUnitySoundEngine.SetState("Music_GamePhase", state);
+        // Music_GamePhase 由各场景上挂的 AkState 设置，这里不再设 State
         if (state != "Day")
         {
-            Post("Stop_Boiling");
-            Post("Stop_Frying");
+            Post(stopBoiling);
+            Post(stopFrying);
+        }
+        else
+        {
+            // 正常流程已在 GameRoot.SleepAndEnterDay() 里设过；这里防止直接从厨房启动测试出现问题
+            GameRoot root = GameRoot.Instance;
+            if (root != null && root.Session != null)
+                SetDayStage(root.Session.DayIndex);
+        }
+
+        // 进入户外场景时这个函数会被调用两次，用 ambienceOn 防止播放两次环境音
+        if (state == "Night" && !ambienceOn)
+        {
+            Post(playAmbience);
+            ambienceOn = true;
+        }
+        else if (state != "Night" && ambienceOn)
+        {
+            Post(stopAmbience);
+            ambienceOn = false;
         }
 
         if (bgmStarted || !playBGM.IsValid())
@@ -81,12 +135,16 @@ public class AudioManager : MonoBehaviour
             e.Post(I.gameObject);
     }
 
-    public static void Post(string eventName)
+    // 按天数切换白天 BGM 版本
+    public static void SetDayStage(int day)
     {
-        if (I == null || string.IsNullOrEmpty(eventName))
+        if (I == null || I.dayStages == null || I.dayStages.Length == 0)
             return;
 
-        AkUnitySoundEngine.PostEvent(eventName, I.gameObject);
+        int index = Mathf.Clamp(day - 1, 0, I.dayStages.Length - 1);
+        AK.Wwise.State stage = I.dayStages[index];
+        if (stage != null)
+            stage.SetValue();
     }
 
     public static void PlayCut(string ingredientId)
@@ -95,47 +153,72 @@ public class AudioManager : MonoBehaviour
         if (!string.IsNullOrEmpty(value))
             SetSwitch("Ingredient", value);
 
-        Post("Play_Cutting");
+        if (I != null)
+            Post(I.playCutting);
     }
 
     public static void PlayEat(string recipeId)
     {
         string dish = DishSwitch(recipeId);
-        if (!string.IsNullOrEmpty(dish))
-            SetSwitch("Dish", dish);
+        if (string.IsNullOrEmpty(dish))
+            dish = "Food_Default";   // 做出失败料理时用默认吃饭声
+        SetSwitch("Dish", dish);
 
-        Post("Play_Eat");
+        if (I != null)
+            Post(I.playEat);
     }
 
     public static void PlaySeasoning(string seasoningId)
     {
+        if (I == null)
+            return;
+
         if (seasoningId == "season_oil")
-            Post("Play_Oil");
+            Post(I.playOil);
         else if (seasoningId == "season_salt")
-            Post("Play_Salt");
+            Post(I.playSalt);
         else if (seasoningId == "season_pepper")
-            Post("Play_Pepper");
+            Post(I.playPepper);
         else if (seasoningId == "season_sugar")
-            Post("Play_Sugar");
+            Post(I.playSugar);
         else if (seasoningId == "season_sauce")
-            Post("Play_Sauce");
-        else if (seasoningId == "season_spice")
-            Post("Play_Spice");
+            Post(I.playSauce);
     }
 
     public static void PlayClick()
     {
-        Post("Play_UI_Click");
+        if (I != null)
+            Post(I.uiClick);
     }
 
     public static void PlayCancel()
     {
-        Post("Play_UI_Cancel");
+        if (I != null)
+            Post(I.uiCancel);
     }
 
     public static void PlayPage()
     {
-        Post("Play_UI_PageTurn");
+        if (I != null)
+            Post(I.uiPageTurn);
+    }
+
+    public static void SetBoiling(bool on)
+    {
+        if (I != null)
+            Post(on ? I.playBoiling : I.stopBoiling);
+    }
+
+    public static void SetFrying(bool on)
+    {
+        if (I != null)
+            Post(on ? I.playFrying : I.stopFrying);
+    }
+
+    public static void PlayDiceRoll()
+    {
+        if (I != null)
+            Post(I.playDiceRoll);
     }
 
     public static void SetMusicVolume(float value)
@@ -162,12 +245,14 @@ public class AudioManager : MonoBehaviour
 
     static void ApplyMusicVolume()
     {
-        AkUnitySoundEngine.SetRTPCValue(MusicVolumeRtpc, musicVolume * 100f);
+        if (I != null && I.musicVolumeRtpc != null)
+            I.musicVolumeRtpc.SetGlobalValue(musicVolume * 100f);
     }
 
     static void ApplySfxVolume()
     {
-        AkUnitySoundEngine.SetRTPCValue(SfxVolumeRtpc, sfxVolume * 100f);
+        if (I != null && I.sfxVolumeRtpc != null)
+            I.sfxVolumeRtpc.SetGlobalValue(sfxVolume * 100f);
     }
 
     static string CutSwitch(string ingredientId)

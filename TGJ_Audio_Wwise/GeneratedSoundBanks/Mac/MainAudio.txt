@@ -1,11 +1,10 @@
 Event	ID	Name			Wwise Object Path	Notes
+	278617630	Play_Ambience			\SFX\Outing\Play_Ambience	
 	286864310	Play_Salt			\SFX\Cooking\Season\Play_Salt	
 	775664385	Play_Frying			\SFX\Cooking\Frying\Play_Frying	
 	1000563996	Play_Sugar			\SFX\Cooking\Season\Play_Sugar	
 	1073466678	Stop_BGM			\Music\Stop_BGM	
-	1290567879	Play_UI_PageTurn			\UI\Play_UI_PageTurn	
 	1602358412	Play_Footstep			\SFX\Outing\Play_Footstep	
-	1614754728	Play_Spice			\SFX\Cooking\Season\Play_Spice	
 	1749424733	Play_UI_Click			\UI\Play_UI_Click	
 	1873669494	Play_Cutting			\SFX\Cooking\Play_Cutting	
 	2016713342	Stop_Boiling			\SFX\Cooking\Boliling\Stop_Boiling	
@@ -19,7 +18,6 @@ Event	ID	Name			Wwise Object Path	Notes
 	3281736991	Play_Sauce			\SFX\Cooking\Season\Play_Sauce	
 	3475817107	Play_Dice_Roll			\SFX\Outing\Play_Dice_Roll	
 	3626504988	Play_Boiling			\SFX\Cooking\Boliling\Play_Boiling	
-	4100364718	Plqy_Ambience			\SFX\Outing\Plqy_Ambience	
 
 Switch Group	ID	Name			Wwise Object Path	Notes
 	1746288848	Ingredient			\MyUnit\Ingredient	
@@ -37,6 +35,7 @@ Switch	ID	Name	Switch Group			Notes
 	2545240700	Onion	Ingredient			
 	2863832591	Pumpkin	Ingredient			
 	3220806263	Tomato	Ingredient			
+	610082551	Food_Default	Dish			
 	975081307	Food_YamPie	Dish			
 	1053467246	Food_Hotpot	Dish			
 	1887427020	Food_FriedFish	Dish			

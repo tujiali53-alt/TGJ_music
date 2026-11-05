@@ -1,0 +1,48 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "172",
+  "SoundBanks": [
+   {
+    "Id": "1290916568",
+    "Type": "Bus",
+    "GUID": "{9237551A-72E7-4206-A9A9-A04CFA391240}",
+    "Language": "SFX",
+    "Hash": "{0D81E9F3-51D6-1FD2-B617-5E55CBA5AB4C}",
+    "ObjectPath": "Reverb_Kitchen",
+    "ShortName": "Reverb_Kitchen",
+    "Path": "Bus/Reverb_Kitchen.bnk",
+    "Plugins": {
+     "ShareSets": [
+      {
+       "Id": "1990128658",
+       "Name": "Room_Medium",
+       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Rooms\\Room_Medium",
+       "GUID": "{F5C06EC1-E4A4-4332-A7D3-A89E2986B74F}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
+      }
+     ]
+    },
+    "AuxBusses": [
+     {
+      "Id": "1290916568",
+      "Name": "Reverb_Kitchen",
+      "ObjectPath": "\\Busses\\MyUnit\\Master Audio Bus\\SFX\\Reverb_Kitchen",
+      "GUID": "{9237551A-72E7-4206-A9A9-A04CFA391240}",
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "1990128658"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  ],
+  "FileHash": "{F2442F6B-6538-7AE0-D5E2-242C4BE8FAF0}"
+ }
+}

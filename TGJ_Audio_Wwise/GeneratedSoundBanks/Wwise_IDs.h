@@ -13,6 +13,7 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID PLAY_AMBIENCE = 278617630U;
         static const AkUniqueID PLAY_BGM = 3126765036U;
         static const AkUniqueID PLAY_BOILING = 3626504988U;
         static const AkUniqueID PLAY_CUTTING = 1873669494U;
@@ -24,12 +25,9 @@ namespace AK
         static const AkUniqueID PLAY_PEPPER = 2775506426U;
         static const AkUniqueID PLAY_SALT = 286864310U;
         static const AkUniqueID PLAY_SAUCE = 3281736991U;
-        static const AkUniqueID PLAY_SPICE = 1614754728U;
         static const AkUniqueID PLAY_SUGAR = 1000563996U;
         static const AkUniqueID PLAY_UI_CANCEL = 2244506081U;
         static const AkUniqueID PLAY_UI_CLICK = 1749424733U;
-        static const AkUniqueID PLAY_UI_PAGETURN = 1290567879U;
-        static const AkUniqueID PLQY_AMBIENCE = 4100364718U;
         static const AkUniqueID STOP_AMBIENCE = 2477713992U;
         static const AkUniqueID STOP_BGM = 1073466678U;
         static const AkUniqueID STOP_BOILING = 2016713342U;
@@ -74,6 +72,7 @@ namespace AK
 
             namespace SWITCH
             {
+                static const AkUniqueID FOOD_DEFAULT = 610082551U;
                 static const AkUniqueID FOOD_FRIEDFISH = 1887427020U;
                 static const AkUniqueID FOOD_HOTPOT = 1053467246U;
                 static const AkUniqueID FOOD_JELLYSHIP = 3530175662U;
@@ -118,6 +117,8 @@ namespace AK
         static const AkUniqueID SS_AIR_STORM = 3715662592U;
         static const AkUniqueID SS_AIR_TIMEOFDAY = 3203397129U;
         static const AkUniqueID SS_AIR_TURBULENCE = 4160247818U;
+        static const AkUniqueID VOLUME_MUSIC = 3891337659U;
+        static const AkUniqueID VOLUME_SFX = 3673881719U;
     } // namespace GAME_PARAMETERS
 
     namespace BANKS
@@ -134,6 +135,12 @@ namespace AK
         static const AkUniqueID SFX = 393239870U;
         static const AkUniqueID UI = 1551306167U;
     } // namespace BUSSES
+
+    namespace AUX_BUSSES
+    {
+        static const AkUniqueID REVERB_KITCHEN = 1290916568U;
+        static const AkUniqueID REVERB_NIGHT = 4203478130U;
+    } // namespace AUX_BUSSES
 
     namespace AUDIO_DEVICES
     {

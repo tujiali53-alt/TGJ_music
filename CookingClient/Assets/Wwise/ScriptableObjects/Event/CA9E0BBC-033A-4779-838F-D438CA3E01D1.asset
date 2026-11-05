@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6311ea9d23f394870b2cded8a210f754, type: 3}
+  m_Name: CA9E0BBC-033A-4779-838F-D438CA3E01D1
+  m_EditorClassIdentifier: AK.Wwise.Unity.API.WwiseTypes::WwiseEventReference
+  objectName: Play_Sugar
+  id: 1000563996
+  guid: CA9E0BBC-033A-4779-838F-D438CA3E01D1
+  IsInUserDefinedSoundBank: 1

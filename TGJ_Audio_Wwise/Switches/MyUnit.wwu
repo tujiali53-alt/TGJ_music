@@ -27,6 +27,7 @@
 						<Switch Name="Food_SeafoodRice" ID="{6F731820-8F40-4662-950F-D006A3AC358A}"/>
 						<Switch Name="Food_YamPie" ID="{02CE6BAF-0EA7-4F05-ADED-9F7CE91305D5}"/>
 						<Switch Name="Food_Hotpot" ID="{9E29E3FE-F1D3-4849-ADA5-AC6F0EAC903A}"/>
+						<Switch Name="Food_Default" ID="{68849183-B4EE-4E91-A238-117BC6EFE0A5}"/>
 					</ChildrenList>
 				</SwitchGroup>
 			</ChildrenList>

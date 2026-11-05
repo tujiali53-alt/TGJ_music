@@ -25,11 +25,6 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Play_UI_PageTurn" ID="{48326C49-1D98-4359-BFE2-83555949A733}">
-					<ChildrenList>
-						<Action Name="" ID="{DEC65CF5-8392-4F9E-BA16-BB0EDB3FCFEE}" ShortID="551791867"/>
-					</ChildrenList>
-				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

@@ -1,0 +1,48 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "172",
+  "SoundBanks": [
+   {
+    "Id": "4203478130",
+    "Type": "Bus",
+    "GUID": "{47ED1BA8-036B-4D22-91C2-93BFA6803ED9}",
+    "Language": "SFX",
+    "Hash": "{B2393A58-6033-113B-F581-8B5C06C2020F}",
+    "ObjectPath": "Reverb_Night",
+    "ShortName": "Reverb_Night",
+    "Path": "Bus/Reverb_Night.bnk",
+    "Plugins": {
+     "ShareSets": [
+      {
+       "Id": "2513915904",
+       "Name": "Hall_Large",
+       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Halls\\Hall_Large",
+       "GUID": "{6D154498-FF6D-4823-96FC-56841B70E079}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
+      }
+     ]
+    },
+    "AuxBusses": [
+     {
+      "Id": "4203478130",
+      "Name": "Reverb_Night",
+      "ObjectPath": "\\Busses\\MyUnit\\Master Audio Bus\\SFX\\Reverb_Night",
+      "GUID": "{47ED1BA8-036B-4D22-91C2-93BFA6803ED9}",
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "2513915904"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  ],
+  "FileHash": "{5262F1AA-B7BB-4BC7-C735-09F8D3CF012C}"
+ }
+}

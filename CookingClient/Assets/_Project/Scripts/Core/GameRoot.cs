@@ -53,6 +53,7 @@ namespace Cooking.Core
                 return false;
 
             Session.DayIndex += 1;
+            AudioManager.SetDayStage(Session.DayIndex);   // 先设置BGM版本，再进入白天
             Session.Phase = DayPhase.Day;
             Session.ClearCookingScores();
             Flow.Load(SceneNames.Cooking);

@@ -176,7 +176,7 @@ namespace Cooking.UI
 
         IEnumerator RollAfterAnimation()
         {
-            AudioManager.Post("Play_Dice_Roll");
+            AudioManager.PlayDiceRoll();
             NightRollResult result = NightCheck.Roll(option, buffDelta);
             if (diceAnimator != null)
             {

@@ -10,11 +10,29 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{60419511-E806-ACD8-0303-958DD61A523F}",
+    "Hash": "{117E29F6-EF14-DD23-C04E-9F396D117628}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
     "Plugins": {
+     "ShareSets": [
+      {
+       "Id": "1990128658",
+       "Name": "Room_Medium",
+       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Rooms\\Room_Medium",
+       "GUID": "{F5C06EC1-E4A4-4332-A7D3-A89E2986B74F}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
+      },
+      {
+       "Id": "2513915904",
+       "Name": "Hall_Large",
+       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Halls\\Hall_Large",
+       "GUID": "{6D154498-FF6D-4823-96FC-56841B70E079}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
+      }
+     ],
      "AudioDevices": [
       {
        "Id": "2317455096",
@@ -66,6 +84,34 @@
       "GUID": "{36E3F8FA-272C-4D3D-82B7-E151A67B1CF6}"
      }
     ],
+    "AuxBusses": [
+     {
+      "Id": "1290916568",
+      "Name": "Reverb_Kitchen",
+      "ObjectPath": "\\Busses\\MyUnit\\Master Audio Bus\\SFX\\Reverb_Kitchen",
+      "GUID": "{9237551A-72E7-4206-A9A9-A04CFA391240}",
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "1990128658"
+        }
+       ]
+      }
+     },
+     {
+      "Id": "4203478130",
+      "Name": "Reverb_Night",
+      "ObjectPath": "\\Busses\\MyUnit\\Master Audio Bus\\SFX\\Reverb_Night",
+      "GUID": "{47ED1BA8-036B-4D22-91C2-93BFA6803ED9}",
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "2513915904"
+        }
+       ]
+      }
+     }
+    ],
     "GameParameters": [
      {
       "Id": "822163944",
@@ -110,6 +156,12 @@
       "GUID": "{536FA72C-8C7E-4C8B-AE03-EF34FDADC314}"
      },
      {
+      "Id": "3673881719",
+      "Name": "Volume_SFX",
+      "ObjectPath": "\\Game Parameters\\MyUnit\\Volume_SFX",
+      "GUID": "{FFD81A76-4599-4C20-A91F-8B0F16A36D26}"
+     },
+     {
       "Id": "3715662592",
       "Name": "SS_Air_Storm",
       "ObjectPath": "\\Game Parameters\\Factory Soundseed Air Game Syncs\\SS_Air_Storm",
@@ -120,6 +172,12 @@
       "Name": "SS_Air_Presence",
       "ObjectPath": "\\Game Parameters\\Factory Soundseed Air Game Syncs\\SS_Air_Presence",
       "GUID": "{E3B7811A-7B2F-490F-B44F-5FE51B468041}"
+     },
+     {
+      "Id": "3891337659",
+      "Name": "Volume_Music",
+      "ObjectPath": "\\Game Parameters\\MyUnit\\Volume_Music",
+      "GUID": "{39DF268B-DA47-4A94-B07A-2B2FF91438CD}"
      },
      {
       "Id": "4160247818",
@@ -275,6 +333,12 @@
       "ObjectPath": "\\Switches\\MyUnit\\Dish",
       "GUID": "{1E446B90-46F5-4617-9C24-475A5AEC3FFB}",
       "Switches": [
+       {
+        "Id": "610082551",
+        "Name": "Food_Default",
+        "ObjectPath": "\\Switches\\MyUnit\\Dish\\Food_Default",
+        "GUID": "{68849183-B4EE-4E91-A238-117BC6EFE0A5}"
+       },
        {
         "Id": "975081307",
         "Name": "Food_YamPie",
@@ -799,6 +863,6 @@
     ]
    }
   ],
-  "FileHash": "{68F941B3-68C8-D2F1-C4C8-A947C00AD3F0}"
+  "FileHash": "{74DF2607-5D24-111A-0873-A6F0B794E195}"
  }
 }

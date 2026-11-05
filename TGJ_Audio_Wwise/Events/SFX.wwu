@@ -153,17 +153,6 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_Spice" ID="{8F57384F-46E8-403F-8099-9BB832694C78}">
-									<ChildrenList>
-										<Action Name="" ID="{84FAE3BD-8753-482F-8DE2-1882924FD9ED}" ShortID="154297806">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="SFX_Spice_None" ID="{7425DF4F-007E-4214-A239-931AFCEEFE14}" WorkUnitID="{F48A459F-BE81-4246-A00A-5F7D8F840E65}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>
@@ -192,7 +181,7 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Plqy_Ambience" ID="{020431C9-D934-4C85-9E4A-6EF4F6730E5B}">
+						<Event Name="Play_Ambience" ID="{020431C9-D934-4C85-9E4A-6EF4F6730E5B}">
 							<ChildrenList>
 								<Action Name="" ID="{D214B66F-332B-4D53-A3B5-5F8BFDCDBCDF}" ShortID="35918739">
 									<PropertyList>

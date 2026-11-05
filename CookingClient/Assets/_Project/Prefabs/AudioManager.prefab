@@ -55,6 +55,118 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 44df3a80c22814975a2c1184621b8978, type: 2}
+  dayStages:
+  - idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a8959c9a003684729ba0d3ebcfef362a, type: 2}
+  - idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a8959c9a003684729ba0d3ebcfef362a, type: 2}
+  - idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a8959c9a003684729ba0d3ebcfef362a, type: 2}
+  - idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 7b30cc31a9d6544949377f5e88a18a03, type: 2}
+  - idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 7b30cc31a9d6544949377f5e88a18a03, type: 2}
+  - idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 7b30cc31a9d6544949377f5e88a18a03, type: 2}
+  - idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 8e3668f272a2843fa9a155fc221a416a, type: 2}
+  playAmbience:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: b71cf48f8d6bd406d8a62ca2604ea06f, type: 2}
+  stopAmbience:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 808669f2f5fd442bd90537f134e18d04, type: 2}
+  uiClick:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 09fa44a56795740da9943ff6455a90b8, type: 2}
+  uiCancel:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 2367bff01716e4da1870846915d71408, type: 2}
+  uiPageTurn:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 09fa44a56795740da9943ff6455a90b8, type: 2}
+  playCutting:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 764541a3382254d43a1f672a48df8065, type: 2}
+  playEat:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: af933b6cc1d59496bb8f9479b227e90b, type: 2}
+  playBoiling:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 2ad5a04588e2d4d32bfa309de0ad007f, type: 2}
+  stopBoiling:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1f912e42fcf4b4f51ba94e42dbb57df2, type: 2}
+  playFrying:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: d69ad0563b88342f384fe52378e54ef1, type: 2}
+  stopFrying:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 763207c911a4d4dd5892377f17897d77, type: 2}
+  playOil:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e2ebb90c930994eb584c0e395e5cf3e5, type: 2}
+  playSalt:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a0a66397f05f84f98967b2d5522fbc67, type: 2}
+  playPepper:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 3b925f5c46fab431c849316540d0ce07, type: 2}
+  playSugar:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e91ea2b8e145c41df80a80c69e39f1a5, type: 2}
+  playSauce:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 34d361251e9464312b27f9d5f4300a35, type: 2}
+  playDiceRoll:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: ab24de382dafc4ffdae044b1ec03b073, type: 2}
+  musicVolumeRtpc:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 4977749c8811747d49a422d43c9d48fa, type: 2}
+  sfxVolumeRtpc:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: ea355513fcbab4349bcca24524766206, type: 2}
 --- !u!114 &3388775302939993076
 MonoBehaviour:
   m_ObjectHideFlags: 0

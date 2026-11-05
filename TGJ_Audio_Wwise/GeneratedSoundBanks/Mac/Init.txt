@@ -12,12 +12,24 @@ State	ID	Name	State Group			Notes
 	1011622525	Night	Music_GamePhase			
 	2607556080	Menu	Music_GamePhase			
 
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	3673881719	Volume_SFX			\MyUnit\Volume_SFX	
+	3891337659	Volume_Music			\MyUnit\Volume_Music	
+
 Audio Bus	ID	Name			Wwise Object Path	Notes
 	393239870	SFX			\MyUnit\Master Audio Bus\SFX	
 	1551306167	UI			\MyUnit\Master Audio Bus\UI	
 	2246998526	Main Audio Bus			\Default Work Unit\Main Audio Bus	
 	3803692087	Master Audio Bus			\MyUnit\Master Audio Bus	
 	3991942870	Music			\MyUnit\Master Audio Bus\Music	
+
+Auxiliary Bus	ID	Name			Wwise Object Path	Notes
+	1290916568	Reverb_Kitchen			\MyUnit\Master Audio Bus\SFX\Reverb_Kitchen	
+	4203478130	Reverb_Night			\MyUnit\Master Audio Bus\SFX\Reverb_Night	
+
+Effect plug-ins	ID	Name	Type				Notes
+	1990128658	Room_Medium	Wwise RoomVerb			
+	2513915904	Hall_Large	Wwise RoomVerb			
 
 Audio Devices	ID	Name	Type				Notes
 	2317455096	No_Output	No Output			

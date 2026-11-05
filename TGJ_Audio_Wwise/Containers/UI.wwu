@@ -19,11 +19,13 @@
 							</ModifierList>
 						</Property>
 						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>-2</Value>
+							</ValueList>
 							<ModifierList>
 								<ModifierInfo>
 									<Modifier Name="" ID="{B0C61825-8179-472E-A480-7FD887336499}">
 										<PropertyList>
-											<Property Name="Enabled" Type="bool" Value="True"/>
 											<Property Name="Max" Type="Real64" Value="1"/>
 											<Property Name="Min" Type="Real64" Value="-1"/>
 										</PropertyList>
@@ -37,7 +39,7 @@
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+							<ObjectRef Name="UI" ID="{0CF59F98-9FF9-4127-A117-345C23CEF2D7}" WorkUnitID="{5B963A53-AA54-4687-A0B9-112941ACC765}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
@@ -104,7 +106,7 @@
 											<Modifier Name="" ID="{ADC35E75-BA5F-44D5-9971-55305BAC8458}">
 												<PropertyList>
 													<Property Name="Enabled" Type="bool" Value="True"/>
-													<Property Name="Max" Type="Real64" Value="500"/>
+													<Property Name="Max" Type="Real64" Value="1000"/>
 												</PropertyList>
 											</Modifier>
 										</ModifierInfo>
@@ -136,16 +138,6 @@
 							<ActiveSourceList>
 								<ActiveSource Name="UI_Click_synth" ID="{330CFBAB-F700-426C-A19E-C8020D72752D}" Platform="Linked"/>
 							</ActiveSourceList>
-						</Sound>
-						<Sound Name="UI_PageTurn_None" ID="{5A534088-4B71-43F4-8646-C9185D34009D}" ShortID="827101002">
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
-								</Reference>
-							</ReferenceList>
 						</Sound>
 					</ChildrenList>
 				</PropertyContainer>

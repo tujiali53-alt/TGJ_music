@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{95648A2A-8E9F-4C9B-8322-80C9450EF305}",
     "Language": "SFX",
-    "Hash": "{FDBD7BE8-3A64-E476-2DF8-F4270DBDFEE9}",
+    "Hash": "{0B6B1BE7-449C-D5A6-63F0-FC9B8EC42256}",
     "ObjectPath": "\\SoundBanks\\MyUnit\\MainAudio",
     "ShortName": "MainAudio",
     "Path": "MainAudio.bnk",
@@ -422,6 +422,54 @@
     },
     "Events": [
      {
+      "Id": "278617630",
+      "Name": "Play_Ambience",
+      "ObjectPath": "\\Events\\SFX\\Outing\\Play_Ambience",
+      "GUID": "{020431C9-D934-4C85-9E4A-6EF4F6730E5B}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "47054378"
+       },
+       {
+        "Id": "63820288"
+       },
+       {
+        "Id": "273339741"
+       },
+       {
+        "Id": "583561962"
+       },
+       {
+        "Id": "618929528"
+       },
+       {
+        "Id": "875078922"
+       },
+       {
+        "Id": "979345559"
+       },
+       {
+        "Id": "982619370"
+       }
+      ],
+      "PluginRefs": {
+       "Custom": [
+        {
+         "Id": "1007474679"
+        }
+       ]
+      },
+      "AuxBusRefs": [
+       {
+        "Id": "4203478130",
+        "Name": "Reverb_Night",
+        "ObjectPath": "\\Busses\\MyUnit\\Master Audio Bus\\SFX\\Reverb_Night",
+        "GUID": "{47ED1BA8-036B-4D22-91C2-93BFA6803ED9}"
+       }
+      ]
+     },
+     {
       "Id": "3126765036",
       "Name": "Play_BGM",
       "ObjectPath": "\\Events\\Music\\Play_BGM",
@@ -696,6 +744,14 @@
        {
         "Id": "772437309"
        }
+      ],
+      "AuxBusRefs": [
+       {
+        "Id": "1290916568",
+        "Name": "Reverb_Kitchen",
+        "ObjectPath": "\\Busses\\MyUnit\\Master Audio Bus\\SFX\\Reverb_Kitchen",
+        "GUID": "{9237551A-72E7-4206-A9A9-A04CFA391240}"
+       }
       ]
      },
      {
@@ -706,6 +762,14 @@
       "DurationType": "OneShot",
       "DurationMin": "1.4008073",
       "DurationMax": "2.5663292",
+      "AuxBusRefs": [
+       {
+        "Id": "1290916568",
+        "Name": "Reverb_Kitchen",
+        "ObjectPath": "\\Busses\\MyUnit\\Master Audio Bus\\SFX\\Reverb_Kitchen",
+        "GUID": "{9237551A-72E7-4206-A9A9-A04CFA391240}"
+       }
+      ],
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -869,6 +933,14 @@
       "DurationType": "OneShot",
       "DurationMin": "2.1696334",
       "DurationMax": "2.7461784",
+      "AuxBusRefs": [
+       {
+        "Id": "1290916568",
+        "Name": "Reverb_Kitchen",
+        "ObjectPath": "\\Busses\\MyUnit\\Master Audio Bus\\SFX\\Reverb_Kitchen",
+        "GUID": "{9237551A-72E7-4206-A9A9-A04CFA391240}"
+       }
+      ],
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -889,6 +961,20 @@
          "GroupId": "2212414297",
          "Id": "3493444713",
          "GUID": "{43D15A45-FA4A-4400-9329-0872C488DEE1}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "455735761"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "2212414297",
+         "Id": "610082551",
+         "GUID": "{68849183-B4EE-4E91-A238-117BC6EFE0A5}",
+         "Default": "true"
         },
         "MediaRefs": [
          {
@@ -990,6 +1076,14 @@
        {
         "Id": "1055378720"
        }
+      ],
+      "AuxBusRefs": [
+       {
+        "Id": "4203478130",
+        "Name": "Reverb_Night",
+        "ObjectPath": "\\Busses\\MyUnit\\Master Audio Bus\\SFX\\Reverb_Night",
+        "GUID": "{47ED1BA8-036B-4D22-91C2-93BFA6803ED9}"
+       }
       ]
      },
      {
@@ -1004,6 +1098,14 @@
        },
        {
         "Id": "702267986"
+       }
+      ],
+      "AuxBusRefs": [
+       {
+        "Id": "1290916568",
+        "Name": "Reverb_Kitchen",
+        "ObjectPath": "\\Busses\\MyUnit\\Master Audio Bus\\SFX\\Reverb_Kitchen",
+        "GUID": "{9237551A-72E7-4206-A9A9-A04CFA391240}"
        }
       ]
      },
@@ -1025,6 +1127,14 @@
        {
         "Id": "672191540"
        }
+      ],
+      "AuxBusRefs": [
+       {
+        "Id": "1290916568",
+        "Name": "Reverb_Kitchen",
+        "ObjectPath": "\\Busses\\MyUnit\\Master Audio Bus\\SFX\\Reverb_Kitchen",
+        "GUID": "{9237551A-72E7-4206-A9A9-A04CFA391240}"
+       }
       ]
      },
      {
@@ -1038,6 +1148,14 @@
       "MediaRefs": [
        {
         "Id": "6530863"
+       }
+      ],
+      "AuxBusRefs": [
+       {
+        "Id": "1290916568",
+        "Name": "Reverb_Kitchen",
+        "ObjectPath": "\\Busses\\MyUnit\\Master Audio Bus\\SFX\\Reverb_Kitchen",
+        "GUID": "{9237551A-72E7-4206-A9A9-A04CFA391240}"
        }
       ]
      },
@@ -1062,6 +1180,14 @@
        {
         "Id": "650090837"
        }
+      ],
+      "AuxBusRefs": [
+       {
+        "Id": "1290916568",
+        "Name": "Reverb_Kitchen",
+        "ObjectPath": "\\Busses\\MyUnit\\Master Audio Bus\\SFX\\Reverb_Kitchen",
+        "GUID": "{9237551A-72E7-4206-A9A9-A04CFA391240}"
+       }
       ]
      },
      {
@@ -1079,16 +1205,15 @@
        {
         "Id": "786212875"
        }
+      ],
+      "AuxBusRefs": [
+       {
+        "Id": "1290916568",
+        "Name": "Reverb_Kitchen",
+        "ObjectPath": "\\Busses\\MyUnit\\Master Audio Bus\\SFX\\Reverb_Kitchen",
+        "GUID": "{9237551A-72E7-4206-A9A9-A04CFA391240}"
+       }
       ]
-     },
-     {
-      "Id": "1614754728",
-      "Name": "Play_Spice",
-      "ObjectPath": "\\Events\\SFX\\Cooking\\Season\\Play_Spice",
-      "GUID": "{8F57384F-46E8-403F-8099-9BB832694C78}",
-      "DurationType": "OneShot",
-      "DurationMin": "0",
-      "DurationMax": "0"
      },
      {
       "Id": "1000563996",
@@ -1110,6 +1235,14 @@
        },
        {
         "Id": "650090837"
+       }
+      ],
+      "AuxBusRefs": [
+       {
+        "Id": "1290916568",
+        "Name": "Reverb_Kitchen",
+        "ObjectPath": "\\Busses\\MyUnit\\Master Audio Bus\\SFX\\Reverb_Kitchen",
+        "GUID": "{9237551A-72E7-4206-A9A9-A04CFA391240}"
        }
       ]
      },
@@ -1133,63 +1266,13 @@
       "ObjectPath": "\\Events\\UI\\Play_UI_Click",
       "GUID": "{DD43EF5A-F998-4571-86D9-BC1C1EACA391}",
       "DurationType": "OneShot",
-      "DurationMin": "0.46852314",
+      "DurationMin": "0.3509958",
       "DurationMax": "0.6625919",
       "MediaRefs": [
        {
         "Id": "420747195"
        }
       ]
-     },
-     {
-      "Id": "1290567879",
-      "Name": "Play_UI_PageTurn",
-      "ObjectPath": "\\Events\\UI\\Play_UI_PageTurn",
-      "GUID": "{48326C49-1D98-4359-BFE2-83555949A733}",
-      "MaxAttenuation": "0",
-      "DurationType": "OneShot",
-      "DurationMin": "0",
-      "DurationMax": "0"
-     },
-     {
-      "Id": "4100364718",
-      "Name": "Plqy_Ambience",
-      "ObjectPath": "\\Events\\SFX\\Outing\\Plqy_Ambience",
-      "GUID": "{020431C9-D934-4C85-9E4A-6EF4F6730E5B}",
-      "DurationType": "Infinite",
-      "MediaRefs": [
-       {
-        "Id": "47054378"
-       },
-       {
-        "Id": "63820288"
-       },
-       {
-        "Id": "273339741"
-       },
-       {
-        "Id": "583561962"
-       },
-       {
-        "Id": "618929528"
-       },
-       {
-        "Id": "875078922"
-       },
-       {
-        "Id": "979345559"
-       },
-       {
-        "Id": "982619370"
-       }
-      ],
-      "PluginRefs": {
-       "Custom": [
-        {
-         "Id": "1007474679"
-        }
-       ]
-      }
      },
      {
       "Id": "2477713992",
@@ -1380,6 +1463,12 @@
       "GUID": "{1E446B90-46F5-4617-9C24-475A5AEC3FFB}",
       "Switches": [
        {
+        "Id": "610082551",
+        "Name": "Food_Default",
+        "ObjectPath": "\\Switches\\MyUnit\\Dish\\Food_Default",
+        "GUID": "{68849183-B4EE-4E91-A238-117BC6EFE0A5}"
+       },
+       {
         "Id": "975081307",
         "Name": "Food_YamPie",
         "ObjectPath": "\\Switches\\MyUnit\\Dish\\Food_YamPie",
@@ -1426,6 +1515,6 @@
     ]
    }
   ],
-  "FileHash": "{2C7FA059-1DBF-967D-69DE-AA0C24E02C84}"
+  "FileHash": "{00FA0B1D-162D-6943-D08C-706BEE22BB00}"
  }
 }

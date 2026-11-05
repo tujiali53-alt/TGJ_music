@@ -18,6 +18,11 @@
 								</ModifierInfo>
 							</ModifierList>
 						</Property>
+						<Property Name="UserAuxSendVolume0" Type="Real64">
+							<ValueList>
+								<Value>-18</Value>
+							</ValueList>
+						</Property>
 						<Property Name="Volume" Type="Real64">
 							<ModifierList>
 								<ModifierInfo>
@@ -38,6 +43,9 @@
 						</Reference>
 						<Reference Name="OutputBus">
 							<ObjectRef Name="SFX" ID="{1444E2D0-F1B5-4D29-9490-AE9CA3A398EC}" WorkUnitID="{5B963A53-AA54-4687-A0B9-112941ACC765}"/>
+						</Reference>
+						<Reference Name="UserAuxSend0">
+							<ObjectRef Name="Reverb_Kitchen" ID="{9237551A-72E7-4206-A9A9-A04CFA391240}" WorkUnitID="{5B963A53-AA54-4687-A0B9-112941ACC765}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
@@ -550,6 +558,9 @@
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
 								</Reference>
+								<Reference Name="DefaultSwitchOrState">
+									<ObjectRef Name="Food_Default" ID="{68849183-B4EE-4E91-A238-117BC6EFE0A5}" WorkUnitID="{C8E75DEB-126D-48FE-A6EB-A195C613D2A6}"/>
+								</Reference>
 								<Reference Name="OutputBus">
 									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
 								</Reference>
@@ -690,6 +701,12 @@
 									</Grouping>
 									<Grouping>
 										<SwitchRef Name="Food_RainbowEgg" ID="{43D15A45-FA4A-4400-9329-0872C488DEE1}"/>
+										<ItemList>
+											<ItemRef Name="Eat_Normal" ID="{B3737B3B-4396-4865-937A-67E31DEDE97C}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Food_Default" ID="{68849183-B4EE-4E91-A238-117BC6EFE0A5}"/>
 										<ItemList>
 											<ItemRef Name="Eat_Normal" ID="{B3737B3B-4396-4865-937A-67E31DEDE97C}"/>
 										</ItemList>
@@ -1151,39 +1168,27 @@
 										</Sound>
 									</ChildrenList>
 								</RandomSequenceContainer>
-								<PropertyContainer Name="SFX_Spice_None" ID="{41413BF4-FA92-4E26-8DCC-0B2219DC5DF7}" ShortID="864673581">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="SFX_Spice_None" ID="{7425DF4F-007E-4214-A239-931AFCEEFE14}" ShortID="376280956">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
-												</Reference>
-											</ReferenceList>
-										</Sound>
-									</ChildrenList>
-								</PropertyContainer>
 							</ChildrenList>
 						</PropertyContainer>
 					</ChildrenList>
 				</PropertyContainer>
 				<PropertyContainer Name="SFX_Outing" ID="{64854DCA-1AC5-4A39-885A-6A44AE818FB2}" ShortID="784718509">
+					<PropertyList>
+						<Property Name="UserAuxSendVolume0" Type="Real64">
+							<ValueList>
+								<Value>-12</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C23FAC4C-DE7C-43E4-8F04-8F89446AAFB9}"/>
+							<ObjectRef Name="SFX" ID="{1444E2D0-F1B5-4D29-9490-AE9CA3A398EC}" WorkUnitID="{5B963A53-AA54-4687-A0B9-112941ACC765}"/>
+						</Reference>
+						<Reference Name="UserAuxSend0">
+							<ObjectRef Name="Reverb_Night" ID="{47ED1BA8-036B-4D22-91C2-93BFA6803ED9}" WorkUnitID="{5B963A53-AA54-4687-A0B9-112941ACC765}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
@@ -1216,7 +1221,7 @@
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-3</Value>
+										<Value>-4.5</Value>
 									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
@@ -1374,6 +1379,9 @@
 							</ChildrenList>
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="Random_Dice_Roll" ID="{51EDFF77-99F8-4FDA-BDD8-C80160FACEA3}" ShortID="491563980">
+							<PropertyList>
+								<Property Name="OverrideUserAuxSends" Type="bool" Value="True"/>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
@@ -1395,6 +1403,7 @@
 							<ChildrenList>
 								<RandomSequenceContainer Name="Cricket" ID="{768A06A0-FFC6-434D-8EFD-7CD012E23860}" ShortID="640122157">
 									<PropertyList>
+										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
 										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 										<Property Name="RandomOrSequence" Type="int16" Value="0"/>
 									</PropertyList>

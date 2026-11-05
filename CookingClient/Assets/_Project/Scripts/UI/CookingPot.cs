@@ -189,7 +189,7 @@ namespace Cooking.UI
             boiling = !boiling;
             boiledKnobTarget = boiling ? FireOnAngle : 0f;
             AudioManager.PlayClick();
-            AudioManager.Post(boiling ? "Play_Boiling" : "Stop_Boiling");
+            AudioManager.SetBoiling(boiling);
             if (boiling)
                 Mark(CookMethod.Boiled);
         }
@@ -199,7 +199,7 @@ namespace Cooking.UI
             frying = !frying;
             friedKnobTarget = frying ? FireOnAngle : 0f;
             AudioManager.PlayClick();
-            AudioManager.Post(frying ? "Play_Frying" : "Stop_Frying");
+            AudioManager.SetFrying(frying);
             if (frying)
                 Mark(CookMethod.Fried);
         }
