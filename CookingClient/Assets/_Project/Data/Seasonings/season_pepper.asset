@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.Data.SeasoningDefinition
   id: season_pepper
   displayName: "\u9ED1\u80E1\u6912"
+  displayNameEn: Black Pepper
   icon: {fileID: 21300000, guid: 9588667e7ca81d94ca4327e923b576ca, type: 3}

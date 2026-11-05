@@ -15,19 +15,19 @@ MonoBehaviour:
   rows:
   - id: log.buff_very_low
     textZh: "\u4ECA\u591C\uFF1A\u79FB\u901F\u964D\u4F4E\uFF0C\u4E8B\u4EF6\u6210\u529F\u7387\u964D\u4F4E"
-    textEn: 'Tonight: slower move, lower event success rate'
+    textEn: 'Tonight: Movement speed reduced, event success rate reduced'
     color: '#E8C36A'
   - id: log.buff_low
     textZh: "\u4ECA\u591C\uFF1A\u79FB\u901F\u964D\u4F4E"
-    textEn: 'Tonight: slower move'
+    textEn: 'Tonight: Movement speed reduced'
     color: '#E8C36A'
   - id: log.buff_normal
     textZh: "\u4ECA\u591C\uFF1A\u72B6\u6001\u6B63\u5E38"
-    textEn: 'Tonight: normal status'
+    textEn: 'Tonight: Status normal'
     color: '#FFFFFF'
   - id: log.buff_high
     textZh: "\u4ECA\u591C\uFF1A\u79FB\u901F\u63D0\u5347\uFF0C\u7167\u4EAE\u8303\u56F4\u589E\u52A0"
-    textEn: 'Tonight: faster move, larger light radius'
+    textEn: 'Tonight: Movement speed increased, illumination range increased'
     color: '#E8C36A'
   - id: log.roll
     textZh: "\u63B7\u51FA {0} \u70B9"

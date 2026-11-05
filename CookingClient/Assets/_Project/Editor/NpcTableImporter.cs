@@ -15,6 +15,7 @@ namespace Cooking.EditorTools
     {
         const string TableAssetPath = "Assets/_Project/Data/Tables/NpcTables.xlsx";
         const string CatalogAssetPath = "Assets/_Project/Data/NpcCatalog.asset";
+        const string UiTextCatalogPath = "Assets/_Project/Data/UiTextCatalog.asset";
         const string IngredientsFolder = "Assets/_Project/Data/Ingredients";
 
         static readonly string[] SpeakerPrefixes =
@@ -87,6 +88,7 @@ namespace Cooking.EditorTools
             ImportOptions(RequireSheet(dataSet, "NpcOptions", result), characters, result);
             ImportRewards(RequireSheet(dataSet, "NpcRewards", result), characters, props, result);
             ImportLines(RequireSheet(dataSet, "NpcLines", result), characters, result);
+            ImportUiStrings(RequireSheet(dataSet, "UiStrings", result), result);
 
             catalog.characters = new List<NpcCharacter>();
             foreach (KeyValuePair<string, NpcCharacter> pair in characters)
@@ -416,6 +418,43 @@ namespace Cooking.EditorTools
                     textEn = StripSpeaker(Cell(row, "textEn"))
                 });
             }
+        }
+
+        static void ImportUiStrings(DataTable table, ImportResult result)
+        {
+            if (table == null)
+                return;
+
+            UiTextCatalog asset = AssetDatabase.LoadAssetAtPath<UiTextCatalog>(UiTextCatalogPath);
+            if (asset == null)
+            {
+                asset = ScriptableObject.CreateInstance<UiTextCatalog>();
+                AssetDatabase.CreateAsset(asset, UiTextCatalogPath);
+            }
+
+            asset.rows = new List<UiTextString>();
+            foreach (DataRow row in table.Rows)
+            {
+                string id = Cell(row, "id");
+                if (string.IsNullOrWhiteSpace(id))
+                    continue;
+
+                string textZh = Cell(row, "textZh");
+                if (string.IsNullOrEmpty(textZh))
+                {
+                    Fail(result, "UiStrings." + id + " 缺少 textZh。");
+                    continue;
+                }
+
+                asset.rows.Add(new UiTextString
+                {
+                    id = id.Trim(),
+                    textZh = textZh,
+                    textEn = Cell(row, "textEn")
+                });
+            }
+
+            EditorUtility.SetDirty(asset);
         }
 
         static NpcCatalog FindOrCreateCatalog()

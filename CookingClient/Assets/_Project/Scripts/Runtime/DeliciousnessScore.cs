@@ -61,6 +61,17 @@ namespace Cooking.Runtime
             RecipeDefinition recipe,
             DishPresentation presentation)
         {
+            return Evaluate(plate, definitions, recipe, presentation, null, DiaryLanguage.Zh);
+        }
+
+        public static DishResult Evaluate(
+            IList<IngredientInstance> plate,
+            IList<IngredientDefinition> definitions,
+            RecipeDefinition recipe,
+            DishPresentation presentation,
+            ScoreCommentCatalog comments,
+            DiaryLanguage language)
+        {
             var result = new DishResult();
             if (plate == null)
                 return result;
@@ -89,14 +100,19 @@ namespace Cooking.Runtime
                 {
                     anyCharcoal = true;
                     result.Score -= CharcoalPenalty * item.Quantity;
-                    result.Comments.Add("我把" + DisplayName(definition, item) + "烧过头了……");
+                    AddComment(
+                        result,
+                        comments,
+                        language,
+                        "comment.charcoal",
+                        DisplayName(definition, item, language));
                     continue;
                 }
 
                 if (definition == null)
                     continue;
 
-                string name = DisplayName(definition, item);
+                string name = DisplayName(definition, item, language);
                 result.Score += BasePerPortion * item.Quantity;
                 if (IsOptimal(definition, item.Doneness))
                 {
@@ -131,23 +147,31 @@ namespace Cooking.Runtime
             if (anyMeat && anyVegetable)
             {
                 result.Score += MeatVegetableBonus;
-                result.Comments.Add("荤素搭配的饮食能给我带来健康的身体——虽然我好像用不着它了。");
+                AddComment(result, comments, language, "comment.meat_vegetable");
             }
 
             if (optimalNames.Count > 0)
-                result.Comments.Add(string.Join("、", optimalNames) + "的火候刚刚好！");
+            {
+                string join = comments != null ? comments.NameJoin(language) : "、";
+                AddComment(
+                    result,
+                    comments,
+                    language,
+                    "comment.optimal",
+                    string.Join(join, optimalNames));
+            }
 
             if (seasoningMatched)
-                result.Comments.Add("这一味调料看来是放对了。");
+                AddComment(result, comments, language, "comment.seasoning");
 
             for (int i = 0; i < undercookedNames.Count; i++)
-                result.Comments.Add("哎呀，" + undercookedNames[i] + "是生的！希望不要拉肚子。");
+                AddComment(result, comments, language, "comment.undercooked", undercookedNames[i]);
 
             int synergy = LargestCluster(hitTimes, SynergyWindow);
             if (synergy > 1)
             {
                 result.Score += SynergyBonusPerFood * synergy;
-                result.Comments.Add("食材的相性很好，味道完美地融合在一起。");
+                AddComment(result, comments, language, "comment.synergy");
             }
 
             bool recipeMatch = RecipeMatcher.Matches(plate, definitions, recipe);
@@ -155,7 +179,7 @@ namespace Cooking.Runtime
             if (recipeMatch)
             {
                 result.Score += RecipeMatchBonus;
-                result.Comments.Add("完美的复现。");
+                AddComment(result, comments, language, "comment.recipe");
             }
 
             if (anyCharcoal)
@@ -183,6 +207,49 @@ namespace Cooking.Runtime
             }
 
             return result;
+        }
+
+        static void AddComment(
+            DishResult result,
+            ScoreCommentCatalog comments,
+            DiaryLanguage language,
+            string id,
+            params string[] args)
+        {
+            if (result == null)
+                return;
+
+            string text = comments != null ? comments.Format(id, language, args) : "";
+            if (string.IsNullOrEmpty(text))
+                text = FallbackComment(id, args);
+            if (string.IsNullOrEmpty(text))
+                return;
+
+            result.Comments.Add(text);
+        }
+
+        static string FallbackComment(string id, string[] args)
+        {
+            string arg0 = args != null && args.Length > 0 ? args[0] : "";
+            switch (id)
+            {
+                case "comment.charcoal":
+                    return "我把" + arg0 + "烧过头了……";
+                case "comment.meat_vegetable":
+                    return "荤素搭配的饮食能给我带来健康的身体——虽然我好像用不着它了。";
+                case "comment.optimal":
+                    return arg0 + "的火候刚刚好！";
+                case "comment.seasoning":
+                    return "这一味调料看来是放对了。";
+                case "comment.undercooked":
+                    return "哎呀，" + arg0 + "是生的！希望不要拉肚子。";
+                case "comment.synergy":
+                    return "食材的相性很好，味道完美地融合在一起。";
+                case "comment.recipe":
+                    return "完美的复现。";
+                default:
+                    return "";
+            }
         }
 
         static bool SeasoningMatches(RecipeDefinition recipe, IngredientInstance item)
@@ -241,12 +308,13 @@ namespace Cooking.Runtime
             return tenth.ToString("0.0", CultureInfo.InvariantCulture);
         }
 
-        static string DisplayName(IngredientDefinition definition, IngredientInstance item)
+        static string DisplayName(IngredientDefinition definition, IngredientInstance item, DiaryLanguage language)
         {
-            if (definition != null && !string.IsNullOrEmpty(definition.displayName))
-                return definition.displayName;
+            string name = IngredientDetailText.DisplayName(definition, language);
+            if (!string.IsNullOrEmpty(name))
+                return name;
 
-            return item.DefinitionId;
+            return item != null ? item.DefinitionId : "";
         }
 
         static IngredientDefinition Find(IList<IngredientDefinition> definitions, string id)

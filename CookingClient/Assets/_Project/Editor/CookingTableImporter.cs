@@ -246,6 +246,7 @@ namespace Cooking.EditorTools
             ImportRecipeSeasonings(RequireSheet(dataSet, "RecipeSeasonings", result), result);
             // steps 日记功能尚未接入，Sheet 可选
             ImportRecipeSteps(OptionalSheet(dataSet, "RecipeSteps"), result);
+            ImportScoreComments(RequireSheet(dataSet, "ScoreComments", result), result);
 
             WarnMissing("Ingredients", IngredientsFolder, typeof(IngredientDefinition), ingredientIds);
             WarnMissing("Seasonings", SeasoningsFolder, typeof(SeasoningDefinition), seasoningIds);
@@ -448,6 +449,7 @@ namespace Cooking.EditorTools
                 SeasoningDefinition asset = FindOrCreate<SeasoningDefinition>(SeasoningsFolder, id, result);
                 asset.id = id;
                 asset.displayName = Cell(row, "displayName");
+                asset.displayNameEn = Cell(row, "displayNameEn");
                 ApplySprite(
                     FirstCell(row, "iconPath", "icon"),
                     ref asset.icon,
@@ -455,6 +457,49 @@ namespace Cooking.EditorTools
                     result);
                 EditorUtility.SetDirty(asset);
             }
+        }
+
+        const string ScoreCommentCatalogPath = "Assets/_Project/Data/ScoreCommentCatalog.asset";
+
+        static void ImportScoreComments(DataTable table, ImportResult result)
+        {
+            if (table == null)
+                return;
+
+            ScoreCommentCatalog asset = AssetDatabase.LoadAssetAtPath<ScoreCommentCatalog>(ScoreCommentCatalogPath);
+            if (asset == null)
+            {
+                asset = ScriptableObject.CreateInstance<ScoreCommentCatalog>();
+                AssetDatabase.CreateAsset(asset, ScoreCommentCatalogPath);
+                result.Created++;
+            }
+            else
+                result.Updated++;
+
+            asset.rows = new List<ScoreCommentString>();
+            foreach (DataRow row in table.Rows)
+            {
+                string id = Cell(row, "id");
+                if (string.IsNullOrWhiteSpace(id))
+                    continue;
+
+                string textZh = Cell(row, "textZh");
+                if (string.IsNullOrEmpty(textZh))
+                {
+                    Debug.LogError("ScoreComments." + id + " 缺少 textZh。");
+                    result.ErrorCount++;
+                    continue;
+                }
+
+                asset.rows.Add(new ScoreCommentString
+                {
+                    id = id.Trim(),
+                    textZh = textZh,
+                    textEn = Cell(row, "textEn")
+                });
+            }
+
+            EditorUtility.SetDirty(asset);
         }
 
         static void ImportRecipes(DataTable table, HashSet<string> ids, ImportResult result)

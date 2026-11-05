@@ -7,6 +7,12 @@ namespace Cooking.Data
     {
         public string id;
         public string displayName;
+        public string displayNameEn;
         public Sprite icon;
+
+        public string DisplayName(DiaryLanguage language)
+        {
+            return NightEventDefinition.Pick(language, displayName, displayNameEn);
+        }
     }
 }

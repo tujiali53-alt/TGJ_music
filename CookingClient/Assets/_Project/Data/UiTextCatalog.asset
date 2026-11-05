@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bfc8c49a028eb1499a16ded8dc95124, type: 3}
+  m_Name: UiTextCatalog
+  m_EditorClassIdentifier: Cooking::Cooking.Data.UiTextCatalog
+  rows:
+  - id: ui.bed_confirm
+    textZh: "\u786E\u8BA4\u8FDB\u5165\u4E0B\u4E00\u5929\uFF1F"
+    textEn: 
+  - id: ui.credit_body
+    textZh: "\u6E38\u620F\u7B56\u5212\uFF1A\u5168\u4F53\u6210\u5458\n\n\u4E3B\u7B56\u5212\uFF1A\u5E73!\n\u4E3B\u7A0B\u5E8F\uFF1A\u56FE\u56FE\n\u6E38\u620F\u7F8E\u672F\uFF1A\u55DD\u513FDIGE\u300159\n\nUI\u8BBE\u8BA1\uFF1A\u55DD\u513FDIGE    
+      \n\u4EBA\u7269\u8BBE\u8BA1\uFF1A59\n\u6587\u6848\u7B56\u5212\uFF1A59  \n\u7FFB\u8BD1\uFF1A\u5E73\uFF01\n\n\u97F3\u4E50\u8BBE\u8BA1\uFF1A\u6C89\u821F"
+    textEn: 

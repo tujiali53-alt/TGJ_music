@@ -107,9 +107,7 @@ namespace Cooking.UI
                 panel.SetActive(true);
 
             SetFoodChrome(true);
-            SetText(displayNameText, IngredientDetailText.DisplayName(definition, GameLanguage.Current));
-            SetText(displayNameCh, definition.displayName);
-            SetText(displayNameEn, definition.displayNameEn);
+            ApplyDisplayNames(definition);
             if (foodImage != null)
             {
                 Sprite sprite = FoodVisualResolver.SpriteFor(definition, item.Shape);
@@ -288,6 +286,23 @@ namespace Cooking.UI
                 return null;
 
             return found.GetComponent<TMP_Text>();
+        }
+
+        void ApplyDisplayNames(IngredientDefinition definition)
+        {
+            bool english = GameLanguage.Current == DiaryLanguage.En;
+            string zh = definition != null ? definition.displayName ?? "" : "";
+            string en = definition != null ? definition.displayNameEn ?? "" : "";
+            if (english && string.IsNullOrEmpty(en))
+                en = zh;
+
+            SetText(displayNameText, IngredientDetailText.DisplayName(definition, GameLanguage.Current));
+            SetText(displayNameCh, english ? "" : zh);
+            SetText(displayNameEn, english ? en : "");
+            if (displayNameCh != null)
+                displayNameCh.gameObject.SetActive(!english);
+            if (displayNameEn != null)
+                displayNameEn.gameObject.SetActive(english);
         }
 
         void SetFlag(TMP_Text target, string key, bool value)

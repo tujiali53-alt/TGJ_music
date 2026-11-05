@@ -1,5 +1,6 @@
 using Cooking.Core;
 using Cooking.Data;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,8 @@ namespace Cooking.Exploration
         [SerializeField] GameObject bedPanel;
         [SerializeField] Button confirmButton;
         [SerializeField] Button cancelButton;
+        [SerializeField] TMP_Text promptText;
+        [SerializeField] UiTextCatalog uiText;
 
         void Awake()
         {
@@ -43,6 +46,13 @@ namespace Cooking.Exploration
 
                 if (cancelButton == null)
                     cancelButton = FindChildButton(bedPanel.transform, "CancelButton");
+
+                if (promptText == null)
+                {
+                    Transform found = bedPanel.transform.Find("PromptText");
+                    if (found != null)
+                        promptText = found.GetComponent<TMP_Text>();
+                }
             }
 
             if (confirmButton == null)
@@ -55,8 +65,40 @@ namespace Cooking.Exploration
             else
                 cancelButton.onClick.AddListener(ClosePanel);
 
+            if (promptText == null)
+                Debug.LogError("bedPanel 下需要有 PromptText。", this);
+
+            if (uiText == null)
+                Debug.LogError("BedSleep 需要绑定 UiTextCatalog。", this);
+
             if (bedPanel != null)
                 bedPanel.SetActive(false);
+
+            ApplyPrompt();
+        }
+
+        void OnEnable()
+        {
+            GameLanguage.Changed += OnLanguageChanged;
+            ApplyPrompt();
+        }
+
+        void OnDisable()
+        {
+            GameLanguage.Changed -= OnLanguageChanged;
+        }
+
+        void OnLanguageChanged()
+        {
+            ApplyPrompt();
+        }
+
+        void ApplyPrompt()
+        {
+            if (promptText == null || uiText == null)
+                return;
+
+            promptText.text = uiText.Pick("ui.bed_confirm", GameLanguage.Current);
         }
 
         void Update()

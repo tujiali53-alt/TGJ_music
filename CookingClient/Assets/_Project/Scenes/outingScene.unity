@@ -7647,6 +7647,8 @@ MonoBehaviour:
   bedPanel: {fileID: 2006101996}
   confirmButton: {fileID: 2106102105}
   cancelButton: {fileID: 2106102205}
+  promptText: {fileID: 0}
+  uiText: {fileID: 11400000, guid: c0f848c8a7e3a8b49968a3dbc6a8f92f, type: 2}
 --- !u!61 &817313460
 BoxCollider2D:
   m_ObjectHideFlags: 0

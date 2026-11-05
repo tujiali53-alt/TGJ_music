@@ -32,6 +32,7 @@ namespace Cooking.UI
         [SerializeField] float resultDelay = 1f;
         [SerializeField] RecipeDefinition[] recipes;
         [SerializeField] DishPresentation presentation;
+        [SerializeField] ScoreCommentCatalog scoreComments;
 
         DishResult lastResult;
         bool resolving;
@@ -202,7 +203,16 @@ namespace Cooking.UI
 
             var plate = new List<IngredientInstance>(session.HeldDish.Items);
             RecipeDefinition today = MatchUnlocked(plate, session);
-            DishResult result = DeliciousnessScore.Evaluate(plate, DefinitionsFor(plate), today, presentation);
+            if (scoreComments == null)
+                Debug.LogError("MealEatController 需要绑定 ScoreCommentCatalog。", this);
+
+            DishResult result = DeliciousnessScore.Evaluate(
+                plate,
+                DefinitionsFor(plate),
+                today,
+                presentation,
+                scoreComments,
+                GameLanguage.Current);
             if (result.Picture == DishPictureKind.Recipe && today != null)
                 session.RememberCorrectRecipe(today.id);
             if (session.AttemptScores == null || session.AttemptScores.Length < MealsPerDay)

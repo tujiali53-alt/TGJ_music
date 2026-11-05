@@ -1047,6 +1047,8 @@ MonoBehaviour:
   bgmSlider: {fileID: 810654182}
   sfxSlider: {fileID: 27608167}
   menuCursor: {fileID: 0}
+  creditBodyText: {fileID: 0}
+  uiText: {fileID: 11400000, guid: c0f848c8a7e3a8b49968a3dbc6a8f92f, type: 2}
 --- !u!114 &769705546
 MonoBehaviour:
   m_ObjectHideFlags: 0

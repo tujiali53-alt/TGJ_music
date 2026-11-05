@@ -1,5 +1,6 @@
 using Cooking.Core;
 using Cooking.Data;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ public class MenuController : MonoBehaviour
     [SerializeField] Slider bgmSlider;
     [SerializeField] Slider sfxSlider;
     [SerializeField] RectTransform menuCursor;
+    [SerializeField] TMP_Text creditBodyText;
+    [SerializeField] UiTextCatalog uiText;
 
     void Awake()
     {
@@ -71,9 +74,23 @@ public class MenuController : MonoBehaviour
             Debug.LogError("MeunScene 的 Canvas 下需要已经放好 SettingPanel。", this);
 
         if (creditPanel != null)
+        {
             creditPanel.SetActive(false);
+            if (creditBodyText == null)
+            {
+                Transform found = creditPanel.transform.Find("Text (TMP)");
+                if (found != null)
+                    creditBodyText = found.GetComponent<TMP_Text>();
+            }
+        }
         else
             Debug.LogError("MeunScene 的 Canvas 下需要已经放好 CreditPanel。", this);
+
+        if (creditBodyText == null)
+            Debug.LogError("CreditPanel 下需要有 Text (TMP)。", this);
+
+        if (uiText == null)
+            Debug.LogError("MenuController 需要绑定 UiTextCatalog。", this);
 
         if (instructionPanel != null)
             instructionPanel.SetActive(false);
@@ -117,15 +134,24 @@ public class MenuController : MonoBehaviour
             Debug.LogError("MeunScene 的 SettingPanel 下需要已经放好 SoundeffectsSlider。", this);
 
         RefreshLanguageMarks();
+        ApplyCreditBody();
         SyncSlidersFromAudio();
+        GameLanguage.Changed += OnLanguageChanged;
     }
 
     void OnDestroy()
     {
+        GameLanguage.Changed -= OnLanguageChanged;
         if (bgmSlider != null)
             bgmSlider.onValueChanged.RemoveListener(OnBgmChanged);
         if (sfxSlider != null)
             sfxSlider.onValueChanged.RemoveListener(OnSfxChanged);
+    }
+
+    void OnLanguageChanged()
+    {
+        RefreshLanguageMarks();
+        ApplyCreditBody();
     }
 
     public void StartGame()
@@ -163,8 +189,17 @@ public class MenuController : MonoBehaviour
     public void OpenCredits()
     {
         AudioManager.PlayClick();
+        ApplyCreditBody();
         if (creditPanel != null)
             creditPanel.SetActive(true);
+    }
+
+    void ApplyCreditBody()
+    {
+        if (creditBodyText == null || uiText == null)
+            return;
+
+        creditBodyText.text = uiText.Pick("ui.credit_body", GameLanguage.Current);
     }
 
     public void CloseCredits()
@@ -196,14 +231,12 @@ public class MenuController : MonoBehaviour
     {
         AudioManager.PlayClick();
         GameLanguage.Set(DiaryLanguage.Zh);
-        RefreshLanguageMarks();
     }
 
     public void SelectEnglish()
     {
         AudioManager.PlayClick();
         GameLanguage.Set(DiaryLanguage.En);
-        RefreshLanguageMarks();
     }
 
     public void ExitGame()

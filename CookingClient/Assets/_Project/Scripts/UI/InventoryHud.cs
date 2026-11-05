@@ -53,7 +53,7 @@ namespace Cooking.UI
                 {
                     IngredientDefinition definition = definitions[i];
                     if (definition != null && definition.id == definitionId)
-                        return definition.displayName;
+                        return IngredientDetailText.DisplayName(definition, GameLanguage.Current);
                 }
             }
 
