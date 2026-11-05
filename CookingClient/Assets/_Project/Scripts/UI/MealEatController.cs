@@ -345,7 +345,16 @@ namespace Cooking.UI
                 resultPanel.SetActive(false);
 
             if (gameOverPanel != null)
+            {
                 gameOverPanel.SetActive(true);
+                Transform name = gameOverPanel.transform.Find("DialogPanel/PlayerDialogue/UserNameText");
+                if (name != null)
+                {
+                    TMP_Text text = name.GetComponent<TMP_Text>();
+                    if (text != null)
+                        text.text = PlayerDisplayName.Resolve(session);
+                }
+            }
 
             resolving = false;
         }

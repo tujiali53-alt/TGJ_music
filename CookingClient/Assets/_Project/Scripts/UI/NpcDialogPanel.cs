@@ -77,7 +77,12 @@ namespace Cooking.UI
 
         void OnLanguageChanged()
         {
-            if (!optionsVisible || !npcOpen)
+            if (!npcOpen)
+                return;
+
+            ApplyPlayerUserName();
+
+            if (!optionsVisible)
                 return;
 
             ShowOptions();
@@ -172,8 +177,7 @@ namespace Cooking.UI
                 profileImage.color = Color.white;
             }
 
-            if (nameText != null)
-                nameText.text = NpcCatalog.Pick(GameLanguage.Current, character.displayNameZh, character.displayNameEn);
+            ApplyPlayerUserName();
 
             HideJudgment();
             BeginLines(CollectLines(""));
@@ -284,10 +288,20 @@ namespace Cooking.UI
 
             if (nameText != null)
                 nameText.gameObject.SetActive(true);
+            ApplyPlayerUserName();
             if (profileImage != null)
                 profileImage.gameObject.SetActive(true);
             if (bodyText != null)
                 bodyText.gameObject.SetActive(true);
+        }
+
+        void ApplyPlayerUserName()
+        {
+            if (nameText == null)
+                return;
+
+            GameRoot root = GameRoot.Instance;
+            nameText.text = PlayerDisplayName.Resolve(root != null ? root.Session : null);
         }
 
         void HideJudgment()

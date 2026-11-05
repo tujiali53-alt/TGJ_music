@@ -132,14 +132,31 @@ public class AudioManager : MonoBehaviour
         if (bgmStarted || !playBGM.IsValid())
             return;
 
-        playBGM.Post(gameObject);
-        bgmStarted = true;
+        try
+        {
+            playBGM.Post(gameObject);
+            bgmStarted = true;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning("AudioManager BGM failed: " + ex.Message);
+        }
     }
 
     public static void Post(AK.Wwise.Event e)
     {
-        if (I != null && e != null && e.IsValid())
+        if (I == null || e == null || !e.IsValid())
+            return;
+
+        // Wwise 原生库若未加载（例如 Mac 插件被 CRLF 破坏），不能抛异常挡住按钮逻辑。
+        try
+        {
             e.Post(I.gameObject);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning("AudioManager.Post failed: " + ex.Message);
+        }
     }
 
     // 按天数切换白天 BGM 版本
@@ -150,8 +167,17 @@ public class AudioManager : MonoBehaviour
 
         int index = Mathf.Clamp(day - 1, 0, I.dayStages.Length - 1);
         AK.Wwise.State stage = I.dayStages[index];
-        if (stage != null)
+        if (stage == null)
+            return;
+
+        try
+        {
             stage.SetValue();
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning("AudioManager.SetDayStage failed: " + ex.Message);
+        }
     }
 
     public static void PlayCut(string ingredientId)
@@ -338,7 +364,16 @@ public class AudioManager : MonoBehaviour
 
     public static void SetSwitch(string group, string value)
     {
-        if (I != null)
+        if (I == null)
+            return;
+
+        try
+        {
             AkUnitySoundEngine.SetSwitch(group, value, I.gameObject);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning("AudioManager.SetSwitch failed: " + ex.Message);
+        }
     }
 }

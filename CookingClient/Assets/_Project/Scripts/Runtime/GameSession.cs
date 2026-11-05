@@ -6,6 +6,7 @@ namespace Cooking.Runtime
     public sealed class GameSession
     {
         public int SaveVersion = 1;
+        public string PlayerName = "";
         public int DayIndex;
         public DayPhase Phase;
         public List<IngredientInstance> Inventory = new List<IngredientInstance>();
@@ -31,6 +32,7 @@ namespace Cooking.Runtime
             return new GameSession
             {
                 SaveVersion = 1,
+                PlayerName = "",
                 DayIndex = 0,
                 Phase = DayPhase.Night,
                 Inventory = new List<IngredientInstance>(),

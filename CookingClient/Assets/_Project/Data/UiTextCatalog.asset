@@ -20,3 +20,12 @@ MonoBehaviour:
     textZh: "\u6E38\u620F\u7B56\u5212\uFF1A\u5168\u4F53\u6210\u5458\n\n\u4E3B\u7B56\u5212\uFF1A\u5E73!\n\u4E3B\u7A0B\u5E8F\uFF1A\u56FE\u56FE\n\u6E38\u620F\u7F8E\u672F\uFF1A\u55DD\u513FDIGE\u300159\n\nUI\u8BBE\u8BA1\uFF1A\u55DD\u513FDIGE    
       \n\u4EBA\u7269\u8BBE\u8BA1\uFF1A59\n\u6587\u6848\u7B56\u5212\uFF1A59  \n\u7FFB\u8BD1\uFF1A\u5E73\uFF01\n\n\u97F3\u4E50\u8BBE\u8BA1\uFF1A\u6C89\u821F"
     textEn: 
+  - id: ui.judgment_success_title
+    textZh: "\u6210\u529F!!"
+    textEn: Success!!
+  - id: ui.judgment_fail_title
+    textZh: "\u5931\u8D25!!......\u4E00\u65E0\u6240\u83B7......"
+    textEn: Fail!!......Came away empty-handed......
+  - id: ui.judgment_empty
+    textZh: "\u4E00\u65E0\u6240\u83B7"
+    textEn: Came away empty-handed

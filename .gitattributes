@@ -181,3 +181,9 @@ LightingData.asset binary
 *.pdb lfs
 *.so lfs
 *.a lfs
+*.dylib binary
+
+# Signed macOS Wwise bundles: never let autocrlf rewrite plist / CodeResources.
+**/Plugins/Mac/**/Info.plist -text
+**/Plugins/Mac/**/CodeResources -text
+**/Plugins/Mac/**/AkUnitySoundEngine -text

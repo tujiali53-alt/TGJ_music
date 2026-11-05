@@ -136,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &18149681
 RectTransform:
   m_ObjectHideFlags: 0
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cba538b123f050b4c944a1558b49b58b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 842f25d87cd268a479dc9a09a7e1c7f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6252,7 +6252,7 @@ GameObject:
   - component: {fileID: 391584036}
   - component: {fileID: 391584035}
   m_Layer: 5
-  m_Name: Title (1)
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6274,7 +6274,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -114, y: 45.56}
+  m_AnchoredPosition: {x: 101, y: 50}
   m_SizeDelta: {x: 891.5, y: 71.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &391584035
@@ -8901,8 +8901,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u6210\u529F\u6982\u738730%"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2a17d3da4e4fc8e48ae02434f070ac7c, type: 2}
-  m_sharedMaterial: {fileID: 5034960185866848995, guid: 2a17d3da4e4fc8e48ae02434f070ac7c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 859d321042635524494206ea7e1dc9f6, type: 2}
+  m_sharedMaterial: {fileID: -7790462071482903980, guid: 859d321042635524494206ea7e1dc9f6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9264,7 +9264,7 @@ GameObject:
   - component: {fileID: 1171638544}
   - component: {fileID: 1171638543}
   m_Layer: 5
-  m_Name: ObtainFoodNameText (1)
+  m_Name: ObtainFoodNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9286,8 +9286,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -128.45, y: 137.68}
-  m_SizeDelta: {x: 943.1, y: 58.88}
+  m_AnchoredPosition: {x: 24.58, y: 142}
+  m_SizeDelta: {x: 735.35, y: 58.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1171638543
 MonoBehaviour:
@@ -9343,7 +9343,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -9594,6 +9594,7 @@ MonoBehaviour:
   beginButton: {fileID: 0}
   confirmButton: {fileID: 0}
   confirmDelay: 1
+  enableSeenSkip: 1
   scoreText: {fileID: 0}
   resultText: {fileID: 0}
   definitions:
@@ -9648,14 +9649,17 @@ MonoBehaviour:
   successRoot: {fileID: 0}
   failRoot: {fileID: 0}
   successBody: {fileID: 0}
+  successTitleText: {fileID: 2044426377}
   obtainFoodNameText: {fileID: 0}
   obtainFoodAmountText: {fileID: 0}
   obtainFoodImage: {fileID: 0}
   failBody: {fileID: 0}
-  failNameText: {fileID: 0}
+  failTitleText: {fileID: 391584035}
+  failNameText: {fileID: 1171638543}
   choiceCursor: {fileID: 0}
   choiceIdle: {fileID: 0}
   choiceHighlight: {fileID: 0}
+  uiText: {fileID: 11400000, guid: c0f848c8a7e3a8b49968a3dbc6a8f92f, type: 2}
 --- !u!1 &1210072248
 GameObject:
   m_ObjectHideFlags: 0
