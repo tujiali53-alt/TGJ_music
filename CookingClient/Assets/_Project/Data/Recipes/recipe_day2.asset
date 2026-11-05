@@ -51,12 +51,9 @@ MonoBehaviour:
   - seasoningId: season_pepper
     targetIngredientId: ing_doneegg
     count: 1
-  - seasoningId: season_spice
-    targetIngredientId: ing_doneegg
-    count: 1
   steps:
   - order: 1
-    hintText: "\u725B\u8089\u3001\u6D0B\u8471\u3001\u756A\u8304\u5207\u5F00\u3002"
+    hintText: "\u725B\u8089\u3001\u6D0B\u8471\u3001\u756A\u8304\u5207\u4E01"
     action: 0
     ingredientId: ing_beef
     cookMethod: 0
@@ -68,13 +65,13 @@ MonoBehaviour:
     cookMethod: 2
     seasoningId: season_oil
   - order: 3
-    hintText: "\u5012\u5165\u5207\u5F00\u7684\u756A\u8304\uFF0C\u6536\u6D53\u6C64\u6C41\u3002"
+    hintText: "\u5012\u5165\u756A\u8304\u4E01\uFF0C\u6536\u6D53\u6C64\u6C41\u3002"
     action: 2
     ingredientId: ing_tomato
     cookMethod: 2
     seasoningId: 
   - order: 4
-    hintText: "\u6253\u5165\u9E21\u86CB\u7116\u716E\uFF0C\u51FA\u9505\u524D\u52A0\u5165\u9ED1\u80E1\u6912\u4E0E\u9999\u6599\u8C03\u5473\u3002"
+    hintText: "\u6253\u5165\u9E21\u86CB\u7116\u716E\uFF0C\u51FA\u9505\u524D\u52A0\u5165\u9ED1\u80E1\u6912\u8C03\u5473\u3002"
     action: 1
     ingredientId: ing_egg
     cookMethod: 1

@@ -182,15 +182,15 @@ namespace Cooking.Runtime
                 AddComment(result, comments, language, "comment.recipe");
             }
 
-            if (anyCharcoal)
-            {
-                result.Picture = DishPictureKind.Charcoal;
-                result.SummarySprite = presentation != null ? presentation.charcoalSprite : null;
-            }
-            else if (recipeMatch || freeformPicture)
+            if (recipeMatch || freeformPicture)
             {
                 result.Picture = DishPictureKind.Recipe;
                 result.SummarySprite = recipe != null ? recipe.finishedSprite : null;
+            }
+            else if (anyCharcoal)
+            {
+                result.Picture = DishPictureKind.Charcoal;
+                result.SummarySprite = presentation != null ? presentation.charcoalSprite : null;
             }
             else
             {

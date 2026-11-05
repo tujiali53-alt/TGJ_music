@@ -48,6 +48,8 @@ public class AudioManager : MonoBehaviour
     [Header("音量 RTPC（0–100）")]
     public AK.Wwise.RTPC musicVolumeRtpc;
     public AK.Wwise.RTPC sfxVolumeRtpc;
+    [Tooltip("当前 SoundBank 若仍是旧总线曲线（0→-100、50→-4、100→0），勾选此项，滑条才会按听感线性变化。Wwise 已改成 0→-96、100→0 并重新 Generate 后请取消勾选。")]
+    public bool legacyBusVolumeCurve = true;
 
     bool bgmStarted;
     bool ambienceOn;
@@ -80,6 +82,11 @@ public class AudioManager : MonoBehaviour
 
     IEnumerator StartWhenBankReady()
     {
+        // Awake 时 Init/MainAudio 可能还没就绪；等引擎初始化后再多等两帧写 RTPC。
+        while (!AkUnitySoundEngine.IsInitialized())
+            yield return null;
+
+        yield return null;
         yield return null;
         if (I != this)
             yield break;
@@ -245,14 +252,42 @@ public class AudioManager : MonoBehaviour
 
     static void ApplyMusicVolume()
     {
-        if (I != null && I.musicVolumeRtpc != null)
-            I.musicVolumeRtpc.SetGlobalValue(musicVolume * 100f);
+        ApplyRtpc(I != null ? I.musicVolumeRtpc : null, musicVolume);
     }
 
     static void ApplySfxVolume()
     {
-        if (I != null && I.sfxVolumeRtpc != null)
-            I.sfxVolumeRtpc.SetGlobalValue(sfxVolume * 100f);
+        ApplyRtpc(I != null ? I.sfxVolumeRtpc : null, sfxVolume);
+    }
+
+    static void ApplyRtpc(AK.Wwise.RTPC rtpc, float normalized)
+    {
+        if (rtpc == null || !rtpc.IsValid() || !AkUnitySoundEngine.IsInitialized())
+            return;
+
+        float unit = Mathf.Clamp01(normalized);
+        float rtpcValue = (I != null && I.legacyBusVolumeCurve)
+            ? SliderToLegacyBusRtpc(unit)
+            : unit * 100f;
+
+        // 总线音量只用全局 RTPC；bypass 内部插值，避免拖滑条时听感滞后。
+        AkUnitySoundEngine.SetRTPCValue(
+            rtpc.Id,
+            rtpcValue,
+            AkUnitySoundEngine.AK_INVALID_GAME_OBJECT,
+            0,
+            AkCurveInterpolation.AkCurveInterpolation_Linear,
+            true);
+    }
+
+    // 旧总线曲线：(0,-100) (50,-4) (100,0)。把滑条 0–1 先映射到目标 dB，再反查 RTPC。
+    static float SliderToLegacyBusRtpc(float unit)
+    {
+        float desiredDb = Mathf.Lerp(-96f, 0f, unit);
+        if (desiredDb <= -4f)
+            return 50f * (desiredDb + 100f) / 96f;
+
+        return 50f + 50f * (desiredDb + 4f) / 4f;
     }
 
     static string CutSwitch(string ingredientId)

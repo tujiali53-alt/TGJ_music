@@ -20,20 +20,14 @@ namespace Cooking.Runtime
             if (!IsFreeform(recipe) || plate == null)
                 return false;
 
-            bool anyFood = false;
             for (int i = 0; i < plate.Count; i++)
             {
                 IngredientInstance item = plate[i];
-                if (item == null || item.Quantity <= 0)
-                    continue;
-
-                anyFood = true;
-                IngredientDefinition definition = Find(definitions, item.DefinitionId);
-                if (definition != null && item.Doneness >= definition.maxDoneness)
-                    return false;
+                if (item != null && item.Quantity > 0)
+                    return true;
             }
 
-            return anyFood;
+            return false;
         }
 
         public static bool Matches(

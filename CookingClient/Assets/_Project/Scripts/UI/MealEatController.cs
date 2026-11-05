@@ -13,10 +13,15 @@ namespace Cooking.UI
     public sealed class MealEatController : MonoBehaviour
     {
         public const int MealsPerDay = 3;
+        public const int FinalDayIndex = 7;
+        public const int FinalDayMeals = 1;
 
         [SerializeField] Button eatButton;
         [SerializeField] Button enterNightButton;
         [SerializeField] Button oneMoreButton;
+        [SerializeField] Button overButton;
+        [SerializeField] Button quitButton;
+        [SerializeField] Button backMenuButton;
         [SerializeField] TMP_Text mealsText;
         [SerializeField] TMP_Text deliciousnessText;
         [SerializeField] TMP_Text ratingFirstText;
@@ -29,6 +34,7 @@ namespace Cooking.UI
         [SerializeField] float commentInterval = 0.5f;
         [SerializeField] Image finalFoodImage;
         [SerializeField] GameObject resultPanel;
+        [SerializeField] GameObject gameOverPanel;
         [SerializeField] float resultDelay = 1f;
         [SerializeField] RecipeDefinition[] recipes;
         [SerializeField] DishPresentation presentation;
@@ -48,6 +54,15 @@ namespace Cooking.UI
 
             if (oneMoreButton == null)
                 oneMoreButton = FindButton("OneMoreTimeButton");
+
+            if (overButton == null)
+                overButton = FindButton("OverButton");
+
+            if (quitButton == null)
+                quitButton = FindButton("QuitButton");
+
+            if (backMenuButton == null)
+                backMenuButton = FindButton("BackMeunButton");
 
             if (mealsText == null)
                 mealsText = FindText("NumberOfMealsText");
@@ -94,6 +109,13 @@ namespace Cooking.UI
                     resultPanel = found.gameObject;
             }
 
+            if (gameOverPanel == null)
+            {
+                Transform found = FindNamed("GameOverPanel");
+                if (found != null)
+                    gameOverPanel = found.gameObject;
+            }
+
             if (eatButton == null)
                 Debug.LogError("需要 InteractionPanel/EattingButton，并且带 Button。", this);
             else
@@ -108,6 +130,21 @@ namespace Cooking.UI
                 Debug.LogError("需要 CheckPanel/OneMoreTimeButton，并且带 Button。", this);
             else
                 oneMoreButton.onClick.AddListener(ClosePanel);
+
+            if (overButton == null)
+                Debug.LogError("需要 CheckPanel/OverButton，并且带 Button。", this);
+            else
+                overButton.onClick.AddListener(OpenGameOver);
+
+            if (quitButton == null)
+                Debug.LogError("需要 EndingPanel/QuitButton，并且带 Button。", this);
+            else
+                quitButton.onClick.AddListener(QuitGame);
+
+            if (backMenuButton == null)
+                Debug.LogError("需要 EndingPanel/BackMeunButton，并且带 Button。", this);
+            else
+                backMenuButton.onClick.AddListener(BackToMenu);
 
             if (mealsText == null)
                 Debug.LogError("需要 NumberOfMealsText。", this);
@@ -133,6 +170,14 @@ namespace Cooking.UI
                 Debug.LogError("需要 EatingCheckPanel。", this);
             else
                 resultPanel.SetActive(false);
+
+            if (gameOverPanel == null)
+                Debug.LogError("需要 Canvas/GameOverPanel。", this);
+            else
+                gameOverPanel.SetActive(false);
+
+            if (overButton != null)
+                overButton.gameObject.SetActive(false);
         }
 
         void OnDestroy()
@@ -145,6 +190,15 @@ namespace Cooking.UI
 
             if (oneMoreButton != null)
                 oneMoreButton.onClick.RemoveListener(ClosePanel);
+
+            if (overButton != null)
+                overButton.onClick.RemoveListener(OpenGameOver);
+
+            if (quitButton != null)
+                quitButton.onClick.RemoveListener(QuitGame);
+
+            if (backMenuButton != null)
+                backMenuButton.onClick.RemoveListener(BackToMenu);
         }
 
         void LateUpdate()
@@ -153,7 +207,7 @@ namespace Cooking.UI
             if (mealsText != null)
             {
                 int meals = session != null ? session.MealsEaten : 0;
-                mealsText.text = meals + "/" + MealsPerDay;
+                mealsText.text = meals + "/" + MealsAllowed(session);
             }
 
             if (deliciousnessText != null)
@@ -181,8 +235,9 @@ namespace Cooking.UI
             AudioManager.PlayClick();
 
             GameSession session = root.Session;
+            int mealsAllowed = MealsAllowed(session);
             bool hasFood = Plate.HasFood();
-            if (session.MealsEaten >= MealsPerDay || !hasFood)
+            if (session.MealsEaten >= mealsAllowed || !hasFood)
             {
                 if (session.MealsEaten > 0)
                 {
@@ -267,6 +322,9 @@ namespace Cooking.UI
             if (root == null || root.Session == null || root.Flow == null || root.Flow.IsLoading)
                 return;
 
+            if (IsFinalDay(root.Session))
+                return;
+
             if (root.Session.MealsEaten < 1)
                 return;
 
@@ -275,10 +333,52 @@ namespace Cooking.UI
             root.Flow.Load(SceneNames.Outing);
         }
 
+        public void OpenGameOver()
+        {
+            GameSession session = Session();
+            if (!IsFinalDay(session) || session.MealsEaten < 1)
+                return;
+
+            AudioManager.PlayClick();
+            StopComments();
+            if (resultPanel != null)
+                resultPanel.SetActive(false);
+
+            if (gameOverPanel != null)
+                gameOverPanel.SetActive(true);
+
+            resolving = false;
+        }
+
+        public void QuitGame()
+        {
+            AudioManager.PlayClick();
+            Application.Quit();
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        }
+
+        public void BackToMenu()
+        {
+            GameRoot root = GameRoot.Instance;
+            if (root == null)
+                return;
+
+            AudioManager.PlayClick();
+            StopComments();
+            if (gameOverPanel != null)
+                gameOverPanel.SetActive(false);
+
+            resolving = false;
+            root.ReturnToMenu();
+        }
+
         void ApplySummary()
         {
             GameSession session = Session();
             int meals = session != null ? session.MealsEaten : 0;
+            bool finalDay = IsFinalDay(session);
             if (ratingFirstText != null)
                 ratingFirstText.text = ScoreAt(session, 0);
 
@@ -312,8 +412,24 @@ namespace Cooking.UI
             else
                 BeginComments(CommentsForLatest(session));
 
+            if (enterNightButton != null)
+                enterNightButton.gameObject.SetActive(!finalDay && meals >= 1);
+
             if (oneMoreButton != null)
-                oneMoreButton.gameObject.SetActive(meals < MealsPerDay);
+                oneMoreButton.gameObject.SetActive(!finalDay && meals < MealsAllowed(session));
+
+            if (overButton != null)
+                overButton.gameObject.SetActive(finalDay && meals >= 1);
+        }
+
+        static bool IsFinalDay(GameSession session)
+        {
+            return session != null && session.DayIndex == FinalDayIndex;
+        }
+
+        static int MealsAllowed(GameSession session)
+        {
+            return IsFinalDay(session) ? FinalDayMeals : MealsPerDay;
         }
 
         void BeginComments(string[] lines)

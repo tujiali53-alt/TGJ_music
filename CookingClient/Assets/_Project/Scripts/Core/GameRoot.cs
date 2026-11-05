@@ -1,6 +1,7 @@
 using Cooking.Data;
 using Cooking.Runtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Cooking.Core
 {
@@ -52,12 +53,26 @@ namespace Cooking.Core
             if (Session.Phase != DayPhase.Night)
                 return false;
 
+            // Day 7 has no night; bed should not advance past the final day.
+            if (Session.DayIndex >= 7)
+                return false;
+
             Session.DayIndex += 1;
             AudioManager.SetDayStage(Session.DayIndex);   // 先设置BGM版本，再进入白天
             Session.Phase = DayPhase.Day;
             Session.ClearCookingScores();
             Flow.Load(SceneNames.Cooking);
             return true;
+        }
+
+        public void ReturnToMenu()
+        {
+            if (Flow != null && Flow.IsLoading)
+                return;
+
+            Instance = null;
+            SceneManager.LoadScene(SceneNames.Menu);
+            Destroy(gameObject);
         }
     }
 }

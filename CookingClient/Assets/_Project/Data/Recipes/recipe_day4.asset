@@ -34,12 +34,9 @@ MonoBehaviour:
   - seasoningId: season_sauce
     targetIngredientId: ing_pumpkin
     count: 1
-  - seasoningId: season_sugar
-    targetIngredientId: ing_berry
-    count: 1
   steps:
   - order: 1
-    hintText: "\u5E7D\u7075\u5357\u74DC\u5207\u5F00\uFF0C\u716E\u719F\u51B7\u5374\u540E\u52A0\u5165\u5976\u6CB9\u7FFB\u62CC\u6210\u6CE5\u3002"
+    hintText: "\u5E7D\u7075\u5357\u74DC\u5207\u5757\uFF0C\u716E\u719F\u51B7\u5374\u540E\u52A0\u5165\u5976\u6CB9\u7FFB\u62CC\u6210\u6CE5\u3002"
     action: 1
     ingredientId: ing_pumpkin
     cookMethod: 1

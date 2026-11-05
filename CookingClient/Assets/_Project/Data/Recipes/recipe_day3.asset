@@ -42,7 +42,7 @@ MonoBehaviour:
     count: 1
   steps:
   - order: 1
-    hintText: "\u7389\u7C73\u9C7C\u5207\u5F00\uFF0C\u871C\u8393\u679C\u5207\u5F00\u3002"
+    hintText: "\u7389\u7C73\u9C7C\u5207\u5757\uFF0C\u871C\u8393\u679C\u5207\u5C0F\u4E01\u3002"
     action: 0
     ingredientId: ing_cornfish
     cookMethod: 0
