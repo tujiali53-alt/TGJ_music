@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.Data.SeasoningDefinition
   id: season_oil
   displayName: "\u6CB9"
-  icon: {fileID: 21300000, guid: 277a8f92c7cf3264e82e8c7004b6a68d, type: 3}
+  icon: {fileID: 21300000, guid: 20f1439db92990b47b8d16bf9b37a047, type: 3}

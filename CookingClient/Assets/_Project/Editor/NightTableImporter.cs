@@ -88,7 +88,10 @@ namespace Cooking.EditorTools
                 "event_beasts",
                 "event_fishing",
                 "event_grave",
-                "event_moonstone"
+                "event_moonstone",
+                "event_a",
+                "event_b",
+                "event_c"
             };
             for (int i = 0; i < ids.Length; i++)
             {

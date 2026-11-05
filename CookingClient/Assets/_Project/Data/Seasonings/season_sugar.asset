@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.Data.SeasoningDefinition
   id: season_sugar
   displayName: "\u7CD6"
-  icon: {fileID: 21300000, guid: 561e66a969bca24448ecbacd7bc2063c, type: 3}
+  icon: {fileID: 21300000, guid: 95d818b506fffca46a766b19ef0ab9a1, type: 3}
