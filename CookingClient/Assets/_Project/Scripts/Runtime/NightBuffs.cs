@@ -24,7 +24,7 @@ namespace Cooking.Runtime
                 speedMultiplier = 1f,
                 successFaceDelta = 0,
                 radiusBonus = 0f,
-                logText = ""
+                logTextId = ""
             };
         }
     }

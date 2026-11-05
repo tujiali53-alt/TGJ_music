@@ -1,4 +1,5 @@
 using System;
+using UnityEngine.Serialization;
 
 namespace Cooking.Data
 {
@@ -10,6 +11,7 @@ namespace Cooking.Data
         public float speedMultiplier;
         public int successFaceDelta;
         public float radiusBonus;
-        public string logText;
+        [FormerlySerializedAs("logText")]
+        public string logTextId;
     }
 }

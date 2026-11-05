@@ -12,9 +12,11 @@ namespace Cooking.UI
         [SerializeField] GameObject panel;
         [SerializeField] TMP_Text logText;
         [SerializeField] ScrollRect scroll;
+        [SerializeField] NightLogCatalog catalog;
 
         static NightLogView instance;
         string shown;
+        DiaryLanguage shownLanguage;
 
         void Awake()
         {
@@ -50,10 +52,25 @@ namespace Cooking.UI
             if (scroll == null)
                 Debug.LogError("RealTimeInformation 下需要有 ScrollRect。", this);
 
+            if (catalog == null)
+                Debug.LogError("NightLogView 需要绑定 NightLogCatalog。", this);
+
             if (panel != null)
                 panel.SetActive(false);
 
             shown = null;
+        }
+
+        void OnEnable()
+        {
+            GameLanguage.Changed += OnLanguageChanged;
+            shown = null;
+            Refresh();
+        }
+
+        void OnDisable()
+        {
+            GameLanguage.Changed -= OnLanguageChanged;
         }
 
         void OnDestroy()
@@ -67,7 +84,18 @@ namespace Cooking.UI
             Refresh();
         }
 
-        public static void Append(NightLogKind kind, string text)
+        void OnLanguageChanged()
+        {
+            shown = null;
+            Refresh();
+        }
+
+        public static void Append(NightLogKind kind, string id, params string[] args)
+        {
+            Append(kind, id, args, args);
+        }
+
+        public static void Append(NightLogKind kind, string id, string[] argsZh, string[] argsEn)
         {
             GameRoot root = GameRoot.Instance;
             if (root == null || root.Session == null || root.Session.NightLog == null)
@@ -76,10 +104,18 @@ namespace Cooking.UI
                 return;
             }
 
+            if (string.IsNullOrEmpty(id))
+            {
+                Debug.LogError("NightLog 缺少 id。");
+                return;
+            }
+
             root.Session.NightLog.Add(new NightLogEntry
             {
                 Kind = kind,
-                Text = text
+                Id = id,
+                ArgsZh = CopyArgs(argsZh),
+                ArgsEn = CopyArgs(argsEn)
             });
 
             if (instance != null)
@@ -91,6 +127,7 @@ namespace Cooking.UI
             if (logText == null || panel == null)
                 return;
 
+            DiaryLanguage language = GameLanguage.Current;
             GameRoot root = GameRoot.Instance;
             string next = "";
             if (root != null && root.Session != null && root.Session.NightLog != null)
@@ -98,12 +135,13 @@ namespace Cooking.UI
                 for (int i = 0; i < root.Session.NightLog.Count; i++)
                 {
                     NightLogEntry entry = root.Session.NightLog[i];
-                    if (entry == null || string.IsNullOrEmpty(entry.Text))
+                    string line = FormatEntry(entry, language);
+                    if (string.IsNullOrEmpty(line))
                         continue;
 
                     if (next.Length > 0)
                         next += "\n";
-                    next += entry.Text;
+                    next += line;
                 }
             }
 
@@ -111,15 +149,43 @@ namespace Cooking.UI
             if (panel.activeSelf != hasText)
                 panel.SetActive(hasText);
 
-            if (!hasText || next == shown)
+            if (!hasText || (next == shown && language == shownLanguage))
                 return;
 
             shown = next;
+            shownLanguage = language;
             logText.text = next;
             if (scroll != null && scroll.content != null)
                 LayoutRebuilder.ForceRebuildLayoutImmediate(scroll.content);
             if (scroll != null)
                 scroll.verticalNormalizedPosition = 0f;
+        }
+
+        string FormatEntry(NightLogEntry entry, DiaryLanguage language)
+        {
+            if (entry == null || string.IsNullOrEmpty(entry.Id))
+                return "";
+
+            if (catalog == null)
+                return entry.Id;
+
+            string[] args = language == DiaryLanguage.En ? entry.ArgsEn : entry.ArgsZh;
+            if (args == null || args.Length == 0)
+                args = entry.ArgsZh ?? entry.ArgsEn;
+
+            string text = catalog.Format(entry.Id, language, args);
+            return NightLogCatalog.WrapColor(text, catalog.ColorHex(entry.Id));
+        }
+
+        static string[] CopyArgs(string[] source)
+        {
+            if (source == null || source.Length == 0)
+                return null;
+
+            var copy = new string[source.Length];
+            for (int i = 0; i < source.Length; i++)
+                copy[i] = source[i] ?? "";
+            return copy;
         }
     }
 }

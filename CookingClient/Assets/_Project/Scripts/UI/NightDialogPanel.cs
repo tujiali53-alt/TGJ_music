@@ -400,12 +400,8 @@ namespace Cooking.UI
             }
 
             NightOption option = choices[index];
-            string blocked = BlockReason(option);
-            if (!string.IsNullOrEmpty(blocked))
-            {
-                NightLogView.Append(NightLogKind.OptionBlocked, blocked);
+            if (TryAppendBlocked(option))
                 return;
-            }
 
             AudioManager.PlayClick();
             ClosePanel();
@@ -551,26 +547,61 @@ namespace Cooking.UI
             return null;
         }
 
+        bool TryAppendBlocked(NightOption option)
+        {
+            GameRoot root = GameRoot.Instance;
+            if (root == null || root.Session == null)
+                return false;
+
+            if (root.Session.ResolvedOptionIdsTonight != null
+                && root.Session.ResolvedOptionIdsTonight.Contains(option.optionId))
+            {
+                string nameZh = option.displayNameZh;
+                string nameEn = option.displayNameEn;
+                if (string.IsNullOrEmpty(nameZh))
+                    nameZh = option.optionId;
+                if (string.IsNullOrEmpty(nameEn))
+                    nameEn = nameZh;
+                NightLogView.Append(
+                    NightLogKind.OptionBlocked,
+                    "log.option_resolved",
+                    new[] { nameZh },
+                    new[] { nameEn });
+                return true;
+            }
+
+            if (option.conditionType == NightConditionType.None)
+                return false;
+
+            if (ConditionMet(option, root.Session))
+                return false;
+
+            string id = "";
+            if (option.conditionType == NightConditionType.HasAnyFood)
+                id = "log.no_food";
+            else if (option.conditionType == NightConditionType.HasVegetable)
+                id = "log.no_veg";
+            else if (option.conditionType == NightConditionType.DeliciousnessAbove)
+                id = "log.deliciousness_low";
+            else if (option.conditionType == NightConditionType.DeliciousnessBelow)
+                id = "log.deliciousness_high";
+
+            if (string.IsNullOrEmpty(id))
+                return false;
+
+            NightLogView.Append(NightLogKind.OptionBlocked, id);
+            return true;
+        }
+
         string BlockReason(NightOption option)
         {
             GameRoot root = GameRoot.Instance;
             if (root == null || root.Session == null)
                 return "";
 
-            bool english = GameLanguage.Current == DiaryLanguage.En;
             if (root.Session.ResolvedOptionIdsTonight != null
                 && root.Session.ResolvedOptionIdsTonight.Contains(option.optionId))
-            {
-                string name = NightEventDefinition.Pick(
-                    GameLanguage.Current,
-                    option.displayNameZh,
-                    option.displayNameEn);
-                if (string.IsNullOrEmpty(name))
-                    name = option.optionId;
-                return english
-                    ? name + " already resolved tonight"
-                    : name + "今夜已经判定过";
-            }
+                return "blocked";
 
             if (option.conditionType == NightConditionType.None)
                 return "";
@@ -578,14 +609,12 @@ namespace Cooking.UI
             if (ConditionMet(option, root.Session))
                 return "";
 
-            if (option.conditionType == NightConditionType.HasAnyFood)
-                return english ? "No food" : "没有食物";
-            if (option.conditionType == NightConditionType.HasVegetable)
-                return english ? "No vegetables" : "没有素食";
-            if (option.conditionType == NightConditionType.DeliciousnessAbove)
-                return english ? "Daytime deliciousness too low" : "白天美味度不足";
-            if (option.conditionType == NightConditionType.DeliciousnessBelow)
-                return english ? "Daytime deliciousness too high" : "白天美味度过高";
+            if (option.conditionType == NightConditionType.HasAnyFood
+                || option.conditionType == NightConditionType.HasVegetable
+                || option.conditionType == NightConditionType.DeliciousnessAbove
+                || option.conditionType == NightConditionType.DeliciousnessBelow)
+                return "blocked";
+
             return "";
         }
 

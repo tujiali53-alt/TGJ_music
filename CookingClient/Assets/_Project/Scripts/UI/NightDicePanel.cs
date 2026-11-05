@@ -210,21 +210,22 @@ namespace Cooking.UI
                     ? (english ? "Success" : "成功")
                     : (english ? "Fail" : "失败");
 
-            string name = NightEventDefinition.Pick(
-                GameLanguage.Current,
-                option.displayNameZh,
-                option.displayNameEn);
-            if (string.IsNullOrEmpty(name))
-                name = option.optionId;
+            string nameZh = option.displayNameZh;
+            string nameEn = option.displayNameEn;
+            if (string.IsNullOrEmpty(nameZh))
+                nameZh = option.optionId;
+            if (string.IsNullOrEmpty(nameEn))
+                nameEn = nameZh;
+
             NightLogView.Append(
                 NightLogKind.DiceRoll,
-                english ? "Rolled " + result.Face : "掷出 " + result.Face + " 点");
+                "log.roll",
+                result.Face.ToString());
             NightLogView.Append(
                 NightLogKind.CheckResult,
-                name + (english ? ": " : "：")
-                + (result.Success
-                    ? (english ? "Success" : "成功")
-                    : (english ? "Fail" : "失败")));
+                result.Success ? "log.check_success" : "log.check_fail",
+                new[] { nameZh },
+                new[] { nameEn });
             Remember(option.optionId, result.Success);
             ScheduleConfirm();
 
@@ -311,9 +312,17 @@ namespace Cooking.UI
             if (string.IsNullOrEmpty(reward.ingredientId) || reward.count <= 0)
                 return;
 
-            string display = DisplayName(reward.ingredientId);
-            if (FindDefinition(reward.ingredientId) == null)
+            IngredientDefinition definition = FindDefinition(reward.ingredientId);
+            if (definition == null)
                 Debug.LogError("缺少食材 " + reward.ingredientId + "。", this);
+
+            string nameZh = IngredientDetailText.DisplayName(definition, DiaryLanguage.Zh);
+            string nameEn = IngredientDetailText.DisplayName(definition, DiaryLanguage.En);
+            if (string.IsNullOrEmpty(nameZh))
+                nameZh = reward.ingredientId;
+            if (string.IsNullOrEmpty(nameEn))
+                nameEn = nameZh;
+            string count = reward.count.ToString();
 
             IngredientInventory.Add(new IngredientInstance
             {
@@ -327,7 +336,11 @@ namespace Cooking.UI
                 SeasoningIds = new List<string>(),
                 IsCharcoal = false
             });
-            NightLogView.Append(NightLogKind.IngredientGain, "获得" + display + "×" + reward.count);
+            NightLogView.Append(
+                NightLogKind.IngredientGain,
+                "log.gain",
+                new[] { nameZh, count },
+                new[] { nameEn, count });
         }
 
         static void Remember(string optionId, bool success)

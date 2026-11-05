@@ -8,8 +8,6 @@ namespace Cooking.Exploration
     public sealed class InteractionPoint : MonoBehaviour
     {
         static readonly Color SpentTint = new Color(0.45f, 0.45f, 0.45f, 1f);
-        const string SpentMessage = "该交互点已经没什么好看的了。";
-
         [SerializeField] string eventId;
         [SerializeField] NightEventDefinition definition;
         [SerializeField] Collider2D hitCollider;
@@ -133,7 +131,7 @@ namespace Cooking.Exploration
 
             if (!dialog.HasActionableOption(definition))
             {
-                NightLogView.Append(NightLogKind.OptionBlocked, SpentMessage);
+                NightLogView.Append(NightLogKind.OptionBlocked, "log.spent");
                 return;
             }
 

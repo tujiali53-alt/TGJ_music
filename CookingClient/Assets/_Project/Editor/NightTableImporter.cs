@@ -16,6 +16,7 @@ namespace Cooking.EditorTools
         const string TableAssetPath = "Assets/_Project/Data/Tables/NightTables.xlsx";
         const string EventsFolder = "Assets/_Project/Data/NightEvents";
         const string BuffAssetPath = "Assets/_Project/Data/NightBuffTable.asset";
+        const string LogCatalogPath = "Assets/_Project/Data/NightLogCatalog.asset";
         const string IngredientsFolder = "Assets/_Project/Data/Ingredients";
 
         [MenuItem("Cooking/Import Night Tables")]
@@ -60,6 +61,16 @@ namespace Cooking.EditorTools
                 return "NightBuffTable 应有 4 行。";
             if (buffs.rows[0].successFaceDelta != -1 || buffs.rows[3].radiusBonus != 0.5f)
                 return "buff 首行应减 1 面，末行半径加 0.5。";
+            if (buffs.rows[0].logTextId != "log.buff_very_low" || buffs.rows[3].logTextId != "log.buff_high")
+                return "buff 日志 id 应对准 NightLogs。";
+
+            NightLogCatalog logs = AssetDatabase.LoadAssetAtPath<NightLogCatalog>(LogCatalogPath);
+            if (logs == null || logs.rows == null || logs.rows.Count < 16)
+                return "NightLogCatalog 行数不足。";
+            if (!logs.TryGet("log.roll", out NightLogString roll) || string.IsNullOrEmpty(roll.textEn))
+                return "NightLogs 缺少 log.roll 英文。";
+            if (string.IsNullOrEmpty(roll.color))
+                return "NightLogs 的 color 不能为空。";
 
             if (mushroom.introPortrait == null || mushroom.introPortrait.name != "Main_Normal")
                 return "蘑菇深埋于地的开场表情应为 Main_Normal。";
@@ -148,6 +159,7 @@ namespace Cooking.EditorTools
             ImportRewards(RequireSheet(dataSet, "NightRewards", result), events, result);
             ImportLines(RequireSheet(dataSet, "NightLines", result), events, result);
             ImportBuffs(RequireSheet(dataSet, "NightBuffs", result), result);
+            ImportLogs(RequireSheet(dataSet, "NightLogs", result), result);
             ImportPortraits(RequireSheet(dataSet, "NightPortraits", result), events, result);
             RestoreMissingEn(events, priorEventEn, priorOptionEn, priorLineEn);
 
@@ -510,6 +522,7 @@ namespace Cooking.EditorTools
                 if (!TryParseFloat(Cell(row, "radiusBonus"), out float radius, "NightBuffs.radiusBonus", result))
                     continue;
 
+                string logTextId = FirstCell(row, "logTextId", "logText");
                 asset.rows.Add(new NightBuffRow
                 {
                     minDeliciousness = min,
@@ -517,7 +530,72 @@ namespace Cooking.EditorTools
                     speedMultiplier = speed,
                     successFaceDelta = delta,
                     radiusBonus = radius,
-                    logText = Cell(row, "logText")
+                    logTextId = logTextId
+                });
+            }
+
+            EditorUtility.SetDirty(asset);
+        }
+
+        static void ImportLogs(DataTable table, ImportResult result)
+        {
+            if (table == null)
+                return;
+
+            NightLogCatalog asset = AssetDatabase.LoadAssetAtPath<NightLogCatalog>(LogCatalogPath);
+            if (asset == null)
+            {
+                asset = ScriptableObject.CreateInstance<NightLogCatalog>();
+                AssetDatabase.CreateAsset(asset, LogCatalogPath);
+                result.Created++;
+            }
+            else
+                result.Updated++;
+
+            Dictionary<string, string> priorEn = new Dictionary<string, string>();
+            Dictionary<string, string> priorColor = new Dictionary<string, string>();
+            if (asset.rows != null)
+            {
+                for (int i = 0; i < asset.rows.Count; i++)
+                {
+                    NightLogString row = asset.rows[i];
+                    if (string.IsNullOrEmpty(row.id))
+                        continue;
+                    if (!string.IsNullOrEmpty(row.textEn))
+                        priorEn[row.id] = row.textEn;
+                    if (!string.IsNullOrEmpty(row.color))
+                        priorColor[row.id] = row.color;
+                }
+            }
+
+            asset.rows = new List<NightLogString>();
+            foreach (DataRow row in table.Rows)
+            {
+                string id = Cell(row, "id");
+                if (string.IsNullOrWhiteSpace(id))
+                    continue;
+
+                string textZh = Cell(row, "textZh");
+                string textEn = Cell(row, "textEn");
+                string color = Cell(row, "color");
+                if (string.IsNullOrEmpty(textEn) && priorEn.TryGetValue(id, out string keptEn))
+                    textEn = keptEn;
+                if (string.IsNullOrEmpty(color) && priorColor.TryGetValue(id, out string keptColor))
+                    color = keptColor;
+
+                if (string.IsNullOrEmpty(textZh))
+                {
+                    Debug.LogError("NightLogs." + id + " 缺少 textZh。");
+                    result.ErrorCount++;
+                    continue;
+                }
+
+                asset.rows.Add(new NightLogString
+                {
+                    id = id,
+                    textZh = textZh,
+                    textEn = textEn,
+                    color = color
                 });
             }
 

@@ -8,8 +8,6 @@ namespace Cooking.Exploration
     public sealed class NpcInteraction : MonoBehaviour
     {
         static readonly Color SpentTint = new Color(0.45f, 0.45f, 0.45f, 1f);
-        const string SpentMessage = "该交互点已经没什么好看的了。";
-
         [SerializeField] string npcId;
         [SerializeField] Collider2D hitCollider;
         [SerializeField] Transform player;
@@ -102,7 +100,7 @@ namespace Cooking.Exploration
 
             if (dialog.IsResolved(npcId))
             {
-                NightLogView.Append(NightLogKind.OptionBlocked, SpentMessage);
+                NightLogView.Append(NightLogKind.OptionBlocked, "log.spent");
                 return;
             }
 

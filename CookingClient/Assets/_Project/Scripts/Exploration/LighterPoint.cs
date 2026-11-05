@@ -78,13 +78,13 @@ namespace Cooking.Exploration
 
             root.Session.LightsAbsorbedTonight += 1;
             int count = root.Session.LightsAbsorbedTonight;
-            NightLogView.Append(NightLogKind.LightAbsorb, "吸收光点，今夜 " + count + " 个");
+            NightLogView.Append(NightLogKind.LightAbsorb, "log.light_absorb", count.ToString(CultureInfo.InvariantCulture));
 
             PlayerLight light = FindAnyObjectByType<PlayerLight>();
             if (light != null)
             {
                 string radius = light.RadiusFor(count).ToString("0.00", CultureInfo.InvariantCulture);
-                NightLogView.Append(NightLogKind.RadiusChanged, "照亮范围变为 " + radius);
+                NightLogView.Append(NightLogKind.RadiusChanged, "log.radius", radius);
             }
 
             gameObject.SetActive(false);

@@ -106,10 +106,10 @@ namespace Cooking.EditorTools
         {
             return new List<NightBuffRow>
             {
-                new NightBuffRow { minDeliciousness = 0f, maxDeliciousness = 10f, speedMultiplier = 0.8f, successFaceDelta = -1, logText = "今夜：移速降低，事件成功率降低" },
-                new NightBuffRow { minDeliciousness = 11f, maxDeliciousness = 40f, speedMultiplier = 0.8f, successFaceDelta = 0, logText = "今夜：移速降低" },
-                new NightBuffRow { minDeliciousness = 41f, maxDeliciousness = 100f, speedMultiplier = 1f, successFaceDelta = 0, logText = "今夜：状态正常" },
-                new NightBuffRow { minDeliciousness = 101f, maxDeliciousness = 9999f, speedMultiplier = 1.2f, successFaceDelta = 0, radiusBonus = 0.5f, logText = "今夜：移速提升，照亮范围增加" }
+                new NightBuffRow { minDeliciousness = 0f, maxDeliciousness = 10f, speedMultiplier = 0.8f, successFaceDelta = -1, logTextId = "log.buff_very_low" },
+                new NightBuffRow { minDeliciousness = 11f, maxDeliciousness = 40f, speedMultiplier = 0.8f, successFaceDelta = 0, logTextId = "log.buff_low" },
+                new NightBuffRow { minDeliciousness = 41f, maxDeliciousness = 100f, speedMultiplier = 1f, successFaceDelta = 0, logTextId = "log.buff_normal" },
+                new NightBuffRow { minDeliciousness = 101f, maxDeliciousness = 9999f, speedMultiplier = 1.2f, successFaceDelta = 0, radiusBonus = 0.5f, logTextId = "log.buff_high" }
             };
         }
 

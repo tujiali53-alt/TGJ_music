@@ -18,22 +18,22 @@ MonoBehaviour:
     speedMultiplier: 0.8
     successFaceDelta: -1
     radiusBonus: 0
-    logText: "\u4ECA\u591C\uFF1A\u79FB\u901F\u964D\u4F4E\uFF0C\u4E8B\u4EF6\u6210\u529F\u7387\u964D\u4F4E"
+    logTextId: log.buff_very_low
   - minDeliciousness: 11
     maxDeliciousness: 40
     speedMultiplier: 0.8
     successFaceDelta: 0
     radiusBonus: 0
-    logText: "\u4ECA\u591C\uFF1A\u79FB\u901F\u964D\u4F4E"
+    logTextId: log.buff_low
   - minDeliciousness: 41
     maxDeliciousness: 100
     speedMultiplier: 1
     successFaceDelta: 0
     radiusBonus: 0
-    logText: "\u4ECA\u591C\uFF1A\u72B6\u6001\u6B63\u5E38"
+    logTextId: log.buff_normal
   - minDeliciousness: 101
     maxDeliciousness: 9999
     speedMultiplier: 1.2
     successFaceDelta: 0
     radiusBonus: 0.5
-    logText: "\u4ECA\u591C\uFF1A\u79FB\u901F\u63D0\u5347\uFF0C\u7167\u4EAE\u8303\u56F4\u589E\u52A0"
+    logTextId: log.buff_high

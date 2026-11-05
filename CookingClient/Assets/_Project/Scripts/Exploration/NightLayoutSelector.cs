@@ -66,13 +66,13 @@ namespace Cooking.Exploration
                 if (light != null)
                     light.BuffRadiusBonus = row.radiusBonus;
 
-                if (!string.IsNullOrEmpty(row.logText))
-                    NightLogView.Append(NightLogKind.Buff, row.logText);
+                if (!string.IsNullOrEmpty(row.logTextId))
+                    NightLogView.Append(NightLogKind.Buff, row.logTextId);
 
                 if (light != null && Mathf.Abs(row.radiusBonus) > 0.001f)
                 {
                     string radius = light.RadiusFor(session.LightsAbsorbedTonight).ToString("0.00", CultureInfo.InvariantCulture);
-                    NightLogView.Append(NightLogKind.RadiusChanged, "照亮范围变为 " + radius);
+                    NightLogView.Append(NightLogKind.RadiusChanged, "log.radius", radius);
                 }
             }
 
