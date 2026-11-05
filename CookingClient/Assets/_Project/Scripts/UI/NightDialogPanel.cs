@@ -126,8 +126,23 @@ namespace Cooking.UI
                 panel.SetActive(false);
             }
 
+            CaptureCursorGap();
             HideOptions();
             SilenceJudgmentBody();
+            GameLanguage.Changed += OnLanguageChanged;
+        }
+
+        void OnDestroy()
+        {
+            GameLanguage.Changed -= OnLanguageChanged;
+        }
+
+        void OnLanguageChanged()
+        {
+            if (!optionsVisible || !openForNight)
+                return;
+
+            ShowOptions();
         }
 
         public void OpenIntro(NightEventDefinition definition, int buffFaceDelta)
@@ -332,8 +347,11 @@ namespace Cooking.UI
                     reward.gameObject.SetActive(true);
                     reward.text = SuccessPercent(option);
                 }
+
+                DialogOptionFit.Apply(button, label, reward, reward != null && reward.gameObject.activeSelf);
             }
 
+            DialogOptionFit.StackVisible(buttons);
             aimedIndex = 0;
             ApplyAim();
         }
@@ -459,7 +477,9 @@ namespace Cooking.UI
                 return;
 
             choiceCursor.gameObject.SetActive(true);
+            float optionWidth = option.rect.width > 0f ? option.rect.width : option.sizeDelta.x;
             float optionHeight = option.rect.height > 0f ? option.rect.height : option.sizeDelta.y;
+            float cursorWidth = choiceCursor.rect.width > 0f ? choiceCursor.rect.width : choiceCursor.sizeDelta.x;
             float cursorHeight = choiceCursor.rect.height > 0f ? choiceCursor.rect.height : choiceCursor.sizeDelta.y;
             Vector2 pos = choiceCursor.anchoredPosition;
 
@@ -468,6 +488,10 @@ namespace Cooking.UI
                 // 枢轴在中心时，中线就是选项的 Pos Y。枢轴在顶边时，中线是 Pos Y 减去一半高度。
                 float optionMiddle = option.anchoredPosition.y + (0.5f - option.pivot.y) * optionHeight;
                 pos.y = optionMiddle - (0.5f - choiceCursor.pivot.y) * cursorHeight;
+
+                // 选项加宽时右缘不动、向左伸；光标贴在当前左缘外侧，间距与场景初始布局一致。
+                float optionLeft = option.anchoredPosition.x - option.pivot.x * optionWidth;
+                pos.x = optionLeft - cursorLeftGap - (1f - choiceCursor.pivot.x) * cursorWidth;
             }
             else
             {
@@ -476,9 +500,36 @@ namespace Cooking.UI
                 float anchorY = Mathf.Lerp(cursorParent.rect.yMin, cursorParent.rect.yMax, anchor.y);
                 float pivotY = local.y - (0.5f - choiceCursor.pivot.y) * cursorHeight;
                 pos.y = pivotY - anchorY;
+
+                Vector3 leftLocal = cursorParent.InverseTransformPoint(
+                    option.TransformPoint(new Vector3(option.rect.xMin, option.rect.center.y, 0f)));
+                float anchorX = Mathf.Lerp(cursorParent.rect.xMin, cursorParent.rect.xMax, anchor.x);
+                float pivotX = leftLocal.x - cursorLeftGap - (1f - choiceCursor.pivot.x) * cursorWidth;
+                pos.x = pivotX - anchorX;
             }
 
             choiceCursor.anchoredPosition = pos;
+        }
+
+        float cursorLeftGap = 22f;
+
+        void CaptureCursorGap()
+        {
+            if (choiceCursor == null || option1 == null)
+                return;
+
+            RectTransform option = option1.transform as RectTransform;
+            if (option == null)
+                return;
+
+            float optionWidth = option.rect.width > 0f ? option.rect.width : option.sizeDelta.x;
+            float cursorWidth = choiceCursor.rect.width > 0f ? choiceCursor.rect.width : choiceCursor.sizeDelta.x;
+            if (optionWidth < 1f || cursorWidth < 1f)
+                return;
+
+            float optionLeft = option.anchoredPosition.x - option.pivot.x * optionWidth;
+            float cursorRight = choiceCursor.anchoredPosition.x + (1f - choiceCursor.pivot.x) * cursorWidth;
+            cursorLeftGap = Mathf.Max(0f, optionLeft - cursorRight);
         }
 
         static RectTransform FindCursor(Transform root)

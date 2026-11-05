@@ -21,19 +21,19 @@ MonoBehaviour:
     textEn: 'Kind:'
   - id: label.optimalDoneness
     textZh: "\u6700\u4F73\u719F\u5EA6\uFF1A"
-    textEn: 'OptimalDoneness:'
+    textEn: 'Optimal:'
   - id: label.maxDoneness
     textZh: "\u6700\u5927\u719F\u5EA6\uFF1A"
-    textEn: 'MaxDoneness:'
+    textEn: 'Max:'
   - id: label.state
     textZh: "\u72B6\u6001\uFF1A"
     textEn: 'State:'
   - id: label.canEatRaw
     textZh: 
-    textEn: 'CanEatRaw:'
+    textEn: 
   - id: label.canCut
     textZh: 
-    textEn: 'CanCut:'
+    textEn: 
   - id: canEatRaw.true
     textZh: "\u4E0D\u53EF\u714E\u716E"
     textEn: True

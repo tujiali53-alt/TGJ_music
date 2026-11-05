@@ -12,6 +12,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] GameObject englishSelectedImage;
     [SerializeField] Slider bgmSlider;
     [SerializeField] Slider sfxSlider;
+    [SerializeField] RectTransform menuCursor;
 
     void Awake()
     {
@@ -79,12 +80,16 @@ public class MenuController : MonoBehaviour
         else
             Debug.LogError("MeunScene 的 Canvas 下需要已经放好 InsructionPanel。", this);
 
+        ResolveMenuCursor();
+
         Bind("HUDPanel/StartButton", StartGame);
-        Bind("HUDPanel/SettingButton", OpenSettings);
-        Bind("HUDPanel/ExitGameButton", ExitGame);
+        if (!BindAim("HUDPanel/SettingButton", OpenSettings))
+            Debug.LogError("MeunScene 的 HUDPanel 下需要已经放好带 Button 的 SettingButton。", this);
+        if (!BindAim("HUDPanel/ExitGameButton", ExitGame))
+            Debug.LogError("MeunScene 的 HUDPanel 下需要已经放好带 Button 的 ExitGameButton。", this);
         Bind("SettingPanel/CloseButton", CloseSettings);
 
-        if (!Bind("HUDPanel/CreditButton", OpenCredits))
+        if (!BindAim("HUDPanel/CreditButton", OpenCredits))
             Debug.LogError("MeunScene 的 HUDPanel 下需要已经放好带 Button 的 CreditButton。", this);
 
         Bind("CreditPanel/CloseButton", CloseCredits);
@@ -237,6 +242,19 @@ public class MenuController : MonoBehaviour
         AudioManager.SetSfxVolume(value);
     }
 
+    void ResolveMenuCursor()
+    {
+        if (menuCursor == null)
+        {
+            Transform found = transform.Find("HUDPanel/Cursor");
+            if (found != null)
+                menuCursor = found as RectTransform;
+        }
+
+        if (menuCursor == null)
+            Debug.LogError("MeunScene 的 HUDPanel 下需要已经放好 Cursor。", this);
+    }
+
     bool Bind(string path, UnityEngine.Events.UnityAction action)
     {
         Transform target = transform.Find(path);
@@ -249,5 +267,39 @@ public class MenuController : MonoBehaviour
 
         button.onClick.AddListener(action);
         return true;
+    }
+
+    bool BindAim(string path, UnityEngine.Events.UnityAction action)
+    {
+        Transform target = transform.Find(path);
+        if (target == null)
+            return false;
+
+        Button button = target.GetComponent<Button>();
+        if (button == null)
+            return false;
+
+        RectTransform rect = target as RectTransform;
+        button.onClick.AddListener(() =>
+        {
+            PointCursorAt(rect);
+            action();
+        });
+        return true;
+    }
+
+    const float MenuCursorY = -307f;
+
+    void PointCursorAt(RectTransform button)
+    {
+        if (menuCursor == null || button == null)
+            return;
+
+        float buttonWidth = button.rect.width > 0f ? button.rect.width : button.sizeDelta.x;
+        float centerX = button.anchoredPosition.x + (0.5f - button.pivot.x) * buttonWidth;
+
+        // X 对准按钮水平中心，Y 固定为场景里的 -307。
+        menuCursor.anchoredPosition = new Vector2(centerX, MenuCursorY);
+        menuCursor.gameObject.SetActive(true);
     }
 }

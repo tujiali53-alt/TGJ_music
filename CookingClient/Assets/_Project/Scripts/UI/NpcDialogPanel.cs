@@ -66,6 +66,21 @@ namespace Cooking.UI
             HideOptions();
             if (panel != null)
                 panel.SetActive(false);
+
+            GameLanguage.Changed += OnLanguageChanged;
+        }
+
+        void OnDestroy()
+        {
+            GameLanguage.Changed -= OnLanguageChanged;
+        }
+
+        void OnLanguageChanged()
+        {
+            if (!optionsVisible || !npcOpen)
+                return;
+
+            ShowOptions();
         }
 
         void Start()
@@ -316,7 +331,11 @@ namespace Cooking.UI
                 TMP_Text reward = FindChildText(button.transform, "RewardText");
                 if (reward != null)
                     reward.gameObject.SetActive(false);
+
+                DialogOptionFit.Apply(button, label, reward, false);
             }
+
+            DialogOptionFit.StackVisible(buttons);
         }
 
         void HideOptions()
