@@ -16,11 +16,11 @@ MonoBehaviour:
   - id: log.buff_very_low
     textZh: "\u4ECA\u591C\uFF1A\u79FB\u901F\u964D\u4F4E\uFF0C\u4E8B\u4EF6\u6210\u529F\u7387\u964D\u4F4E"
     textEn: 'Tonight: Movement speed reduced, event success rate reduced'
-    color: '#E8C36A'
+    color: '#FFFFFF'
   - id: log.buff_low
     textZh: "\u4ECA\u591C\uFF1A\u79FB\u901F\u964D\u4F4E"
     textEn: 'Tonight: Movement speed reduced'
-    color: '#E8C36A'
+    color: '#FFFFFF'
   - id: log.buff_normal
     textZh: "\u4ECA\u591C\uFF1A\u72B6\u6001\u6B63\u5E38"
     textEn: 'Tonight: Status normal'
@@ -28,7 +28,7 @@ MonoBehaviour:
   - id: log.buff_high
     textZh: "\u4ECA\u591C\uFF1A\u79FB\u901F\u63D0\u5347\uFF0C\u7167\u4EAE\u8303\u56F4\u589E\u52A0"
     textEn: 'Tonight: Movement speed increased, illumination range increased'
-    color: '#E8C36A'
+    color: '#FFFFFF'
   - id: log.roll
     textZh: "\u63B7\u51FA {0} \u70B9"
     textEn: Rolled {0}
@@ -36,44 +36,44 @@ MonoBehaviour:
   - id: log.check_success
     textZh: "{0}\uFF1A\u6210\u529F"
     textEn: '{0}: Success'
-    color: '#7DDB7A'
+    color: '#eccdc0'
   - id: log.check_fail
     textZh: "{0}\uFF1A\u5931\u8D25"
     textEn: '{0}: Fail'
-    color: '#E86A6A'
+    color: '#b1a3d0'
   - id: log.gain
     textZh: "\u83B7\u5F97{0}\xD7{1}"
     textEn: "Got {0} \xD7{1}"
-    color: '#7DDB7A'
+    color: '#eccdc0'
   - id: log.light_absorb
     textZh: "\u5438\u6536\u5149\u70B9\uFF0C\u4ECA\u591C {0} \u4E2A"
-    textEn: 'Absorbed a light. Tonight: {0}'
-    color: '#7EC8E8'
+    textEn: 'Absorbed a light point. Tonight: {0}'
+    color: '#FFFFFF'
   - id: log.radius
     textZh: "\u7167\u4EAE\u8303\u56F4\u53D8\u4E3A {0}"
     textEn: Light radius is now {0}
-    color: '#7EC8E8'
+    color: '#FFFFFF'
   - id: log.spent
     textZh: "\u8BE5\u4EA4\u4E92\u70B9\u5DF2\u7ECF\u6CA1\u4EC0\u4E48\u597D\u770B\u7684\u4E86\u3002"
     textEn: Nothing more to see here.
-    color: '#A0A0A0'
+    color: '#FFFFFF'
   - id: log.option_resolved
     textZh: "{0}\u4ECA\u591C\u5DF2\u7ECF\u5224\u5B9A\u8FC7"
-    textEn: '{0} already resolved tonight'
-    color: '#A0A0A0'
+    textEn: '{0} already done tonight'
+    color: '#FFFFFF'
   - id: log.no_food
     textZh: "\u6CA1\u6709\u98DF\u7269"
-    textEn: No food
-    color: '#E86A6A'
+    textEn: You have no food
+    color: '#FFFFFF'
   - id: log.no_veg
     textZh: "\u6CA1\u6709\u7D20\u98DF"
-    textEn: No vegetables
-    color: '#E86A6A'
+    textEn: You have no vegetables
+    color: '#FFFFFF'
   - id: log.deliciousness_low
     textZh: "\u767D\u5929\u7F8E\u5473\u5EA6\u4E0D\u8DB3"
     textEn: Daytime deliciousness too low
-    color: '#E86A6A'
+    color: '#FFFFFF'
   - id: log.deliciousness_high
     textZh: "\u767D\u5929\u7F8E\u5473\u5EA6\u8FC7\u9AD8"
     textEn: Daytime deliciousness too high
-    color: '#E86A6A'
+    color: '#FFFFFF'

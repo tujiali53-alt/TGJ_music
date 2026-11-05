@@ -470,31 +470,52 @@ MonoBehaviour:
   props:
   - id: prop_earphone
     displayNameZh: "\u5355\u53EA\u8033\u673A"
-    displayNameEn: 
+    displayNameEn: Single Earbud
     descriptionZh: "\u4E00\u53EA\u88AB\u9057\u843D\u5728\u68EE\u6797\u4E2D\u7684\u65E0\u7EBF\u8033\u673A\u3002\n\u636E\u8BF4\u5B83\u7684\u4E3B\u4EBA\u66FE\u5728\u4E00\u573A\u7D27\u5F20\u7684\u9650\u65F6\u5DE5\u4F5C\u4E2D\u5C06\u5176\u9057\u5931\uFF0C\u663E\u7136\u4E3B\u4EBA\u6CA1\u6709\u6599\u5230\uFF0C\u8033\u673A\u4E5F\u6709\u7A7F\u8D8A\u5230\u5F02\u4E16\u754C\u7684\u53EF\u80FD\u6027\u3002"
-    descriptionEn: 
+    descriptionEn: "A wireless earbud left behind in the forest.\nThey say its owner
+      lost it during a tense, time-limited work sprint\u2014clearly never suspecting
+      that an earbud, too, might have a way of crossing into another world."
     sprite: {fileID: 21300000, guid: 3ea0e6c1a37817d43a733555642f0533, type: 3}
   - id: prop_list
     displayNameZh: "\u5F02\u5E38\u8BB0\u5F55\u6E05\u5355"
-    displayNameEn: 
+    displayNameEn: Anomaly Log
     descriptionZh: "\u4E00\u5F20\u5199\u7740\u5BC6\u5BC6\u9EBB\u9EBB\u6587\u5B57\u7684\u8868\u683C\uFF0C\u5176\u4E2D\u4E00\u4E9B\u5DF2\u7ECF\u88AB\u5212\u6389\u3002\n\u4ECE\u98DF\u6750\u6D88\u5931\u5230\u6587\u5B57\u6D6E\u73B0\u5728\u7A7A\u4E2D\uFF0C\u4E0A\u9762\u8BB0\u5F55\u7740\u8BB8\u591A\u532A\u5937\u6240\u601D\u7684\u4E8B\u4EF6\u3002\u867D\u7136\u5DF2\u7ECF\u89E3\u51B3\u4E0D\u5C11\uFF0C\u4F46\u65B0\u7684\u5F02\u5E38\u603B\u4F1A\u6E90\u6E90\u4E0D\u65AD\u5730\u5728\u4E0B\u4E00\u884C\u51FA\u73B0\u3002"
-    descriptionEn: 
+    descriptionEn: 'A table filled with dense writing, some entries already crossed
+      out.
+
+      From ingredients vanishing to text appearing in midair, it records
+      many bizarre incidents. Quite a few have been resolved, yet new anomalies keep
+      turning up on the next line.'
     sprite: {fileID: 21300000, guid: 1e33fb4f47ce094408bf01fff8eda368, type: 3}
   - id: prop_bucket
     displayNameZh: "\u963F\u8C46\u6BD4\u5168\u5BB6\u6876"
-    displayNameEn: 
+    displayNameEn: A Dobe's Family Bucket
     descriptionZh: "\u4E00\u4E2A\u6765\u8DEF\u4E0D\u660E\u7684\u5947\u602A\u76D2\u5B50\uFF0C\u91CC\u9762\u6BCF\u4E2A\u5DE5\u5177\u90FD\u523B\u7740\u5947\u602A\u7684\u7B26\u53F7\u3002\n\u636E\u8BF4\u62E5\u6709\u5B83\u7684\u4EBA\u4FBF\u62E5\u6709\u4E86\u6539\u5929\u6362\u5730\u7684\u80FD\u529B\uFF0C\u552F\u4E00\u9700\u8981\u6CE8\u610F\u7684\u662F\uFF0C\u5076\u5C14\u4F7F\u7528\u5B83\u7684\u4EBA\u4F1A\u53D1\u51FA\u4E00\u58F0\u51C4\u5389\u7684\u60E8\u53EB\uFF0C\u968F\u540E\u4E00\u5207\u4FBF\u9700\u8981\u91CD\u5934\u6765\u8FC7\u3002"
-    descriptionEn: 
+    descriptionEn: "A strange box of unknown origin, every tool inside engraved with
+      peculiar symbols.\nThey say whoever possesses it gains the power to reshape
+      the world. The only thing to watch out for is that now and then its user lets
+      out a piercing scream\u2014and then everything has to start over from the beginning."
     sprite: {fileID: 21300000, guid: 5681456165daa13499ef8693af2d3ad4, type: 3}
   - id: prop_sampler
     displayNameZh: "\u97F3\u6548\u91C7\u6837\u5668"
-    displayNameEn: 
+    displayNameEn: Sound Effect Sampler
     descriptionZh: "\u4E00\u4E2A\u5C0F\u5DE7\u7684\u7535\u5B50\u5668\u68B0\u3002\n\u5494\u5494\u7684\u5207\u83DC\u58F0\u3001\u6C34\u6CB8\u817E\u65F6\u7684\u5495\u561F\u58F0\u3001\u70ED\u6CB9\u7684\u6ECB\u6ECB\u58F0\u2026\u2026\u5373\u4F7F\u6CA1\u6709\u5F00\u59CB\u70F9\u996A\uFF0C\u53EA\u8981\u6309\u4E0B\u6309\u94AE\uFF0C\u8033\u8FB9\u5C31\u4F1A\u54CD\u8D77\u5BF9\u5E94\u7684\u58F0\u97F3\u3002\u4E5F\u8BB8\u4F60\u5728\u8FD9\u91CC\u542C\u89C1\u7684\u4E00\u5207\uFF0C\u90FD\u53EA\u662F\u67D0\u4EBA\u968F\u624B\u6309\u4E0B\u7684\u5F00\u5173\u3002"
-    descriptionEn: 
+    descriptionEn: 'A small electronic device.
+
+      The crunch-crunch of chopping,
+      the gurgle of boiling water, the sizzle of hot oil... even without any cooking
+      underway, press a button and the corresponding sound plays in your ear. Perhaps
+      everything you hear here is just someone casually flipping a switch.'
     sprite: {fileID: 21300000, guid: 7b2c30a444fa41b4ebe25e9f02894b5a, type: 3}
   - id: prop_manuscript
     displayNameZh: "\u4E00\u6C93\u4E66\u7A3F"
-    displayNameEn: 
+    displayNameEn: A Stack of Manuscripts
     descriptionZh: "\u4E00\u53E0\u88AB\u53CD\u590D\u4FEE\u6539\u8FC7\u7684\u7A3F\u7EB8\uFF0C\u4F3C\u4E4E\u8BB0\u5F55\u4E86\u67D0\u4E2A\u4EBA\u8DCC\u5B95\u8D77\u4F0F\u7684\u4E00\u751F\u3002\n\u770B\u6765\u8FD9\u4F4D\u5C0F\u8BF4\u5BB6\u70ED\u8877\u4E8E\u8BA9\u7B14\u4E0B\u7684\u89D2\u8272\u906D\u53D7\u5404\u79CD\u4E0D\u5E78\uFF0C\u4E00\u4E2A\u4EBA\u7A76\u7ADF\u8981\u72AF\u4E0B\u600E\u6837\u7684\u7F6A\u884C\uFF0C\u624D\u4F1A\u906D\u53D7\u5982\u6B64\u6B8B\u9177\u7684\u5BF9\u5F85\uFF1F\u4EE4\u4EBA\u4E0D\u5B89\u7684\u662F\uFF0C\u4F5C\u8005\u4F3C\u4E4E\u5BF9\u5176\u5341\u5206\u6EE1\u610F\u3002"
-    descriptionEn: 
+    descriptionEn: 'A pile of repeatedly revised draft pages, seemingly recording
+      someone''s turbulent life.
+
+      This novelist, it seems, is fond of subjecting
+      his characters to every kind of misfortune. What crime must a person commit
+      to deserve such cruel treatment? Unsettlingly, the author seems thoroughly
+      pleased with it.'
     sprite: {fileID: 21300000, guid: fffaadca868a18448826cefaa0a1f393, type: 3}

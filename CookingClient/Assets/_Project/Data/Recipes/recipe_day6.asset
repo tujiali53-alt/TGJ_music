@@ -24,7 +24,7 @@ MonoBehaviour:
     cookMethod: 2
     count: 1
   - ingredientId: ing_doneegg
-    shape: 1
+    shape: 0
     cookMethod: 1
     count: 1
   - ingredientId: ing_tomato

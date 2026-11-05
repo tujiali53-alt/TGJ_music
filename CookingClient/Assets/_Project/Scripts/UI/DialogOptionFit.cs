@@ -11,7 +11,7 @@ namespace Cooking.UI
         const float MaxWidth = 520f;
         const float MinHeight = 97f;
         const float MaxHeight = 180f;
-        const float HorizontalPad = 24f;
+        const float HorizontalPad = 32f;
         const float VerticalChrome = 60f;
         const float StackGap = 8f;
 

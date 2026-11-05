@@ -14,7 +14,9 @@ namespace Cooking.UI
     public sealed class IngredientDetails : MonoBehaviour
     {
         [SerializeField] IngredientAttributeCatalog catalog;
+        [SerializeField] NpcCatalog npcCatalog;
         [SerializeField] GameObject panel;
+        [SerializeField] GameObject propPanel;
         [SerializeField] RectTransform slotContent;
 
         TMP_Text displayNameText;
@@ -23,6 +25,7 @@ namespace Cooking.UI
         Image foodImage;
         Image propImage;
         TMP_Text propDescText;
+        TMP_Text propDisplayNameText;
         GameObject attributeNames;
         GameObject attributeValues;
         TMP_Text descriptionLabel;
@@ -39,6 +42,7 @@ namespace Cooking.UI
         TMP_Text stateValue;
 
         bool bound;
+        bool propBound;
         bool loggedMissingPropChrome;
         readonly List<RaycastResult> hits = new List<RaycastResult>();
         readonly HashSet<string> missingIds = new HashSet<string>();
@@ -47,29 +51,38 @@ namespace Cooking.UI
         void Awake()
         {
             Bind();
+            BindPropPanel();
             if (panel != null)
             {
                 IgnoreRaycasts(panel);
                 panel.SetActive(false);
+            }
+
+            if (propPanel != null)
+            {
+                IgnoreRaycasts(propPanel);
+                propPanel.SetActive(false);
             }
         }
 
         void OnDisable()
         {
             Hide();
+            HideProp();
         }
 
         void LateUpdate()
         {
-            if (panel == null)
+            if (panel == null && propPanel == null)
                 return;
 
             FoodSlotView slot = SlotUnderPointer();
             bool click = Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame;
             FoodSlotView.UpdatePointer(slot, click);
-            if (slot == null || slot.Shown == null || slot.ShownDefinition == null)
+            if (slot == null)
             {
                 Hide();
+                HideProp();
                 return;
             }
 
@@ -77,15 +90,25 @@ namespace Cooking.UI
             if (drag != null && drag.IsDragging)
             {
                 Hide();
+                HideProp();
                 return;
             }
 
             if (slot.ShowingProp)
             {
+                Hide();
                 ShowProp(slot);
                 return;
             }
 
+            if (slot.Shown == null || slot.ShownDefinition == null)
+            {
+                Hide();
+                HideProp();
+                return;
+            }
+
+            HideProp();
             Show(slot.Shown, slot.ShownDefinition);
         }
 
@@ -137,43 +160,60 @@ namespace Cooking.UI
         {
             if (slot == null || !slot.ShowingProp)
             {
-                Hide();
+                HideProp();
                 return;
             }
 
-            if (!bound)
-                Bind();
+            if (!propBound)
+                BindPropPanel();
 
-            if (panel == null)
+            if (propPanel == null)
                 return;
 
-            if (propImage == null || propDescText == null)
+            if (propImage == null || propDescText == null || propDisplayNameText == null)
             {
                 if (!loggedMissingPropChrome)
                 {
                     loggedMissingPropChrome = true;
-                    Debug.LogError("DetailsPanel 下需要有 PropImage 和 PropDescText。", panel);
+                    Debug.LogError(
+                        "PropDetailsPanel 下需要有 PropImage、PropDescText 和 PropDiasPlayName。",
+                        propPanel);
                 }
                 return;
             }
 
-            if (!panel.activeSelf)
-                panel.SetActive(true);
+            NpcProp definition = npcCatalog != null ? npcCatalog.FindProp(slot.ShownPropId) : null;
+            if (definition == null && npcCatalog != null && !string.IsNullOrEmpty(slot.ShownPropId))
+                Debug.LogError("NpcCatalog 里没有道具 " + slot.ShownPropId + "。", npcCatalog);
 
-            SetFoodChrome(false);
-            propImage.gameObject.SetActive(true);
-            propDescText.gameObject.SetActive(true);
-            propImage.sprite = slot.ShownPropSprite;
-            propImage.enabled = slot.ShownPropSprite != null;
+            if (!propPanel.activeSelf)
+                propPanel.SetActive(true);
+
+            Sprite sprite = definition != null && definition.sprite != null
+                ? definition.sprite
+                : slot.ShownPropSprite;
+            propImage.sprite = sprite;
+            propImage.enabled = sprite != null;
             propImage.preserveAspect = true;
             propImage.color = Color.white;
-            propDescText.text = slot.ShownPropDescription ?? "";
+            propDescText.text = definition != null
+                ? NpcCatalog.Pick(GameLanguage.Current, definition.descriptionZh, definition.descriptionEn)
+                : slot.ShownPropDescription ?? "";
+            propDisplayNameText.text = definition != null
+                ? NpcCatalog.Pick(GameLanguage.Current, definition.displayNameZh, definition.displayNameEn)
+                : "";
         }
 
         public void Hide()
         {
             if (panel != null && panel.activeSelf)
                 panel.SetActive(false);
+        }
+
+        public void HideProp()
+        {
+            if (propPanel != null && propPanel.activeSelf)
+                propPanel.SetActive(false);
         }
 
         void Bind()
@@ -218,26 +258,6 @@ namespace Cooking.UI
             attributeNames = names.gameObject;
             attributeValues = values.gameObject;
 
-            Transform propPicture = panel.transform.Find("PropImage");
-            if (propPicture == null)
-                Debug.LogError("DetailsPanel 下需要有 PropImage。", panel);
-            else
-            {
-                propImage = propPicture.GetComponent<Image>();
-                if (propImage == null)
-                    Debug.LogError("DetailsPanel/PropImage 需要有 Image。", propPicture);
-            }
-
-            Transform propText = panel.transform.Find("PropDescText");
-            if (propText == null)
-                Debug.LogError("DetailsPanel 下需要有 PropDescText。", panel);
-            else
-            {
-                propDescText = propText.GetComponent<TMP_Text>();
-                if (propDescText == null)
-                    Debug.LogError("DetailsPanel/PropDescText 需要有 TextMeshPro 文字。", propText);
-            }
-
             Transform food = panel.transform.Find("FoodImage");
             if (food == null)
                 Debug.LogError("DetailsPanel 下需要有 FoodImage。", panel);
@@ -261,6 +281,67 @@ namespace Cooking.UI
             maxValue = Require(values, "MaxDoness");
             stateValue = Require(values, "State");
             bound = true;
+        }
+
+        void BindPropPanel()
+        {
+            if (propPanel == null)
+            {
+                Transform found = transform.Find("PropDetailsPanel");
+                if (found != null)
+                    propPanel = found.gameObject;
+            }
+
+            if (npcCatalog == null)
+            {
+                System.Reflection.FieldInfo field = typeof(FoodTray).GetField(
+                    "npcCatalog",
+                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                FoodTray tray = GetComponent<FoodTray>();
+                if (field != null && tray != null)
+                    npcCatalog = field.GetValue(tray) as NpcCatalog;
+            }
+
+            if (propPanel == null)
+            {
+                Debug.LogError("TrayPanel 下需要有 PropDetailsPanel。", this);
+                return;
+            }
+
+            if (npcCatalog == null)
+                Debug.LogError("IngredientDetails 需要绑定 NpcCatalog。", this);
+
+            Transform propPicture = propPanel.transform.Find("PropImage");
+            if (propPicture == null)
+                Debug.LogError("PropDetailsPanel 下需要有 PropImage。", propPanel);
+            else
+            {
+                propImage = propPicture.GetComponent<Image>();
+                if (propImage == null)
+                    Debug.LogError("PropDetailsPanel/PropImage 需要有 Image。", propPicture);
+            }
+
+            Transform propText = propPanel.transform.Find("PropDescText");
+            if (propText == null)
+                Debug.LogError("PropDetailsPanel 下需要有 PropDescText。", propPanel);
+            else
+            {
+                propDescText = propText.GetComponent<TMP_Text>();
+                if (propDescText == null)
+                    Debug.LogError("PropDetailsPanel/PropDescText 需要有 TextMeshPro 文字。", propText);
+            }
+
+            Transform propName = propPanel.transform.Find("PropDiasPlayName");
+            if (propName == null)
+                Debug.LogError("PropDetailsPanel 下需要有 PropDiasPlayName。", propPanel);
+            else
+            {
+                propDisplayNameText = propName.GetComponent<TMP_Text>();
+                if (propDisplayNameText == null)
+                    Debug.LogError("PropDetailsPanel/PropDiasPlayName 需要有 TextMeshPro 文字。", propName);
+            }
+
+            propBound = true;
         }
 
         TMP_Text Require(Transform parent, string childName)
@@ -344,10 +425,6 @@ namespace Cooking.UI
                 attributeValues.SetActive(food);
             if (foodImage != null)
                 foodImage.gameObject.SetActive(food);
-            if (propImage != null)
-                propImage.gameObject.SetActive(!food);
-            if (propDescText != null)
-                propDescText.gameObject.SetActive(!food);
         }
 
         static void SetText(TMP_Text target, string value)

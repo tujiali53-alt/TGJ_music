@@ -304,7 +304,7 @@ namespace Cooking.EditorTools
                     ref asset.spriteWhole,
                     "Ingredients/" + id + ".spriteWhole",
                     result);
-                ApplySprite(
+                ApplyOptionalSprite(
                     FirstCell(row, "spriteCut", "spriteCutPath"),
                     ref asset.spriteCut,
                     "Ingredients/" + id + ".spriteCut",

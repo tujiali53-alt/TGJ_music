@@ -79,3 +79,6 @@ MonoBehaviour:
   - id: ui.commentsBg
     spriteZh: {fileID: 21300000, guid: 6e2cd5aa3a71966439d0e3d5153bcea1, type: 3}
     spriteEn: {fileID: 21300000, guid: 4d61eba33c5b1bd48818303d732b5ead, type: 3}
+  - id: ui.propDetailsBg
+    spriteZh: {fileID: 21300000, guid: bb5542923cee03044ac51f064d8eb65a, type: 3}
+    spriteEn: {fileID: 21300000, guid: 2fdc6b470c287284fb4611959e97878f, type: 3}
