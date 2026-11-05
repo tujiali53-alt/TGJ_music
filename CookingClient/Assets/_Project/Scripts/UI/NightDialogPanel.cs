@@ -45,6 +45,8 @@ namespace Cooking.UI
         bool awaitingPlayerLine;
         bool loggedMissingShocked;
         bool openForNight;
+        bool resultSuccess;
+        string resultOptionId;
         Sprite pendingPortrait;
         int buffDelta;
         NightEventDefinition current;
@@ -154,6 +156,7 @@ namespace Cooking.UI
             openForNight = true;
             current = definition;
             buffDelta = buffFaceDelta;
+            resultOptionId = "";
             UsePlayerDialogue();
             if (definition != null && definition.introPortrait == null)
             {
@@ -185,6 +188,8 @@ namespace Cooking.UI
             openForNight = true;
             current = definition;
             choices.Clear();
+            resultSuccess = success;
+            resultOptionId = option.optionId;
             pendingPortrait = success ? option.successPortrait : option.failPortrait;
             if (pendingPortrait == null && success && option.optionId == "opt_grave_mourn")
                 NoteMissingShocked();
@@ -319,6 +324,7 @@ namespace Cooking.UI
 
         void ShowOptions()
         {
+            RememberIntroSeen();
             optionsVisible = true;
             if (buttons == null)
                 return;
@@ -777,9 +783,37 @@ namespace Cooking.UI
 
         void ClosePanel()
         {
+            if (resultMode)
+                RememberOutcomeSeen();
+
             openForNight = false;
+            resultOptionId = "";
             if (panel != null)
                 panel.SetActive(false);
+        }
+
+        void RememberIntroSeen()
+        {
+            GameSession session = Session();
+            if (session == null || current == null)
+                return;
+
+            session.RememberNightIntro(current.id);
+        }
+
+        void RememberOutcomeSeen()
+        {
+            GameSession session = Session();
+            if (session == null || string.IsNullOrEmpty(resultOptionId))
+                return;
+
+            session.RememberNightOutcome(resultOptionId, resultSuccess);
+        }
+
+        static GameSession Session()
+        {
+            GameRoot root = GameRoot.Instance;
+            return root != null ? root.Session : null;
         }
 
         void UseJudgment(bool success)

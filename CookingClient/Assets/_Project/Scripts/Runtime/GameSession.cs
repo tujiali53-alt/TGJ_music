@@ -17,6 +17,9 @@ namespace Cooking.Runtime
         public int LightsAbsorbedTonight;
         public List<string> ResolvedOptionIdsTonight = new List<string>();
         public List<string> RevealedRewardOptionIds = new List<string>();
+        public List<string> SeenNightIntroIds = new List<string>();
+        public List<string> SeenNightSuccessOptionIds = new List<string>();
+        public List<string> SeenNightFailOptionIds = new List<string>();
         public List<NightLogEntry> NightLog = new List<NightLogEntry>();
         public List<string> CorrectRecipeIds = new List<string>();
         public List<string> DiarySeenIds = new List<string>();
@@ -39,12 +42,58 @@ namespace Cooking.Runtime
                 LightsAbsorbedTonight = 0,
                 ResolvedOptionIdsTonight = new List<string>(),
                 RevealedRewardOptionIds = new List<string>(),
+                SeenNightIntroIds = new List<string>(),
+                SeenNightSuccessOptionIds = new List<string>(),
+                SeenNightFailOptionIds = new List<string>(),
                 NightLog = new List<NightLogEntry>(),
                 CorrectRecipeIds = new List<string>(),
                 DiarySeenIds = new List<string>(),
                 ResolvedNpcIds = new List<string>(),
                 Props = new List<PropStack>()
             };
+        }
+
+        public bool HasSeenNightIntro(string eventId)
+        {
+            return !string.IsNullOrEmpty(eventId) && Contains(SeenNightIntroIds, eventId);
+        }
+
+        public bool HasSeenNightOutcome(string optionId, bool success)
+        {
+            if (string.IsNullOrEmpty(optionId))
+                return false;
+
+            return Contains(success ? SeenNightSuccessOptionIds : SeenNightFailOptionIds, optionId);
+        }
+
+        public bool HasRolledNightOption(string optionId)
+        {
+            return HasSeenNightOutcome(optionId, true) || HasSeenNightOutcome(optionId, false);
+        }
+
+        public void RememberNightIntro(string eventId)
+        {
+            RememberId(ref SeenNightIntroIds, eventId);
+        }
+
+        public void RememberNightOutcome(string optionId, bool success)
+        {
+            if (success)
+                RememberId(ref SeenNightSuccessOptionIds, optionId);
+            else
+                RememberId(ref SeenNightFailOptionIds, optionId);
+        }
+
+        static void RememberId(ref List<string> ids, string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                return;
+
+            if (ids == null)
+                ids = new List<string>();
+
+            if (!Contains(ids, id))
+                ids.Add(id);
         }
 
         public void RememberCorrectRecipe(string recipeId)
@@ -80,6 +129,9 @@ namespace Cooking.Runtime
 
         static bool Contains(List<string> ids, string id)
         {
+            if (ids == null || string.IsNullOrEmpty(id))
+                return false;
+
             for (int i = 0; i < ids.Count; i++)
             {
                 if (ids[i] == id)

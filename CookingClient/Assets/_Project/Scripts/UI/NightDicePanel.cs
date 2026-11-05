@@ -15,6 +15,8 @@ namespace Cooking.UI
         [SerializeField] Button beginButton;
         [SerializeField] Button confirmButton;
         [SerializeField] float confirmDelay = 2f;
+        [Tooltip("开启后：已掷过的选项跳过骰子面板，直接出结果并发食材。")]
+        [SerializeField] bool enableSeenSkip = true;
         [SerializeField] TMP_Text scoreText;
         [SerializeField] TMP_Text resultText;
         [SerializeField] IngredientDefinition[] definitions;
@@ -123,11 +125,41 @@ namespace Cooking.UI
                 beginButton.gameObject.SetActive(true);
             if (confirmButton != null)
                 confirmButton.gameObject.SetActive(false);
+
+            if (ShouldSkipDiceUi(chosen))
+            {
+                ResolveInstant();
+                return;
+            }
+
             if (panel != null)
             {
                 panel.SetActive(true);
                 Canvas.ForceUpdateCanvases();
             }
+        }
+
+        bool ShouldSkipDiceUi(NightOption chosen)
+        {
+            if (!enableSeenSkip)
+                return false;
+
+            GameRoot root = GameRoot.Instance;
+            if (root == null || root.Session == null || string.IsNullOrEmpty(chosen.optionId))
+                return false;
+
+            return root.Session.HasRolledNightOption(chosen.optionId);
+        }
+
+        void ResolveInstant()
+        {
+            if (panel != null)
+                panel.SetActive(false);
+
+            NightRollResult result = NightCheck.Roll(option, buffDelta);
+            Present(result, showConfirm: false);
+            if (dialog != null)
+                dialog.OpenResult(current, option, result.Success, result.Rewards);
         }
 
         public bool IsOpen => panel != null && panel.activeSelf;
@@ -194,10 +226,10 @@ namespace Cooking.UI
             if (panel == null || !panel.activeSelf)
                 yield break;
 
-            Present(result);
+            Present(result, showConfirm: true);
         }
 
-        void Present(NightRollResult result)
+        void Present(NightRollResult result, bool showConfirm)
         {
             lastRoll = result;
             rolled = true;
@@ -227,7 +259,9 @@ namespace Cooking.UI
                 new[] { nameZh },
                 new[] { nameEn });
             Remember(option.optionId, result.Success);
-            ScheduleConfirm();
+
+            if (showConfirm)
+                ScheduleConfirm();
 
             if (!result.Success || result.Rewards == null)
                 return;
