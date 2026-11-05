@@ -60,7 +60,7 @@ namespace Cooking.UI
                     NpcProp definition = npcCatalog != null ? npcCatalog.FindProp(prop.PropId) : null;
                     Sprite sprite = definition != null ? definition.sprite : null;
                     string description = definition != null
-                        ? NpcCatalog.Pick(DiaryLanguage.Zh, definition.descriptionZh, definition.descriptionEn)
+                        ? NpcCatalog.Pick(GameLanguage.Current, definition.descriptionZh, definition.descriptionEn)
                         : "";
                     if (definition == null && npcCatalog != null)
                         Debug.LogError("NpcCatalog 里没有道具 " + prop.PropId + "。", npcCatalog);

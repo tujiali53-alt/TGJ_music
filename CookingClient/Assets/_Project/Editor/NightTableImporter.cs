@@ -36,15 +36,15 @@ namespace Cooking.EditorTools
         public static string ValidateImported()
         {
             NightEventDefinition mushroom = FindEvent("event_mushroom");
-            if (mushroom == null || mushroom.unlockNight != 0 || mushroom.displayName != "蘑菇深埋于地")
+            if (mushroom == null || mushroom.unlockNight != 0 || mushroom.displayNameZh != "蘑菇深埋于地")
                 return "event_mushroom 未按表导入。";
 
             NightOption pull = FindOption(mushroom, "opt_mushroom_pull");
             if (pull.optionId != "opt_mushroom_pull" || pull.successFaces != 4 || pull.rewards == null || pull.rewards.Count != 2)
                 return "连根拔起的成功面或奖励行数不对。";
             if (pull.rewards[0].ingredientId != "ing_mushroom" || pull.rewards[0].count != 10
-                || pull.rewards[1].ingredientId != "ing_potato" || pull.rewards[1].count != 1)
-                return "连根拔起奖励应为蘑菇 10 和土豆 1。";
+                || pull.rewards[1].ingredientId != "ing_yam" || pull.rewards[1].count != 1)
+                return "连根拔起奖励应为蘑菇 10 和山药 1。";
 
             NightEventDefinition fishing = FindEvent("event_fishing");
             NightOption cast = FindOption(fishing, "opt_fishing_cast");
@@ -134,6 +134,10 @@ namespace Cooking.EditorTools
                 return result;
             }
 
+            Dictionary<string, string> priorEventEn = SnapshotEventEn();
+            Dictionary<string, string> priorOptionEn = SnapshotOptionEn();
+            Dictionary<string, string> priorLineEn = SnapshotLineEn();
+
             Dictionary<string, NightEventDefinition> events = ImportEvents(
                 RequireSheet(dataSet, "NightEvents", result),
                 result);
@@ -142,10 +146,132 @@ namespace Cooking.EditorTools
             ImportLines(RequireSheet(dataSet, "NightLines", result), events, result);
             ImportBuffs(RequireSheet(dataSet, "NightBuffs", result), result);
             ImportPortraits(RequireSheet(dataSet, "NightPortraits", result), events, result);
+            RestoreMissingEn(events, priorEventEn, priorOptionEn, priorLineEn);
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             return result;
+        }
+
+        static Dictionary<string, string> SnapshotEventEn()
+        {
+            var map = new Dictionary<string, string>();
+            string[] guids = AssetDatabase.FindAssets("t:NightEventDefinition", new[] { EventsFolder });
+            for (int i = 0; i < guids.Length; i++)
+            {
+                NightEventDefinition asset = AssetDatabase.LoadAssetAtPath<NightEventDefinition>(
+                    AssetDatabase.GUIDToAssetPath(guids[i]));
+                if (asset == null || string.IsNullOrEmpty(asset.id) || string.IsNullOrEmpty(asset.displayNameEn))
+                    continue;
+                map[asset.id] = asset.displayNameEn;
+            }
+
+            return map;
+        }
+
+        static Dictionary<string, string> SnapshotOptionEn()
+        {
+            var map = new Dictionary<string, string>();
+            string[] guids = AssetDatabase.FindAssets("t:NightEventDefinition", new[] { EventsFolder });
+            for (int i = 0; i < guids.Length; i++)
+            {
+                NightEventDefinition asset = AssetDatabase.LoadAssetAtPath<NightEventDefinition>(
+                    AssetDatabase.GUIDToAssetPath(guids[i]));
+                if (asset == null || asset.options == null)
+                    continue;
+
+                for (int o = 0; o < asset.options.Count; o++)
+                {
+                    NightOption option = asset.options[o];
+                    if (string.IsNullOrEmpty(option.optionId) || string.IsNullOrEmpty(option.displayNameEn))
+                        continue;
+                    map[option.optionId] = option.displayNameEn;
+                }
+            }
+
+            return map;
+        }
+
+        static Dictionary<string, string> SnapshotLineEn()
+        {
+            var map = new Dictionary<string, string>();
+            string[] guids = AssetDatabase.FindAssets("t:NightEventDefinition", new[] { EventsFolder });
+            for (int i = 0; i < guids.Length; i++)
+            {
+                NightEventDefinition asset = AssetDatabase.LoadAssetAtPath<NightEventDefinition>(
+                    AssetDatabase.GUIDToAssetPath(guids[i]));
+                if (asset == null || asset.lines == null)
+                    continue;
+
+                for (int l = 0; l < asset.lines.Count; l++)
+                {
+                    NightLine line = asset.lines[l];
+                    if (string.IsNullOrEmpty(line.textEn))
+                        continue;
+                    map[LineKey(asset.id, line)] = line.textEn;
+                }
+            }
+
+            return map;
+        }
+
+        static string LineKey(string eventId, NightLine line)
+        {
+            return eventId + "|" + (line.optionId ?? "") + "|" + (int)line.phase + "|" + line.order;
+        }
+
+        static void RestoreMissingEn(
+            Dictionary<string, NightEventDefinition> events,
+            Dictionary<string, string> priorEventEn,
+            Dictionary<string, string> priorOptionEn,
+            Dictionary<string, string> priorLineEn)
+        {
+            if (events == null)
+                return;
+
+            foreach (KeyValuePair<string, NightEventDefinition> pair in events)
+            {
+                NightEventDefinition asset = pair.Value;
+                if (asset == null)
+                    continue;
+
+                if (string.IsNullOrEmpty(asset.displayNameEn)
+                    && priorEventEn.TryGetValue(asset.id, out string eventEn))
+                {
+                    asset.displayNameEn = eventEn;
+                    EditorUtility.SetDirty(asset);
+                }
+
+                if (asset.options != null)
+                {
+                    for (int i = 0; i < asset.options.Count; i++)
+                    {
+                        NightOption option = asset.options[i];
+                        if (string.IsNullOrEmpty(option.displayNameEn)
+                            && priorOptionEn.TryGetValue(option.optionId, out string optionEn))
+                        {
+                            option.displayNameEn = optionEn;
+                            asset.options[i] = option;
+                            EditorUtility.SetDirty(asset);
+                        }
+                    }
+                }
+
+                if (asset.lines != null)
+                {
+                    for (int i = 0; i < asset.lines.Count; i++)
+                    {
+                        NightLine line = asset.lines[i];
+                        if (!string.IsNullOrEmpty(line.textEn))
+                            continue;
+                        if (!priorLineEn.TryGetValue(LineKey(asset.id, line), out string lineEn))
+                            continue;
+                        line.textEn = lineEn;
+                        asset.lines[i] = line;
+                        EditorUtility.SetDirty(asset);
+                    }
+                }
+            }
         }
 
         static Dictionary<string, NightEventDefinition> ImportEvents(DataTable table, ImportResult result)
@@ -163,7 +289,8 @@ namespace Cooking.EditorTools
                 id = id.Trim();
                 NightEventDefinition asset = FindOrCreateEvent(id, result);
                 asset.id = id;
-                asset.displayName = Cell(row, "displayName");
+                asset.displayNameZh = FirstCell(row, "displayNameZh", "displayName");
+                asset.displayNameEn = Cell(row, "displayNameEn");
                 if (!TryParseInt(Cell(row, "unlockNight"), out int unlockNight, "NightEvents/" + id + ".unlockNight", result))
                     continue;
 
@@ -221,7 +348,8 @@ namespace Cooking.EditorTools
                 {
                     optionId = optionId,
                     order = order,
-                    displayName = Cell(row, "displayName"),
+                    displayNameZh = FirstCell(row, "displayNameZh", "displayName"),
+                    displayNameEn = Cell(row, "displayNameEn"),
                     conditionType = condition,
                     conditionValue = conditionValue,
                     successFaces = faces,
@@ -322,8 +450,8 @@ namespace Cooking.EditorTools
                 if (!TryParseInt(Cell(row, "order"), out int order, "NightLines/" + eventId + ".order", result))
                     continue;
 
-                string text = Cell(row, "text");
-                if (text == "-")
+                string textZh = FirstCell(row, "textZh", "text");
+                if (textZh == "-")
                     continue;
 
                 if (asset.lines == null)
@@ -333,7 +461,8 @@ namespace Cooking.EditorTools
                     optionId = Cell(row, "optionId"),
                     phase = phase,
                     order = order,
-                    text = text
+                    textZh = textZh,
+                    textEn = Cell(row, "textEn")
                 });
                 EditorUtility.SetDirty(asset);
             }
@@ -417,8 +546,8 @@ namespace Cooking.EditorTools
                     continue;
                 }
 
-                string shown = Cell(row, "displayName");
-                if (!string.IsNullOrEmpty(shown) && shown != asset.displayName)
+                string shown = FirstCell(row, "displayNameZh", "displayName");
+                if (!string.IsNullOrEmpty(shown) && shown != asset.displayNameZh)
                 {
                     Debug.LogError("NightPortraits 事件名不一致：" + eventId + " 表上是 " + shown);
                     result.ErrorCount++;

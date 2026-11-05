@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Cooking.Data
 {
@@ -18,7 +19,9 @@ namespace Cooking.Data
         public string optionId;
         public NightLinePhase phase;
         public int order;
-        public string text;
+        [FormerlySerializedAs("text")]
+        public string textZh;
+        public string textEn;
     }
 
     [Serializable]
@@ -26,7 +29,9 @@ namespace Cooking.Data
     {
         public string optionId;
         public int order;
-        public string displayName;
+        [FormerlySerializedAs("displayName")]
+        public string displayNameZh;
+        public string displayNameEn;
         public NightConditionType conditionType;
         public float conditionValue;
         public int successFaces;
@@ -39,10 +44,25 @@ namespace Cooking.Data
     public sealed class NightEventDefinition : ScriptableObject
     {
         public string id;
-        public string displayName;
+        [FormerlySerializedAs("displayName")]
+        public string displayNameZh;
+        public string displayNameEn;
         public int unlockNight;
         public Sprite introPortrait;
         public List<NightOption> options;
         public List<NightLine> lines;
+
+        public static string Pick(DiaryLanguage language, string zh, string en)
+        {
+            if (language == DiaryLanguage.En && !string.IsNullOrEmpty(en))
+                return en;
+
+            return zh ?? "";
+        }
+
+        public string DisplayName(DiaryLanguage language)
+        {
+            return Pick(language, displayNameZh, displayNameEn);
+        }
     }
 }

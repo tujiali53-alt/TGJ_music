@@ -158,7 +158,7 @@ namespace Cooking.UI
             if (deliciousnessText != null)
             {
                 float value = session != null ? session.TodayDeliciousness : 0f;
-                deliciousnessText.text = "美味度：" + DeliciousnessScore.FormatScore(value);
+                deliciousnessText.text = DeliciousnessPrefix() + DeliciousnessScore.FormatScore(value);
             }
         }
 
@@ -363,7 +363,7 @@ namespace Cooking.UI
                 if (i > 0 && commentInterval > 0f)
                     yield return new WaitForSeconds(commentInterval);
 
-                shown.Add("评语：" + lines[i]);
+                shown.Add(CommentPrefix() + lines[i]);
                 commentsText.text = string.Join("\n", shown);
                 FitComments();
             }
@@ -403,6 +403,16 @@ namespace Cooking.UI
 
             commentsScroll.StopMovement();
             commentsScroll.verticalNormalizedPosition = 1f;
+        }
+
+        static string DeliciousnessPrefix()
+        {
+            return GameLanguage.Current == DiaryLanguage.En ? "Deliciousness: " : "美味度：";
+        }
+
+        static string CommentPrefix()
+        {
+            return GameLanguage.Current == DiaryLanguage.En ? "Comment: " : "评语：";
         }
 
         static string ScoreAt(GameSession session, int index)

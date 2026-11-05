@@ -35,10 +35,10 @@ MonoBehaviour:
     textZh: 
     textEn: 'CanCut:'
   - id: canEatRaw.true
-    textZh: "\u53EF\u714E\u716E"
+    textZh: "\u4E0D\u53EF\u714E\u716E"
     textEn: True
   - id: canEatRaw.false
-    textZh: "\u4E0D\u53EF\u714E\u716E"
+    textZh: "\u53EF\u714E\u716E"
     textEn: False
   - id: canCut.true
     textZh: "\u53EF\u5207"

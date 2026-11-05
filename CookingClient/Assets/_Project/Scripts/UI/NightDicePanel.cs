@@ -139,23 +139,27 @@ namespace Cooking.UI
             if (source.rewards == null || source.rewards.Count == 0)
                 return "";
 
+            bool english = GameLanguage.Current == DiaryLanguage.En;
+            string allJoin = english ? ", " : "，";
+            string oneJoin = english ? " or " : "或";
+            string times = english ? " x " : "×";
             string all = "";
             string one = "";
             for (int i = 0; i < source.rewards.Count; i++)
             {
                 NightReward reward = source.rewards[i];
-                string piece = DisplayName(reward.ingredientId) + "×" + reward.count;
+                string piece = DisplayName(reward.ingredientId) + times + reward.count;
                 if (reward.pickMode == NightRewardPick.One)
-                    one = Join(one, piece, "或");
+                    one = Join(one, piece, oneJoin);
                 else
-                    all = Join(all, piece, "，");
+                    all = Join(all, piece, allJoin);
             }
 
             if (all.Length == 0)
                 return one;
             if (one.Length == 0)
                 return all;
-            return all + "，" + one;
+            return all + allJoin + one;
         }
 
         void OnBegin()
@@ -200,12 +204,27 @@ namespace Cooking.UI
             ShowFace(result.Face);
             if (scoreText != null)
                 scoreText.text = result.Face.ToString();
+            bool english = GameLanguage.Current == DiaryLanguage.En;
             if (resultText != null)
-                resultText.text = result.Success ? "成功" : "失败";
+                resultText.text = result.Success
+                    ? (english ? "Success" : "成功")
+                    : (english ? "Fail" : "失败");
 
-            string name = string.IsNullOrEmpty(option.displayName) ? option.optionId : option.displayName;
-            NightLogView.Append(NightLogKind.DiceRoll, "掷出 " + result.Face + " 点");
-            NightLogView.Append(NightLogKind.CheckResult, name + "：" + (result.Success ? "成功" : "失败"));
+            string name = NightEventDefinition.Pick(
+                GameLanguage.Current,
+                option.displayNameZh,
+                option.displayNameEn);
+            if (string.IsNullOrEmpty(name))
+                name = option.optionId;
+            NightLogView.Append(
+                NightLogKind.DiceRoll,
+                english ? "Rolled " + result.Face : "掷出 " + result.Face + " 点");
+            NightLogView.Append(
+                NightLogKind.CheckResult,
+                name + (english ? ": " : "：")
+                + (result.Success
+                    ? (english ? "Success" : "成功")
+                    : (english ? "Fail" : "失败")));
             Remember(option.optionId, result.Success);
             ScheduleConfirm();
 
@@ -363,10 +382,8 @@ namespace Cooking.UI
         string DisplayName(string ingredientId)
         {
             IngredientDefinition definition = FindDefinition(ingredientId);
-            if (definition != null && !string.IsNullOrEmpty(definition.displayName))
-                return definition.displayName;
-
-            return ingredientId;
+            string name = IngredientDetailText.DisplayName(definition, GameLanguage.Current);
+            return string.IsNullOrEmpty(name) ? ingredientId : name;
         }
 
         static string Join(string left, string right, string separator)

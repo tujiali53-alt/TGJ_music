@@ -24,8 +24,8 @@ namespace Cooking.EditorTools
             NightRollResult success = NightCheck.Resolve(pull, 4, 0, 0);
             if (!success.Success || success.Face != 4)
                 return "连根拔起掷出 4 应成功。";
-            if (!HasReward(success.Rewards, "ing_mushroom", 10) || !HasReward(success.Rewards, "ing_potato", 1))
-                return "连根拔起成功应同时给白蘑菇 10 和星土豆 1。";
+            if (!HasReward(success.Rewards, "ing_mushroom", 10) || !HasReward(success.Rewards, "ing_yam", 1))
+                return "连根拔起成功应同时给白蘑菇 10 和山药 1。";
             if (success.Rewards.Count != 2)
                 return "连根拔起成功应正好两行奖励。";
 
@@ -74,12 +74,12 @@ namespace Cooking.EditorTools
             {
                 optionId = "opt_mushroom_pull",
                 order = 1,
-                displayName = "连根拔起",
+                displayNameZh = "连根拔起",
                 successFaces = 4,
                 rewards = new List<NightReward>
                 {
                     new NightReward { pickMode = NightRewardPick.All, ingredientId = "ing_mushroom", count = 10 },
-                    new NightReward { pickMode = NightRewardPick.All, ingredientId = "ing_potato", count = 1 }
+                    new NightReward { pickMode = NightRewardPick.All, ingredientId = "ing_yam", count = 1 }
                 }
             };
         }
@@ -90,7 +90,7 @@ namespace Cooking.EditorTools
             {
                 optionId = "opt_fishing_cast",
                 order = 1,
-                displayName = "拉竿！",
+                displayNameZh = "拉竿！",
                 conditionType = NightConditionType.None,
                 conditionValue = 0f,
                 successFaces = 5,

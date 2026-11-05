@@ -11,7 +11,6 @@ namespace Cooking.UI
     {
         [SerializeField] Image recipeImage;
         [SerializeField] RecipeDefinition[] recipes;
-        [SerializeField] DiaryLanguage language = DiaryLanguage.Zh;
         [SerializeField] Button previousButton;
         [SerializeField] Button nextButton;
 
@@ -44,16 +43,28 @@ namespace Cooking.UI
 
         void OnEnable()
         {
+            GameLanguage.Changed += OnLanguageChanged;
             Apply();
+        }
+
+        void OnDisable()
+        {
+            GameLanguage.Changed -= OnLanguageChanged;
         }
 
         void OnDestroy()
         {
+            GameLanguage.Changed -= OnLanguageChanged;
             if (previousButton != null)
                 previousButton.onClick.RemoveListener(ShowPrevious);
 
             if (nextButton != null)
                 nextButton.onClick.RemoveListener(ShowNext);
+        }
+
+        void OnLanguageChanged()
+        {
+            ApplyPage();
         }
 
         public void ShowPrevious()
@@ -122,7 +133,7 @@ namespace Cooking.UI
             if (recipeImage != null)
             {
                 RecipeDefinition recipe = pageIndex >= 0 && pageIndex < pages.Count ? pages[pageIndex] : null;
-                Sprite sprite = PageSprite(recipe, language);
+                Sprite sprite = PageSprite(recipe, GameLanguage.Current);
                 recipeImage.sprite = sprite;
                 recipeImage.enabled = sprite != null;
                 if (sprite != null)

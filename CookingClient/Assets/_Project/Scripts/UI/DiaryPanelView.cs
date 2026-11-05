@@ -11,7 +11,6 @@ namespace Cooking.UI
     public sealed class DiaryPanelView : MonoBehaviour
     {
         [SerializeField] DiaryCatalog catalog;
-        [SerializeField] DiaryLanguage language = DiaryLanguage.Zh;
         [SerializeField] TMP_Text dayText;
         [SerializeField] TMP_Text titleText;
         [SerializeField] TMP_Text leftText;
@@ -41,16 +40,28 @@ namespace Cooking.UI
         void OnEnable()
         {
             Resolve();
+            GameLanguage.Changed += OnLanguageChanged;
             ShowOpeningPage();
+        }
+
+        void OnDisable()
+        {
+            GameLanguage.Changed -= OnLanguageChanged;
         }
 
         void OnDestroy()
         {
+            GameLanguage.Changed -= OnLanguageChanged;
             if (previousButton != null)
                 previousButton.onClick.RemoveListener(ShowPrevious);
 
             if (nextButton != null)
                 nextButton.onClick.RemoveListener(ShowNext);
+        }
+
+        void OnLanguageChanged()
+        {
+            Apply(CurrentPages(), false);
         }
 
         public void ShowPrevious()
@@ -113,13 +124,13 @@ namespace Cooking.UI
 
             DiaryEntry entry = pages[pageIndex];
             if (dayText != null)
-                dayText.text = DiaryBook.DayLine(catalog, entry.storyDay, language);
+                dayText.text = DiaryBook.DayLine(catalog, entry.storyDay, GameLanguage.Current);
             if (titleText != null)
-                titleText.text = DiaryBook.Title(catalog, entry, language);
+                titleText.text = DiaryBook.Title(catalog, entry, GameLanguage.Current);
             if (leftText != null)
-                leftText.text = DiaryBook.Join(entry, DiarySide.Left, language);
+                leftText.text = DiaryBook.Join(entry, DiarySide.Left, GameLanguage.Current);
             if (rightText != null)
-                rightText.text = DiaryBook.Join(entry, DiarySide.Right, language);
+                rightText.text = DiaryBook.Join(entry, DiarySide.Right, GameLanguage.Current);
 
             if (previousButton != null)
                 previousButton.interactable = pageIndex > 0;

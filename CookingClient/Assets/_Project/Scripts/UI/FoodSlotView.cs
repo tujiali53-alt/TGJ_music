@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
+using Cooking.Core;
 using Cooking.Data;
 using Cooking.Runtime;
 using TMPro;
@@ -162,12 +163,17 @@ namespace Cooking.UI
             ApplyProp();
         }
 
+        static string DonenessPrefix()
+        {
+            return GameLanguage.Current == DiaryLanguage.En ? "Doneness: " : "熟度：";
+        }
+
         void Apply()
         {
             bool has = shown != null && shownQuantity > 0;
             if (statusText != null)
                 statusText.text = has
-                    ? "熟度：" + shown.Doneness.ToString("0.00", CultureInfo.InvariantCulture)
+                    ? DonenessPrefix() + shown.Doneness.ToString("0.00", CultureInfo.InvariantCulture)
                     : "";
 
             if (icon != null)

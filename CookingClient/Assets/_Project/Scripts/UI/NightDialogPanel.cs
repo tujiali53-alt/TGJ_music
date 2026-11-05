@@ -17,7 +17,6 @@ namespace Cooking.UI
         [SerializeField] Button option2;
         [SerializeField] Button option3;
         [SerializeField] NightDicePanel dice;
-        [SerializeField] DiaryLanguage language = DiaryLanguage.Zh;
         [SerializeField] GameObject playerDialogue;
         [SerializeField] Image profileImage;
         [SerializeField] GameObject dialogueFrame;
@@ -324,7 +323,10 @@ namespace Cooking.UI
                 TMP_Text label = FindChildText(button.transform, "Label");
                 TMP_Text reward = FindChildText(button.transform, "RewardText");
                 if (label != null)
-                    label.text = option.displayName;
+                    label.text = NightEventDefinition.Pick(
+                        GameLanguage.Current,
+                        option.displayNameZh,
+                        option.displayNameEn);
                 if (reward != null)
                 {
                     reward.gameObject.SetActive(true);
@@ -504,11 +506,19 @@ namespace Cooking.UI
             if (root == null || root.Session == null)
                 return "";
 
+            bool english = GameLanguage.Current == DiaryLanguage.En;
             if (root.Session.ResolvedOptionIdsTonight != null
                 && root.Session.ResolvedOptionIdsTonight.Contains(option.optionId))
             {
-                string name = string.IsNullOrEmpty(option.displayName) ? option.optionId : option.displayName;
-                return name + "今夜已经判定过";
+                string name = NightEventDefinition.Pick(
+                    GameLanguage.Current,
+                    option.displayNameZh,
+                    option.displayNameEn);
+                if (string.IsNullOrEmpty(name))
+                    name = option.optionId;
+                return english
+                    ? name + " already resolved tonight"
+                    : name + "今夜已经判定过";
             }
 
             if (option.conditionType == NightConditionType.None)
@@ -518,13 +528,13 @@ namespace Cooking.UI
                 return "";
 
             if (option.conditionType == NightConditionType.HasAnyFood)
-                return "没有食物";
+                return english ? "No food" : "没有食物";
             if (option.conditionType == NightConditionType.HasVegetable)
-                return "没有素食";
+                return english ? "No vegetables" : "没有素食";
             if (option.conditionType == NightConditionType.DeliciousnessAbove)
-                return "白天美味度不足";
+                return english ? "Daytime deliciousness too low" : "白天美味度不足";
             if (option.conditionType == NightConditionType.DeliciousnessBelow)
-                return "白天美味度过高";
+                return english ? "Daytime deliciousness too high" : "白天美味度过高";
             return "";
         }
 
@@ -672,7 +682,11 @@ namespace Cooking.UI
             if (dialogueName != null)
                 dialogueName.SetActive(true);
             if (openForNight && nameText != null)
-                nameText.text = "小鼻嘎";
+            {
+                nameText.text = GameLanguage.Current == DiaryLanguage.En
+                    ? "Lil Tu"
+                    : "小鼻嘎";
+            }
             if (profileImage != null)
                 profileImage.gameObject.SetActive(true);
             if (bodyText != null)
@@ -747,7 +761,7 @@ namespace Cooking.UI
 
         void FillSuccess(IList<NightReward> rewards)
         {
-            bool english = language == DiaryLanguage.En;
+            bool english = GameLanguage.Current == DiaryLanguage.En;
             string nameJoin = english ? ", " : "、";
             string amountJoin = english ? ", " : "，";
             string names = "";
@@ -764,7 +778,7 @@ namespace Cooking.UI
                         continue;
 
                     IngredientDefinition definition = FindKnown(known, reward.ingredientId);
-                    string name = IngredientDetailText.DisplayName(definition, language);
+                    string name = IngredientDetailText.DisplayName(definition, GameLanguage.Current);
                     if (string.IsNullOrEmpty(name))
                         name = reward.ingredientId;
                     if (sprite == null && definition != null && definition.spriteWhole != null)
@@ -794,7 +808,7 @@ namespace Cooking.UI
             if (failNameText == null)
                 return;
 
-            failNameText.text = language == DiaryLanguage.En
+            failNameText.text = GameLanguage.Current == DiaryLanguage.En
                 ? "Came away empty-handed"
                 : "一无所获";
         }
@@ -803,7 +817,9 @@ namespace Cooking.UI
         {
             int faces = NightCheck.EffectiveFaces(option.successFaces, buffDelta);
             int percent = Mathf.RoundToInt(faces * 100f / 6f);
-            return "成功概率" + percent + "%";
+            return GameLanguage.Current == DiaryLanguage.En
+                ? "Success Rate " + percent + "%"
+                : "成功概率" + percent + "%";
         }
 
         static string Join(string left, string right, string separator)
@@ -851,7 +867,8 @@ namespace Cooking.UI
             for (int i = 0; i < definition.lines.Count; i++)
             {
                 NightLine line = definition.lines[i];
-                if (line.phase != phase || string.IsNullOrEmpty(line.text))
+                string text = NightEventDefinition.Pick(GameLanguage.Current, line.textZh, line.textEn);
+                if (line.phase != phase || string.IsNullOrEmpty(text))
                     continue;
 
                 string lineOption = line.optionId ?? "";
@@ -864,7 +881,12 @@ namespace Cooking.UI
 
             matched.Sort(CompareLine);
             for (int i = 0; i < matched.Count; i++)
-                result.Add(matched[i].text);
+            {
+                result.Add(NightEventDefinition.Pick(
+                    GameLanguage.Current,
+                    matched[i].textZh,
+                    matched[i].textEn));
+            }
             return result;
         }
 

@@ -1044,6 +1044,7 @@ GameObject:
   - component: {fileID: 202429520}
   - component: {fileID: 202429519}
   - component: {fileID: 202429518}
+  - component: {fileID: 202429521}
   m_Layer: 5
   m_Name: enterNightButton
   m_TagString: Untagged
@@ -1152,6 +1153,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202429516}
   m_CullTransparentMesh: 1
+--- !u!114 &202429521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202429516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f6478901234a5b6c7d8e9f012b42c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
+  id: ui.enterNight
+  catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
+  language: 1
 --- !u!1 &218224663
 GameObject:
   m_ObjectHideFlags: 0
@@ -3847,6 +3863,7 @@ GameObject:
   - component: {fileID: 566436771}
   - component: {fileID: 566436770}
   - component: {fileID: 566436769}
+  - component: {fileID: 566436772}
   m_Layer: 5
   m_Name: CuttingButton
   m_TagString: Untagged
@@ -3955,6 +3972,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 566436767}
   m_CullTransparentMesh: 1
+--- !u!114 &566436772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566436767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f6478901234a5b6c7d8e9f012b42c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
+  id: ui.cut
+  catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
+  language: 1
 --- !u!1 &571429669
 GameObject:
   m_ObjectHideFlags: 0
@@ -4855,6 +4887,7 @@ GameObject:
   - component: {fileID: 646465236}
   - component: {fileID: 646465235}
   - component: {fileID: 646465234}
+  - component: {fileID: 646465237}
   m_Layer: 5
   m_Name: OneMoreTimeButton
   m_TagString: Untagged
@@ -4963,6 +4996,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 646465232}
   m_CullTransparentMesh: 1
+--- !u!114 &646465237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646465232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f6478901234a5b6c7d8e9f012b42c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
+  id: ui.tryAgain
+  catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
+  language: 1
 --- !u!1 &661254659
 GameObject:
   m_ObjectHideFlags: 0
@@ -5201,6 +5249,7 @@ GameObject:
   - component: {fileID: 675812486}
   - component: {fileID: 675812488}
   - component: {fileID: 675812487}
+  - component: {fileID: 675812489}
   m_Layer: 5
   m_Name: DetailsPanel
   m_TagString: Untagged
@@ -5270,6 +5319,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675812485}
   m_CullTransparentMesh: 1
+--- !u!114 &675812489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675812485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f6478901234a5b6c7d8e9f012b42c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
+  id: ui.description
+  catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
+  language: 1
 --- !u!1 &677939861
 GameObject:
   m_ObjectHideFlags: 0
@@ -6307,7 +6371,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af13722b1eae53469f98199e4e01bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Cooking::Cooking.UI.IngredientDetails
-  language: 0
   catalog: {fileID: 11400000, guid: 6ccc60230210a9247a36f59ca9d6899d, type: 2}
   panel: {fileID: 675812485}
   slotContent: {fileID: 810000022}
@@ -36581,7 +36644,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Cooking::Cooking.UI.NpcDialogPanel
   catalog: {fileID: 11400000, guid: b0825e34f61a7d2c3e507192a3b4ef56, type: 2}
-  language: 0
   openOnDayStart: 1
   dayNpcId: npc_tutu
   panel: {fileID: 880010001}
@@ -37755,6 +37817,7 @@ GameObject:
   - component: {fileID: 934345632}
   - component: {fileID: 934345631}
   - component: {fileID: 934345630}
+  - component: {fileID: 934345633}
   m_Layer: 5
   m_Name: closeButton
   m_TagString: Untagged
@@ -37863,6 +37926,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934345628}
   m_CullTransparentMesh: 1
+--- !u!114 &934345633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934345628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f6478901234a5b6c7d8e9f012b42c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
+  id: ui.cancel
+  catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
+  language: 1
 --- !u!1 &940001001
 GameObject:
   m_ObjectHideFlags: 0
@@ -38065,7 +38143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &950823003
 RectTransform:
   m_ObjectHideFlags: 0
@@ -38141,7 +38219,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Cooking::Cooking.UI.DiaryPanelView
   catalog: {fileID: 11400000, guid: 6fab823231500614db503580db656d29, type: 2}
-  language: 0
   dayText: {fileID: 0}
   titleText: {fileID: 0}
   leftText: {fileID: 0}
@@ -38160,6 +38237,7 @@ GameObject:
   - component: {fileID: 964802219}
   - component: {fileID: 964802218}
   - component: {fileID: 964802217}
+  - component: {fileID: 964802220}
   m_Layer: 5
   m_Name: EattingButton
   m_TagString: Untagged
@@ -38268,6 +38346,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964802215}
   m_CullTransparentMesh: 1
+--- !u!114 &964802220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964802215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f6478901234a5b6c7d8e9f012b42c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
+  id: ui.eat
+  catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
+  language: 1
 --- !u!1 &991874761
 GameObject:
   m_ObjectHideFlags: 0
@@ -38914,6 +39007,7 @@ GameObject:
   - component: {fileID: 1053690572}
   - component: {fileID: 1053690571}
   - component: {fileID: 1053690570}
+  - component: {fileID: 1053690573}
   m_Layer: 5
   m_Name: openRecipeButton
   m_TagString: Untagged
@@ -39022,6 +39116,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1053690568}
   m_CullTransparentMesh: 1
+--- !u!114 &1053690573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053690568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f6478901234a5b6c7d8e9f012b42c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
+  id: ui.recipe
+  catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
+  language: 1
 --- !u!1 &1057656964
 GameObject:
   m_ObjectHideFlags: 0
@@ -39194,7 +39303,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: daca5e98c44ea834cb9112a2caccf5ab, type: 2}
   - {fileID: 11400000, guid: e0a07ec966f90f34ea62b59013509068, type: 2}
   - {fileID: 11400000, guid: 34f485811a46ee643b81c6c2d3013b93, type: 2}
-  language: 0
   previousButton: {fileID: 0}
   nextButton: {fileID: 0}
 --- !u!1 &1141805928
@@ -45371,6 +45479,7 @@ GameObject:
   - component: {fileID: 2106144724}
   - component: {fileID: 2106144723}
   - component: {fileID: 2106144722}
+  - component: {fileID: 2106144725}
   m_Layer: 5
   m_Name: openDiaryButton
   m_TagString: Untagged
@@ -45479,6 +45588,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2106144720}
   m_CullTransparentMesh: 1
+--- !u!114 &2106144725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106144720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f6478901234a5b6c7d8e9f012b42c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
+  id: ui.diary
+  catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
+  language: 1
 --- !u!1 &2107521137
 GameObject:
   m_ObjectHideFlags: 0

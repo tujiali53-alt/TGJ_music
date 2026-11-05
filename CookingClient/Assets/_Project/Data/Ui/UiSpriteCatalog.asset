@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d4e5f64789012a3b4c5d6e7f80920a, type: 3}
+  m_Name: UiSpriteCatalog
+  m_EditorClassIdentifier: Cooking::Cooking.Data.UiSpriteCatalog
+  rows:
+  - id: ui.start
+    spriteZh: {fileID: 21300000, guid: f0c950ec77e43054195e6f3493c4f40d, type: 3}
+    spriteEn: {fileID: 21300000, guid: d5347e8849542ec449f721d5ac4fb28d, type: 3}
+  - id: ui.quit
+    spriteZh: {fileID: 21300000, guid: 99558d57211a2ba448a6f472d0c32021, type: 3}
+    spriteEn: {fileID: 21300000, guid: 61b32e9b719ae524c96742b1f4e10db7, type: 3}
+  - id: ui.credit
+    spriteZh: {fileID: 21300000, guid: a34970edc5636804f8676afff3d77231, type: 3}
+    spriteEn: {fileID: 21300000, guid: 8f119148fd3f8174e8cc8d9630fd6f54, type: 3}
+  - id: ui.cancel
+    spriteZh: {fileID: 21300000, guid: b50f51a5c404c1745a38ecb4002ec99c, type: 3}
+    spriteEn: {fileID: 21300000, guid: 641b9bdaa3e3cab4b93058646a577ff3, type: 3}
+  - id: ui.confirm
+    spriteZh: {fileID: 21300000, guid: c6389150c7053354897acd2c7e716f74, type: 3}
+    spriteEn: {fileID: 21300000, guid: 6823591a7b871784c9b10c2c5427ac15, type: 3}
+  - id: ui.eat
+    spriteZh: {fileID: 21300000, guid: 8027573139794964783dd7278e496b74, type: 3}
+    spriteEn: {fileID: 21300000, guid: 4d42b66bc60842e4b8b35cee920dbd2d, type: 3}
+  - id: ui.recipe
+    spriteZh: {fileID: 21300000, guid: c870f0ab516b19446b52c8091bcf9393, type: 3}
+    spriteEn: {fileID: 21300000, guid: cdc6ec131fd60cd49a6271252294eab0, type: 3}
+  - id: ui.diary
+    spriteZh: {fileID: 21300000, guid: e8ccb844dfaee084691d9125f13e6840, type: 3}
+    spriteEn: {fileID: 21300000, guid: 4501ef2b2a779e34ba1b1dac956d0908, type: 3}
+  - id: ui.cut
+    spriteZh: {fileID: 21300000, guid: be554d12b937e4f4c92d5a62feeca0a8, type: 3}
+    spriteEn: {fileID: 21300000, guid: bbc25b4c93947ff49aa4c8fb6afd24e5, type: 3}
+  - id: ui.savour
+    spriteZh: {fileID: 21300000, guid: 5940b66b2f7eb5a4ba2fa336a61dbd31, type: 3}
+    spriteEn: {fileID: 21300000, guid: 6d5a0b06217d1254bb120491768c7261, type: 3}
+  - id: ui.dice
+    spriteZh: {fileID: 21300000, guid: 409b466b660f982428a731a47308a7f1, type: 3}
+    spriteEn: {fileID: 21300000, guid: aa7f51d509f8c2d4488a7f19faa2366e, type: 3}
+  - id: ui.enterNight
+    spriteZh: {fileID: 21300000, guid: 2e5e4cfe7e3a21347b8490c7f0848428, type: 3}
+    spriteEn: {fileID: 21300000, guid: 1807a2355a26dc4499cb34865f1ea2be, type: 3}
+  - id: ui.tryAgain
+    spriteZh: {fileID: 21300000, guid: 8d5c7cb1310fb00488a4ef68c343ba07, type: 3}
+    spriteEn: {fileID: 21300000, guid: 5f1f0ad91b229b945bdfe45b2d39fd40, type: 3}
+  - id: ui.result
+    spriteZh: {fileID: 21300000, guid: 2f27d9434d5b1584281463c0ab23c6dc, type: 3}
+    spriteEn: {fileID: 21300000, guid: 4bd861d849faa9640b4a70c58f21a615, type: 3}
+  - id: ui.description
+    spriteZh: {fileID: 21300000, guid: 1340fc75f12a4f745b5e867a05e5012d, type: 3}
+    spriteEn: {fileID: 21300000, guid: f7898e1737a480840a5d3eb3d982bd6e, type: 3}
+  - id: ui.continue
+    spriteZh: {fileID: 21300000, guid: b3672633a51185c4cb33f7d8f7adac90, type: 3}
+    spriteEn: {fileID: 21300000, guid: 7922ac50b83983049b9d51d086c18d3b, type: 3}
+  - id: ui.settingBg
+    spriteZh: {fileID: 21300000, guid: 562c3fd05cccf69479cec0efebbb801b, type: 3}
+    spriteEn: {fileID: 21300000, guid: dc8bd0daacd477c48964522dd2fd751c, type: 3}
+  - id: ui.instructions
+    spriteZh: {fileID: 21300000, guid: 1415056d2fc177049bccc56cfc6110fc, type: 3}
+    spriteEn: {fileID: 21300000, guid: 2937fb082be40884abcb4f7b96c249b7, type: 3}
+  - id: ui.instructionPanel
+    spriteZh: {fileID: 21300000, guid: fead1f9818a0a0d4cb2578cda9c5ba00, type: 3}
+    spriteEn: {fileID: 21300000, guid: a11dc9c36ee8da946b6fc951ecb5305d, type: 3}

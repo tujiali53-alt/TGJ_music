@@ -12,7 +12,6 @@ namespace Cooking.UI
     public sealed class NpcDialogPanel : MonoBehaviour
     {
         [SerializeField] NpcCatalog catalog;
-        [SerializeField] DiaryLanguage language = DiaryLanguage.Zh;
         [SerializeField] bool openOnDayStart;
         [SerializeField] string dayNpcId = "npc_tutu";
         [SerializeField] GameObject panel;
@@ -159,7 +158,7 @@ namespace Cooking.UI
             }
 
             if (nameText != null)
-                nameText.text = NpcCatalog.Pick(language, character.displayNameZh, character.displayNameEn);
+                nameText.text = NpcCatalog.Pick(GameLanguage.Current, character.displayNameZh, character.displayNameEn);
 
             HideJudgment();
             BeginLines(CollectLines(""));
@@ -312,7 +311,7 @@ namespace Cooking.UI
                 if (label == null)
                     Debug.LogError(button.name + " 下需要有 Label。", button);
                 else
-                    label.text = NpcCatalog.Pick(language, option.displayNameZh, option.displayNameEn);
+                    label.text = NpcCatalog.Pick(GameLanguage.Current, option.displayNameZh, option.displayNameEn);
 
                 TMP_Text reward = FindChildText(button.transform, "RewardText");
                 if (reward != null)
@@ -361,7 +360,7 @@ namespace Cooking.UI
             result.Sort((a, b) => a.order.CompareTo(b.order));
             var texts = new List<string>();
             for (int i = 0; i < result.Count; i++)
-                texts.Add(NpcCatalog.Pick(language, result[i].textZh, result[i].textEn));
+                texts.Add(NpcCatalog.Pick(GameLanguage.Current, result[i].textZh, result[i].textEn));
 
             return texts;
         }

@@ -7,10 +7,20 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager I;
 
+    const string MusicVolumePrefs = "cooking.volume.music";
+    const string SfxVolumePrefs = "cooking.volume.sfx";
+    const string MusicVolumeRtpc = "Volume_Music";
+    const string SfxVolumeRtpc = "Volume_SFX";
+
     public AK.Wwise.Event playBGM;
     public AK.Wwise.Event stopBGM;
 
     bool bgmStarted;
+    static float musicVolume = 1f;
+    static float sfxVolume = 1f;
+
+    public static float MusicVolume => musicVolume;
+    public static float SfxVolume => sfxVolume;
 
     void Awake()
     {
@@ -22,6 +32,9 @@ public class AudioManager : MonoBehaviour
 
         I = this;
         DontDestroyOnLoad(gameObject);
+        musicVolume = PlayerPrefs.GetFloat(MusicVolumePrefs, 1f);
+        sfxVolume = PlayerPrefs.GetFloat(SfxVolumePrefs, 1f);
+        ApplyVolumes();
     }
 
     void Start()
@@ -36,6 +49,7 @@ public class AudioManager : MonoBehaviour
         if (I != this)
             yield break;
 
+        ApplyVolumes();
         ApplyPhaseFor(SceneManager.GetActiveScene().name);
     }
 
@@ -122,6 +136,38 @@ public class AudioManager : MonoBehaviour
     public static void PlayPage()
     {
         Post("Play_UI_PageTurn");
+    }
+
+    public static void SetMusicVolume(float value)
+    {
+        musicVolume = Mathf.Clamp01(value);
+        PlayerPrefs.SetFloat(MusicVolumePrefs, musicVolume);
+        PlayerPrefs.Save();
+        ApplyMusicVolume();
+    }
+
+    public static void SetSfxVolume(float value)
+    {
+        sfxVolume = Mathf.Clamp01(value);
+        PlayerPrefs.SetFloat(SfxVolumePrefs, sfxVolume);
+        PlayerPrefs.Save();
+        ApplySfxVolume();
+    }
+
+    static void ApplyVolumes()
+    {
+        ApplyMusicVolume();
+        ApplySfxVolume();
+    }
+
+    static void ApplyMusicVolume()
+    {
+        AkUnitySoundEngine.SetRTPCValue(MusicVolumeRtpc, musicVolume * 100f);
+    }
+
+    static void ApplySfxVolume()
+    {
+        AkUnitySoundEngine.SetRTPCValue(SfxVolumeRtpc, sfxVolume * 100f);
     }
 
     static string CutSwitch(string ingredientId)

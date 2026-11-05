@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cooking.Core;
 using Cooking.Data;
 using Cooking.Runtime;
 using TMPro;
@@ -12,7 +13,6 @@ namespace Cooking.UI
     [DefaultExecutionOrder(100)]
     public sealed class IngredientDetails : MonoBehaviour
     {
-        [SerializeField] DiaryLanguage language = DiaryLanguage.Zh;
         [SerializeField] IngredientAttributeCatalog catalog;
         [SerializeField] GameObject panel;
         [SerializeField] RectTransform slotContent;
@@ -107,7 +107,7 @@ namespace Cooking.UI
                 panel.SetActive(true);
 
             SetFoodChrome(true);
-            SetText(displayNameText, IngredientDetailText.DisplayName(definition, language));
+            SetText(displayNameText, IngredientDetailText.DisplayName(definition, GameLanguage.Current));
             SetText(displayNameCh, definition.displayName);
             SetText(displayNameEn, definition.displayNameEn);
             if (foodImage != null)
@@ -119,7 +119,7 @@ namespace Cooking.UI
                 foodImage.color = Color.white;
             }
             SetFromTable(descriptionLabel, "label.description");
-            SetText(descriptionValue, IngredientDetailText.Description(definition, language));
+            SetText(descriptionValue, IngredientDetailText.Description(definition, GameLanguage.Current));
             SetFromTable(kindLabel, "label.kind");
             SetFromTable(kindValue, "kind." + definition.kind);
             SetFlag(canEatRawText, "canEatRaw", definition.canEatRaw);
@@ -132,7 +132,7 @@ namespace Cooking.UI
             WarnIfMissing("shape." + item.Shape);
             WarnIfMissing("cook." + item.CookMethod);
             WarnIfMissing("state.joiner");
-            SetText(stateValue, IngredientDetailText.State(catalog, item.Shape, item.CookMethod, language));
+            SetText(stateValue, IngredientDetailText.State(catalog, item.Shape, item.CookMethod, GameLanguage.Current));
         }
 
         public void ShowProp(FoodSlotView slot)
@@ -294,7 +294,7 @@ namespace Cooking.UI
         {
             WarnIfMissing("label." + key);
             WarnIfMissing(key + "." + (value ? "true" : "false"));
-            SetText(target, IngredientDetailText.Flag(catalog, key, value, language));
+            SetText(target, IngredientDetailText.Flag(catalog, key, value, GameLanguage.Current));
         }
 
         void SetFromTable(TMP_Text target, string id)
@@ -302,7 +302,7 @@ namespace Cooking.UI
             if (target == null)
                 return;
 
-            if (!IngredientDetailText.TryText(catalog, id, language, out string text))
+            if (!IngredientDetailText.TryText(catalog, id, GameLanguage.Current, out string text))
             {
                 WarnIfMissing(id);
                 target.text = "";
@@ -314,7 +314,7 @@ namespace Cooking.UI
 
         void WarnIfMissing(string id)
         {
-            if (IngredientDetailText.TryText(catalog, id, language, out _))
+            if (IngredientDetailText.TryText(catalog, id, GameLanguage.Current, out _))
                 return;
 
             if (missingIds.Add(id))
