@@ -16,12 +16,16 @@ namespace Cooking.Exploration
         const int FaceBack = 1;
         const int FaceLeft = 2;
         const int FaceRight = 3;
+        const string WorldLayerName = "World";
 
         static readonly int FacingId = Animator.StringToHash("Facing");
         static readonly int WalkingId = Animator.StringToHash("Walking");
 
         Collider2D boundary;
+        ContactFilter2D worldFilter;
+        readonly RaycastHit2D[] hits = new RaycastHit2D[8];
         int facing = FaceFront;
+        bool worldFilterReady;
 
         void Awake()
         {
@@ -45,6 +49,18 @@ namespace Cooking.Exploration
                 boundary = marker.GetComponent<Collider2D>();
                 if (boundary == null)
                     Debug.LogError("MapBounds 上需要已经放好碰撞体。", marker);
+            }
+
+            int worldLayer = LayerMask.NameToLayer(WorldLayerName);
+            if (worldLayer < 0)
+                Debug.LogError("缺少 Layer：World。", this);
+            else
+            {
+                worldFilter = new ContactFilter2D();
+                worldFilter.SetLayerMask(1 << worldLayer);
+                worldFilter.useTriggers = false;
+                worldFilter.useLayerMask = true;
+                worldFilterReady = true;
             }
         }
 
@@ -77,7 +93,11 @@ namespace Cooking.Exploration
                     }
 
                     direction.Normalize();
-                    position += direction * (moveSpeed * SpeedMultiplier * Time.deltaTime);
+                    Vector2 delta = direction * (moveSpeed * SpeedMultiplier * Time.deltaTime);
+                    // 先横后竖，贴着 World 层障碍物滑动，不能穿过。
+                    position = Slide(position, new Vector2(delta.x, 0f));
+                    transform.position = new Vector3(position.x, position.y, 0f);
+                    position = Slide(position, new Vector2(0f, delta.y));
                 }
             }
 
@@ -89,6 +109,27 @@ namespace Cooking.Exploration
 
             position = ClampToMap(position);
             transform.position = new Vector3(position.x, position.y, 0f);
+        }
+
+        Vector2 Slide(Vector2 origin, Vector2 delta)
+        {
+            if (body == null || !worldFilterReady || delta.sqrMagnitude < 0.0000001f)
+                return origin + delta;
+
+            float distance = delta.magnitude;
+            Vector2 direction = delta / distance;
+            int count = body.Cast(direction, worldFilter, hits, distance + Skin);
+            float travel = distance;
+            for (int i = 0; i < count; i++)
+            {
+                RaycastHit2D hit = hits[i];
+                if (hit.collider == null || hit.collider == body)
+                    continue;
+
+                travel = Mathf.Min(travel, Mathf.Max(0f, hit.distance - Skin));
+            }
+
+            return origin + direction * travel;
         }
 
         Vector2 ClampToMap(Vector2 position)
