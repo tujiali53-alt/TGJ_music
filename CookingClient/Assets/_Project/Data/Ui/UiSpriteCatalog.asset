@@ -91,3 +91,6 @@ MonoBehaviour:
   - id: ui.over
     spriteZh: {fileID: 21300000, guid: 7d2f43fb47d45f04c83f705b7aeb4ac4, type: 3}
     spriteEn: {fileID: 21300000, guid: 8bffb7d09769eff439527b08eeb624b3, type: 3}
+  - id: ui.endingQuit
+    spriteZh: {fileID: 21300000, guid: 58ae5a50c0babef4da158e055c61bc4f, type: 3}
+    spriteEn: {fileID: 21300000, guid: 43fba7a161aaf7a4891dd225a7f7e489, type: 3}

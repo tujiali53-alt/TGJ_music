@@ -185,6 +185,17 @@ namespace Cooking.EditorTools
                         Fail(result, "找不到 CG Sprite " + cgPath + " @ " + id);
                 }
 
+                Sprite endingImageZh = LoadOptionalSprite(
+                    Cell(row, "endingImageZh"),
+                    "endingImageZh",
+                    id,
+                    result);
+                Sprite endingImageEn = LoadOptionalSprite(
+                    Cell(row, "endingImageEn"),
+                    "endingImageEn",
+                    id,
+                    result);
+
                 endings.Add(new EndingDefinition
                 {
                     id = id,
@@ -194,10 +205,14 @@ namespace Cooking.EditorTools
                     requireAllNpcProps = requireProps,
                     forbidAllNpcProps = forbidProps,
                     cg = cg,
+                    endingImageZh = endingImageZh,
+                    endingImageEn = endingImageEn,
                     panelTextZh = Cell(row, "panelTextZh"),
                     panelTextEn = Cell(row, "panelTextEn"),
                     clickTextZh = Cell(row, "clickTextZh"),
                     clickTextEn = Cell(row, "clickTextEn"),
+                    creditTextZh = Cell(row, "creditTextZh"),
+                    creditTextEn = Cell(row, "creditTextEn"),
                     lines = new List<EndingLine>()
                 });
             }
@@ -442,6 +457,35 @@ namespace Cooking.EditorTools
             return false;
         }
 
+        static Sprite LoadOptionalSprite(string path, string field, string endingId, ImportResult result)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+                return null;
+
+            path = path.Trim();
+            Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(path);
+            if (sprite == null)
+            {
+                UnityEngine.Object[] assets = AssetDatabase.LoadAllAssetsAtPath(path);
+                if (assets != null)
+                {
+                    for (int i = 0; i < assets.Length; i++)
+                    {
+                        if (assets[i] is Sprite found)
+                        {
+                            sprite = found;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (sprite == null)
+                Fail(result, "找不到 EndingPanel 图 " + field + " " + path + " @ " + endingId);
+
+            return sprite;
+        }
+
         static void Fail(ImportResult result, string message)
         {
             Debug.LogError(message);
@@ -500,20 +544,34 @@ namespace Cooking.EditorTools
                     "id", "priority",
                     "requireAllInBookDiaries", "forbidAllInBookDiaries",
                     "requireAllNpcProps", "forbidAllNpcProps",
-                    "cg", "panelTextZh", "panelTextEn", "clickTextZh", "clickTextEn"
+                    "cg",
+                    "endingImageZh", "endingImageEn",
+                    "panelTextZh", "panelTextEn",
+                    "clickTextZh", "clickTextEn",
+                    "creditTextZh", "creditTextEn"
                 },
-                // 日记决定普通/好结局台词；NPC 全道具只影响流程（metaPanel + 共通 + CG 强制 normal）。
+                // 日记决定普通/好结局；NPC 全道具只影响流程。EndingPanel 图按语言各绑一张（共 4 张）。
                 new[]
                 {
                     "ending_good", "100", "1", "0", "0", "0",
                     "Assets/_Project/Arts/Ending/Ending_Good.PNG",
-                    "（好结局占位文案）", "", "点击任意处继续", ""
+                    "Assets/_Project/Arts/Ending/chGOOD Ending.png",
+                    "Assets/_Project/Arts/Ending/engGOOD Ending.png",
+                    "（好结局占位文案）", "",
+                    "点击任意处继续", "",
+                    "特别演出\n平！ 饰演 章鱼猫\n图图 饰演 鼻嘎图\n嘎子DIGE 饰演 社积食\n沉舟 饰演 吟游诗人\n59 饰演 小说家\n\n游戏策划：林子大了什么后厨都有\n\n主策划：平!\n主程序：图图\n游戏美术：嘎子DIGE、59\n\nUI设计：嘎子DIGE\n人物设计：59\n文案策划：59\n翻译：平！\n\n音乐设计：沉舟",
+                    "Special Thanks\nPing! as Octopus Cat\nTutu as Lil Tu\nGaziDIGE as Sheji Food\nChenzhou as Bard\n59 as Novelist\n\nGame Design: When the forest is big, every kitchen has something\n\nLead Design: Ping!\nLead Programming: Tutu\nArt: GaziDIGE, 59\n\nUI: GaziDIGE\nCharacter Design: 59\nWriting: 59\nTranslation: Ping!\n\nMusic: Chenzhou"
                 },
                 new[]
                 {
                     "ending_normal", "50", "0", "1", "0", "0",
                     "Assets/_Project/Arts/Ending/Ending_Normal.JPG",
-                    "（普通结局占位文案）", "", "点击任意处继续", ""
+                    "Assets/_Project/Arts/Ending/chNoraml Ending.png",
+                    "Assets/_Project/Arts/Ending/engNoraml Ending.png",
+                    "（普通结局占位文案）", "",
+                    "点击任意处继续", "",
+                    "特别演出\n平！ 饰演 章鱼猫\n图图 饰演 鼻嘎图\n嘎子DIGE 饰演 社积食\n沉舟 饰演 吟游诗人\n59 饰演 小说家\n\n游戏策划：林子大了什么后厨都有\n\n主策划：平!\n主程序：图图\n游戏美术：嘎子DIGE、59\n\nUI设计：嘎子DIGE\n人物设计：59\n文案策划：59\n翻译：平！\n\n音乐设计：沉舟",
+                    "Special Thanks\nPing! as Octopus Cat\nTutu as Lil Tu\nGaziDIGE as Sheji Food\nChenzhou as Bard\n59 as Novelist\n\nGame Design: When the forest is big, every kitchen has something\n\nLead Design: Ping!\nLead Programming: Tutu\nArt: GaziDIGE, 59\n\nUI: GaziDIGE\nCharacter Design: 59\nWriting: 59\nTranslation: Ping!\n\nMusic: Chenzhou"
                 }
             };
 

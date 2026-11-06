@@ -19,6 +19,8 @@ namespace Cooking.UI
         [SerializeField] float fadeDuration = 2f;
         [SerializeField] float cgClickDelay = 3f;
         [SerializeField] float clickFadeDuration = 0.5f;
+        [SerializeField] float endingImageHoldDuration = 3f;
+        [SerializeField] float creditScrollSpeed = 80f;
         [SerializeField] GameObject gameOverPanel;
         [SerializeField] GameObject dialogPanel;
         [SerializeField] GameObject metaPanel;
@@ -32,17 +34,23 @@ namespace Cooking.UI
         [SerializeField] CanvasGroup cgClickCanvasGroup;
         [SerializeField] GameObject endingPanel;
         [SerializeField] Image endingPanelImage;
+        [SerializeField] GameObject scrollPanel;
+        [SerializeField] Image scrollEndingImage;
+        [SerializeField] TMP_Text creditText;
+        [SerializeField] RectTransform creditRect;
         [SerializeField] TMP_Text endingText;
 
         readonly List<EndingLine> queue = new List<EndingLine>();
         EndingDefinition resolved;
         Sprite displayCg;
+        Sprite displayEndingImage;
         bool hasAllNpcProps;
         Sprite lastExpression;
         int lineIndex;
         bool running;
         bool dialogActive;
         bool awaitingCgClick;
+        bool creditsScrolling;
         Coroutine routine;
         GameObject activeDialogRoot;
 
@@ -63,6 +71,14 @@ namespace Cooking.UI
             GameLanguage.Changed -= OnLanguageChanged;
             if (cgClickButton != null)
                 cgClickButton.onClick.RemoveListener(OnCgClicked);
+        }
+
+        void Update()
+        {
+            if (!creditsScrolling || creditRect == null)
+                return;
+
+            creditRect.anchoredPosition += Vector2.up * creditScrollSpeed * Time.unscaledDeltaTime;
         }
 
         public void Begin()
@@ -90,7 +106,6 @@ namespace Cooking.UI
 
             ResolveRefs();
 
-            // GameOverPanel 需先激活，协程才能在本组件上跑；子面板仍保持关闭。
             if (gameOverPanel != null)
                 gameOverPanel.SetActive(true);
             HideChildren();
@@ -118,7 +133,12 @@ namespace Cooking.UI
                 ApplyClickText();
 
             if (endingPanel != null && endingPanel.activeSelf)
+            {
+                RefreshDisplayEndingImage();
+                ApplyEndingImages();
+                ApplyCreditText();
                 ApplyEndingPanelTexts();
+            }
         }
 
         IEnumerator RunSequence()
@@ -126,21 +146,23 @@ namespace Cooking.UI
             running = true;
             dialogActive = false;
             awaitingCgClick = false;
+            creditsScrolling = false;
 
             GameSession session = GameRoot.Instance != null ? GameRoot.Instance.Session : null;
             resolved = EndingRules.Resolve(session, endingCatalog, diaryCatalog, npcCatalog);
             hasAllNpcProps = EndingRules.HasAllNpcProps(session, npcCatalog);
             displayCg = ResolveDisplayCg();
+            RefreshDisplayEndingImage();
 
             if (resolved == null)
                 Debug.LogError("没有命中任何结局，请检查 EndingCatalog 条件。", endingCatalog);
 
-            // 1) 黑屏后只播 endingCG，不叠对话。
+            // 1) 黑屏后只播 endingCG。
             yield return FadeToBlack();
             ShowEndingCg();
             yield return FadeFromBlack();
 
-            // 2) 间隔后再渐显 ClickButton。
+            // 2) 间隔后渐显 ClickButton。
             float delay = Mathf.Max(0f, cgClickDelay);
             if (delay > 0f)
                 yield return new WaitForSecondsRealtime(delay);
@@ -156,24 +178,46 @@ namespace Cooking.UI
 
             HideClickButton();
 
-            // 3) 点击后再出对话面板。
-            PrepareDialogPhase();
-            if (queue.Count > 0)
+            // 3) 齐道具：黑屏后再进 metaPanel；未齐道具直接进 DialogPanel。
+            if (hasAllNpcProps)
             {
-                dialogActive = true;
-                ShowCurrentLine();
-                while (dialogActive)
-                    yield return null;
+                yield return FadeToBlack();
+                PrepareDialogPhase();
+                if (queue.Count > 0)
+                {
+                    dialogActive = true;
+                    ShowCurrentLine();
+                }
+
+                yield return FadeFromBlack();
+            }
+            else
+            {
+                PrepareDialogPhase();
+                if (queue.Count > 0)
+                {
+                    dialogActive = true;
+                    ShowCurrentLine();
+                }
             }
 
-            yield return FadeToBlack();
+            while (dialogActive)
+                yield return null;
 
+            // 4) 黑屏后进入 EndingPanel，先只显示 endingImage。
+            yield return FadeToBlack();
             HideDialogPhase();
             if (endingCg != null)
                 endingCg.SetActive(false);
 
-            ShowEndingPanel();
+            ShowEndingPanelIntro();
             yield return FadeFromBlack();
+
+            float hold = Mathf.Max(0f, endingImageHoldDuration);
+            if (hold > 0f)
+                yield return new WaitForSecondsRealtime(hold);
+
+            ShowEndingScrollPanel();
 
             running = false;
             routine = null;
@@ -181,7 +225,6 @@ namespace Cooking.UI
 
         Sprite ResolveDisplayCg()
         {
-            // 集齐全部 NPC 道具时，好/普通结局对话都叠在 normal CG 上。
             if (hasAllNpcProps && endingCatalog != null)
             {
                 EndingDefinition normal = endingCatalog.Find("ending_normal");
@@ -190,6 +233,20 @@ namespace Cooking.UI
             }
 
             return resolved != null ? resolved.cg : null;
+        }
+
+        void RefreshDisplayEndingImage()
+        {
+            if (resolved == null)
+            {
+                displayEndingImage = null;
+                return;
+            }
+
+            displayEndingImage = EndingCatalog.PickSprite(
+                GameLanguage.Current,
+                resolved.endingImageZh,
+                resolved.endingImageEn);
         }
 
         void PrepareDialogPhase()
@@ -394,7 +451,6 @@ namespace Cooking.UI
                 cgClickCanvasGroup.interactable = alpha > 0.99f;
             }
 
-            // 按钮底图保持透明，只渐显提示文字。
             if (cgClickText != null)
             {
                 Color color = cgClickText.color;
@@ -412,18 +468,49 @@ namespace Cooking.UI
             awaitingCgClick = false;
         }
 
-        void ShowEndingPanel()
+        void ShowEndingPanelIntro()
         {
+            creditsScrolling = false;
             if (endingPanel != null)
                 endingPanel.SetActive(true);
 
-            if (endingPanelImage != null)
-            {
-                endingPanelImage.sprite = displayCg;
-                endingPanelImage.enabled = displayCg != null;
-            }
+            if (scrollPanel != null)
+                scrollPanel.SetActive(false);
 
+            if (endingPanelImage != null)
+                endingPanelImage.gameObject.SetActive(true);
+
+            ApplyEndingImages();
             ApplyEndingPanelTexts();
+        }
+
+        void ShowEndingScrollPanel()
+        {
+            if (endingPanelImage != null)
+                endingPanelImage.gameObject.SetActive(false);
+
+            if (scrollPanel != null)
+                scrollPanel.SetActive(true);
+
+            ApplyEndingImages();
+            ApplyCreditText();
+            ResetCreditPosition();
+            creditsScrolling = true;
+        }
+
+        void ApplyEndingImages()
+        {
+            ApplyImage(endingPanelImage, displayEndingImage);
+            ApplyImage(scrollEndingImage, displayEndingImage);
+        }
+
+        static void ApplyImage(Image image, Sprite sprite)
+        {
+            if (image == null)
+                return;
+
+            image.sprite = sprite;
+            image.enabled = sprite != null;
         }
 
         void ApplyEndingPanelTexts()
@@ -441,6 +528,46 @@ namespace Cooking.UI
                 GameLanguage.Current,
                 resolved.panelTextZh,
                 resolved.panelTextEn);
+        }
+
+        void ApplyCreditText()
+        {
+            if (creditText == null)
+                return;
+
+            if (resolved == null)
+            {
+                creditText.text = "";
+                return;
+            }
+
+            creditText.text = EndingCatalog.Pick(
+                GameLanguage.Current,
+                resolved.creditTextZh,
+                resolved.creditTextEn);
+            // 顶对齐，避免固定高度 + 居中导致文字起点远在屏外。
+            creditText.verticalAlignment = VerticalAlignmentOptions.Top;
+            creditText.overflowMode = TextOverflowModes.Overflow;
+            creditText.ForceMeshUpdate(true);
+        }
+
+        void ResetCreditPosition()
+        {
+            if (creditRect == null || creditText == null)
+                return;
+
+            Canvas.ForceUpdateCanvases();
+            creditText.ForceMeshUpdate(true);
+
+            float textHeight = Mathf.Max(1f, creditText.preferredHeight);
+            creditRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, textHeight);
+
+            RectTransform parent = creditRect.parent as RectTransform;
+            float parentHeight = parent != null ? parent.rect.height : 1080f;
+
+            // 让文字顶部刚好在父面板底边外侧，立刻能滚进视野。
+            float startY = -parentHeight * 0.5f - textHeight * (1f - creditRect.pivot.y);
+            creditRect.anchoredPosition = new Vector2(creditRect.anchoredPosition.x, startY);
         }
 
         void ApplyClickText()
@@ -517,12 +644,17 @@ namespace Cooking.UI
 
         void HideChildren()
         {
+            creditsScrolling = false;
             if (dialogPanel != null)
                 dialogPanel.SetActive(false);
             if (metaPanel != null)
                 metaPanel.SetActive(false);
             if (endingCg != null)
                 endingCg.SetActive(false);
+            if (scrollPanel != null)
+                scrollPanel.SetActive(false);
+            if (endingPanelImage != null)
+                endingPanelImage.gameObject.SetActive(false);
             if (endingPanel != null)
                 endingPanel.SetActive(false);
             HideClickButton();
@@ -638,12 +770,39 @@ namespace Cooking.UI
                         endingPanelImage = found.GetComponent<Image>();
                 }
 
+                if (scrollPanel == null)
+                {
+                    Transform found = endingPanel.transform.Find("ScrollPanel");
+                    if (found != null)
+                        scrollPanel = found.gameObject;
+                }
+
                 if (endingText == null)
                 {
                     Transform found = endingPanel.transform.Find("endingText");
                     if (found != null)
                         endingText = found.GetComponent<TMP_Text>();
                 }
+            }
+
+            if (scrollPanel != null)
+            {
+                if (scrollEndingImage == null)
+                {
+                    Transform found = scrollPanel.transform.Find("endingImage");
+                    if (found != null)
+                        scrollEndingImage = found.GetComponent<Image>();
+                }
+
+                if (creditText == null)
+                {
+                    Transform found = scrollPanel.transform.Find("CreditText");
+                    if (found != null)
+                        creditText = found.GetComponent<TMP_Text>();
+                }
+
+                if (creditRect == null && creditText != null)
+                    creditRect = creditText.rectTransform;
             }
 
             if (fadeOverlay == null)

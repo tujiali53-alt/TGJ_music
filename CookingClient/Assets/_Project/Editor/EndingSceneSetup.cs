@@ -48,7 +48,6 @@ namespace Cooking.EditorTools
             Transform metaPanel = gameOver.Find("metaPanel");
             Transform endingPanel = gameOver.Find("EndingPanel");
 
-            // endingCG 在对话面板后面，EndingPanel 最前。
             if (endingCg != null)
                 endingCg.SetAsFirstSibling();
             if (dialog != null)
@@ -66,6 +65,8 @@ namespace Cooking.EditorTools
             so.FindProperty("fadeDuration").floatValue = 2f;
             so.FindProperty("cgClickDelay").floatValue = 3f;
             so.FindProperty("clickFadeDuration").floatValue = 0.5f;
+            so.FindProperty("endingImageHoldDuration").floatValue = 3f;
+            so.FindProperty("creditScrollSpeed").floatValue = 80f;
             so.FindProperty("gameOverPanel").objectReferenceValue = gameOver.gameObject;
 
             so.FindProperty("dialogPanel").objectReferenceValue =
@@ -120,10 +121,37 @@ namespace Cooking.EditorTools
 
             so.FindProperty("endingPanel").objectReferenceValue =
                 endingPanel != null ? endingPanel.gameObject : null;
+            Transform scrollPanel = null;
             if (endingPanel != null)
             {
                 AssignImage(so, "endingPanelImage", endingPanel.Find("endingImage"));
                 AssignText(so, "endingText", endingPanel.Find("endingText"));
+
+                scrollPanel = endingPanel.Find("ScrollPanel");
+                so.FindProperty("scrollPanel").objectReferenceValue =
+                    scrollPanel != null ? scrollPanel.gameObject : null;
+
+                if (scrollPanel != null)
+                {
+                    AssignImage(so, "scrollEndingImage", scrollPanel.Find("endingImage"));
+                    Transform credit = scrollPanel.Find("CreditText");
+                    if (credit != null)
+                    {
+                        so.FindProperty("creditText").objectReferenceValue =
+                            credit.GetComponent<TMP_Text>();
+                        so.FindProperty("creditRect").objectReferenceValue =
+                            credit.GetComponent<RectTransform>();
+                    }
+
+                    scrollPanel.gameObject.SetActive(false);
+                }
+
+                Transform panelImage = endingPanel.Find("endingImage");
+                if (panelImage != null)
+                    panelImage.gameObject.SetActive(false);
+                Transform endingText = endingPanel.Find("endingText");
+                if (endingText != null)
+                    endingText.gameObject.SetActive(false);
             }
 
             so.ApplyModifiedPropertiesWithoutUndo();
@@ -157,6 +185,7 @@ namespace Cooking.EditorTools
             bool saved = EditorSceneManager.SaveScene(scene);
             return "Ending scene setup OK. fade=" + (fadeImg != null)
                 + " meta=" + (metaPanel != null)
+                + " scroll=" + (scrollPanel != null)
                 + " meals=" + mealCount
                 + " catalog=" + (endingCatalog != null)
                 + " saved=" + saved;

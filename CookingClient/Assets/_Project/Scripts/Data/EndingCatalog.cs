@@ -24,10 +24,14 @@ namespace Cooking.Data
         public bool requireAllNpcProps;
         public bool forbidAllNpcProps;
         public Sprite cg;
+        public Sprite endingImageZh;
+        public Sprite endingImageEn;
         public string panelTextZh;
         public string panelTextEn;
         public string clickTextZh;
         public string clickTextEn;
+        public string creditTextZh;
+        public string creditTextEn;
         public List<EndingLine> lines = new List<EndingLine>();
     }
 
@@ -43,6 +47,17 @@ namespace Cooking.Data
                 return en;
 
             return zh ?? "";
+        }
+
+        public static Sprite PickSprite(DiaryLanguage language, Sprite zh, Sprite en)
+        {
+            if (language == DiaryLanguage.En && en != null)
+                return en;
+
+            if (zh != null)
+                return zh;
+
+            return en;
         }
 
         public EndingDefinition Find(string endingId)
