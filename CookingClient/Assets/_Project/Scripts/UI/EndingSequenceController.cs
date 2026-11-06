@@ -17,6 +17,8 @@ namespace Cooking.UI
         [SerializeField] NpcCatalog npcCatalog;
         [SerializeField] Image fadeOverlay;
         [SerializeField] float fadeDuration = 2f;
+        [SerializeField] float cgClickDelay = 3f;
+        [SerializeField] float clickFadeDuration = 0.5f;
         [SerializeField] GameObject gameOverPanel;
         [SerializeField] GameObject dialogPanel;
         [SerializeField] GameObject metaPanel;
@@ -27,6 +29,7 @@ namespace Cooking.UI
         [SerializeField] Image endingCgImage;
         [SerializeField] Button cgClickButton;
         [SerializeField] TMP_Text cgClickText;
+        [SerializeField] CanvasGroup cgClickCanvasGroup;
         [SerializeField] GameObject endingPanel;
         [SerializeField] Image endingPanelImage;
         [SerializeField] TMP_Text endingText;
@@ -39,6 +42,7 @@ namespace Cooking.UI
         int lineIndex;
         bool running;
         bool dialogActive;
+        bool awaitingCgClick;
         Coroutine routine;
         GameObject activeDialogRoot;
 
@@ -48,12 +52,17 @@ namespace Cooking.UI
         {
             ResolveRefs();
             HideChildren();
+            if (cgClickButton != null)
+                cgClickButton.onClick.AddListener(OnCgClicked);
+
             GameLanguage.Changed += OnLanguageChanged;
         }
 
         void OnDestroy()
         {
             GameLanguage.Changed -= OnLanguageChanged;
+            if (cgClickButton != null)
+                cgClickButton.onClick.RemoveListener(OnCgClicked);
         }
 
         public void Begin()
@@ -105,6 +114,9 @@ namespace Cooking.UI
             if (dialogActive)
                 ShowCurrentLine();
 
+            if (awaitingCgClick)
+                ApplyClickText();
+
             if (endingPanel != null && endingPanel.activeSelf)
                 ApplyEndingPanelTexts();
         }
@@ -113,6 +125,7 @@ namespace Cooking.UI
         {
             running = true;
             dialogActive = false;
+            awaitingCgClick = false;
 
             GameSession session = GameRoot.Instance != null ? GameRoot.Instance.Session : null;
             resolved = EndingRules.Resolve(session, endingCatalog, diaryCatalog, npcCatalog);
@@ -122,23 +135,35 @@ namespace Cooking.UI
             if (resolved == null)
                 Debug.LogError("没有命中任何结局，请检查 EndingCatalog 条件。", endingCatalog);
 
+            // 1) 黑屏后只播 endingCG，不叠对话。
             yield return FadeToBlack();
-
             ShowEndingCg();
-            PrepareDialogPhase();
+            yield return FadeFromBlack();
 
+            // 2) 间隔后再渐显 ClickButton。
+            float delay = Mathf.Max(0f, cgClickDelay);
+            if (delay > 0f)
+                yield return new WaitForSecondsRealtime(delay);
+
+            yield return FadeInClickButton();
+
+            if (cgClickButton != null)
+            {
+                awaitingCgClick = true;
+                while (awaitingCgClick)
+                    yield return null;
+            }
+
+            HideClickButton();
+
+            // 3) 点击后再出对话面板。
+            PrepareDialogPhase();
             if (queue.Count > 0)
             {
                 dialogActive = true;
                 ShowCurrentLine();
-                yield return FadeFromBlack();
-
                 while (dialogActive)
                     yield return null;
-            }
-            else
-            {
-                yield return FadeFromBlack();
             }
 
             yield return FadeToBlack();
@@ -308,6 +333,11 @@ namespace Cooking.UI
 
         void ShowEndingCg()
         {
+            if (dialogPanel != null)
+                dialogPanel.SetActive(false);
+            if (metaPanel != null)
+                metaPanel.SetActive(false);
+
             if (endingCg != null)
                 endingCg.SetActive(true);
 
@@ -318,8 +348,68 @@ namespace Cooking.UI
                 endingCgImage.color = displayCg != null ? Color.white : Color.black;
             }
 
-            if (cgClickButton != null)
-                cgClickButton.gameObject.SetActive(false);
+            HideClickButton();
+        }
+
+        IEnumerator FadeInClickButton()
+        {
+            if (cgClickButton == null)
+                yield break;
+
+            ApplyClickText();
+            cgClickButton.gameObject.SetActive(true);
+            cgClickButton.interactable = false;
+            SetClickAlpha(0f);
+
+            float duration = Mathf.Max(0.01f, clickFadeDuration);
+            float elapsed = 0f;
+            while (elapsed < duration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                SetClickAlpha(Mathf.Clamp01(elapsed / duration));
+                yield return null;
+            }
+
+            SetClickAlpha(1f);
+            cgClickButton.interactable = true;
+        }
+
+        void HideClickButton()
+        {
+            awaitingCgClick = false;
+            if (cgClickButton == null)
+                return;
+
+            cgClickButton.interactable = false;
+            SetClickAlpha(0f);
+            cgClickButton.gameObject.SetActive(false);
+        }
+
+        void SetClickAlpha(float alpha)
+        {
+            if (cgClickCanvasGroup != null)
+            {
+                cgClickCanvasGroup.alpha = alpha;
+                cgClickCanvasGroup.blocksRaycasts = alpha > 0.01f;
+                cgClickCanvasGroup.interactable = alpha > 0.99f;
+            }
+
+            // 按钮底图保持透明，只渐显提示文字。
+            if (cgClickText != null)
+            {
+                Color color = cgClickText.color;
+                color.a = alpha;
+                cgClickText.color = color;
+            }
+        }
+
+        void OnCgClicked()
+        {
+            if (!awaitingCgClick)
+                return;
+
+            AudioManager.PlayClick();
+            awaitingCgClick = false;
         }
 
         void ShowEndingPanel()
@@ -351,6 +441,23 @@ namespace Cooking.UI
                 GameLanguage.Current,
                 resolved.panelTextZh,
                 resolved.panelTextEn);
+        }
+
+        void ApplyClickText()
+        {
+            if (cgClickText == null)
+                return;
+
+            if (resolved == null)
+            {
+                cgClickText.text = "";
+                return;
+            }
+
+            cgClickText.text = EndingCatalog.Pick(
+                GameLanguage.Current,
+                resolved.clickTextZh,
+                resolved.clickTextEn);
         }
 
         IEnumerator FadeToBlack()
@@ -418,8 +525,7 @@ namespace Cooking.UI
                 endingCg.SetActive(false);
             if (endingPanel != null)
                 endingPanel.SetActive(false);
-            if (cgClickButton != null)
-                cgClickButton.gameObject.SetActive(false);
+            HideClickButton();
             if (fadeOverlay != null)
             {
                 Color color = fadeOverlay.color;
@@ -502,11 +608,17 @@ namespace Cooking.UI
                         cgClickButton = found.GetComponent<Button>();
                 }
 
-                if (cgClickText == null && cgClickButton != null)
+                if (cgClickButton != null)
                 {
-                    TMP_Text tmp = cgClickButton.GetComponentInChildren<TMP_Text>(true);
-                    if (tmp != null)
-                        cgClickText = tmp;
+                    if (cgClickText == null)
+                    {
+                        TMP_Text tmp = cgClickButton.GetComponentInChildren<TMP_Text>(true);
+                        if (tmp != null)
+                            cgClickText = tmp;
+                    }
+
+                    if (cgClickCanvasGroup == null)
+                        cgClickCanvasGroup = cgClickButton.GetComponent<CanvasGroup>();
                 }
             }
 

@@ -64,6 +64,8 @@ namespace Cooking.EditorTools
             so.FindProperty("npcCatalog").objectReferenceValue = npcCatalog;
             so.FindProperty("fadeOverlay").objectReferenceValue = fadeImg;
             so.FindProperty("fadeDuration").floatValue = 2f;
+            so.FindProperty("cgClickDelay").floatValue = 3f;
+            so.FindProperty("clickFadeDuration").floatValue = 0.5f;
             so.FindProperty("gameOverPanel").objectReferenceValue = gameOver.gameObject;
 
             so.FindProperty("dialogPanel").objectReferenceValue =
@@ -104,6 +106,14 @@ namespace Cooking.EditorTools
                     TMP_Text tmp = click.GetComponentInChildren<TMP_Text>(true);
                     if (tmp != null)
                         so.FindProperty("cgClickText").objectReferenceValue = tmp;
+
+                    CanvasGroup group = click.GetComponent<CanvasGroup>();
+                    if (group == null)
+                        group = Undo.AddComponent<CanvasGroup>(click.gameObject);
+                    group.alpha = 0f;
+                    group.interactable = false;
+                    group.blocksRaycasts = false;
+                    so.FindProperty("cgClickCanvasGroup").objectReferenceValue = group;
                     click.gameObject.SetActive(false);
                 }
             }

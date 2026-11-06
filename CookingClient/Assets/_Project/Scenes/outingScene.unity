@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 641b9bdaa3e3cab4b93058646a577ff3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b50f51a5c404c1745a38ecb4002ec99c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1113,7 +1113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.cancel
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 1
+  language: 0
 --- !u!1 &276683061
 GameObject:
   m_ObjectHideFlags: 0
@@ -8967,7 +8967,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a11dc9c36ee8da946b6fc951ecb5305d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fead1f9818a0a0d4cb2578cda9c5ba00, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8999,7 +8999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.instructionPanel
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 1
+  language: 0
 --- !u!1 &1133946432
 GameObject:
   m_ObjectHideFlags: 0
@@ -9428,7 +9428,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: aa7f51d509f8c2d4488a7f19faa2366e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 409b466b660f982428a731a47308a7f1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9460,7 +9460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.dice
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 1
+  language: 0
 --- !u!1 &1166273581
 GameObject:
   m_ObjectHideFlags: 0
@@ -9793,7 +9793,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4bd861d849faa9640b4a70c58f21a615, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2f27d9434d5b1584281463c0ab23c6dc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9825,7 +9825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.result
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 1
+  language: 0
 --- !u!1 &1202550055
 GameObject:
   m_ObjectHideFlags: 0
@@ -18167,7 +18167,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6823591a7b871784c9b10c2c5427ac15, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c6389150c7053354897acd2c7e716f74, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18199,7 +18199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.confirm
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 1
+  language: 0
 --- !u!1 &2044426375
 GameObject:
   m_ObjectHideFlags: 0
@@ -18847,7 +18847,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6823591a7b871784c9b10c2c5427ac15, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c6389150c7053354897acd2c7e716f74, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18915,7 +18915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.confirm
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 1
+  language: 0
 --- !u!1 &2106102201
 GameObject:
   m_ObjectHideFlags: 0
@@ -18983,7 +18983,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 641b9bdaa3e3cab4b93058646a577ff3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b50f51a5c404c1745a38ecb4002ec99c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -19051,7 +19051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.cancel
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 1
+  language: 0
 --- !u!1 &2106102301
 GameObject:
   m_ObjectHideFlags: 0
