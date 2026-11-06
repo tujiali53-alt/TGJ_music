@@ -559,8 +559,8 @@ namespace Cooking.EditorTools
                     "Assets/_Project/Arts/Ending/engGOOD Ending.png",
                     "（好结局占位文案）", "",
                     "点击任意处继续", "",
-                    "特别演出\n平！ 饰演 章鱼猫\n图图 饰演 鼻嘎图\n嘎子DIGE 饰演 社积食\n沉舟 饰演 吟游诗人\n59 饰演 小说家\n\n游戏策划：林子大了什么后厨都有\n\n主策划：平!\n主程序：图图\n游戏美术：嘎子DIGE、59\n\nUI设计：嘎子DIGE\n人物设计：59\n文案策划：59\n翻译：平！\n\n音乐设计：沉舟",
-                    "Special Thanks\nPing! as Octopus Cat\nTutu as Lil Tu\nGaziDIGE as Sheji Food\nChenzhou as Bard\n59 as Novelist\n\nGame Design: When the forest is big, every kitchen has something\n\nLead Design: Ping!\nLead Programming: Tutu\nArt: GaziDIGE, 59\n\nUI: GaziDIGE\nCharacter Design: 59\nWriting: 59\nTranslation: Ping!\n\nMusic: Chenzhou"
+                    "特别演出\n平！ 饰演 章鱼猫\n图图 饰演 鼻嘎图\n隔儿DIGE 饰演 社积食\n沉舟 饰演 吟游诗人\n59 饰演 小说家\n\n游戏策划：林子大了什么后厨都有\n\n主策划：平!\n主程序：图图\n游戏美术：隔儿DIGE、59\n\nUI设计：隔儿DIGE\n人物设计：59\n文案策划：59\n翻译：平！\n\n音乐设计：沉舟",
+                    "Special Thanks\nPing! as Octopus Cat\nTutu as Lil Tu\n隔儿DIGE as Sheji Food\nChenzhou as Bard\n59 as Novelist\n\nGame Design: When the forest is big, every kitchen has something\n\nLead Design: Ping!\nLead Programming: Tutu\nArt: 隔儿DIGE, 59\n\nUI: 隔儿DIGE\nCharacter Design: 59\nWriting: 59\nTranslation: Ping!\n\nMusic: Chenzhou"
                 },
                 new[]
                 {
@@ -570,8 +570,8 @@ namespace Cooking.EditorTools
                     "Assets/_Project/Arts/Ending/engNoraml Ending.png",
                     "（普通结局占位文案）", "",
                     "点击任意处继续", "",
-                    "特别演出\n平！ 饰演 章鱼猫\n图图 饰演 鼻嘎图\n嘎子DIGE 饰演 社积食\n沉舟 饰演 吟游诗人\n59 饰演 小说家\n\n游戏策划：林子大了什么后厨都有\n\n主策划：平!\n主程序：图图\n游戏美术：嘎子DIGE、59\n\nUI设计：嘎子DIGE\n人物设计：59\n文案策划：59\n翻译：平！\n\n音乐设计：沉舟",
-                    "Special Thanks\nPing! as Octopus Cat\nTutu as Lil Tu\nGaziDIGE as Sheji Food\nChenzhou as Bard\n59 as Novelist\n\nGame Design: When the forest is big, every kitchen has something\n\nLead Design: Ping!\nLead Programming: Tutu\nArt: GaziDIGE, 59\n\nUI: GaziDIGE\nCharacter Design: 59\nWriting: 59\nTranslation: Ping!\n\nMusic: Chenzhou"
+                    "特别演出\n平！ 饰演 章鱼猫\n图图 饰演 鼻嘎图\n隔儿DIGE 饰演 社积食\n沉舟 饰演 吟游诗人\n59 饰演 小说家\n\n游戏策划：林子大了什么后厨都有\n\n主策划：平!\n主程序：图图\n游戏美术：隔儿DIGE、59\n\nUI设计：隔儿DIGE\n人物设计：59\n文案策划：59\n翻译：平！\n\n音乐设计：沉舟",
+                    "Special Thanks\nPing! as Octopus Cat\nTutu as Lil Tu\n隔儿DIGE as Sheji Food\nChenzhou as Bard\n59 as Novelist\n\nGame Design: When the forest is big, every kitchen has something\n\nLead Design: Ping!\nLead Programming: Tutu\nArt: 隔儿DIGE, 59\n\nUI: 隔儿DIGE\nCharacter Design: 59\nWriting: 59\nTranslation: Ping!\n\nMusic: Chenzhou"
                 }
             };
 

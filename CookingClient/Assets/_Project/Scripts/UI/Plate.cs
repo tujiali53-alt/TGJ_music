@@ -7,7 +7,7 @@ namespace Cooking.UI
 {
     public sealed class Plate : MonoBehaviour, IFoodStation
     {
-        public const int Capacity = 4;
+        public const int Capacity = 9;
 
         static Plate current;
 

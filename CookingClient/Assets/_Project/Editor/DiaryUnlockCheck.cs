@@ -83,6 +83,19 @@ namespace Cooking.EditorTools
             if (third.Count != 2 || third[0].id != "diary_day1_past" || third[1].id != "diary_day1_present")
                 return "没做对第 2 天时，第 3 天白天仍应只有第 1 天的两页。";
 
+            session.DayIndex = 7;
+            session.Phase = DayPhase.Day;
+            List<DiaryEntry> finalDay = DiaryBook.Visible(catalog, session);
+            bool hasDay6Present = false;
+            for (int i = 0; i < finalDay.Count; i++)
+            {
+                if (finalDay[i] != null && finalDay[i].id == "diary_day6_present")
+                    hasDay6Present = true;
+            }
+
+            if (!hasDay6Present)
+                return "第 7 天白天即使没做对第 6 天食谱，也应解锁 diary_day6_present。";
+
             return null;
             }
             finally
@@ -180,6 +193,7 @@ namespace Cooking.EditorTools
                 Page("diary_day1_past", "recipe_day1", 1, DiaryKind.Past, 1, DayPhase.Night, 1, true),
                 Page("diary_day1_present", "recipe_day1", 1, DiaryKind.Present, 2, DayPhase.Day, 2, true),
                 Page("diary_day2_past", "recipe_day2", 2, DiaryKind.Past, 2, DayPhase.Night, 3, true),
+                Page("diary_day6_present", "recipe_day6", 6, DiaryKind.Present, 7, DayPhase.Day, 12, true),
                 Page("diary_day6_fallback", "recipe_day1", 6, DiaryKind.PresentFallback, 2, DayPhase.Day, 13, false)
             };
             return catalog;

@@ -318,6 +318,10 @@ namespace Cooking.UI
 
             if (background != null)
                 background.enabled = restoreBackground;
+
+            FoodSlotView settled = GetComponent<FoodSlotView>();
+            if (settled != null)
+                settled.RefreshOccupiedBase();
         }
     }
 }

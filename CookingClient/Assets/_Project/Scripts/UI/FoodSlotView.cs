@@ -35,6 +35,9 @@ namespace Cooking.UI
         Sprite normalSprite;
         bool hovered;
         bool selected;
+        bool potToken;
+        static Sprite potOccupiedBase;
+        static bool missingPotOccupiedBase;
 
         public int StackIndex => stackIndex;
         public bool InventorySlot => inventorySlot;
@@ -81,6 +84,8 @@ namespace Cooking.UI
                 background = null;
             if (background != null)
                 normalSprite = background.sprite;
+
+            potToken = GetComponentInParent<PotArea>() != null;
 
             if (!inventorySlot)
             {
@@ -148,6 +153,14 @@ namespace Cooking.UI
             Apply();
         }
 
+        public void RefreshOccupiedBase()
+        {
+            if (drag != null && drag.IsDragging)
+                return;
+
+            ApplyOccupiedBase(shown != null && shownQuantity > 0);
+        }
+
         public void ShowProp(string propId, Sprite sprite, int quantity, string description)
         {
             showingProp = true;
@@ -188,7 +201,7 @@ namespace Cooking.UI
                 }
                 icon.enabled = sprite != null;
                 icon.preserveAspect = true;
-                icon.color = has && shownDefinition != null && GetComponentInParent<PotArea>() != null
+                icon.color = has && shownDefinition != null && potToken
                     ? CookingPot.DonenessTint(shown.Doneness, shownDefinition.maxDoneness)
                     : Color.white;
                 if (sprite != null)
@@ -199,6 +212,45 @@ namespace Cooking.UI
                 countText.text = has
                     ? "x" + shownQuantity + ShapeLabel(shown.Shape) + MethodLabel(shown.CookMethod)
                     : "";
+
+            ApplyOccupiedBase(has);
+        }
+
+        void ApplyOccupiedBase(bool has)
+        {
+            if (!potToken || background == null || (drag != null && drag.IsDragging))
+                return;
+
+            Sprite baseSprite = ResolvePotOccupiedBase();
+            if (has && baseSprite != null)
+            {
+                background.sprite = baseSprite;
+                background.color = Color.white;
+                background.preserveAspect = true;
+                background.enabled = true;
+            }
+            else
+            {
+                background.enabled = false;
+            }
+        }
+
+        static Sprite ResolvePotOccupiedBase()
+        {
+            if (potOccupiedBase != null || missingPotOccupiedBase)
+                return potOccupiedBase;
+
+            CookingPot pot = Object.FindAnyObjectByType<CookingPot>(FindObjectsInactive.Include);
+            if (pot != null)
+                potOccupiedBase = pot.OccupiedTokenBase;
+
+            if (potOccupiedBase == null)
+            {
+                missingPotOccupiedBase = true;
+                Debug.LogError("缺少锅令牌底图 pot.png。请在 CookingPot 上绑 OccupiedTokenBase。");
+            }
+
+            return potOccupiedBase;
         }
 
         void ApplyProp()

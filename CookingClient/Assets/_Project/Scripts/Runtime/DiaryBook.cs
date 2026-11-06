@@ -14,13 +14,28 @@ namespace Cooking.Runtime
 
         public static bool IsUnlocked(DiaryEntry entry, GameSession session)
         {
-            if (entry == null || session == null || string.IsNullOrEmpty(entry.recipeId))
+            if (entry == null || session == null)
+                return false;
+
+            // 第 7 天白天起，第 6 天「现在的日记」不依赖做对食谱。
+            if (IsDay6PresentFreeOnFinalDay(entry, session))
+                return true;
+
+            if (string.IsNullOrEmpty(entry.recipeId))
                 return false;
 
             if (!Contains(session.CorrectRecipeIds, entry.recipeId))
                 return false;
 
             return Moment(session.DayIndex, session.Phase) >= Moment(entry.unlockDay, entry.unlockPhase);
+        }
+
+        static bool IsDay6PresentFreeOnFinalDay(DiaryEntry entry, GameSession session)
+        {
+            if (entry.kind != DiaryKind.Present || entry.storyDay != 6)
+                return false;
+
+            return Moment(session.DayIndex, session.Phase) >= Moment(7, DayPhase.Day);
         }
 
         public static List<DiaryEntry> Visible(DiaryCatalog catalog, GameSession session)

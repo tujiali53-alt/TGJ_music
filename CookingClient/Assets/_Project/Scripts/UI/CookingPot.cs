@@ -11,10 +11,13 @@ namespace Cooking.UI
         public const int Capacity = 8;
 
         [SerializeField] IngredientDefinition[] definitions;
+        [SerializeField] Sprite occupiedTokenBase;
         [SerializeField] float donenessPerSecond = 40f;
         [SerializeField] Color cookedColor = new Color(0.22f, 0.12f, 0.08f, 1f);
         [SerializeField] float cookedAlpha = 1f;
         [SerializeField] float fireKnobDegreesPerSecond = 90f;
+
+        public Sprite OccupiedTokenBase => occupiedTokenBase;
 
         const float FireOnAngle = -45f;
 
