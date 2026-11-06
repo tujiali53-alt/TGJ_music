@@ -94,6 +94,9 @@ namespace Cooking.UI
             AudioManager.PlayCancel();
             if (recipePanel != null)
                 recipePanel.SetActive(false);
+
+            if (TutorialDirector.Instance != null)
+                TutorialDirector.Instance.NotifyRecipeClosed();
         }
 
         public void OpenDiary()

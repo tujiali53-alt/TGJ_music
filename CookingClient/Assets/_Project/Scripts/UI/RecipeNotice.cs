@@ -1,5 +1,7 @@
 using System.Collections;
 using Cooking.Core;
+using Cooking.Data;
+using Cooking.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +35,9 @@ namespace Cooking.UI
             if (openRecipeButton != null)
                 openRecipeButton.onClick.AddListener(OnRecipeClicked);
 
+            if (WaitForDay1TutorialWakeup())
+                return;
+
             if (AutoOpens(CurrentDayIndex()))
             {
                 StartCoroutine(OpenAfterDelay());
@@ -40,6 +45,32 @@ namespace Cooking.UI
             }
 
             ShowRedPoint();
+        }
+
+        static bool WaitForDay1TutorialWakeup()
+        {
+            GameRoot root = GameRoot.Instance;
+            if (root == null || root.Session == null)
+                return false;
+
+            GameSession session = root.Session;
+            if (session.DayIndex != 1 || session.Phase != DayPhase.Day)
+                return false;
+
+            if (session.HasSeenTutorial(TutorialIds.Completed))
+                return false;
+
+            return !session.HasSeenTutorial(TutorialIds.Day1Wakeup);
+        }
+
+        public void OpenNowForTutorial()
+        {
+            if (opened || panels == null)
+                return;
+
+            opened = true;
+            HideRedPoint();
+            panels.OpenRecipe();
         }
 
         void OnDestroy()

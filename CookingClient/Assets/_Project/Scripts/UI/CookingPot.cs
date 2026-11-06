@@ -204,6 +204,14 @@ namespace Cooking.UI
                 Mark(CookMethod.Fried);
         }
 
+        public void TurnOffAllFires()
+        {
+            if (boiling)
+                ToggleBoiledFire();
+            if (frying)
+                ToggleFriedFire();
+        }
+
         public static Color DonenessTint(float doneness, float maxDoneness)
         {
             if (current == null || maxDoneness <= 0f)
@@ -277,7 +285,14 @@ namespace Cooking.UI
                     float previous = item.Doneness;
                     float next = Mathf.Min(definition.maxDoneness, previous + donenessPerSecond * Time.deltaTime);
                     if (item.OptimalHitTime < 0f && previous < definition.optimalDoneness && next >= definition.optimalDoneness)
+                    {
                         item.OptimalHitTime = Time.time;
+                        item.Doneness = definition.optimalDoneness;
+                        if (TutorialDirector.Instance != null)
+                            TutorialDirector.Instance.NotifyReachedOptimal(item);
+                        continue;
+                    }
+
                     item.Doneness = next;
                 }
             }

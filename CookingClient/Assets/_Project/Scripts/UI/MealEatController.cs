@@ -355,6 +355,9 @@ namespace Cooking.UI
                 resultPanel.SetActive(true);
 
             ResetCommentScroll();
+
+            if (TutorialDirector.Instance != null)
+                TutorialDirector.Instance.NotifyEatResultReady();
         }
 
         public void ClosePanel()

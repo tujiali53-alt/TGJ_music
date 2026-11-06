@@ -827,6 +827,7 @@ namespace Cooking.UI
 
         void ClosePanel()
         {
+            bool wasResult = resultMode;
             if (resultMode)
                 RememberOutcomeSeen();
 
@@ -834,6 +835,9 @@ namespace Cooking.UI
             resultOptionId = "";
             if (panel != null)
                 panel.SetActive(false);
+
+            if (wasResult && TutorialDirector.Instance != null)
+                TutorialDirector.Instance.NotifyNightResultClosed();
         }
 
         void RememberIntroSeen()

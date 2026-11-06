@@ -63,6 +63,9 @@ namespace Cooking.UI
             if (CookingPot.TryConvertLeavingEgg(item))
                 return false;
 
+            if (TutorialDirector.Instance != null && !TutorialDirector.Instance.AllowPlateDrop())
+                return false;
+
             if (session.HeldDish.Items.Count >= Capacity || !tokens.HasFree())
                 return false;
 
@@ -71,6 +74,8 @@ namespace Cooking.UI
             IngredientInventory.Remove(item);
             session.HeldDish.Items.Add(item);
             tokens.Present(item, localPoint, definition);
+            if (TutorialDirector.Instance != null)
+                TutorialDirector.Instance.NotifyPlated();
             return true;
         }
 

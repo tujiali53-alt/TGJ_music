@@ -62,7 +62,7 @@ MonoBehaviour:
     spriteZh: {fileID: 21300000, guid: b3672633a51185c4cb33f7d8f7adac90, type: 3}
     spriteEn: {fileID: 21300000, guid: 7922ac50b83983049b9d51d086c18d3b, type: 3}
   - id: ui.settingBg
-    spriteZh: {fileID: 21300000, guid: 562c3fd05cccf69479cec0efebbb801b, type: 3}
+    spriteZh: {fileID: 21300000, guid: 79034f36e38181c4f8796532b8c47621, type: 3}
     spriteEn: {fileID: 21300000, guid: dc8bd0daacd477c48964522dd2fd751c, type: 3}
   - id: ui.instructions
     spriteZh: {fileID: 21300000, guid: 1415056d2fc177049bccc56cfc6110fc, type: 3}

@@ -25,6 +25,7 @@ namespace Cooking.Runtime
         public List<string> DiarySeenIds = new List<string>();
         public List<string> ResolvedNpcIds = new List<string>();
         public List<PropStack> Props = new List<PropStack>();
+        public List<string> SeenTutorialIds = new List<string>();
 
         public static GameSession NewGame()
         {
@@ -49,8 +50,19 @@ namespace Cooking.Runtime
                 CorrectRecipeIds = new List<string>(),
                 DiarySeenIds = new List<string>(),
                 ResolvedNpcIds = new List<string>(),
-                Props = new List<PropStack>()
+                Props = new List<PropStack>(),
+                SeenTutorialIds = new List<string>()
             };
+        }
+
+        public bool HasSeenTutorial(string tutorialId)
+        {
+            return Contains(SeenTutorialIds, tutorialId);
+        }
+
+        public void RememberTutorial(string tutorialId)
+        {
+            RememberId(ref SeenTutorialIds, tutorialId);
         }
 
         public bool HasSeenNightIntro(string eventId)
