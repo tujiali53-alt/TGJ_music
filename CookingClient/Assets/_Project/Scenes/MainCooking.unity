@@ -2802,6 +2802,7 @@ RectTransform:
   - {fileID: 1091211009}
   - {fileID: 1322390025}
   - {fileID: 1356708927}
+  - {fileID: 1750800510}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2855,7 +2856,8 @@ MonoBehaviour:
   finalCommentsText1: {fileID: 1494190817}
   finalCommentsText2: {fileID: 615315199}
   resultPanel: {fileID: 1458961160}
-  gameOverPanel: {fileID: 0}
+  gameOverPanel: {fileID: 1356708926}
+  endingSequence: {fileID: 1356708930}
   resultDelay: 1
   recipes:
   - {fileID: 11400000, guid: 3a4b5c6d7e8f901a2b3c4d5e6f708192, type: 2}
@@ -3346,7 +3348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &396482081
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37761,6 +37763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.NightDialogClick
   panel: {fileID: 0}
   npc: {fileID: 0}
+  ending: {fileID: 0}
 --- !u!1 &880010011
 GameObject:
   m_ObjectHideFlags: 0
@@ -41977,7 +41980,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1080488794
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42015,6 +42018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.NightDialogClick
   panel: {fileID: 0}
   npc: {fileID: 0}
+  ending: {fileID: 0}
 --- !u!114 &1080488796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44871,13 +44875,14 @@ GameObject:
   - component: {fileID: 1356708927}
   - component: {fileID: 1356708929}
   - component: {fileID: 1356708928}
+  - component: {fileID: 1356708930}
   m_Layer: 5
   m_Name: GameOverPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1356708927
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44938,6 +44943,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1356708926}
   m_CullTransparentMesh: 1
+--- !u!114 &1356708930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356708926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2a279bef15a0940befed1eb43ce37b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.EndingSequenceController
+  endingCatalog: {fileID: 11400000, guid: f90cc847d1427274eb4cd51809f0cea1, type: 2}
+  diaryCatalog: {fileID: 11400000, guid: 6fab823231500614db503580db656d29, type: 2}
+  npcCatalog: {fileID: 11400000, guid: b0825e34f61a7d2c3e507192a3b4ef56, type: 2}
+  fadeOverlay: {fileID: 1750800508}
+  fadeDuration: 2
+  cgClickDelay: 2
+  gameOverPanel: {fileID: 1356708926}
+  dialogPanel: {fileID: 1080488793}
+  bodyText: {fileID: 299763144}
+  nameText: {fileID: 1300848899}
+  profileImage: {fileID: 1846531209}
+  endingCg: {fileID: 1855114459}
+  endingCgImage: {fileID: 1890197575}
+  cgClickButton: {fileID: 475278438}
+  cgClickText: {fileID: 1034798201}
+  endingPanel: {fileID: 396482080}
+  endingPanelImage: {fileID: 1490761567}
+  endingText: {fileID: 660802381}
 --- !u!1 &1362788460
 GameObject:
   m_ObjectHideFlags: 0
@@ -49339,6 +49374,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741867233}
   m_CullTransparentMesh: 1
+--- !u!1 &1750800507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1750800510}
+  - component: {fileID: 1750800509}
+  - component: {fileID: 1750800508}
+  m_Layer: 5
+  m_Name: FadeOverlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1750800508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750800507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1750800509
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750800507}
+  m_CullTransparentMesh: 1
+--- !u!224 &1750800510
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750800507}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 364117975}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1769126235
 GameObject:
   m_ObjectHideFlags: 0
@@ -50909,7 +51019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1855114460
 RectTransform:
   m_ObjectHideFlags: 0

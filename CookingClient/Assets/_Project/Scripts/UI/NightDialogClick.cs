@@ -7,14 +7,29 @@ namespace Cooking.UI
     {
         [SerializeField] NightDialogPanel panel;
         [SerializeField] NpcDialogPanel npc;
+        [SerializeField] EndingSequenceController ending;
 
         public void Bind(NightDialogPanel owner)
         {
             panel = owner;
         }
 
+        public void BindEnding(EndingSequenceController owner)
+        {
+            ending = owner;
+        }
+
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (ending == null)
+                ending = GetComponentInParent<EndingSequenceController>(true);
+
+            if (ending != null && ending.IsDialogActive)
+            {
+                ending.OnPanelClick(eventData);
+                return;
+            }
+
             if (npc == null)
                 npc = GetComponentInParent<NpcDialogPanel>(true);
 

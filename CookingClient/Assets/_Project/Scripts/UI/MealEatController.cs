@@ -37,6 +37,7 @@ namespace Cooking.UI
         [SerializeField] TMP_Text finalCommentsText2;
         [SerializeField] GameObject resultPanel;
         [SerializeField] GameObject gameOverPanel;
+        [SerializeField] EndingSequenceController endingSequence;
         [SerializeField] float resultDelay = 1f;
         [SerializeField] RecipeDefinition[] recipes;
         [SerializeField] DishPresentation presentation;
@@ -126,6 +127,9 @@ namespace Cooking.UI
                 if (found != null)
                     gameOverPanel = found.gameObject;
             }
+
+            if (endingSequence == null && gameOverPanel != null)
+                endingSequence = gameOverPanel.GetComponent<EndingSequenceController>();
 
             if (eatButton == null)
                 Debug.LogError("需要 InteractionPanel/EattingButton，并且带 Button。", this);
@@ -389,8 +393,15 @@ namespace Cooking.UI
             if (resultPanel != null)
                 resultPanel.SetActive(false);
 
-            if (gameOverPanel != null)
+            if (endingSequence == null && gameOverPanel != null)
+                endingSequence = gameOverPanel.GetComponent<EndingSequenceController>();
+
+            if (endingSequence != null)
+                endingSequence.Begin();
+            else if (gameOverPanel != null)
                 gameOverPanel.SetActive(true);
+            else
+                Debug.LogError("需要 Canvas/GameOverPanel 上的 EndingSequenceController。", this);
 
             resolving = false;
         }
