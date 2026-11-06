@@ -26,6 +26,7 @@ namespace Cooking.Runtime
         public List<string> ResolvedNpcIds = new List<string>();
         public List<PropStack> Props = new List<PropStack>();
         public List<string> SeenTutorialIds = new List<string>();
+        public string PlayerName = "";
 
         public static GameSession NewGame()
         {
@@ -51,7 +52,8 @@ namespace Cooking.Runtime
                 DiarySeenIds = new List<string>(),
                 ResolvedNpcIds = new List<string>(),
                 Props = new List<PropStack>(),
-                SeenTutorialIds = new List<string>()
+                SeenTutorialIds = new List<string>(),
+                PlayerName = ""
             };
         }
 

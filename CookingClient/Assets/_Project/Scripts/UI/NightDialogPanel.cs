@@ -168,11 +168,7 @@ namespace Cooking.UI
                 ShowOptions();
 
             if (!resultMode && nameText != null && playerDialogue != null && playerDialogue.activeSelf)
-            {
-                nameText.text = GameLanguage.Current == DiaryLanguage.En
-                    ? "Lil Tu"
-                    : "小鼻嘎";
-            }
+                nameText.text = ResolvePlayerName();
         }
 
         public void OpenIntro(NightEventDefinition definition, int buffFaceDelta)
@@ -812,11 +808,7 @@ namespace Cooking.UI
             if (dialogueName != null)
                 dialogueName.SetActive(true);
             if (openForNight && nameText != null)
-            {
-                nameText.text = GameLanguage.Current == DiaryLanguage.En
-                    ? "Lil Tu"
-                    : "小鼻嘎";
-            }
+                nameText.text = ResolvePlayerName();
             if (profileImage != null)
                 profileImage.gameObject.SetActive(true);
             if (bodyText != null)
@@ -1001,6 +993,17 @@ namespace Cooking.UI
             return GameLanguage.Current == DiaryLanguage.En
                 ? "Success Rate " + percent + "%"
                 : "成功概率" + percent + "%";
+        }
+
+        static string ResolvePlayerName()
+        {
+            GameRoot root = GameRoot.Instance;
+            if (root != null)
+                return root.PlayerDisplayName;
+
+            return GameLanguage.Current == DiaryLanguage.En
+                ? GameRoot.DefaultPlayerNameEn
+                : GameRoot.DefaultPlayerNameZh;
         }
 
         static string Join(string left, string right, string separator)

@@ -1,3 +1,4 @@
+using System.Collections;
 using Cooking.Core;
 using Cooking.Data;
 using TMPro;
@@ -9,6 +10,10 @@ public class MenuController : MonoBehaviour
     [SerializeField] GameObject settingPanel;
     [SerializeField] GameObject creditPanel;
     [SerializeField] GameObject instructionPanel;
+    [SerializeField] GameObject enterNamePanel;
+    [SerializeField] TMP_InputField nameInput;
+    [SerializeField] Image fadeOverlay;
+    [SerializeField] float enterGameFadeDuration = 2f;
     [SerializeField] GameObject chineseSelectedImage;
     [SerializeField] GameObject englishSelectedImage;
     [SerializeField] Slider bgmSlider;
@@ -16,6 +21,8 @@ public class MenuController : MonoBehaviour
     [SerializeField] RectTransform menuCursor;
     [SerializeField] TMP_Text creditBodyText;
     [SerializeField] UiTextCatalog uiText;
+
+    bool enteringGame;
 
     void Awake()
     {
@@ -38,6 +45,27 @@ public class MenuController : MonoBehaviour
             Transform panel = transform.Find("InsructionPanel");
             if (panel != null)
                 instructionPanel = panel.gameObject;
+        }
+
+        if (enterNamePanel == null)
+        {
+            Transform panel = transform.Find("enterNamePanel");
+            if (panel != null)
+                enterNamePanel = panel.gameObject;
+        }
+
+        if (nameInput == null && enterNamePanel != null)
+        {
+            Transform found = enterNamePanel.transform.Find("InputField (TMP)");
+            if (found != null)
+                nameInput = found.GetComponent<TMP_InputField>();
+        }
+
+        if (fadeOverlay == null)
+        {
+            Transform found = transform.Find("FadeOverlay");
+            if (found != null)
+                fadeOverlay = found.GetComponent<Image>();
         }
 
         if (chineseSelectedImage == null)
@@ -97,9 +125,27 @@ public class MenuController : MonoBehaviour
         else
             Debug.LogError("MeunScene 的 Canvas 下需要已经放好 InsructionPanel。", this);
 
+        if (enterNamePanel != null)
+            enterNamePanel.SetActive(false);
+        else
+            Debug.LogError("MeunScene 的 Canvas 下需要已经放好 enterNamePanel。", this);
+
+        if (nameInput == null)
+            Debug.LogError("enterNamePanel 下需要有 InputField (TMP)。", this);
+
+        if (fadeOverlay == null)
+            Debug.LogError("MeunScene 的 Canvas 下需要已经放好带 Image 的 FadeOverlay。", this);
+        else
+        {
+            fadeOverlay.gameObject.SetActive(false);
+            Color color = fadeOverlay.color;
+            color.a = 0f;
+            fadeOverlay.color = color;
+        }
+
         ResolveMenuCursor();
 
-        Bind("HUDPanel/StartButton", StartGame);
+        Bind("HUDPanel/StartButton", OpenEnterName);
         if (!BindAim("HUDPanel/SettingButton", OpenSettings))
             Debug.LogError("MeunScene 的 HUDPanel 下需要已经放好带 Button 的 SettingButton。", this);
         if (!BindAim("HUDPanel/ExitGameButton", ExitGame))
@@ -125,6 +171,9 @@ public class MenuController : MonoBehaviour
 
         if (!Bind("SettingPanel/EnglishButton", SelectEnglish))
             Debug.LogError("MeunScene 的 SettingPanel 下需要已经放好带 Button 的 EnglishButton。", this);
+
+        if (!Bind("enterNamePanel/ComfirmButton", ConfirmEnterName))
+            Debug.LogError("enterNamePanel 下需要已经放好带 Button 的 ComfirmButton。", this);
 
         if (bgmSlider != null)
             bgmSlider.onValueChanged.AddListener(OnBgmChanged);
@@ -157,17 +206,84 @@ public class MenuController : MonoBehaviour
         ApplyCreditBody();
     }
 
-    public void StartGame()
+    public void OpenEnterName()
     {
+        if (enteringGame)
+            return;
+
         AudioManager.PlayClick();
+        if (settingPanel != null)
+            settingPanel.SetActive(false);
+        if (creditPanel != null)
+            creditPanel.SetActive(false);
+        if (instructionPanel != null)
+            instructionPanel.SetActive(false);
+        if (enterNamePanel != null)
+            enterNamePanel.SetActive(true);
+        if (nameInput != null)
+            nameInput.ActivateInputField();
+    }
+
+    public void ConfirmEnterName()
+    {
+        if (enteringGame)
+            return;
+
+        AudioManager.PlayClick();
+        enteringGame = true;
+        if (enterNamePanel != null)
+            enterNamePanel.SetActive(false);
+        StartCoroutine(FadeThenEnterGame());
+    }
+
+    IEnumerator FadeThenEnterGame()
+    {
+        if (fadeOverlay != null)
+        {
+            fadeOverlay.gameObject.SetActive(true);
+            Color color = fadeOverlay.color;
+            color.r = 0f;
+            color.g = 0f;
+            color.b = 0f;
+            color.a = 0f;
+            fadeOverlay.color = color;
+
+            float duration = Mathf.Max(0.01f, enterGameFadeDuration);
+            float elapsed = 0f;
+            while (elapsed < duration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                color.a = t;
+                fadeOverlay.color = color;
+                yield return null;
+            }
+
+            color.a = 1f;
+            fadeOverlay.color = color;
+        }
+
+        EnterGame();
+    }
+
+    void EnterGame()
+    {
         GameRoot root = GameRoot.Instance;
         if (root == null || root.Flow == null)
         {
             Debug.LogError("MeunScene 里需要已经放好带 SceneFlow 的 GameRoot。");
+            enteringGame = false;
             return;
         }
 
+        string typed = nameInput != null ? nameInput.text : "";
+        if (typed != null)
+            typed = typed.Trim();
+        else
+            typed = "";
+
         root.NewGame();
+        root.Session.PlayerName = typed;
         root.Flow.Load(SceneNames.Outing);
     }
 

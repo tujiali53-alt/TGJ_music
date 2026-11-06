@@ -9,8 +9,24 @@ namespace Cooking.Core
     {
         public static GameRoot Instance { get; private set; }
 
+        public const string DefaultPlayerNameZh = "小鼻嘎";
+        public const string DefaultPlayerNameEn = "Lil Tu";
+
         public GameSession Session { get; private set; }
         public SceneFlow Flow { get; private set; }
+
+        public string PlayerDisplayName
+        {
+            get
+            {
+                if (Session != null && !string.IsNullOrWhiteSpace(Session.PlayerName))
+                    return Session.PlayerName.Trim();
+
+                return GameLanguage.Current == DiaryLanguage.En
+                    ? DefaultPlayerNameEn
+                    : DefaultPlayerNameZh;
+            }
+        }
 
         void Awake()
         {

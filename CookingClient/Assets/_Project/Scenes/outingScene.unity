@@ -990,6 +990,7 @@ GameObject:
   - component: {fileID: 228503932}
   - component: {fileID: 228503931}
   - component: {fileID: 228503930}
+  - component: {fileID: 228503933}
   m_Layer: 5
   m_Name: closedButton
   m_TagString: Untagged
@@ -1080,7 +1081,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b50f51a5c404c1745a38ecb4002ec99c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 641b9bdaa3e3cab4b93058646a577ff3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1098,6 +1099,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 228503928}
   m_CullTransparentMesh: 1
+--- !u!114 &228503933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228503928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f6478901234a5b6c7d8e9f012b42c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
+  id: ui.cancel
+  catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
+  language: 1
 --- !u!1 &276683061
 GameObject:
   m_ObjectHideFlags: 0
@@ -8904,6 +8920,7 @@ GameObject:
   - component: {fileID: 1064606982}
   - component: {fileID: 1064606984}
   - component: {fileID: 1064606983}
+  - component: {fileID: 1064606985}
   m_Layer: 5
   m_Name: tutorialImage
   m_TagString: Untagged
@@ -8968,6 +8985,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064606981}
   m_CullTransparentMesh: 1
+--- !u!114 &1064606985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064606981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f6478901234a5b6c7d8e9f012b42c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
+  id: ui.instructionPanel
+  catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
+  language: 1
 --- !u!1 &1133946432
 GameObject:
   m_ObjectHideFlags: 0

@@ -1410,6 +1410,10 @@ MonoBehaviour:
   settingPanel: {fileID: 1494454951}
   creditPanel: {fileID: 736366757}
   instructionPanel: {fileID: 372985309}
+  enterNamePanel: {fileID: 0}
+  nameInput: {fileID: 0}
+  fadeOverlay: {fileID: 0}
+  enterGameFadeDuration: 2
   chineseSelectedImage: {fileID: 1954402352}
   englishSelectedImage: {fileID: 985316093}
   bgmSlider: {fileID: 810654182}
@@ -2542,7 +2546,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 79034f36e38181c4f8796532b8c47621, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc8bd0daacd477c48964522dd2fd751c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3637,6 +3641,7 @@ GameObject:
   - component: {fileID: 1495743749}
   - component: {fileID: 1495743751}
   - component: {fileID: 1495743750}
+  - component: {fileID: 1495743752}
   m_Layer: 5
   m_Name: enterNameImage
   m_TagString: Untagged
@@ -3701,6 +3706,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1495743748}
   m_CullTransparentMesh: 1
+--- !u!114 &1495743752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495743748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f6478901234a5b6c7d8e9f012b42c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
+  id: ui.enterName
+  catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
+  language: 1
 --- !u!1 &1505714776
 GameObject:
   m_ObjectHideFlags: 0
@@ -3840,6 +3860,7 @@ GameObject:
   - component: {fileID: 1520053017}
   - component: {fileID: 1520053016}
   - component: {fileID: 1520053015}
+  - component: {fileID: 1520053018}
   m_Layer: 5
   m_Name: ComfirmButton
   m_TagString: Untagged
@@ -3948,6 +3969,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520053013}
   m_CullTransparentMesh: 1
+--- !u!114 &1520053018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520053013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f6478901234a5b6c7d8e9f012b42c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
+  id: ui.confirm
+  catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
+  language: 1
 --- !u!1 &1586724844
 GameObject:
   m_ObjectHideFlags: 0

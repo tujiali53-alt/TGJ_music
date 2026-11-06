@@ -115,9 +115,12 @@ namespace Cooking.UI
 
             if (nameText != null)
             {
-                nameText.text = GameLanguage.Current == DiaryLanguage.En
-                    ? "Lil Tu"
-                    : "小鼻嘎";
+                GameRoot root = GameRoot.Instance;
+                nameText.text = root != null
+                    ? root.PlayerDisplayName
+                    : (GameLanguage.Current == DiaryLanguage.En
+                        ? GameRoot.DefaultPlayerNameEn
+                        : GameRoot.DefaultPlayerNameZh);
             }
 
             // expressionId 对应 PlayerProfileImage；空单元格沿用上一句表情。
