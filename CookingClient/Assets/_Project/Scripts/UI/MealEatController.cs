@@ -33,12 +33,17 @@ namespace Cooking.UI
         [SerializeField] ScrollRect commentsScroll;
         [SerializeField] float commentInterval = 0.5f;
         [SerializeField] Image finalFoodImage;
+        [SerializeField] TMP_Text finalCommentsText1;
+        [SerializeField] TMP_Text finalCommentsText2;
         [SerializeField] GameObject resultPanel;
         [SerializeField] GameObject gameOverPanel;
         [SerializeField] float resultDelay = 1f;
         [SerializeField] RecipeDefinition[] recipes;
         [SerializeField] DishPresentation presentation;
         [SerializeField] ScoreCommentCatalog scoreComments;
+        [SerializeField] UiTextCatalog uiText;
+
+        const string FinalFoodCommentId = "ui.final_food_comment";
 
         DishResult lastResult;
         bool resolving;
@@ -101,6 +106,12 @@ namespace Cooking.UI
                 if (found != null)
                     finalFoodImage = found.GetComponent<Image>();
             }
+
+            if (finalCommentsText1 == null)
+                finalCommentsText1 = FindText("FinalCommentsText1");
+
+            if (finalCommentsText2 == null)
+                finalCommentsText2 = FindText("FinalCommentsText2");
 
             if (resultPanel == null)
             {
@@ -166,6 +177,12 @@ namespace Cooking.UI
             if (finalFoodImage == null)
                 Debug.LogError("需要 CheckPanel/FinalFoodImage。", this);
 
+            if (finalCommentsText1 == null || finalCommentsText2 == null)
+                Debug.LogError("FinalFoodImage 下需要 FinalCommentsText1 和 FinalCommentsText2。", this);
+
+            if (uiText == null)
+                Debug.LogError("MealEatController 需要绑定 UiTextCatalog。", this);
+
             if (resultPanel == null)
                 Debug.LogError("需要 EatingCheckPanel。", this);
             else
@@ -178,10 +195,15 @@ namespace Cooking.UI
 
             if (overButton != null)
                 overButton.gameObject.SetActive(false);
+
+            ApplyFinalFoodComments();
+            GameLanguage.Changed += OnLanguageChanged;
         }
 
         void OnDestroy()
         {
+            GameLanguage.Changed -= OnLanguageChanged;
+
             if (eatButton != null)
                 eatButton.onClick.RemoveListener(Eat);
 
@@ -199,6 +221,29 @@ namespace Cooking.UI
 
             if (backMenuButton != null)
                 backMenuButton.onClick.RemoveListener(BackToMenu);
+        }
+
+        void OnLanguageChanged()
+        {
+            ApplyFinalFoodComments();
+        }
+
+        void ApplyFinalFoodComments()
+        {
+            string text = UiPick(FinalFoodCommentId, "美味！！！！", "Delicious!!!!");
+            if (finalCommentsText1 != null)
+                finalCommentsText1.text = text;
+            if (finalCommentsText2 != null)
+                finalCommentsText2.text = text;
+        }
+
+        string UiPick(string id, string fallbackZh, string fallbackEn)
+        {
+            string text = uiText != null ? uiText.Pick(id, GameLanguage.Current) : "";
+            if (!string.IsNullOrEmpty(text))
+                return text;
+
+            return GameLanguage.Current == DiaryLanguage.En ? fallbackEn : fallbackZh;
         }
 
         void LateUpdate()

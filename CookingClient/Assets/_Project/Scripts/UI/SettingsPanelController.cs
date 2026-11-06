@@ -83,6 +83,9 @@ namespace Cooking.UI
             if (!Bind("SettingPanel/InstructionsButton", OpenInstructions))
                 Debug.LogError("SettingPanel 下需要已经放好带 Button 的 InstructionsButton。", this);
 
+            if (!Bind("SettingPanel/QuitButton", ExitGame))
+                Debug.LogError("SettingPanel 下需要已经放好带 Button 的 QuitButton。", this);
+
             if (!Bind("InsructionPanel/CloseButton", CloseInstructions))
                 Debug.LogError("InsructionPanel 下需要已经放好带 Button 的 CloseButton。", this);
 
@@ -166,6 +169,15 @@ namespace Cooking.UI
             AudioManager.PlayClick();
             GameLanguage.Set(DiaryLanguage.En);
             RefreshLanguageMarks();
+        }
+
+        public void ExitGame()
+        {
+            AudioManager.PlayClick();
+            Application.Quit();
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
         }
 
         void RefreshLanguageMarks()

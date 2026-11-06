@@ -179,7 +179,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cba538b123f050b4c944a1558b49b58b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 842f25d87cd268a479dc9a09a7e1c7f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6252,7 +6252,7 @@ GameObject:
   - component: {fileID: 391584036}
   - component: {fileID: 391584035}
   m_Layer: 5
-  m_Name: Title (1)
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6274,7 +6274,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -114, y: 45.56}
+  m_AnchoredPosition: {x: 106, y: 35}
   m_SizeDelta: {x: 891.5, y: 71.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &391584035
@@ -6297,7 +6297,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u5931\u8D25!!......\u4E00\u65E0\u6240\u83B7......"
+  m_text: Fail!!......Came away empty-handed......
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a17d3da4e4fc8e48ae02434f070ac7c, type: 2}
   m_sharedMaterial: {fileID: 5034960185866848995, guid: 2a17d3da4e4fc8e48ae02434f070ac7c, type: 2}
@@ -6324,8 +6324,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
-  m_fontSizeBase: 55
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -9082,7 +9082,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 409b466b660f982428a731a47308a7f1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aa7f51d509f8c2d4488a7f19faa2366e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9114,7 +9114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.dice
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1166273581
 GameObject:
   m_ObjectHideFlags: 0
@@ -9264,7 +9264,7 @@ GameObject:
   - component: {fileID: 1171638544}
   - component: {fileID: 1171638543}
   m_Layer: 5
-  m_Name: ObtainFoodNameText (1)
+  m_Name: ObtainFoodNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9286,7 +9286,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -128.45, y: 137.68}
+  m_AnchoredPosition: {x: 124, y: 137.68}
   m_SizeDelta: {x: 943.1, y: 58.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1171638543
@@ -9343,7 +9343,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -9447,7 +9447,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2f27d9434d5b1584281463c0ab23c6dc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4bd861d849faa9640b4a70c58f21a615, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9479,7 +9479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.result
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1202550055
 GameObject:
   m_ObjectHideFlags: 0
@@ -9594,6 +9594,7 @@ MonoBehaviour:
   beginButton: {fileID: 0}
   confirmButton: {fileID: 0}
   confirmDelay: 1
+  enableSeenSkip: 1
   scoreText: {fileID: 0}
   resultText: {fileID: 0}
   definitions:
@@ -9648,14 +9649,17 @@ MonoBehaviour:
   successRoot: {fileID: 0}
   failRoot: {fileID: 0}
   successBody: {fileID: 0}
+  successTitleText: {fileID: 2044426377}
   obtainFoodNameText: {fileID: 0}
   obtainFoodAmountText: {fileID: 0}
   obtainFoodImage: {fileID: 0}
   failBody: {fileID: 0}
-  failNameText: {fileID: 0}
+  failTitleText: {fileID: 391584035}
+  failNameText: {fileID: 1171638543}
   choiceCursor: {fileID: 0}
   choiceIdle: {fileID: 0}
   choiceHighlight: {fileID: 0}
+  uiText: {fileID: 11400000, guid: c0f848c8a7e3a8b49968a3dbc6a8f92f, type: 2}
 --- !u!1 &1210072248
 GameObject:
   m_ObjectHideFlags: 0
@@ -17815,7 +17819,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c6389150c7053354897acd2c7e716f74, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6823591a7b871784c9b10c2c5427ac15, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17847,7 +17851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.confirm
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &2044426375
 GameObject:
   m_ObjectHideFlags: 0
@@ -17882,8 +17886,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -255, y: 67}
-  m_SizeDelta: {x: 220, y: 60}
+  m_AnchoredPosition: {x: -248.37, y: 56.13}
+  m_SizeDelta: {x: 237.26, y: 55.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2044426377
 MonoBehaviour:
@@ -17905,7 +17909,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u6210\u529F!!"
+  m_text: Success!!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a17d3da4e4fc8e48ae02434f070ac7c, type: 2}
   m_sharedMaterial: {fileID: 5034960185866848995, guid: 2a17d3da4e4fc8e48ae02434f070ac7c, type: 2}
@@ -17932,8 +17936,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
-  m_fontSizeBase: 55
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -18325,8 +18329,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 190.2, y: 67}
-  m_SizeDelta: {x: 667.37, y: 68.89}
+  m_AnchoredPosition: {x: 243.13, y: 56.13}
+  m_SizeDelta: {x: 745.73, y: 55.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2094064748
 MonoBehaviour:
@@ -18375,8 +18379,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
-  m_fontSizeBase: 55
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -18495,7 +18499,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c6389150c7053354897acd2c7e716f74, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6823591a7b871784c9b10c2c5427ac15, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18563,7 +18567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.confirm
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &2106102201
 GameObject:
   m_ObjectHideFlags: 0
@@ -18631,7 +18635,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b50f51a5c404c1745a38ecb4002ec99c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 641b9bdaa3e3cab4b93058646a577ff3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18699,7 +18703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.cancel
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &2106102301
 GameObject:
   m_ObjectHideFlags: 0

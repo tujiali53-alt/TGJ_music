@@ -114,6 +114,9 @@ public class MenuController : MonoBehaviour
         if (!Bind("SettingPanel/InstructionsButton", OpenInstructions))
             Debug.LogError("MeunScene 的 SettingPanel 下需要已经放好带 Button 的 InstructionsButton。", this);
 
+        if (!Bind("SettingPanel/QuitButton", ExitGame))
+            Debug.LogError("MeunScene 的 SettingPanel 下需要已经放好带 Button 的 QuitButton。", this);
+
         if (!Bind("InsructionPanel/CloseButton", CloseInstructions))
             Debug.LogError("MeunScene 的 InsructionPanel 下需要已经放好带 Button 的 CloseButton。", this);
 

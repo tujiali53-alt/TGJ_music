@@ -36,7 +36,7 @@ MonoBehaviour:
   - id: log.check_success
     textZh: "{0}\uFF1A\u6210\u529F"
     textEn: '{0}: Success'
-    color: '#eccdc0'
+    color: '#f5df86'
   - id: log.check_fail
     textZh: "{0}\uFF1A\u5931\u8D25"
     textEn: '{0}: Fail'

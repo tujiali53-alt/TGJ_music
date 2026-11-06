@@ -11,6 +11,10 @@ namespace Cooking.UI
 {
     public sealed class NightDialogPanel : MonoBehaviour
     {
+        const string SuccessTitleId = "ui.judgment_success_title";
+        const string FailTitleId = "ui.judgment_fail_title";
+        const string EmptyHandedId = "ui.judgment_empty";
+
         [SerializeField] GameObject panel;
         [SerializeField] TMP_Text bodyText;
         [SerializeField] Button option1;
@@ -26,17 +30,21 @@ namespace Cooking.UI
         [SerializeField] GameObject successRoot;
         [SerializeField] GameObject failRoot;
         [SerializeField] TMP_Text successBody;
+        [SerializeField] TMP_Text successTitleText;
         [SerializeField] TMP_Text obtainFoodNameText;
         [SerializeField] TMP_Text obtainFoodAmountText;
         [SerializeField] Image obtainFoodImage;
         [SerializeField] TMP_Text failBody;
+        [SerializeField] TMP_Text failTitleText;
         [SerializeField] TMP_Text failNameText;
         [SerializeField] RectTransform choiceCursor;
         [SerializeField] Sprite choiceIdle;
         [SerializeField] Sprite choiceHighlight;
+        [SerializeField] UiTextCatalog uiText;
 
         readonly List<string> lines = new List<string>();
         readonly List<NightOption> choices = new List<NightOption>();
+        readonly List<NightReward> lastRewards = new List<NightReward>();
         Button[] buttons;
         int aimedIndex;
         int lineIndex;
@@ -108,10 +116,12 @@ namespace Cooking.UI
                 Debug.LogError("DialogPanel 下需要有 DialogueJudgment。", this);
             if (successRoot == null || failRoot == null)
                 Debug.LogError("DialogueJudgment 下需要有 DeterminationSuccessful 和 CheckFailed。", this);
-            if (successBody == null || obtainFoodNameText == null || obtainFoodAmountText == null || obtainFoodImage == null)
-                Debug.LogError("DeterminationSuccessful 下需要有 bodyText、ObtainFoodNameText、obtainFoodText、ObtainFoodImage。", this);
-            if (failBody == null || failNameText == null)
-                Debug.LogError("CheckFailed 下需要有 bodyText (1) 和 ObtainFoodNameText (1)。", this);
+            if (successBody == null || successTitleText == null || obtainFoodNameText == null || obtainFoodAmountText == null || obtainFoodImage == null)
+                Debug.LogError("DeterminationSuccessful 下需要有 Title、bodyText、ObtainFoodNameText、obtainFoodText、ObtainFoodImage。", this);
+            if (failBody == null || failTitleText == null || failNameText == null)
+                Debug.LogError("CheckFailed 下需要有 Title、bodyText (1) 和 ObtainFoodNameText。", this);
+            if (uiText == null)
+                Debug.LogError("NightDialogPanel 需要绑定 UiTextCatalog。", this);
 
             if (option1 != null)
                 option1.onClick.AddListener(ChooseFirst);
@@ -131,6 +141,7 @@ namespace Cooking.UI
             CaptureCursorGap();
             HideOptions();
             SilenceJudgmentBody();
+            ApplyJudgmentTitles();
             GameLanguage.Changed += OnLanguageChanged;
         }
 
@@ -141,10 +152,27 @@ namespace Cooking.UI
 
         void OnLanguageChanged()
         {
-            if (!optionsVisible || !openForNight)
+            if (!openForNight)
                 return;
 
-            ShowOptions();
+            if (resultMode)
+            {
+                ApplyJudgmentTitles();
+                if (resultSuccess)
+                    FillSuccess(lastRewards);
+                else
+                    FillFail();
+            }
+
+            if (optionsVisible)
+                ShowOptions();
+
+            if (!resultMode && nameText != null && playerDialogue != null && playerDialogue.activeSelf)
+            {
+                nameText.text = GameLanguage.Current == DiaryLanguage.En
+                    ? "Lil Tu"
+                    : "小鼻嘎";
+            }
         }
 
         public void OpenIntro(NightEventDefinition definition, int buffFaceDelta)
@@ -193,9 +221,17 @@ namespace Cooking.UI
             pendingPortrait = success ? option.successPortrait : option.failPortrait;
             if (pendingPortrait == null && success && option.optionId == "opt_grave_mourn")
                 NoteMissingShocked();
+            lastRewards.Clear();
+            if (rewards != null)
+            {
+                for (int i = 0; i < rewards.Count; i++)
+                    lastRewards.Add(rewards[i]);
+            }
+
             UseJudgment(success);
+            ApplyJudgmentTitles();
             if (success)
-                FillSuccess(rewards);
+                FillSuccess(lastRewards);
             else
                 FillFail();
 
@@ -735,6 +771,8 @@ namespace Cooking.UI
 
             if (successBody == null && success != null)
                 successBody = FindChildText(success, "bodyText");
+            if (successTitleText == null && success != null)
+                successTitleText = FindChildText(success, "Title");
             if (obtainFoodNameText == null && success != null)
                 obtainFoodNameText = FindChildText(success, "ObtainFoodNameText");
             if (obtainFoodAmountText == null && success != null)
@@ -748,8 +786,14 @@ namespace Cooking.UI
 
             if (failBody == null && failed != null)
                 failBody = FindChildText(failed, "bodyText (1)");
+            if (failTitleText == null && failed != null)
+                failTitleText = FindChildText(failed, "Title");
             if (failNameText == null && failed != null)
-                failNameText = FindChildText(failed, "ObtainFoodNameText (1)");
+            {
+                failNameText = FindChildText(failed, "ObtainFoodNameText");
+                if (failNameText == null)
+                    failNameText = FindChildText(failed, "ObtainFoodNameText (1)");
+            }
         }
 
         void UsePlayerDialogue()
@@ -922,9 +966,28 @@ namespace Cooking.UI
             if (failNameText == null)
                 return;
 
-            failNameText.text = GameLanguage.Current == DiaryLanguage.En
-                ? "Came away empty-handed"
-                : "一无所获";
+            failNameText.text = UiPick(EmptyHandedId, "一无所获", "Came away empty-handed");
+        }
+
+        void ApplyJudgmentTitles()
+        {
+            if (successTitleText != null)
+                successTitleText.text = UiPick(SuccessTitleId, "成功!!", "Success!!");
+
+            if (failTitleText != null)
+                failTitleText.text = UiPick(
+                    FailTitleId,
+                    "失败!!......一无所获......",
+                    "Fail!!......Came away empty-handed......");
+        }
+
+        string UiPick(string id, string fallbackZh, string fallbackEn)
+        {
+            string text = uiText != null ? uiText.Pick(id, GameLanguage.Current) : "";
+            if (!string.IsNullOrEmpty(text))
+                return text;
+
+            return GameLanguage.Current == DiaryLanguage.En ? fallbackEn : fallbackZh;
         }
 
         string SuccessPercent(NightOption option)

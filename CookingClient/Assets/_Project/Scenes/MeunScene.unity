@@ -730,7 +730,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 99558d57211a2ba448a6f472d0c32021, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b875e0131197b9543a15403fd4f52564, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -762,7 +762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.quit
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &736366757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,7 +1694,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b50f51a5c404c1745a38ecb4002ec99c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 641b9bdaa3e3cab4b93058646a577ff3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1726,7 +1726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.cancel
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &880001001
 GameObject:
   m_ObjectHideFlags: 0
@@ -2174,7 +2174,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 562c3fd05cccf69479cec0efebbb801b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc8bd0daacd477c48964522dd2fd751c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2206,7 +2206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.settingBg
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1174348935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2460,7 +2460,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 193a444680681d64b83af8fbfec91b1a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e5c2558ee647c7c4591fbfa23328f3a4, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2492,7 +2492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.setting
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1243945547
 GameObject:
   m_ObjectHideFlags: 0
@@ -2529,7 +2529,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6, y: -213}
+  m_AnchoredPosition: {x: -178, y: -213}
   m_SizeDelta: {x: 214, y: 54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1243945549
@@ -2596,7 +2596,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1415056d2fc177049bccc56cfc6110fc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2937fb082be40884abcb4f7b96c249b7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2628,7 +2628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.instructions
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1255380827
 GameObject:
   m_ObjectHideFlags: 0
@@ -2985,7 +2985,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a34970edc5636804f8676afff3d77231, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c271eb17921b90a4c9b7cb3128ab0988, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3017,7 +3017,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.credit
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1457156862
 GameObject:
   m_ObjectHideFlags: 0
@@ -3134,6 +3134,7 @@ RectTransform:
   - {fileID: 1927970920}
   - {fileID: 810654181}
   - {fileID: 27608166}
+  - {fileID: 2015903066}
   m_Father: {fileID: 769705543}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3475,7 +3476,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fead1f9818a0a0d4cb2578cda9c5ba00, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a11dc9c36ee8da946b6fc951ecb5305d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3507,7 +3508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.instructionPanel
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1776963179
 GameObject:
   m_ObjectHideFlags: 0
@@ -3611,7 +3612,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f0c950ec77e43054195e6f3493c4f40d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: baf43f373981f9d4f8795c389fa8c643, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3643,7 +3644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.start
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1897345114
 GameObject:
   m_ObjectHideFlags: 0
@@ -3918,7 +3919,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b50f51a5c404c1745a38ecb4002ec99c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 641b9bdaa3e3cab4b93058646a577ff3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3950,7 +3951,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.cancel
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1954402352
 GameObject:
   m_ObjectHideFlags: 0
@@ -4026,6 +4027,142 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954402352}
   m_CullTransparentMesh: 1
+--- !u!1 &2015903065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2015903066}
+  - component: {fileID: 2015903069}
+  - component: {fileID: 2015903068}
+  - component: {fileID: 2015903067}
+  - component: {fileID: 2015903070}
+  m_Layer: 5
+  m_Name: QuitButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2015903066
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015903065}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1494454952}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 178, y: -213}
+  m_SizeDelta: {x: 218, y: 55}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2015903067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015903065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 2015903068}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2015903068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015903065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 557983acb07ff29469bcd0278d48c8b0, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2015903069
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015903065}
+  m_CullTransparentMesh: 1
+--- !u!114 &2015903070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015903065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f6478901234a5b6c7d8e9f012b42c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
+  id: ui.settingQuit
+  catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
+  language: 1
 --- !u!1 &2084165792
 GameObject:
   m_ObjectHideFlags: 0
@@ -4204,7 +4341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b50f51a5c404c1745a38ecb4002ec99c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 641b9bdaa3e3cab4b93058646a577ff3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4236,7 +4373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.cancel
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &2129139577
 GameObject:
   m_ObjectHideFlags: 0
