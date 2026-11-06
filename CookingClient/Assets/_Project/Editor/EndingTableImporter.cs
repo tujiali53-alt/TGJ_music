@@ -91,12 +91,6 @@ namespace Cooking.EditorTools
                 errors++;
             }
 
-            if (catalog.Find("ending_other") == null)
-            {
-                Debug.LogError("缺少 ending_other。");
-                errors++;
-            }
-
             if (errors == 0)
                 Debug.Log("Ending tables validate OK.");
         }
@@ -508,23 +502,18 @@ namespace Cooking.EditorTools
                     "requireAllNpcProps", "forbidAllNpcProps",
                     "cg", "panelTextZh", "panelTextEn", "clickTextZh", "clickTextEn"
                 },
+                // 日记决定普通/好结局台词；NPC 全道具只影响流程（metaPanel + 共通 + CG 强制 normal）。
                 new[]
                 {
-                    "ending_good", "100", "1", "0", "1", "0",
+                    "ending_good", "100", "1", "0", "0", "0",
                     "Assets/_Project/Arts/Ending/Ending_Good.PNG",
                     "（好结局占位文案）", "", "点击任意处继续", ""
                 },
                 new[]
                 {
-                    "ending_normal", "50", "0", "1", "1", "0",
+                    "ending_normal", "50", "0", "1", "0", "0",
                     "Assets/_Project/Arts/Ending/Ending_Normal.JPG",
                     "（普通结局占位文案）", "", "点击任意处继续", ""
-                },
-                new[]
-                {
-                    "ending_other", "10", "0", "0", "0", "1",
-                    "",
-                    "（其他结局占位文案）", "", "点击任意处继续", ""
                 }
             };
 
@@ -564,8 +553,6 @@ namespace Cooking.EditorTools
                 ("谢谢你陪我走完这段旅程。", ""),
                 ("要是还有下次……", ""),
                 ("至少给我准备一台烤箱啊！", "Main_Worry"));
-
-            // ending_other: no branch lines yet (placeholder)
 
             var sheets = new Dictionary<string, List<string[]>>
             {

@@ -43,30 +43,51 @@ namespace Cooking.EditorTools
             NpcCatalog npcCatalog = AssetDatabase.LoadAssetAtPath<NpcCatalog>(
                 "Assets/_Project/Data/NpcCatalog.asset");
 
+            Transform dialog = gameOver.Find("DialogPanel");
+            Transform endingCg = gameOver.Find("endingCG");
+            Transform metaPanel = gameOver.Find("metaPanel");
+            Transform endingPanel = gameOver.Find("EndingPanel");
+
+            // endingCG 在对话面板后面，EndingPanel 最前。
+            if (endingCg != null)
+                endingCg.SetAsFirstSibling();
+            if (dialog != null)
+                dialog.SetSiblingIndex(1);
+            if (metaPanel != null)
+                metaPanel.SetSiblingIndex(2);
+            if (endingPanel != null)
+                endingPanel.SetAsLastSibling();
+
             SerializedObject so = new SerializedObject(seq);
             so.FindProperty("endingCatalog").objectReferenceValue = endingCatalog;
             so.FindProperty("diaryCatalog").objectReferenceValue = diaryCatalog;
             so.FindProperty("npcCatalog").objectReferenceValue = npcCatalog;
             so.FindProperty("fadeOverlay").objectReferenceValue = fadeImg;
             so.FindProperty("fadeDuration").floatValue = 2f;
-            so.FindProperty("cgClickDelay").floatValue = 2f;
             so.FindProperty("gameOverPanel").objectReferenceValue = gameOver.gameObject;
-
-            Transform dialog = gameOver.Find("DialogPanel");
-            Transform endingCg = gameOver.Find("endingCG");
-            Transform endingPanel = gameOver.Find("EndingPanel");
 
             so.FindProperty("dialogPanel").objectReferenceValue =
                 dialog != null ? dialog.gameObject : null;
+            so.FindProperty("metaPanel").objectReferenceValue =
+                metaPanel != null ? metaPanel.gameObject : null;
 
             if (dialog != null)
             {
-                Transform player = dialog.Find("PlayerDialogue");
-                if (player != null)
+                NightDialogClick click = dialog.GetComponent<NightDialogClick>();
+                if (click == null)
+                    click = Undo.AddComponent<NightDialogClick>(dialog.gameObject);
+                click.BindEnding(seq);
+            }
+
+            if (metaPanel != null)
+            {
+                Transform metaDialog = metaPanel.Find("DialogPanel");
+                if (metaDialog != null)
                 {
-                    AssignText(so, "bodyText", player.Find("BodyText"));
-                    AssignText(so, "nameText", player.Find("UserNameText"));
-                    AssignImage(so, "profileImage", player.Find("PlayerProfileImage"));
+                    NightDialogClick click = metaDialog.GetComponent<NightDialogClick>();
+                    if (click == null)
+                        click = Undo.AddComponent<NightDialogClick>(metaDialog.gameObject);
+                    click.BindEnding(seq);
                 }
             }
 
@@ -83,6 +104,7 @@ namespace Cooking.EditorTools
                     TMP_Text tmp = click.GetComponentInChildren<TMP_Text>(true);
                     if (tmp != null)
                         so.FindProperty("cgClickText").objectReferenceValue = tmp;
+                    click.gameObject.SetActive(false);
                 }
             }
 
@@ -98,6 +120,8 @@ namespace Cooking.EditorTools
 
             if (dialog != null)
                 dialog.gameObject.SetActive(false);
+            if (metaPanel != null)
+                metaPanel.gameObject.SetActive(false);
             if (endingCg != null)
                 endingCg.gameObject.SetActive(false);
             if (endingPanel != null)
@@ -122,6 +146,7 @@ namespace Cooking.EditorTools
             EditorSceneManager.MarkSceneDirty(scene);
             bool saved = EditorSceneManager.SaveScene(scene);
             return "Ending scene setup OK. fade=" + (fadeImg != null)
+                + " meta=" + (metaPanel != null)
                 + " meals=" + mealCount
                 + " catalog=" + (endingCatalog != null)
                 + " saved=" + saved;
@@ -154,6 +179,7 @@ namespace Cooking.EditorTools
                 return img;
             }
 
+            fadeT.SetAsLastSibling();
             return fadeT.GetComponent<Image>();
         }
 

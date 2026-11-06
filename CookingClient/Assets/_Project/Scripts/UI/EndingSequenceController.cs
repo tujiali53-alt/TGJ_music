@@ -17,9 +17,9 @@ namespace Cooking.UI
         [SerializeField] NpcCatalog npcCatalog;
         [SerializeField] Image fadeOverlay;
         [SerializeField] float fadeDuration = 2f;
-        [SerializeField] float cgClickDelay = 2f;
         [SerializeField] GameObject gameOverPanel;
         [SerializeField] GameObject dialogPanel;
+        [SerializeField] GameObject metaPanel;
         [SerializeField] TMP_Text bodyText;
         [SerializeField] TMP_Text nameText;
         [SerializeField] Image profileImage;
@@ -33,12 +33,14 @@ namespace Cooking.UI
 
         readonly List<EndingLine> queue = new List<EndingLine>();
         EndingDefinition resolved;
+        Sprite displayCg;
+        bool hasAllNpcProps;
         Sprite lastExpression;
         int lineIndex;
         bool running;
         bool dialogActive;
-        bool awaitingCgClick;
         Coroutine routine;
+        GameObject activeDialogRoot;
 
         public bool IsDialogActive => dialogActive;
 
@@ -46,17 +48,12 @@ namespace Cooking.UI
         {
             ResolveRefs();
             HideChildren();
-            if (cgClickButton != null)
-                cgClickButton.onClick.AddListener(OnCgClicked);
-
             GameLanguage.Changed += OnLanguageChanged;
         }
 
         void OnDestroy()
         {
             GameLanguage.Changed -= OnLanguageChanged;
-            if (cgClickButton != null)
-                cgClickButton.onClick.RemoveListener(OnCgClicked);
         }
 
         public void Begin()
@@ -108,9 +105,6 @@ namespace Cooking.UI
             if (dialogActive)
                 ShowCurrentLine();
 
-            if (awaitingCgClick)
-                ApplyClickText();
-
             if (endingPanel != null && endingPanel.activeSelf)
                 ApplyEndingPanelTexts();
         }
@@ -119,27 +113,22 @@ namespace Cooking.UI
         {
             running = true;
             dialogActive = false;
-            awaitingCgClick = false;
-            resolved = EndingRules.Resolve(
-                GameRoot.Instance != null ? GameRoot.Instance.Session : null,
-                endingCatalog,
-                diaryCatalog,
-                npcCatalog);
+
+            GameSession session = GameRoot.Instance != null ? GameRoot.Instance.Session : null;
+            resolved = EndingRules.Resolve(session, endingCatalog, diaryCatalog, npcCatalog);
+            hasAllNpcProps = EndingRules.HasAllNpcProps(session, npcCatalog);
+            displayCg = ResolveDisplayCg();
 
             if (resolved == null)
                 Debug.LogError("没有命中任何结局，请检查 EndingCatalog 条件。", endingCatalog);
 
             yield return FadeToBlack();
 
-            BuildQueue();
-            lastExpression = null;
-            lineIndex = 0;
+            ShowEndingCg();
+            PrepareDialogPhase();
 
             if (queue.Count > 0)
             {
-                if (dialogPanel != null)
-                    dialogPanel.SetActive(true);
-                HideOptions();
                 dialogActive = true;
                 ShowCurrentLine();
                 yield return FadeFromBlack();
@@ -149,46 +138,113 @@ namespace Cooking.UI
             }
             else
             {
-                if (dialogPanel != null)
-                    dialogPanel.SetActive(false);
                 yield return FadeFromBlack();
             }
 
             yield return FadeToBlack();
 
-            if (dialogPanel != null)
-                dialogPanel.SetActive(false);
-
-            ShowEndingCg();
-            yield return FadeFromBlack();
-
-            float delay = Mathf.Max(0f, cgClickDelay);
-            if (delay > 0f)
-                yield return new WaitForSecondsRealtime(delay);
-
-            awaitingCgClick = true;
-            if (cgClickButton != null)
-            {
-                cgClickButton.gameObject.SetActive(true);
-                ApplyClickText();
-            }
-
-            while (awaitingCgClick)
-                yield return null;
-
+            HideDialogPhase();
             if (endingCg != null)
                 endingCg.SetActive(false);
 
             ShowEndingPanel();
+            yield return FadeFromBlack();
+
             running = false;
             routine = null;
         }
 
-        void BuildQueue()
+        Sprite ResolveDisplayCg()
         {
+            // 集齐全部 NPC 道具时，好/普通结局对话都叠在 normal CG 上。
+            if (hasAllNpcProps && endingCatalog != null)
+            {
+                EndingDefinition normal = endingCatalog.Find("ending_normal");
+                if (normal != null && normal.cg != null)
+                    return normal.cg;
+            }
+
+            return resolved != null ? resolved.cg : null;
+        }
+
+        void PrepareDialogPhase()
+        {
+            lastExpression = null;
+            lineIndex = 0;
             queue.Clear();
-            AppendLines(endingCatalog != null ? endingCatalog.commonLines : null);
-            AppendLines(resolved != null ? resolved.lines : null);
+
+            if (hasAllNpcProps)
+            {
+                if (metaPanel != null)
+                    metaPanel.SetActive(true);
+                if (dialogPanel != null)
+                    dialogPanel.SetActive(false);
+
+                BindDialogUi(FindMetaDialogPanel());
+                AppendLines(endingCatalog != null ? endingCatalog.commonLines : null);
+                AppendLines(resolved != null ? resolved.lines : null);
+            }
+            else
+            {
+                if (metaPanel != null)
+                    metaPanel.SetActive(false);
+                if (dialogPanel != null)
+                    dialogPanel.SetActive(true);
+
+                BindDialogUi(dialogPanel);
+                AppendLines(resolved != null ? resolved.lines : null);
+            }
+
+            HideOptions(activeDialogRoot);
+        }
+
+        void HideDialogPhase()
+        {
+            dialogActive = false;
+            if (dialogPanel != null)
+                dialogPanel.SetActive(false);
+            if (metaPanel != null)
+                metaPanel.SetActive(false);
+        }
+
+        GameObject FindMetaDialogPanel()
+        {
+            if (metaPanel == null)
+                return null;
+
+            Transform found = metaPanel.transform.Find("DialogPanel");
+            return found != null ? found.gameObject : metaPanel;
+        }
+
+        void BindDialogUi(GameObject root)
+        {
+            activeDialogRoot = root;
+            bodyText = null;
+            nameText = null;
+            profileImage = null;
+
+            if (root == null)
+                return;
+
+            Transform player = root.transform.Find("PlayerDialogue");
+            if (player != null)
+            {
+                Transform body = player.Find("BodyText");
+                if (body != null)
+                    bodyText = body.GetComponent<TMP_Text>();
+
+                Transform name = player.Find("UserNameText");
+                if (name != null)
+                    nameText = name.GetComponent<TMP_Text>();
+
+                Transform profile = player.Find("PlayerProfileImage");
+                if (profile != null)
+                    profileImage = profile.GetComponent<Image>();
+            }
+
+            NightDialogClick click = root.GetComponent<NightDialogClick>();
+            if (click != null)
+                click.BindEnding(this);
         }
 
         void AppendLines(IList<EndingLine> lines)
@@ -252,25 +308,15 @@ namespace Cooking.UI
             if (endingCg != null)
                 endingCg.SetActive(true);
 
-            Sprite cg = resolved != null ? resolved.cg : null;
             if (endingCgImage != null)
             {
-                endingCgImage.sprite = cg;
-                endingCgImage.enabled = cg != null;
-                endingCgImage.color = cg != null ? Color.white : Color.black;
+                endingCgImage.sprite = displayCg;
+                endingCgImage.enabled = displayCg != null;
+                endingCgImage.color = displayCg != null ? Color.white : Color.black;
             }
 
             if (cgClickButton != null)
                 cgClickButton.gameObject.SetActive(false);
-        }
-
-        void OnCgClicked()
-        {
-            if (!awaitingCgClick)
-                return;
-
-            AudioManager.PlayClick();
-            awaitingCgClick = false;
         }
 
         void ShowEndingPanel()
@@ -278,11 +324,10 @@ namespace Cooking.UI
             if (endingPanel != null)
                 endingPanel.SetActive(true);
 
-            Sprite cg = resolved != null ? resolved.cg : null;
             if (endingPanelImage != null)
             {
-                endingPanelImage.sprite = cg;
-                endingPanelImage.enabled = cg != null;
+                endingPanelImage.sprite = displayCg;
+                endingPanelImage.enabled = displayCg != null;
             }
 
             ApplyEndingPanelTexts();
@@ -303,23 +348,6 @@ namespace Cooking.UI
                 GameLanguage.Current,
                 resolved.panelTextZh,
                 resolved.panelTextEn);
-        }
-
-        void ApplyClickText()
-        {
-            if (cgClickText == null)
-                return;
-
-            if (resolved == null)
-            {
-                cgClickText.text = "";
-                return;
-            }
-
-            cgClickText.text = EndingCatalog.Pick(
-                GameLanguage.Current,
-                resolved.clickTextZh,
-                resolved.clickTextEn);
         }
 
         IEnumerator FadeToBlack()
@@ -381,6 +409,8 @@ namespace Cooking.UI
         {
             if (dialogPanel != null)
                 dialogPanel.SetActive(false);
+            if (metaPanel != null)
+                metaPanel.SetActive(false);
             if (endingCg != null)
                 endingCg.SetActive(false);
             if (endingPanel != null)
@@ -395,17 +425,18 @@ namespace Cooking.UI
                 fadeOverlay.gameObject.SetActive(false);
             }
 
-            HideOptions();
+            HideOptions(dialogPanel);
+            HideOptions(FindMetaDialogPanel());
         }
 
-        void HideOptions()
+        void HideOptions(GameObject root)
         {
-            if (dialogPanel == null)
+            if (root == null)
                 return;
 
             for (int i = 1; i <= 3; i++)
             {
-                Transform found = dialogPanel.transform.Find("Option" + i);
+                Transform found = root.transform.Find("Option" + i);
                 if (found != null)
                     found.gameObject.SetActive(false);
             }
@@ -423,34 +454,24 @@ namespace Cooking.UI
                     dialogPanel = found.gameObject;
             }
 
+            if (metaPanel == null)
+            {
+                Transform found = transform.Find("metaPanel");
+                if (found != null)
+                    metaPanel = found.gameObject;
+            }
+
             if (dialogPanel != null)
             {
-                Transform player = dialogPanel.transform.Find("PlayerDialogue");
-                if (player != null)
-                {
-                    if (bodyText == null)
-                    {
-                        Transform found = player.Find("BodyText");
-                        if (found != null)
-                            bodyText = found.GetComponent<TMP_Text>();
-                    }
-
-                    if (nameText == null)
-                    {
-                        Transform found = player.Find("UserNameText");
-                        if (found != null)
-                            nameText = found.GetComponent<TMP_Text>();
-                    }
-
-                    if (profileImage == null)
-                    {
-                        Transform found = player.Find("PlayerProfileImage");
-                        if (found != null)
-                            profileImage = found.GetComponent<Image>();
-                    }
-                }
-
                 NightDialogClick click = dialogPanel.GetComponent<NightDialogClick>();
+                if (click != null)
+                    click.BindEnding(this);
+            }
+
+            GameObject metaDialog = FindMetaDialogPanel();
+            if (metaDialog != null)
+            {
+                NightDialogClick click = metaDialog.GetComponent<NightDialogClick>();
                 if (click != null)
                     click.BindEnding(this);
             }

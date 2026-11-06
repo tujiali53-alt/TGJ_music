@@ -68,7 +68,7 @@ MonoBehaviour:
     priority: 100
     requireAllInBookDiaries: 1
     forbidAllInBookDiaries: 0
-    requireAllNpcProps: 1
+    requireAllNpcProps: 0
     forbidAllNpcProps: 0
     cg: {fileID: 21300000, guid: f3fbfbb32923cb24bb624fcd4ea7bb8e, type: 3}
     panelTextZh: "\uFF08\u597D\u7ED3\u5C40\u5360\u4F4D\u6587\u6848\uFF09"
@@ -150,7 +150,7 @@ MonoBehaviour:
     priority: 50
     requireAllInBookDiaries: 0
     forbidAllInBookDiaries: 1
-    requireAllNpcProps: 1
+    requireAllNpcProps: 0
     forbidAllNpcProps: 0
     cg: {fileID: 21300000, guid: d181836628ec6f040adf44f04eaa24bf, type: 3}
     panelTextZh: "\uFF08\u666E\u901A\u7ED3\u5C40\u5360\u4F4D\u6587\u6848\uFF09"
@@ -228,15 +228,3 @@ MonoBehaviour:
       textEn: 
       expressionId: Main_Happy
       expression: {fileID: 21300000, guid: 0d9d4a104912594408a7937c4dd198fb, type: 3}
-  - id: ending_other
-    priority: 10
-    requireAllInBookDiaries: 0
-    forbidAllInBookDiaries: 0
-    requireAllNpcProps: 0
-    forbidAllNpcProps: 1
-    cg: {fileID: 0}
-    panelTextZh: "\uFF08\u5176\u4ED6\u7ED3\u5C40\u5360\u4F4D\u6587\u6848\uFF09"
-    panelTextEn: 
-    clickTextZh: "\u70B9\u51FB\u4EFB\u610F\u5904\u7EE7\u7EED"
-    clickTextEn: 
-    lines: []
