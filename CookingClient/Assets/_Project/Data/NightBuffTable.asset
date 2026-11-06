@@ -26,12 +26,12 @@ MonoBehaviour:
     radiusBonus: 0
     logTextId: log.buff_low
   - minDeliciousness: 41
-    maxDeliciousness: 100
+    maxDeliciousness: 70
     speedMultiplier: 1
     successFaceDelta: 0
     radiusBonus: 0
     logTextId: log.buff_normal
-  - minDeliciousness: 101
+  - minDeliciousness: 71
     maxDeliciousness: 9999
     speedMultiplier: 1.2
     successFaceDelta: 0

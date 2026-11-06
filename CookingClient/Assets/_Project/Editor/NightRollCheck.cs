@@ -37,6 +37,13 @@ namespace Cooking.EditorTools
             if (low.successFaceDelta != -1)
                 return "美味度 0 的成功率加减应为 -1。";
 
+            NightBuffRow normal = NightBuffs.Match(70f, SampleBuffs());
+            if (normal.speedMultiplier != 1f || normal.radiusBonus != 0f || normal.successFaceDelta != 0)
+                return "美味度 70 应为正常档。";
+            NightBuffRow high = NightBuffs.Match(71f, SampleBuffs());
+            if (high.speedMultiplier != 1.2f || high.radiusBonus != 0.5f)
+                return "美味度 71 应为移速与亮度提升档。";
+
             NightRollResult weakened = NightCheck.Resolve(pull, 4, low.successFaceDelta, 0);
             if (weakened.Success)
                 return "成功率减 1 面时，连根拔起掷出 4 应失败。";
@@ -108,8 +115,8 @@ namespace Cooking.EditorTools
             {
                 new NightBuffRow { minDeliciousness = 0f, maxDeliciousness = 10f, speedMultiplier = 0.8f, successFaceDelta = -1, logTextId = "log.buff_very_low" },
                 new NightBuffRow { minDeliciousness = 11f, maxDeliciousness = 40f, speedMultiplier = 0.8f, successFaceDelta = 0, logTextId = "log.buff_low" },
-                new NightBuffRow { minDeliciousness = 41f, maxDeliciousness = 100f, speedMultiplier = 1f, successFaceDelta = 0, logTextId = "log.buff_normal" },
-                new NightBuffRow { minDeliciousness = 101f, maxDeliciousness = 9999f, speedMultiplier = 1.2f, successFaceDelta = 0, radiusBonus = 0.5f, logTextId = "log.buff_high" }
+                new NightBuffRow { minDeliciousness = 41f, maxDeliciousness = 70f, speedMultiplier = 1f, successFaceDelta = 0, logTextId = "log.buff_normal" },
+                new NightBuffRow { minDeliciousness = 71f, maxDeliciousness = 9999f, speedMultiplier = 1.2f, successFaceDelta = 0, radiusBonus = 0.5f, logTextId = "log.buff_high" }
             };
         }
 

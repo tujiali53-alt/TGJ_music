@@ -20,7 +20,7 @@ namespace Cooking.Runtime
             return new NightBuffRow
             {
                 minDeliciousness = 41f,
-                maxDeliciousness = 100f,
+                maxDeliciousness = 70f,
                 speedMultiplier = 1f,
                 successFaceDelta = 0,
                 radiusBonus = 0f,

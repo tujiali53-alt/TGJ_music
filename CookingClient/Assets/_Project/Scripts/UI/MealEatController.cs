@@ -44,6 +44,8 @@ namespace Cooking.UI
         [SerializeField] ScoreCommentCatalog scoreComments;
         [SerializeField] UiTextCatalog uiText;
 
+        public RecipeDefinition[] Recipes => recipes;
+
         const string FinalFoodCommentId = "ui.final_food_comment";
 
         DishResult lastResult;
