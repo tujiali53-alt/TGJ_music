@@ -75,6 +75,19 @@
 										</ObjectList>
 									</ObjectLists>
 								</AuxBus>
+								<Bus Name="SFX_Duck" ID="{EC7151D6-02C5-406B-B553-5DDCB5AEA0D1}">
+									<DuckingList>
+										<DuckItem>
+											<BusRef Name="Music" ID="{36E3F8FA-272C-4D3D-82B7-E151A67B1CF6}"/>
+											<DuckingParam>
+												<Volume>-2</Volume>
+												<FadeInTime>0.300000011920929</FadeInTime>
+												<FadeOutTime>0.100000001490116</FadeOutTime>
+												<FadeCurve>FadeLinear</FadeCurve>
+											</DuckingParam>
+										</DuckItem>
+									</DuckingList>
+								</Bus>
 							</ChildrenList>
 							<ObjectLists>
 								<ObjectList Name="RTPC">

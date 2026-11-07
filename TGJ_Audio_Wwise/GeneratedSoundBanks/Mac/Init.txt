@@ -8,6 +8,7 @@ State	ID	Name	State Group			Notes
 	2962601785	BGM_V3	Music_BGM_Stage			
 	2962601787	BGM_V1	Music_BGM_Stage			
 	311764537	Day	Music_GamePhase			
+	529726532	End	Music_GamePhase			
 	748895195	None	Music_GamePhase			
 	1011622525	Night	Music_GamePhase			
 	2607556080	Menu	Music_GamePhase			
@@ -20,6 +21,7 @@ Audio Bus	ID	Name			Wwise Object Path	Notes
 	393239870	SFX			\MyUnit\Master Audio Bus\SFX	
 	1551306167	UI			\MyUnit\Master Audio Bus\UI	
 	2246998526	Main Audio Bus			\Default Work Unit\Main Audio Bus	
+	2478496102	SFX_Duck			\MyUnit\Master Audio Bus\SFX\SFX_Duck	
 	3803692087	Master Audio Bus			\MyUnit\Master Audio Bus	
 	3991942870	Music			\MyUnit\Master Audio Bus\Music	
 

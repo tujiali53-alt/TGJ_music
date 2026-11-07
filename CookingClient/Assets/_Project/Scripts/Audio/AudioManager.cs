@@ -15,8 +15,10 @@ public class AudioManager : MonoBehaviour
     [Header("BGM")]
     public AK.Wwise.Event playBGM;
     public AK.Wwise.Event stopBGM;
-    [Tooltip("Music_BGM_Stage：第 1 格 = 第 1 天，第 2 格 = 第 2 天……天数超过格数时沿用最后一格")]
+    [Tooltip("Music_BGM_Stage")]
     public AK.Wwise.State[] dayStages;
+    [Tooltip("结尾演出：选 Music_GamePhase / End")]
+    public AK.Wwise.State endState;
 
     [Header("夜晚环境音")]
     public AK.Wwise.Event playAmbience;
@@ -45,13 +47,13 @@ public class AudioManager : MonoBehaviour
     [Header("夜晚探索")]
     public AK.Wwise.Event playDiceRoll;
 
-    [Header("音量 RTPC（0–100）")]
+    [Header("音量 RTPC")]
     public AK.Wwise.RTPC musicVolumeRtpc;
     public AK.Wwise.RTPC sfxVolumeRtpc;
-    [Tooltip("当前 SoundBank 若仍是旧总线曲线（0→-100、50→-4、100→0），勾选此项，滑条才会按听感线性变化。Wwise 已改成 0→-96、100→0 并重新 Generate 后请取消勾选。")]
     public bool legacyBusVolumeCurve = true;
 
     bool bgmStarted;
+    bool bgmEndOn;
     bool ambienceOn;
     static float musicVolume = 1f;
     static float sfxVolume = 1f;
@@ -129,6 +131,13 @@ public class AudioManager : MonoBehaviour
             ambienceOn = false;
         }
 
+        if (bgmEndOn)
+        {
+            Post(stopBGM);
+            bgmStarted = false;
+            bgmEndOn = false;
+        }
+
         if (bgmStarted || !playBGM.IsValid())
             return;
 
@@ -140,6 +149,22 @@ public class AudioManager : MonoBehaviour
     {
         if (I != null && e != null && e.IsValid())
             e.Post(I.gameObject);
+    }
+
+    public static void StopBGMForEnding()
+    {
+        if (I != null && I.endState.IsValid())
+            Post(I.stopBGM);
+    }
+
+    public static void PlayBGMEnd()
+    {
+        if (I == null || !I.endState.IsValid())
+            return;
+
+        I.endState.SetValue();
+        Post(I.playBGM);
+        I.bgmEndOn = true;
     }
 
     // 按天数切换白天 BGM 版本
@@ -270,7 +295,6 @@ public class AudioManager : MonoBehaviour
             ? SliderToLegacyBusRtpc(unit)
             : unit * 100f;
 
-        // 总线音量只用全局 RTPC；bypass 内部插值，避免拖滑条时听感滞后。
         AkUnitySoundEngine.SetRTPCValue(
             rtpc.Id,
             rtpcValue,
@@ -280,7 +304,6 @@ public class AudioManager : MonoBehaviour
             true);
     }
 
-    // 旧总线曲线：(0,-100) (50,-4) (100,0)。把滑条 0–1 先映射到目标 dB，再反查 RTPC。
     static float SliderToLegacyBusRtpc(float unit)
     {
         float desiredDb = Mathf.Lerp(-96f, 0f, unit);

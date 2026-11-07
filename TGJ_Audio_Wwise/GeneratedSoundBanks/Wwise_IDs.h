@@ -56,6 +56,7 @@ namespace AK
             namespace STATE
             {
                 static const AkUniqueID DAY = 311764537U;
+                static const AkUniqueID END = 529726532U;
                 static const AkUniqueID MENU = 2607556080U;
                 static const AkUniqueID NIGHT = 1011622525U;
                 static const AkUniqueID NONE = 748895195U;
@@ -133,6 +134,7 @@ namespace AK
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
         static const AkUniqueID MUSIC = 3991942870U;
         static const AkUniqueID SFX = 393239870U;
+        static const AkUniqueID SFX_DUCK = 2478496102U;
         static const AkUniqueID UI = 1551306167U;
     } // namespace BUSSES
 

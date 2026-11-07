@@ -157,8 +157,10 @@ namespace Cooking.UI
             if (resolved == null)
                 Debug.LogError("没有命中任何结局，请检查 EndingCatalog 条件。", endingCatalog);
 
-            // 1) 黑屏后只播 endingCG。
+            // 1) 黑屏后只播 endingCG。主 BGM 随黑屏淡出，结局音乐随 CG 渐显进入。
+            AudioManager.StopBGMForEnding();
             yield return FadeToBlack();
+            AudioManager.PlayBGMEnd();
             ShowEndingCg();
             yield return FadeFromBlack();
 
