@@ -175,7 +175,7 @@ namespace Cooking.UI
                 && Has(TutorialIds.Day1Salt)
                 && Needs(TutorialIds.Day1Scoop))
             {
-                PlayDaySegment(TutorialIds.Day1Scoop, null);
+                PlayDaySegment(TutorialIds.Day1Scoop, PlayPlateHintSequence);
             }
         }
 
@@ -187,15 +187,15 @@ namespace Cooking.UI
             if (!Has(TutorialIds.Day1Scoop) || !Needs(TutorialIds.Day1FindPlate))
                 return;
 
-            PlayDaySegment(TutorialIds.Day1FindPlate, null);
+            PlayPlateHintSequence();
         }
 
         public void NotifyPlateClicked()
         {
-            if (!IsTutorialDay1() || !Has(TutorialIds.Day1FindPlate) || !Needs(TutorialIds.Day1Plate))
+            if (!IsTutorialDay1() || !Has(TutorialIds.Day1Scoop) || !Needs(TutorialIds.Day1Plate))
                 return;
 
-            PlayDaySegment(TutorialIds.Day1Plate, null);
+            PlayPlateHintSequence();
         }
 
         public bool AllowPlateDrop()
@@ -203,7 +203,7 @@ namespace Cooking.UI
             if (!IsTutorialDay1())
                 return true;
 
-            return Has(TutorialIds.Day1Plate);
+            return Has(TutorialIds.Day1Scoop);
         }
 
         public bool AllowEat()
@@ -216,6 +216,17 @@ namespace Cooking.UI
 
         public void NotifyPlated()
         {
+            if (!IsTutorialDay1())
+                return;
+
+            Remember(TutorialIds.Day1FindPlate);
+            Remember(TutorialIds.Day1Plate);
+        }
+
+        void PlayPlateHintSequence()
+        {
+            PlayDaySegment(TutorialIds.Day1Plate, () =>
+                PlayDaySegment(TutorialIds.Day1FindPlate, null));
         }
 
         public void NotifyEatResultReady()
