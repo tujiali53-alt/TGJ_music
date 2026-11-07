@@ -91,6 +91,10 @@ namespace Cooking.UI
             {
                 if (background != null)
                     background.enabled = false;
+                if (countText != null)
+                    countText.gameObject.SetActive(false);
+                if (statusText != null)
+                    statusText.gameObject.SetActive(false);
             }
             else
                 ResolveHighlight();
@@ -209,9 +213,7 @@ namespace Cooking.UI
             }
 
             if (countText != null)
-                countText.text = has
-                    ? "x" + shownQuantity + ShapeLabel(shown.Shape) + MethodLabel(shown.CookMethod)
-                    : "";
+                countText.text = has ? "x" + shownQuantity : "";
 
             ApplyOccupiedBase(has);
         }
@@ -306,29 +308,6 @@ namespace Cooking.UI
             }
 
             slotHighlight = art.sprite;
-        }
-
-        static string ShapeLabel(CutShape shape)
-        {
-            if (shape == CutShape.Cut)
-                return " 切";
-
-            return "";
-        }
-
-        static string MethodLabel(CookMethod method)
-        {
-            switch (method)
-            {
-                case CookMethod.Boiled:
-                    return " 煮";
-                case CookMethod.Fried:
-                    return " 煎";
-                case CookMethod.BoiledAndFried:
-                    return " 煎煮";
-                default:
-                    return "";
-            }
         }
 
     }
