@@ -53,13 +53,18 @@ namespace Cooking.EditorTools
             string[] required =
             {
                 TutorialIds.Night0Intro,
+                TutorialIds.Night0AfterHint,
                 TutorialIds.Night0PostForage,
                 TutorialIds.Day1Wakeup,
                 TutorialIds.Day1AfterRecipe,
-                TutorialIds.Day1AfterCut,
-                TutorialIds.Day1Optimal,
+                TutorialIds.Day1Fry,
+                TutorialIds.Day1Oil,
+                TutorialIds.Day1Boil,
+                TutorialIds.Day1Salt,
+                TutorialIds.Day1Scoop,
+                TutorialIds.Day1FindPlate,
                 TutorialIds.Day1Plate,
-                TutorialIds.Day1AfterEat
+                TutorialIds.Day1Taste
             };
 
             int errors = 0;
@@ -213,7 +218,9 @@ namespace Cooking.EditorTools
                 ("这里是哪……我是谁？", "Where is this... Who am I?", "Main_Normal"),
                 ("肚子好饿，有什么能吃的吗。", "I'm so hungry. Is there anything to eat?", "Main_Worry"),
                 ("闻到一股熟悉的香味，好像是……蘑菇？过去看看吧，说不定真能找到点东西。",
-                    "I smell a familiar aroma. It seems to be... mushrooms? Let me go take a look. Maybe I can really find something.", "Main_Smile"),
+                    "I smell a familiar aroma. It seems to be... mushrooms? Let me go take a look. Maybe I can really find something.", "Main_Smile"));
+
+            Add(rows, TutorialIds.Night0AfterHint,
                 ("真倒霉，又冷又饿，还很困。先回去睡会，起床再想想吃什么。",
                     "How unlucky. I'm cold, hungry, and sleepy too. I'll go back and sleep for a while first, then think about what to eat after I wake up.", "Main_Defeat"));
 
@@ -230,30 +237,35 @@ namespace Cooking.EditorTools
                 ("蘑菇得先切碎。手里的刀意外顺手，好像我曾这样做过无数次。",
                     "The mushrooms need to be chopped first. The knife in my hand is unexpectedly handy, as if I have done this countless times before.", "Main_Normal"));
 
-            Add(rows, TutorialIds.Day1AfterCut,
+            Add(rows, TutorialIds.Day1Fry,
                 ("接下来得想办法把它弄熟，直觉告诉我，用煎更快。",
-                    "Next, I have to find a way to cook them. Intuition tells me frying is faster.", "Main_Confidence"),
+                    "Next, I have to find a way to cook them. Intuition tells me frying is faster.", "Main_Confidence"));
+
+            Add(rows, TutorialIds.Day1Oil,
                 ("还差一点油，要把蘑菇本身的香味逼出来，汤才会好喝。",
-                    "I still need a little oil to bring out the mushrooms' own aroma, so the soup will taste better.", "Main_Normal"),
+                    "I still need a little oil to bring out the mushrooms' own aroma, so the soup will taste better.", "Main_Normal"));
+
+            Add(rows, TutorialIds.Day1Boil,
                 ("注意火候，差不多熟了就可以捞进炖锅里。",
-                    "Pay attention to the heat. Once they are almost cooked, I can scoop them into the stew pot.", "Main_Pray"),
+                    "Pay attention to the heat. Once they are almost cooked, I can scoop them into the stew pot.", "Main_Pray"));
+
+            Add(rows, TutorialIds.Day1Salt,
                 ("记得调味，不然汤会变得寡淡的。",
                     "Remember to season it, otherwise the soup will become bland.", "Main_Normal"));
 
-            Add(rows, TutorialIds.Day1Optimal,
-                ("完成了，把它们捞出来备用。", "Done. Scoop them out and set them aside.", "Main_Happy"),
-                ("该摆盘了。", "Time to plate it.", "Main_Smile"),
+            Add(rows, TutorialIds.Day1Scoop,
+                ("完成了，把它们捞出来备用。", "Done. Scoop them out and set them aside.", "Main_Happy"));
+
+            Add(rows, TutorialIds.Day1FindPlate,
                 ("盘子在哪？总不能让我空手吃吧。",
                     "Where is the plate? Can't expect me to eat with my bare hands, right?", "Main_Forced"));
 
             Add(rows, TutorialIds.Day1Plate,
-                ("记得调味", "Remember to season it", "Main_Normal"),
-                ("可以品鉴一下了", "I can give it a try now", "Main_Smile"));
+                ("该摆盘了。", "Time to plate it.", "Main_Smile"));
 
-            Add(rows, TutorialIds.Day1AfterEat,
+            Add(rows, TutorialIds.Day1Taste,
                 ("味道不错，看来我以前手艺挺好的嘛。只有蘑菇还是太单调了，希望后面能找到更多。",
-                    "It tastes good. It seems my cooking skills used to be pretty good. Just mushrooms alone is still too monotonous. I hope I can find more later.", "Main_Happy"),
-                ("可以多做几次熟悉一下", "I can do it a few more times to get familiar with it", "Main_Smile"));
+                    "It tastes good. It seems my cooking skills used to be pretty good. Just mushrooms alone is still too monotonous. I hope I can find more later.", "Main_Happy"));
 
             MinimalXlsx.Write(absolute, new Dictionary<string, List<string[]>>
             {
