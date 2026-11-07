@@ -44,12 +44,12 @@ namespace Cooking.Exploration
 
             if (!flying)
             {
-                if (hitCollider.OverlapPoint(player.position))
+                if (TouchesPlayer())
                     flying = true;
                 return;
             }
 
-            Vector3 target = player.position;
+            Vector3 target = PlayerCenter();
             target.z = transform.position.z;
             transform.position = Vector3.MoveTowards(transform.position, target, flySpeed * Time.deltaTime);
             if (Vector2.Distance(transform.position, target) > absorbDistance)
@@ -64,6 +64,45 @@ namespace Cooking.Exploration
             transform.position = home;
             if (!gameObject.activeSelf)
                 gameObject.SetActive(true);
+        }
+
+        bool TouchesPlayer()
+        {
+            if (!hitCollider.enabled || !hitCollider.gameObject.activeInHierarchy)
+                return false;
+
+            if (hitCollider.OverlapPoint(player.position))
+                return true;
+
+            Collider2D playerBody = player.GetComponent<Collider2D>();
+            if (playerBody != null && playerBody.enabled)
+            {
+                ColliderDistance2D gap = hitCollider.Distance(playerBody);
+                if (gap.isValid && (gap.isOverlapped || gap.distance <= 0.05f))
+                    return true;
+            }
+
+            SpriteRenderer body = player.GetComponent<SpriteRenderer>();
+            if (body == null || body.sprite == null)
+                return false;
+
+            Bounds area = hitCollider.bounds;
+            Bounds sprite = body.bounds;
+            return sprite.min.x <= area.max.x && sprite.max.x >= area.min.x
+                && sprite.min.y <= area.max.y && sprite.max.y >= area.min.y;
+        }
+
+        Vector3 PlayerCenter()
+        {
+            Collider2D playerBody = player.GetComponent<Collider2D>();
+            if (playerBody != null && playerBody.enabled)
+                return playerBody.bounds.center;
+
+            SpriteRenderer body = player.GetComponent<SpriteRenderer>();
+            if (body != null && body.sprite != null)
+                return body.bounds.center;
+
+            return player.position;
         }
 
         void Absorb()
@@ -87,6 +126,7 @@ namespace Cooking.Exploration
                 NightLogView.Append(NightLogKind.RadiusChanged, "log.radius", radius);
             }
 
+            flying = false;
             gameObject.SetActive(false);
         }
     }
