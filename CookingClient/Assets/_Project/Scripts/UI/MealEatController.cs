@@ -692,8 +692,16 @@ namespace Cooking.UI
 
         public void ShowEatRedPoint()
         {
-            if (eatRedPoint != null)
-                eatRedPoint.SetActive(true);
+            if (eatRedPoint == null)
+                return;
+
+            if (TutorialDirector.Instance == null || !TutorialDirector.Instance.ShowsEatRedPoint)
+            {
+                eatRedPoint.SetActive(false);
+                return;
+            }
+
+            eatRedPoint.SetActive(true);
         }
 
         public void HideEatRedPoint()
@@ -704,7 +712,9 @@ namespace Cooking.UI
 
         public void RefreshEatRedPoint()
         {
-            if (Plate.HasFood())
+            if (Plate.HasFood()
+                && TutorialDirector.Instance != null
+                && TutorialDirector.Instance.ShowsEatRedPoint)
                 ShowEatRedPoint();
             else
                 HideEatRedPoint();

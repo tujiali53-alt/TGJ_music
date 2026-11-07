@@ -35,6 +35,7 @@ namespace Cooking.UI
         public bool BlocksRecipeAutoOpen => Needs(TutorialIds.Day1Wakeup);
         public bool BlocksEnterNight => IsTutorialDay1() && Needs(TutorialIds.Completed);
         public bool BlocksCookingInput => IsTutorialDay1() && IsPlaying;
+        public bool ShowsEatRedPoint => IsTutorialDay1();
 
         void Awake()
         {
