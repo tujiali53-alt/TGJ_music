@@ -197,7 +197,7 @@ namespace Cooking.UI
                     if (shown.Shape == CutShape.Cut && shownDefinition.spriteCut == null && missingCutSprites.Add(shownDefinition.id))
                         Debug.LogError(shownDefinition.id + " 切开后需要 spriteCut。", shownDefinition);
 
-                    sprite = FoodVisualResolver.SpriteFor(shownDefinition, shown.Shape);
+                    sprite = FoodVisualResolver.SpriteFor(shownDefinition, shown.Shape, shown.CookMethod);
                 }
                 icon.enabled = sprite != null;
                 icon.preserveAspect = true;

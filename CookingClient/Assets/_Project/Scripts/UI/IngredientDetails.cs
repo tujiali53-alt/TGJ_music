@@ -133,7 +133,7 @@ namespace Cooking.UI
             ApplyDisplayNames(definition);
             if (foodImage != null)
             {
-                Sprite sprite = FoodVisualResolver.SpriteFor(definition, item.Shape);
+                Sprite sprite = FoodVisualResolver.SpriteFor(definition, item.Shape, item.CookMethod);
                 foodImage.sprite = sprite;
                 foodImage.enabled = sprite != null;
                 foodImage.preserveAspect = true;

@@ -345,6 +345,10 @@ namespace Cooking.EditorTools
                     continue;
                 }
 
+                // 鸡蛋按烹饪方法换图，固定由 ApplyEggVisualSprites 写入，不进通用桶。
+                if (IsEggIngredient(id))
+                    continue;
+
                 if (bucket.TryGetValue(id, out string existing) && existing != path)
                 {
                     Debug.LogError(id + " 的 " + shape + " 外观在不同烹饪方法上不一致：" + existing + " / " + path);
@@ -354,8 +358,32 @@ namespace Cooking.EditorTools
                 bucket[id] = path;
             }
 
+            ApplyEggVisualSprites(result);
             ApplyVisualSprites(whole, false, result);
             ApplyVisualSprites(cut, true, result);
+        }
+
+        static bool IsEggIngredient(string id)
+        {
+            return id == "ing_egg" || id == "ing_doneegg";
+        }
+
+        // 鸡蛋：整颗固定 Food_Egg，切开/煎态固定 Food_Egg_Sliced；运行时再按烹饪方法选用。
+        static void ApplyEggVisualSprites(ImportResult result)
+        {
+            const string wholePath = "Assets/_Project/Arts/Ingrediant/Food_Egg.png";
+            const string cutPath = "Assets/_Project/Arts/Ingrediant/Food_Egg_Sliced.png";
+            string[] eggIds = { "ing_egg", "ing_doneegg" };
+            for (int i = 0; i < eggIds.Length; i++)
+            {
+                IngredientDefinition asset = FindById<IngredientDefinition>(IngredientsFolder, eggIds[i]);
+                if (asset == null)
+                    continue;
+
+                ApplySprite(wholePath, ref asset.spriteWhole, "IngredientVisualStates/" + eggIds[i] + ".Whole", result);
+                ApplySprite(cutPath, ref asset.spriteCut, "IngredientVisualStates/" + eggIds[i] + ".Cut", result);
+                EditorUtility.SetDirty(asset);
+            }
         }
 
         static void ApplyVisualSprites(Dictionary<string, string> paths, bool cut, ImportResult result)

@@ -63,9 +63,9 @@ MonoBehaviour:
       expression: {fileID: 21300000, guid: cfdf2882c7d3d1040bdea747af36b7ae, type: 3}
   - id: day1_fry
     lines:
-    - textZh: "\u63A5\u4E0B\u6765\u5F97\u60F3\u529E\u6CD5\u628A\u5B83\u5F04\u719F\uFF0C\u76F4\u89C9\u544A\u8BC9\u6211\uFF0C\u7528\u714E\u66F4\u5FEB\u3002"
-      textEn: Next, I have to find a way to cook them. Intuition tells me frying
-        is faster.
+    - textZh: "\u63A5\u4E0B\u6765\u5F97\u60F3\u529E\u6CD5\u628A\u5B83\u5F04\u719F\uFF0C\u76F4\u89C9\u544A\u8BC9\u6211\uFF0C\u628A\u5B83\u62D6\u5230\u7076\u53F0\u7089\u5B50\u4E0A\u7684\u4EFB\u610F\u4E00\u683C\u4E2D\uFF0C\u7528\u714E\u66F4\u5FEB\u3002"
+      textEn: Next, I have to find a way to cook them. Drag it to any slot on the
+        stove. Intuition tells me frying is faster.
       expressionId: Main_Confidence
       expression: {fileID: 21300000, guid: 8b356976984a41c4cb994867d0a90a79, type: 3}
   - id: day1_oil
