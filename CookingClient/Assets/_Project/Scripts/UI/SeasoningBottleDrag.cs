@@ -85,6 +85,12 @@ namespace Cooking.UI
                 return;
 
             tracking = false;
+            if (TutorialDirector.Instance != null && TutorialDirector.Instance.BlocksCookingInput)
+            {
+                ReturnHome();
+                return;
+            }
+
             IngredientInstance item = FindFood(eventData, out RectTransform food);
             if (item != null)
             {
@@ -93,6 +99,8 @@ namespace Cooking.UI
 
                 item.SeasoningIds.Add(seasoning.id);
                 AudioManager.PlaySeasoning(seasoning.id);
+                if (TutorialDirector.Instance != null)
+                    TutorialDirector.Instance.NotifySeasoned(item, seasoning.id);
                 BeginPour(food);
                 return;
             }

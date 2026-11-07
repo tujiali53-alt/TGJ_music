@@ -73,6 +73,12 @@ namespace Cooking.UI
             panels.OpenRecipe();
         }
 
+        public void ShowRedPointForTutorial()
+        {
+            if (!opened)
+                ShowRedPoint();
+        }
+
         void OnDestroy()
         {
             if (openRecipeButton != null)

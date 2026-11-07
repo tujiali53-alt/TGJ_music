@@ -375,6 +375,9 @@ namespace Cooking.UI
                 "log.gain",
                 new[] { nameZh, count },
                 new[] { nameEn, count });
+
+            if (reward.ingredientId == "ing_mushroom" && TutorialDirector.Instance != null)
+                TutorialDirector.Instance.NotifyMushroomGained();
         }
 
         static void Remember(string optionId, bool success)

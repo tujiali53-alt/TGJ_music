@@ -100,10 +100,15 @@ namespace Cooking.UI
                 return;
 
             IngredientInventory.Add(item);
+            if (TutorialDirector.Instance != null)
+                TutorialDirector.Instance.NotifyReturnedToInventory(item);
         }
 
         public void CutHeld()
         {
+            if (TutorialDirector.Instance != null && TutorialDirector.Instance.BlocksCookingInput)
+                return;
+
             AudioManager.PlayClick();
             bool cutAny = false;
             for (int i = 0; i < held.Count; i++)

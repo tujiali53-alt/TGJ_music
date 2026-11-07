@@ -419,6 +419,9 @@ namespace Cooking.UI
                 SeasoningIds = new List<string>(),
                 IsCharcoal = false
             });
+
+            if (ingredientId == "ing_mushroom" && TutorialDirector.Instance != null)
+                TutorialDirector.Instance.NotifyMushroomGained();
         }
 
         void AddProp(string propId, int count)

@@ -18,6 +18,7 @@ namespace Cooking.UI
         [SerializeField] GameObject tutorialPanel;
         [SerializeField] Button tutorialCloseButton;
         [SerializeField] float tutorialCloseDelay = 2f;
+        [SerializeField] float dayDialogDelay = 0.1f;
         [SerializeField] GameObject guideMask;
         [SerializeField] Button eatButton;
         [SerializeField] MealEatController mealEat;
@@ -26,12 +27,14 @@ namespace Cooking.UI
 
         bool playing;
         bool plateGuideActive;
+        bool pendingPostForage;
+        Coroutine dayPlay;
         readonly List<Selectable> disabledSelectables = new List<Selectable>();
 
-        public bool IsPlaying => playing || (dialogPlayer != null && dialogPlayer.IsActive);
+        public bool IsPlaying => playing || dayPlay != null || (dialogPlayer != null && dialogPlayer.IsActive);
         public bool BlocksRecipeAutoOpen => Needs(TutorialIds.Day1Wakeup);
-        public bool BlocksPlateUntilOptimalDone =>
-            IsTutorialDay1() && !Has(TutorialIds.Day1Optimal) && Has(TutorialIds.Day1AfterCut);
+        public bool BlocksEnterNight => IsTutorialDay1() && Needs(TutorialIds.Completed);
+        public bool BlocksCookingInput => IsTutorialDay1() && IsPlaying;
 
         void Awake()
         {
@@ -57,6 +60,12 @@ namespace Cooking.UI
 
             if (tutorialCloseButton != null)
                 tutorialCloseButton.onClick.RemoveListener(OnTutorialPanelClosed);
+
+            if (dayPlay != null)
+            {
+                StopCoroutine(dayPlay);
+                dayPlay = null;
+            }
         }
 
         void Start()
@@ -83,8 +92,32 @@ namespace Cooking.UI
             if (session == null || session.DayIndex != 0 || session.Phase != DayPhase.Night)
                 return;
 
-            if (Needs(TutorialIds.Night0PostForage) && Has(TutorialIds.Night0Intro))
-                PlaySegment(TutorialIds.Night0PostForage, null);
+            if (!Has(TutorialIds.Night0Intro))
+                return;
+
+            if (Needs(TutorialIds.Night0AfterHint))
+            {
+                PlaySegment(TutorialIds.Night0AfterHint, TryPlayNight0PostForage);
+                return;
+            }
+
+            TryPlayNight0PostForage();
+        }
+
+        public void NotifyMushroomGained()
+        {
+            GameSession session = Session();
+            if (session == null || session.DayIndex != 0 || session.Phase != DayPhase.Night)
+                return;
+
+            if (!Has(TutorialIds.Night0Intro) || !Needs(TutorialIds.Night0PostForage))
+                return;
+
+            pendingPostForage = true;
+            if (Needs(TutorialIds.Night0AfterHint) || playing)
+                return;
+
+            TryPlayNight0PostForage();
         }
 
         public void NotifyRecipeClosed()
@@ -92,36 +125,76 @@ namespace Cooking.UI
             if (!IsTutorialDay1() || Needs(TutorialIds.Day1Wakeup) || !Needs(TutorialIds.Day1AfterRecipe))
                 return;
 
-            PlaySegment(TutorialIds.Day1AfterRecipe, null);
+            PlayDaySegment(TutorialIds.Day1AfterRecipe, null);
         }
 
         public void NotifyCut()
         {
-            if (!IsTutorialDay1() || !Needs(TutorialIds.Day1AfterCut))
+            if (!IsTutorialDay1() || !Has(TutorialIds.Day1AfterRecipe) || !Needs(TutorialIds.Day1Fry))
                 return;
 
-            if (!Has(TutorialIds.Day1AfterRecipe))
-                return;
-
-            PlaySegment(TutorialIds.Day1AfterCut, null);
+            PlayDaySegment(TutorialIds.Day1Fry, null);
         }
 
-        public void NotifyReachedOptimal(IngredientInstance item)
+        public void NotifyPotPlaced(IngredientInstance item, CookMethod method)
         {
-            if (!IsTutorialDay1() || !Needs(TutorialIds.Day1Optimal))
+            if (!IsTutorialDay1() || item == null || item.DefinitionId != "ing_mushroom")
                 return;
 
-            if (!Has(TutorialIds.Day1AfterCut))
+            if (method == CookMethod.Fried
+                && Has(TutorialIds.Day1Fry)
+                && Needs(TutorialIds.Day1Oil))
+            {
+                PlayDaySegment(TutorialIds.Day1Oil, null);
+                return;
+            }
+
+            if (method == CookMethod.Boiled
+                && Has(TutorialIds.Day1Boil)
+                && Needs(TutorialIds.Day1Salt))
+            {
+                PlayDaySegment(TutorialIds.Day1Salt, null);
+            }
+        }
+
+        public void NotifySeasoned(IngredientInstance item, string seasoningId)
+        {
+            if (!IsTutorialDay1() || item == null || item.DefinitionId != "ing_mushroom")
                 return;
 
-            if (item == null || item.DefinitionId != "ing_mushroom")
+            if (seasoningId == "season_oil"
+                && Has(TutorialIds.Day1Oil)
+                && Needs(TutorialIds.Day1Boil))
+            {
+                PlayDaySegment(TutorialIds.Day1Boil, null);
+                return;
+            }
+
+            if (seasoningId == "season_salt"
+                && Has(TutorialIds.Day1Salt)
+                && Needs(TutorialIds.Day1Scoop))
+            {
+                PlayDaySegment(TutorialIds.Day1Scoop, null);
+            }
+        }
+
+        public void NotifyReturnedToInventory(IngredientInstance item)
+        {
+            if (!IsTutorialDay1() || item == null || item.DefinitionId != "ing_mushroom")
                 return;
 
-            CookingPot pot = FindAnyObjectByType<CookingPot>(FindObjectsInactive.Include);
-            if (pot != null)
-                pot.TurnOffAllFires();
+            if (!Has(TutorialIds.Day1Scoop) || !Needs(TutorialIds.Day1FindPlate))
+                return;
 
-            PlaySegment(TutorialIds.Day1Optimal, null);
+            PlayDaySegment(TutorialIds.Day1FindPlate, null);
+        }
+
+        public void NotifyPlateClicked()
+        {
+            if (!IsTutorialDay1() || !Has(TutorialIds.Day1FindPlate) || !Needs(TutorialIds.Day1Plate))
+                return;
+
+            PlayDaySegment(TutorialIds.Day1Plate, null);
         }
 
         public bool AllowPlateDrop()
@@ -129,35 +202,42 @@ namespace Cooking.UI
             if (!IsTutorialDay1())
                 return true;
 
-            if (Needs(TutorialIds.Day1Optimal))
-                return false;
+            return Has(TutorialIds.Day1Plate);
+        }
 
-            return true;
+        public bool AllowEat()
+        {
+            if (!IsTutorialDay1())
+                return true;
+
+            return Has(TutorialIds.Day1Plate);
         }
 
         public void NotifyPlated()
         {
-            if (!IsTutorialDay1() || !Needs(TutorialIds.Day1Plate))
-                return;
-
-            if (!Has(TutorialIds.Day1Optimal))
-                return;
-
-            PlaySegment(TutorialIds.Day1Plate, null);
         }
 
         public void NotifyEatResultReady()
         {
-            if (!IsTutorialDay1() || !Needs(TutorialIds.Day1AfterEat))
+            if (!IsTutorialDay1() || !Has(TutorialIds.Day1Plate))
                 return;
 
-            if (!Has(TutorialIds.Day1Plate))
-                return;
-
-            PlaySegment(TutorialIds.Day1AfterEat, () =>
+            if (Needs(TutorialIds.Day1Taste))
             {
+                PlayDaySegment(TutorialIds.Day1Taste, FinishDay1Tutorial);
+                return;
+            }
+
+            FinishDay1Tutorial();
+        }
+
+        void FinishDay1Tutorial()
+        {
+            if (Needs(TutorialIds.Completed))
                 Remember(TutorialIds.Completed);
-            });
+
+            if (mealEat != null)
+                mealEat.RefreshResultButtons();
         }
 
         void BeginNight0Intro()
@@ -170,12 +250,10 @@ namespace Cooking.UI
 
         void BeginDay1Wakeup()
         {
-            PlaySegment(TutorialIds.Day1Wakeup, () =>
+            PlayDaySegment(TutorialIds.Day1Wakeup, () =>
             {
                 if (recipeNotice != null)
-                    recipeNotice.OpenNowForTutorial();
-                else if (recipePanels != null)
-                    recipePanels.OpenRecipe();
+                    recipeNotice.ShowRedPointForTutorial();
             });
         }
 
@@ -206,6 +284,73 @@ namespace Cooking.UI
                 tutorialPanel.SetActive(false);
             if (tutorialCloseButton != null)
                 tutorialCloseButton.gameObject.SetActive(false);
+        }
+
+        void TryPlayNight0PostForage()
+        {
+            if (!pendingPostForage || !Needs(TutorialIds.Night0PostForage))
+                return;
+
+            if (Needs(TutorialIds.Night0AfterHint) || playing)
+                return;
+
+            pendingPostForage = false;
+            PlaySegment(TutorialIds.Night0PostForage, null);
+        }
+
+        string pendingDaySegment;
+        System.Action pendingDayAfter;
+
+        void PlayDaySegment(string segmentId, System.Action after)
+        {
+            if (catalog == null || string.IsNullOrEmpty(segmentId))
+                return;
+
+            if (Has(segmentId))
+            {
+                if (after != null)
+                    after();
+                return;
+            }
+
+            if (playing || dayPlay != null)
+            {
+                pendingDaySegment = segmentId;
+                pendingDayAfter = after;
+                return;
+            }
+
+            if (dayPlay != null)
+                StopCoroutine(dayPlay);
+
+            dayPlay = StartCoroutine(PlayDaySegmentDelayed(segmentId, after));
+        }
+
+        IEnumerator PlayDaySegmentDelayed(string segmentId, System.Action after)
+        {
+            float delay = Mathf.Max(0f, dayDialogDelay);
+            if (delay > 0f)
+                yield return new WaitForSecondsRealtime(delay);
+
+            dayPlay = null;
+            PlaySegment(segmentId, () =>
+            {
+                if (after != null)
+                    after();
+                FlushPendingDaySegment();
+            });
+        }
+
+        void FlushPendingDaySegment()
+        {
+            if (string.IsNullOrEmpty(pendingDaySegment))
+                return;
+
+            string id = pendingDaySegment;
+            System.Action after = pendingDayAfter;
+            pendingDaySegment = null;
+            pendingDayAfter = null;
+            PlayDaySegment(id, after);
         }
 
         void PlaySegment(string segmentId, System.Action after)

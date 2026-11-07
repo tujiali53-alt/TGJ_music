@@ -52,13 +52,18 @@ namespace Cooking.Data
     public static class TutorialIds
     {
         public const string Night0Intro = "night0_intro";
+        public const string Night0AfterHint = "night0_after_hint";
         public const string Night0PostForage = "night0_post_forage";
         public const string Day1Wakeup = "day1_wakeup";
         public const string Day1AfterRecipe = "day1_after_recipe";
-        public const string Day1AfterCut = "day1_after_cut";
-        public const string Day1Optimal = "day1_optimal";
+        public const string Day1Fry = "day1_fry";
+        public const string Day1Oil = "day1_oil";
+        public const string Day1Boil = "day1_boil";
+        public const string Day1Salt = "day1_salt";
+        public const string Day1Scoop = "day1_scoop";
+        public const string Day1FindPlate = "day1_find_plate";
         public const string Day1Plate = "day1_plate";
-        public const string Day1AfterEat = "day1_after_eat";
+        public const string Day1Taste = "day1_taste";
         public const string Completed = "tutorial_completed";
     }
 }

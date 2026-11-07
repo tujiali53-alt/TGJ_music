@@ -123,6 +123,12 @@ namespace Cooking.UI
 
             tracking = false;
             IsDragging = false;
+            if (TutorialDirector.Instance != null && TutorialDirector.Instance.BlocksCookingInput)
+            {
+                Settle(heldPosition, false);
+                return;
+            }
+
             FoodSlotView view = GetComponent<FoodSlotView>();
             IngredientInstance item = view != null ? view.Shown : null;
             IFoodStation station = FindStation(eventData);
@@ -168,6 +174,13 @@ namespace Cooking.UI
             rightTracking = false;
             tracking = false;
             IsDragging = false;
+
+            if (TutorialDirector.Instance != null && TutorialDirector.Instance.BlocksCookingInput)
+            {
+                takeOne = false;
+                ReturnToTray();
+                return;
+            }
 
             FoodSlotView view = GetComponent<FoodSlotView>();
             IngredientInstance item = view != null ? view.Shown : null;

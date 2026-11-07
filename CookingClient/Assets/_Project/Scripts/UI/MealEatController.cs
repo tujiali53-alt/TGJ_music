@@ -17,6 +17,7 @@ namespace Cooking.UI
         public const int FinalDayMeals = 1;
 
         [SerializeField] Button eatButton;
+        [SerializeField] GameObject eatRedPoint;
         [SerializeField] Button enterNightButton;
         [SerializeField] Button oneMoreButton;
         [SerializeField] Button overButton;
@@ -48,14 +49,21 @@ namespace Cooking.UI
 
         const string FinalFoodCommentId = "ui.final_food_comment";
 
+        public static MealEatController Instance { get; private set; }
+
         DishResult lastResult;
         bool resolving;
         Coroutine commentReveal;
 
         void Awake()
         {
+            Instance = this;
+
             if (eatButton == null)
                 eatButton = FindButton("EattingButton");
+
+            ResolveEatRedPoint();
+            HideEatRedPoint();
 
             if (enterNightButton == null)
                 enterNightButton = FindButton("enterNightButton");
@@ -138,6 +146,9 @@ namespace Cooking.UI
             else
                 eatButton.onClick.AddListener(Eat);
 
+            if (eatRedPoint == null)
+                Debug.LogError("需要 InteractionPanel/RedPoint_eat 或 EattingButton/RedPoint_eat。", this);
+
             if (enterNightButton == null)
                 Debug.LogError("需要 EatingCheckPanel/enterNightButton，并且带 Button。", this);
             else
@@ -208,6 +219,9 @@ namespace Cooking.UI
 
         void OnDestroy()
         {
+            if (Instance == this)
+                Instance = null;
+
             GameLanguage.Changed -= OnLanguageChanged;
 
             if (eatButton != null)
@@ -285,6 +299,9 @@ namespace Cooking.UI
 
             AudioManager.PlayClick();
 
+            if (TutorialDirector.Instance != null && !TutorialDirector.Instance.AllowEat())
+                return;
+
             GameSession session = root.Session;
             int mealsAllowed = MealsAllowed(session);
             bool hasFood = Plate.HasFood();
@@ -292,6 +309,7 @@ namespace Cooking.UI
             {
                 if (session.MealsEaten > 0)
                 {
+                    HideEatRedPoint();
                     resolving = true;
                     ShowResult();
                     return;
@@ -300,6 +318,8 @@ namespace Cooking.UI
                 Debug.Log("盘子上没有食物，不能进食。", this);
                 return;
             }
+
+            HideEatRedPoint();
 
             if (session.HeldDish == null || session.HeldDish.Items == null)
             {
@@ -358,6 +378,11 @@ namespace Cooking.UI
 
             if (TutorialDirector.Instance != null)
                 TutorialDirector.Instance.NotifyEatResultReady();
+        }
+
+        public void RefreshResultButtons()
+        {
+            ApplySummary();
         }
 
         public void ClosePanel()
@@ -474,7 +499,14 @@ namespace Cooking.UI
                 BeginComments(CommentsForLatest(session));
 
             if (enterNightButton != null)
-                enterNightButton.gameObject.SetActive(!finalDay && meals >= 1);
+            {
+                bool allowNight = !finalDay && meals >= 1;
+                if (allowNight
+                    && TutorialDirector.Instance != null
+                    && TutorialDirector.Instance.BlocksEnterNight)
+                    allowNight = false;
+                enterNightButton.gameObject.SetActive(allowNight);
+            }
 
             if (oneMoreButton != null)
                 oneMoreButton.gameObject.SetActive(!finalDay && meals < MealsAllowed(session));
@@ -656,6 +688,46 @@ namespace Cooking.UI
                 return null;
 
             return root.Session;
+        }
+
+        public void ShowEatRedPoint()
+        {
+            if (eatRedPoint != null)
+                eatRedPoint.SetActive(true);
+        }
+
+        public void HideEatRedPoint()
+        {
+            if (eatRedPoint != null)
+                eatRedPoint.SetActive(false);
+        }
+
+        public void RefreshEatRedPoint()
+        {
+            if (Plate.HasFood())
+                ShowEatRedPoint();
+            else
+                HideEatRedPoint();
+        }
+
+        void ResolveEatRedPoint()
+        {
+            if (eatRedPoint != null)
+                return;
+
+            if (eatButton != null)
+            {
+                Transform underButton = eatButton.transform.Find("RedPoint_eat");
+                if (underButton != null)
+                {
+                    eatRedPoint = underButton.gameObject;
+                    return;
+                }
+            }
+
+            Transform found = FindNamed("RedPoint_eat");
+            if (found != null)
+                eatRedPoint = found.gameObject;
         }
 
         Button FindButton(string objectName)

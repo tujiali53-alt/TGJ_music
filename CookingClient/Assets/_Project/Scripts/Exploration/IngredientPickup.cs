@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Cooking.Core;
 using Cooking.Data;
 using Cooking.Runtime;
+using Cooking.UI;
 using UnityEngine;
 
 namespace Cooking.Exploration
@@ -86,6 +87,9 @@ namespace Cooking.Exploration
 
             collected = true;
             gameObject.SetActive(false);
+
+            if (definition.id == "ing_mushroom" && TutorialDirector.Instance != null)
+                TutorialDirector.Instance.NotifyMushroomGained();
         }
     }
 }

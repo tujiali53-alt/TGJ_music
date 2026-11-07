@@ -96,6 +96,9 @@ namespace Cooking.UI
                 return false;
             }
 
+            if (TutorialDirector.Instance != null && TutorialDirector.Instance.BlocksCookingInput)
+                return false;
+
             Zone zone = null;
             FoodSlotView token = null;
             for (int i = 0; i < current.zones.Count; i++)
@@ -117,7 +120,8 @@ namespace Cooking.UI
             if (token.Shown != null && token.Shown != item)
                 return false;
 
-            if (token.Shown != item)
+            bool placedNow = token.Shown != item;
+            if (placedNow)
             {
                 Detach(item);
                 Plate.Detach(item);
@@ -129,6 +133,9 @@ namespace Cooking.UI
 
             if (current.Heating(zone))
                 ApplyArea(item, zone.Area.Method);
+
+            if (placedNow && zone.Area != null && TutorialDirector.Instance != null)
+                TutorialDirector.Instance.NotifyPotPlaced(item, zone.Area.Method);
 
             return true;
         }
@@ -156,6 +163,8 @@ namespace Cooking.UI
                 return;
 
             IngredientInventory.Add(item);
+            if (TutorialDirector.Instance != null)
+                TutorialDirector.Instance.NotifyReturnedToInventory(item);
         }
 
         public static bool TryConvertLeavingEgg(IngredientInstance item)
@@ -291,8 +300,6 @@ namespace Cooking.UI
                     {
                         item.OptimalHitTime = Time.time;
                         item.Doneness = definition.optimalDoneness;
-                        if (TutorialDirector.Instance != null)
-                            TutorialDirector.Instance.NotifyReachedOptimal(item);
                         continue;
                     }
 

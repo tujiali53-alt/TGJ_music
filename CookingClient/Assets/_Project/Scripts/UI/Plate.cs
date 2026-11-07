@@ -2,10 +2,11 @@ using Cooking.Core;
 using Cooking.Data;
 using Cooking.Runtime;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Cooking.UI
 {
-    public sealed class Plate : MonoBehaviour, IFoodStation
+    public sealed class Plate : MonoBehaviour, IFoodStation, IPointerClickHandler
     {
         public const int Capacity = 9;
 
@@ -37,6 +38,19 @@ namespace Cooking.UI
                 current = null;
         }
 
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData == null || eventData.button != PointerEventData.InputButton.Left)
+                return;
+
+            if (TutorialDirector.Instance != null && TutorialDirector.Instance.BlocksCookingInput)
+                return;
+
+            TrayToggle.OpenCurrent();
+            if (TutorialDirector.Instance != null)
+                TutorialDirector.Instance.NotifyPlateClicked();
+        }
+
         public bool TryPlace(IngredientInstance item)
         {
             return TryPlace(item, Vector2.zero, null);
@@ -63,8 +77,13 @@ namespace Cooking.UI
             if (CookingPot.TryConvertLeavingEgg(item))
                 return false;
 
-            if (TutorialDirector.Instance != null && !TutorialDirector.Instance.AllowPlateDrop())
-                return false;
+            if (TutorialDirector.Instance != null)
+            {
+                if (TutorialDirector.Instance.BlocksCookingInput)
+                    return false;
+                if (!TutorialDirector.Instance.AllowPlateDrop())
+                    return false;
+            }
 
             if (session.HeldDish.Items.Count >= Capacity || !tokens.HasFree())
                 return false;
@@ -74,6 +93,8 @@ namespace Cooking.UI
             IngredientInventory.Remove(item);
             session.HeldDish.Items.Add(item);
             tokens.Present(item, localPoint, definition);
+            if (MealEatController.Instance != null)
+                MealEatController.Instance.ShowEatRedPoint();
             if (TutorialDirector.Instance != null)
                 TutorialDirector.Instance.NotifyPlated();
             return true;
@@ -89,6 +110,8 @@ namespace Cooking.UI
                 return false;
 
             current.tokens.Clear(item);
+            if (MealEatController.Instance != null)
+                MealEatController.Instance.RefreshEatRedPoint();
             return true;
         }
 
@@ -104,6 +127,8 @@ namespace Cooking.UI
         {
             if (tokens != null)
                 tokens.ClearAll();
+            if (MealEatController.Instance != null)
+                MealEatController.Instance.HideEatRedPoint();
         }
 
         public static void ClearActive()
