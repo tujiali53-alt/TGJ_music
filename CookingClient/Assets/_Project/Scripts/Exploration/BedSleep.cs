@@ -1,5 +1,6 @@
 using Cooking.Core;
 using Cooking.Data;
+using Cooking.Runtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -126,6 +127,31 @@ namespace Cooking.Exploration
                 return;
 
             bedPanel.SetActive(true);
+            RefreshConfirmButton();
+        }
+
+        void RefreshConfirmButton()
+        {
+            if (confirmButton == null)
+                return;
+
+            confirmButton.gameObject.SetActive(HasIngredients());
+        }
+
+        static bool HasIngredients()
+        {
+            GameRoot root = GameRoot.Instance;
+            if (root == null || root.Session == null || root.Session.Inventory == null)
+                return false;
+
+            for (int i = 0; i < root.Session.Inventory.Count; i++)
+            {
+                IngredientInstance item = root.Session.Inventory[i];
+                if (item != null && item.Quantity > 0)
+                    return true;
+            }
+
+            return false;
         }
 
         bool PlayerAtBed()
@@ -149,6 +175,12 @@ namespace Cooking.Exploration
 
         void ConfirmSleep()
         {
+            if (!HasIngredients())
+            {
+                RefreshConfirmButton();
+                return;
+            }
+
             AudioManager.PlayClick();
             GameRoot root = GameRoot.Instance;
             if (root == null)
