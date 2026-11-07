@@ -20,7 +20,6 @@ namespace Cooking.UI
         [SerializeField] float cgClickDelay = 3f;
         [SerializeField] float clickFadeDuration = 0.5f;
         [SerializeField] float endingImageHoldDuration = 3f;
-        [SerializeField] float creditScrollSpeed = 80f;
         [SerializeField] GameObject gameOverPanel;
         [SerializeField] GameObject dialogPanel;
         [SerializeField] GameObject metaPanel;
@@ -36,9 +35,8 @@ namespace Cooking.UI
         [SerializeField] Image endingPanelImage;
         [SerializeField] GameObject scrollPanel;
         [SerializeField] Image scrollEndingImage;
-        [SerializeField] TMP_Text creditText;
-        [SerializeField] RectTransform creditRect;
-        [SerializeField] TMP_Text endingText;
+        [SerializeField] Button quitButton;
+        [SerializeField] Button backMenuButton;
 
         readonly List<EndingLine> queue = new List<EndingLine>();
         EndingDefinition resolved;
@@ -50,7 +48,6 @@ namespace Cooking.UI
         bool running;
         bool dialogActive;
         bool awaitingCgClick;
-        bool creditsScrolling;
         Coroutine routine;
         GameObject activeDialogRoot;
 
@@ -60,6 +57,7 @@ namespace Cooking.UI
         {
             ResolveRefs();
             HideChildren();
+            BindEndingButtons();
             if (cgClickButton != null)
                 cgClickButton.onClick.AddListener(OnCgClicked);
 
@@ -71,14 +69,10 @@ namespace Cooking.UI
             GameLanguage.Changed -= OnLanguageChanged;
             if (cgClickButton != null)
                 cgClickButton.onClick.RemoveListener(OnCgClicked);
-        }
-
-        void Update()
-        {
-            if (!creditsScrolling || creditRect == null)
-                return;
-
-            creditRect.anchoredPosition += Vector2.up * creditScrollSpeed * Time.unscaledDeltaTime;
+            if (quitButton != null)
+                quitButton.onClick.RemoveListener(QuitGame);
+            if (backMenuButton != null)
+                backMenuButton.onClick.RemoveListener(BackToMenu);
         }
 
         public void Begin()
@@ -136,8 +130,6 @@ namespace Cooking.UI
             {
                 RefreshDisplayEndingImage();
                 ApplyEndingImages();
-                ApplyCreditText();
-                ApplyEndingPanelTexts();
             }
         }
 
@@ -146,7 +138,6 @@ namespace Cooking.UI
             running = true;
             dialogActive = false;
             awaitingCgClick = false;
-            creditsScrolling = false;
 
             GameSession session = GameRoot.Instance != null ? GameRoot.Instance.Session : null;
             resolved = EndingRules.Resolve(session, endingCatalog, diaryCatalog, npcCatalog);
@@ -245,10 +236,9 @@ namespace Cooking.UI
                 return;
             }
 
-            displayEndingImage = EndingCatalog.PickSprite(
-                GameLanguage.Current,
-                resolved.endingImageZh,
-                resolved.endingImageEn);
+            Sprite zh = hasAllNpcProps ? resolved.metaEndingImageZh : resolved.endingImageZh;
+            Sprite en = hasAllNpcProps ? resolved.metaEndingImageEn : resolved.endingImageEn;
+            displayEndingImage = EndingCatalog.PickSprite(GameLanguage.Current, zh, en);
         }
 
         void PrepareDialogPhase()
@@ -470,9 +460,49 @@ namespace Cooking.UI
             awaitingCgClick = false;
         }
 
+        void BindEndingButtons()
+        {
+            if (quitButton != null)
+            {
+                quitButton.onClick.RemoveListener(QuitGame);
+                quitButton.onClick.AddListener(QuitGame);
+            }
+            else
+                Debug.LogError("需要 ScrollPanel/QuitButton，并且带 Button。", this);
+
+            if (backMenuButton != null)
+            {
+                backMenuButton.onClick.RemoveListener(BackToMenu);
+                backMenuButton.onClick.AddListener(BackToMenu);
+            }
+            else
+                Debug.LogError("需要 ScrollPanel/BackMeunButton，并且带 Button。", this);
+        }
+
+        void QuitGame()
+        {
+            AudioManager.PlayClick();
+            Application.Quit();
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        }
+
+        void BackToMenu()
+        {
+            GameRoot root = GameRoot.Instance;
+            if (root == null)
+                return;
+
+            AudioManager.PlayClick();
+            if (gameOverPanel != null)
+                gameOverPanel.SetActive(false);
+
+            root.ReturnToMenu();
+        }
+
         void ShowEndingPanelIntro()
         {
-            creditsScrolling = false;
             if (endingPanel != null)
                 endingPanel.SetActive(true);
 
@@ -483,7 +513,6 @@ namespace Cooking.UI
                 endingPanelImage.gameObject.SetActive(true);
 
             ApplyEndingImages();
-            ApplyEndingPanelTexts();
         }
 
         void ShowEndingScrollPanel()
@@ -495,9 +524,6 @@ namespace Cooking.UI
                 scrollPanel.SetActive(true);
 
             ApplyEndingImages();
-            ApplyCreditText();
-            ResetCreditPosition();
-            creditsScrolling = true;
         }
 
         void ApplyEndingImages()
@@ -513,63 +539,6 @@ namespace Cooking.UI
 
             image.sprite = sprite;
             image.enabled = sprite != null;
-        }
-
-        void ApplyEndingPanelTexts()
-        {
-            if (endingText == null)
-                return;
-
-            if (resolved == null)
-            {
-                endingText.text = "";
-                return;
-            }
-
-            endingText.text = EndingCatalog.Pick(
-                GameLanguage.Current,
-                resolved.panelTextZh,
-                resolved.panelTextEn);
-        }
-
-        void ApplyCreditText()
-        {
-            if (creditText == null)
-                return;
-
-            if (resolved == null)
-            {
-                creditText.text = "";
-                return;
-            }
-
-            creditText.text = EndingCatalog.Pick(
-                GameLanguage.Current,
-                resolved.creditTextZh,
-                resolved.creditTextEn);
-            // 顶对齐，避免固定高度 + 居中导致文字起点远在屏外。
-            creditText.verticalAlignment = VerticalAlignmentOptions.Top;
-            creditText.overflowMode = TextOverflowModes.Overflow;
-            creditText.ForceMeshUpdate(true);
-        }
-
-        void ResetCreditPosition()
-        {
-            if (creditRect == null || creditText == null)
-                return;
-
-            Canvas.ForceUpdateCanvases();
-            creditText.ForceMeshUpdate(true);
-
-            float textHeight = Mathf.Max(1f, creditText.preferredHeight);
-            creditRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, textHeight);
-
-            RectTransform parent = creditRect.parent as RectTransform;
-            float parentHeight = parent != null ? parent.rect.height : 1080f;
-
-            // 让文字顶部刚好在父面板底边外侧，立刻能滚进视野。
-            float startY = -parentHeight * 0.5f - textHeight * (1f - creditRect.pivot.y);
-            creditRect.anchoredPosition = new Vector2(creditRect.anchoredPosition.x, startY);
         }
 
         void ApplyClickText()
@@ -646,7 +615,6 @@ namespace Cooking.UI
 
         void HideChildren()
         {
-            creditsScrolling = false;
             if (dialogPanel != null)
                 dialogPanel.SetActive(false);
             if (metaPanel != null)
@@ -778,13 +746,6 @@ namespace Cooking.UI
                     if (found != null)
                         scrollPanel = found.gameObject;
                 }
-
-                if (endingText == null)
-                {
-                    Transform found = endingPanel.transform.Find("endingText");
-                    if (found != null)
-                        endingText = found.GetComponent<TMP_Text>();
-                }
             }
 
             if (scrollPanel != null)
@@ -796,15 +757,19 @@ namespace Cooking.UI
                         scrollEndingImage = found.GetComponent<Image>();
                 }
 
-                if (creditText == null)
+                if (quitButton == null)
                 {
-                    Transform found = scrollPanel.transform.Find("CreditText");
+                    Transform found = scrollPanel.transform.Find("QuitButton");
                     if (found != null)
-                        creditText = found.GetComponent<TMP_Text>();
+                        quitButton = found.GetComponent<Button>();
                 }
 
-                if (creditRect == null && creditText != null)
-                    creditRect = creditText.rectTransform;
+                if (backMenuButton == null)
+                {
+                    Transform found = scrollPanel.transform.Find("BackMeunButton");
+                    if (found != null)
+                        backMenuButton = found.GetComponent<Button>();
+                }
             }
 
             if (fadeOverlay == null)

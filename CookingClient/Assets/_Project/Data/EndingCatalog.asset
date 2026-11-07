@@ -73,18 +73,10 @@ MonoBehaviour:
     cg: {fileID: 21300000, guid: f3fbfbb32923cb24bb624fcd4ea7bb8e, type: 3}
     endingImageZh: {fileID: 21300000, guid: 7eac7446b1b79b546bcf7399e6596349, type: 3}
     endingImageEn: {fileID: 21300000, guid: 6d2fddef06ca41d439675f42d1d68a1a, type: 3}
-    panelTextZh: "\uFF08\u597D\u7ED3\u5C40\u5360\u4F4D\u6587\u6848\uFF09"
-    panelTextEn: 
+    metaEndingImageZh: {fileID: 21300000, guid: 5ff8fe0578ee915488321f95911f7b9a, type: 3}
+    metaEndingImageEn: {fileID: 21300000, guid: 27a30461cfac86841bfea05e92100658, type: 3}
     clickTextZh: "\u70B9\u51FB\u4EFB\u610F\u5904\u7EE7\u7EED"
     clickTextEn: 
-    creditTextZh: "\u7279\u522B\u6F14\u51FA\n\u5E73\uFF01 \u9970\u6F14 \u7AE0\u9C7C\u732B\n\u56FE\u56FE
-      \u9970\u6F14 \u9F3B\u560E\u56FE\n\u9694\u513FDIGE \u9970\u6F14 \u793E\u79EF\u98DF\n\u6C89\u821F
-      \u9970\u6F14 \u541F\u6E38\u8BD7\u4EBA\n59 \u9970\u6F14 \u5C0F\u8BF4\u5BB6\n\n\u6E38\u620F\u7B56\u5212\uFF1A\u6797\u5B50\u5927\u4E86\u4EC0\u4E48\u540E\u53A8\u90FD\u6709\n\n\u4E3B\u7B56\u5212\uFF1A\u5E73!\n\u4E3B\u7A0B\u5E8F\uFF1A\u56FE\u56FE\n\u6E38\u620F\u7F8E\u672F\uFF1A\u9694\u513FDIGE\u300159\n\nUI\u8BBE\u8BA1\uFF1A\u9694\u513FDIGE\n\u4EBA\u7269\u8BBE\u8BA1\uFF1A59\n\u6587\u6848\u7B56\u5212\uFF1A59\n\u7FFB\u8BD1\uFF1A\u5E73\uFF01\n\n\u97F3\u4E50\u8BBE\u8BA1\uFF1A\u6C89\u821F"
-    creditTextEn: "Special Thanks\nPing! as Octopus Cat\nTutu as Lil Tu\n\u9694\u513FDIGE
-      as Sheji Food\nChenzhou as Bard\n59 as Novelist\n\nGame Design: When the forest
-      is big, every kitchen has something\n\nLead Design: Ping!\nLead Programming:
-      Tutu\nArt: \u9694\u513FDIGE, 59\n\nUI: \u9694\u513FDIGE\nCharacter Design:
-      59\nWriting: 59\nTranslation: Ping!\n\nMusic: Chenzhou"
     lines:
     - speaker: "\u4E3B\u89D2"
       textZh: "\u771F\u662F\u8352\u5510\u3002"
@@ -165,18 +157,10 @@ MonoBehaviour:
     cg: {fileID: 21300000, guid: d181836628ec6f040adf44f04eaa24bf, type: 3}
     endingImageZh: {fileID: 21300000, guid: 321becf89652f414983cbe3e558e04a2, type: 3}
     endingImageEn: {fileID: 21300000, guid: 3fd4b4592c1bce643a2a10762145053b, type: 3}
-    panelTextZh: "\uFF08\u666E\u901A\u7ED3\u5C40\u5360\u4F4D\u6587\u6848\uFF09"
-    panelTextEn: 
+    metaEndingImageZh: {fileID: 21300000, guid: e84a9048bdbe1f946a4845788c773893, type: 3}
+    metaEndingImageEn: {fileID: 21300000, guid: 316c04a776b58e84ba33295721e73ec5, type: 3}
     clickTextZh: "\u70B9\u51FB\u4EFB\u610F\u5904\u7EE7\u7EED"
     clickTextEn: 
-    creditTextZh: "\u7279\u522B\u6F14\u51FA\n\u5E73\uFF01 \u9970\u6F14 \u7AE0\u9C7C\u732B\n\u56FE\u56FE
-      \u9970\u6F14 \u9F3B\u560E\u56FE\n\u9694\u513FDIGE \u9970\u6F14 \u793E\u79EF\u98DF\n\u6C89\u821F
-      \u9970\u6F14 \u541F\u6E38\u8BD7\u4EBA\n59 \u9970\u6F14 \u5C0F\u8BF4\u5BB6\n\n\u6E38\u620F\u7B56\u5212\uFF1A\u6797\u5B50\u5927\u4E86\u4EC0\u4E48\u540E\u53A8\u90FD\u6709\n\n\u4E3B\u7B56\u5212\uFF1A\u5E73!\n\u4E3B\u7A0B\u5E8F\uFF1A\u56FE\u56FE\n\u6E38\u620F\u7F8E\u672F\uFF1A\u9694\u513FDIGE\u300159\n\nUI\u8BBE\u8BA1\uFF1A\u9694\u513FDIGE\n\u4EBA\u7269\u8BBE\u8BA1\uFF1A59\n\u6587\u6848\u7B56\u5212\uFF1A59\n\u7FFB\u8BD1\uFF1A\u5E73\uFF01\n\n\u97F3\u4E50\u8BBE\u8BA1\uFF1A\u6C89\u821F"
-    creditTextEn: "Special Thanks\nPing! as Octopus Cat\nTutu as Lil Tu\n\u9694\u513FDIGE
-      as Sheji Food\nChenzhou as Bard\n59 as Novelist\n\nGame Design: When the forest
-      is big, every kitchen has something\n\nLead Design: Ping!\nLead Programming:
-      Tutu\nArt: \u9694\u513FDIGE, 59\n\nUI: \u9694\u513FDIGE\nCharacter Design:
-      59\nWriting: 59\nTranslation: Ping!\n\nMusic: Chenzhou"
     lines:
     - speaker: "\u4E3B\u89D2"
       textZh: "\u8FD9\u4E48\u8BF4\u6765\uFF0C\u6211\u8FD9\u51E0\u5929\u7684\u4E00\u4E3E\u4E00\u52A8\u90FD\u88AB\u4F60\u770B\u4E86\u4E2A\u4E00\u6E05\u4E8C\u695A\uFF1F"

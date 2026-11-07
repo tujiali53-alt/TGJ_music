@@ -3149,6 +3149,7 @@ GameObject:
   - component: {fileID: 319362008}
   - component: {fileID: 319362007}
   - component: {fileID: 319362006}
+  - component: {fileID: 319362009}
   m_Layer: 5
   m_Name: BackMeunButton
   m_TagString: Untagged
@@ -3257,6 +3258,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319362004}
   m_CullTransparentMesh: 1
+--- !u!114 &319362009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319362004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f6478901234a5b6c7d8e9f012b42c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
+  id: ui.endingBackMenu
+  catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
+  language: 0
 --- !u!1 &323596134
 GameObject:
   m_ObjectHideFlags: 0
@@ -6510,6 +6526,7 @@ GameObject:
   - component: {fileID: 489507410}
   - component: {fileID: 489507412}
   - component: {fileID: 489507411}
+  - component: {fileID: 489507413}
   m_Layer: 5
   m_Name: CreditImage
   m_TagString: Untagged
@@ -6574,6 +6591,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 489507409}
   m_CullTransparentMesh: 1
+--- !u!114 &489507413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489507409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f6478901234a5b6c7d8e9f012b42c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
+  id: ui.endingCredits
+  catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
+  language: 0
 --- !u!1 &489531209
 GameObject:
   m_ObjectHideFlags: 0
@@ -50031,7 +50063,6 @@ MonoBehaviour:
   cgClickDelay: 3
   clickFadeDuration: 0.5
   endingImageHoldDuration: 3
-  creditScrollSpeed: 80
   gameOverPanel: {fileID: 1356708926}
   dialogPanel: {fileID: 1080488793}
   metaPanel: {fileID: 1506410018}
@@ -50047,9 +50078,8 @@ MonoBehaviour:
   endingPanelImage: {fileID: 1490761567}
   scrollPanel: {fileID: 271415444}
   scrollEndingImage: {fileID: 711122446}
-  creditText: {fileID: 2004065911}
-  creditRect: {fileID: 2004065910}
-  endingText: {fileID: 660802381}
+  quitButton: {fileID: 1206175857}
+  backMenuButton: {fileID: 319362006}
 --- !u!1 &1362788460
 GameObject:
   m_ObjectHideFlags: 0

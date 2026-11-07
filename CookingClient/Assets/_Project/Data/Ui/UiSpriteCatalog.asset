@@ -92,5 +92,11 @@ MonoBehaviour:
     spriteZh: {fileID: 21300000, guid: 7d2f43fb47d45f04c83f705b7aeb4ac4, type: 3}
     spriteEn: {fileID: 21300000, guid: 8bffb7d09769eff439527b08eeb624b3, type: 3}
   - id: ui.endingQuit
-    spriteZh: {fileID: 21300000, guid: 58ae5a50c0babef4da158e055c61bc4f, type: 3}
-    spriteEn: {fileID: 21300000, guid: 43fba7a161aaf7a4891dd225a7f7e489, type: 3}
+    spriteZh: {fileID: 21300000, guid: 115c6034629042c429da79598d82c74b, type: 3}
+    spriteEn: {fileID: 21300000, guid: c9c8a2d3dce278f419da454c791f5fbc, type: 3}
+  - id: ui.endingBackMenu
+    spriteZh: {fileID: 21300000, guid: b7a9da8069000cc4ab0fed5842967929, type: 3}
+    spriteEn: {fileID: 21300000, guid: 7389a93c7b83a6a46aee46ff6c60f7fa, type: 3}
+  - id: ui.endingCredits
+    spriteZh: {fileID: 21300000, guid: 7029916094be6c54481bb870e67a3f88, type: 3}
+    spriteEn: {fileID: 21300000, guid: 65a32037ffd8b2548ac1e9250e0b33b5, type: 3}
