@@ -694,8 +694,7 @@ namespace Cooking.EditorTools
                 if (!string.IsNullOrWhiteSpace(countText)
                     && !TryParseInt(countText, out count, "RecipeSeasonings/" + recipeId + ".count", result))
                     continue;
-                if (count <= 0)
-                    count = 1;
+                // count > 0 必需；==0 可选；<0 同值至少其一
 
                 if (!grouped.TryGetValue(recipeId, out List<RecipeSeasoning> list))
                 {

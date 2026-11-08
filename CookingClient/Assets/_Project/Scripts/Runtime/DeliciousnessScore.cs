@@ -261,7 +261,10 @@ namespace Cooking.Runtime
             if (expected.Count == 0)
                 return false;
 
-            return RecipeMatcher.SameSeasonings(item.SeasoningIds, expected);
+            return RecipeMatcher.SameSeasonings(
+                item.SeasoningIds,
+                expected,
+                RecipeMatcher.OptionalSeasonings(recipe, item.DefinitionId));
         }
 
         static int LargestCluster(List<float> times, float window)

@@ -18,6 +18,7 @@ namespace Cooking.Data
     {
         public string seasoningId;
         public string targetIngredientId;
+        // count > 0：必需；count == 0：可选；count < 0：同值互斥组，至少满足其一
         public int count;
     }
 

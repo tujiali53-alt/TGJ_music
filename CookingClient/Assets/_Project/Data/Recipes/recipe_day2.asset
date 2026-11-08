@@ -41,6 +41,9 @@ MonoBehaviour:
     count: 1
   - seasoningId: season_salt
     targetIngredientId: ing_onion
+    count: 0
+  - seasoningId: season_oil
+    targetIngredientId: ing_onion
     count: 1
   - seasoningId: season_oil
     targetIngredientId: ing_beef
