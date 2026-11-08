@@ -109,6 +109,7 @@ namespace Cooking.UI
             if (TutorialDirector.Instance != null && TutorialDirector.Instance.BlocksCookingInput)
                 return;
 
+            TrayToggle.OpenCurrent();
             AudioManager.PlayClick();
             bool cutAny = false;
             for (int i = 0; i < held.Count; i++)
