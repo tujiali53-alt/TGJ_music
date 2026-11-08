@@ -21,7 +21,7 @@ MonoBehaviour:
   - optionId: opt_a_1
     order: 1
     displayNameZh: "\u8BF7\u6559\u5200\u6280"
-    displayNameEn: Ask him about his knife skills.
+    displayNameEn: Ask his knife skills
     conditionType: 0
     conditionValue: 0
     successFaces: 6
@@ -34,7 +34,7 @@ MonoBehaviour:
   - optionId: opt_a_2
     order: 2
     displayNameZh: "\u8D5E\u7F8E\u964C\u751F\u53A8\u5E08"
-    displayNameEn: Praise the stranger's cooking.
+    displayNameEn: Praise his cooking
     conditionType: 0
     conditionValue: 0
     successFaces: 6

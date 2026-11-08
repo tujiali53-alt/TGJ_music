@@ -20,8 +20,8 @@ MonoBehaviour:
   options:
   - optionId: opt_c_1
     order: 1
-    displayNameZh: 1
-    displayNameEn: 1
+    displayNameZh: "\u6572\u6572\u8717\u58F3"
+    displayNameEn: Knock on the snail shell
     conditionType: 0
     conditionValue: 0
     successFaces: 6
@@ -33,8 +33,8 @@ MonoBehaviour:
     failPortrait: {fileID: 0}
   - optionId: opt_c_2
     order: 2
-    displayNameZh: 2
-    displayNameEn: 2
+    displayNameZh: "\u5728\u65C1\u966A\u4F34"
+    displayNameEn: Stay by its side
     conditionType: 0
     conditionValue: 0
     successFaces: 6

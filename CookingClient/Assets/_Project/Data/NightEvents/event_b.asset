@@ -21,7 +21,7 @@ MonoBehaviour:
   - optionId: opt_b_1
     order: 1
     displayNameZh: "\u6295\u7ED9\u9C7C\u515A"
-    displayNameEn: Vote for the Fish Party.
+    displayNameEn: Vote for the Fish
     conditionType: 0
     conditionValue: 0
     successFaces: 6
@@ -34,7 +34,7 @@ MonoBehaviour:
   - optionId: opt_b_2
     order: 2
     displayNameZh: "\u6295\u7ED9\u7C73\u515A"
-    displayNameEn: Vote for the Rice Party.
+    displayNameEn: Vote for the Rice
     conditionType: 0
     conditionValue: 0
     successFaces: 6
@@ -47,7 +47,7 @@ MonoBehaviour:
   - optionId: opt_b_3
     order: 3
     displayNameZh: "\u8FD9\u90FD\u5565\u554A\uFF0C\u6211\u8981\u5F03\u7968\uFF01\uFF01"
-    displayNameEn: What even is this? I'm abstaining!!
+    displayNameEn: ...? Abstain!
     conditionType: 0
     conditionValue: 0
     successFaces: 6
