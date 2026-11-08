@@ -384,6 +384,9 @@ namespace Cooking.UI
                 {
                     reward.gameObject.SetActive(true);
                     reward.text = SuccessPercent(option);
+                    reward.alignment = GameLanguage.Current == DiaryLanguage.En
+                        ? TextAlignmentOptions.Right
+                        : TextAlignmentOptions.Left;
                 }
 
                 DialogOptionFit.Apply(button, label, reward, reward != null && reward.gameObject.activeSelf);
@@ -991,7 +994,7 @@ namespace Cooking.UI
             int faces = NightCheck.EffectiveFaces(option.successFaces, buffDelta);
             int percent = Mathf.RoundToInt(faces * 100f / 6f);
             return GameLanguage.Current == DiaryLanguage.En
-                ? "Success Rate " + percent + "%"
+                ? percent + "%"
                 : "成功概率" + percent + "%";
         }
 
