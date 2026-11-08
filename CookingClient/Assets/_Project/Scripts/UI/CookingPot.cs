@@ -176,7 +176,7 @@ namespace Cooking.UI
             if (egg == null || egg.id != "ing_egg")
                 return false;
 
-            if (item.CookMethod != CookMethod.Boiled)
+            if (item.CookMethod == CookMethod.Raw)
                 return false;
 
             if (item.Doneness < DeliciousnessScore.OptimalStart(egg) || item.Doneness >= egg.maxDoneness)
@@ -380,7 +380,7 @@ namespace Cooking.UI
                 Quantity = 1,
                 Doneness = done.optimalDoneness,
                 Shape = CutShape.Whole,
-                CookMethod = CookMethod.Boiled,
+                CookMethod = egg.CookMethod,
                 SeasoningIds = seasonings,
                 IsCharcoal = false,
                 OptimalHitTime = egg.OptimalHitTime >= 0f ? egg.OptimalHitTime : Time.time
