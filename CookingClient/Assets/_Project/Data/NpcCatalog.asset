@@ -93,7 +93,8 @@ MonoBehaviour:
     - optionId: opt_bard_you
       order: 3
       textZh: "\u4E5F\u8BB8\u662F\u795E\u660E\u7684\u542F\u793A\uFF0C\u4E5F\u8BB8\u53EA\u662F\u6211\u4E0D\u7518\u5FC3\u5C31\u6B64\u6C89\u9ED8\u3002"
-      textEn: 
+      textEn: "Perhaps it was a revelation from the gods\u2014or perhaps I simply
+        refused to fall silent."
     - optionId: opt_bard_you
       order: 4
       textZh: "\u90A3\u65CB\u5F8B\u9A71\u4F7F\u7740\u6211\uFF0C\u51E0\u4E4E\u662F\u5F3A\u8FEB\u6211\u5C06\u5B83\u6B4C\u5531\uFF0C\u6211\u4E5F\u4E0D\u80FD\u4E0D\u6B4C\u5531\u3002"
@@ -261,7 +262,7 @@ MonoBehaviour:
       textEn: But before that, I need to continue finishing my research work.
   - id: npc_designer
     displayNameZh: "\u793E\u79EF\u98DF"
-    displayNameEn: Designer
+    displayNameEn: Dyspegniter
     eventNameZh: "\u79EF\u98DF\uFF1F\u8BBE\u8BA1\u5E08\uFF01"
     eventNameEn: 
     portrait: {fileID: 21300000, guid: 788a9a52cc7a11c4a984f5ee2dd4433d, type: 3}
@@ -271,7 +272,7 @@ MonoBehaviour:
     - optionId: opt_designer_bigger
       order: 1
       displayNameZh: "\u628A\u56FE\u753B\u5927\u4E00\u70B9"
-      displayNameEn: 
+      displayNameEn: Draw the picture bigger.
       rewards:
       - kind: 0
         rewardId: ing_rice
@@ -282,7 +283,7 @@ MonoBehaviour:
     - optionId: opt_designer_less
       order: 2
       displayNameZh: "\u5C11\u5403\u4E00\u70B9"
-      displayNameEn: 
+      displayNameEn: Eat less.
       rewards:
       - kind: 1
         rewardId: prop_bucket
@@ -291,75 +292,79 @@ MonoBehaviour:
     - optionId: 
       order: 1
       textZh: "\u4E0D\u5BF9\u2026\u2026\u8FD8\u662F\u4E0D\u5BF9\u2026\u2026"
-      textEn: 
+      textEn: No... still not right...
     - optionId: 
       order: 2
       textZh: "\u554A\uFF0C\u4F60\u6765\u5F97\u6B63\u597D\uFF01\u5FEB\u5E2E\u6211\u770B\u770B\u8FD9\u4E2A\uFF01"
-      textEn: 
+      textEn: Ah, perfect timing! Come take a look at this for me!
     - optionId: 
       order: 3
       textZh: "\u6211\u53EB\u793E\u79EF\u98DF\uFF0C\u662F\u4E00\u540D\u8BBE\u8BA1\u5E08\u3002"
-      textEn: 
+      textEn: I'm Dyspegniter, an artist.
     - optionId: 
       order: 4
       textZh: "\u4E8B\u60C5\u662F\u8FD9\u6837\u7684\uFF0C\u81EA\u4ECE\u77E5\u9053\u4E16\u754C\u8981\u6BC1\u706D\u540E\uFF0C\u6211\u5C31\u638F\u7A7A\u79EF\u84C4\uFF0C\u4E70\u4E0B\u4E86\u6240\u6709\u60F3\u5403\u7684\u4E1C\u897F\u3002"
-      textEn: 
+      textEn: "Here's the thing\u2014ever since I found out the world was ending,
+        I emptied my savings and bought everything I want to eat."
     - optionId: 
       order: 5
       textZh: "\u6BD5\u7ADF\u90FD\u8981\u4E16\u754C\u672B\u65E5\u4E86\uFF0C\u603B\u4E0D\u80FD\u7559\u4E0B\u4EC0\u4E48\u9057\u61BE\u5427\uFF1F"
-      textEn: 
+      textEn: I mean, can't leave with regrets, right?
     - optionId: 
       order: 6
       textZh: "\u7ED3\u679C\u2026\u2026\u6211\u597D\u50CF\u6CA1\u529E\u6CD5\u4E00\u53E3\u6C14\u628A\u5B83\u4EEC\u5168\u585E\u8FDB\u53BB\u3002"
-      textEn: 
+      textEn: Turns out... I can't stuff it all in at once.
     - optionId: 
       order: 7
       textZh: "\u800C\u4E14\u521A\u624D\u5403\u5F97\u592A\u591A\uFF0C\u73B0\u5728\u5F2F\u8170\u90FD\u8D39\u52B2\u2026\u2026"
-      textEn: 
+      textEn: And I ate so much just now that I can barely bend over...
     - optionId: 
       order: 8
       textZh: "\u4E8E\u662F\u6211\u6309\u7167\u6211\u7684\u80C3\u5BB9\u91CF\u753B\u4E86\u5F20\u56FE\uFF0C\u51C6\u5907\u597D\u597D\u89C4\u5212\u4E00\u4E0B\u3002"
-      textEn: 
+      textEn: So I drew a diagram based on my stomach capacity, planning to map it
+        all out properly.
     - optionId: opt_designer_bigger
       order: 1
       textZh: "\u6211\u600E\u4E48\u4F1A\u60F3\u4E0D\u5230\u5462\uFF1F"
-      textEn: 
+      textEn: Why didn't I think of that?
     - optionId: opt_designer_bigger
       order: 2
       textZh: "\u53EA\u8981\u653E\u5927\u753B\u5E03\uFF0C\u5F53\u7136\u80FD\u628A\u5B83\u4EEC\u5168\u90E8\u90FD\u88C5\u4E0B\u3002"
-      textEn: 
+      textEn: Just enlarge the canvas, and of course everything will fit.
     - optionId: opt_designer_bigger
       order: 3
       textZh: "\u53EF\u4F60\u662F\u4E0D\u662F\u5FD8\u8BB0\u4E86\u4E00\u4EF6\u4E8B\uFF1F"
-      textEn: 
+      textEn: But didn't you forget one thing?
     - optionId: opt_designer_bigger
       order: 4
       textZh: "\u6211\u7684\u80C3\u5E76\u4E0D\u80FD\u8DDF\u7740\u653E\u5927\u5440\uFF01"
-      textEn: 
+      textEn: My stomach doesn't scale up with it!
     - optionId: opt_designer_less
       order: 1
       textZh: "\u4F60\u8BF4\u5F97\u8F7B\u5DE7\uFF01"
-      textEn: 
+      textEn: Easy for you to say!
     - optionId: opt_designer_less
       order: 2
       textZh: "\u4E07\u4E00\u660E\u5929\u5C31\u662F\u4E16\u754C\u672B\u65E5\u5462\uFF1F\u5C11\u5403\u7684\u8BDD\u6211\u5C82\u4E0D\u662F\u4E8F\u5927\u53D1\u4E86\uFF1F"
-      textEn: 
+      textEn: What if tomorrow is the end of the world? If I eat less, wouldn't I
+        be losing out big time?
     - optionId: opt_designer_less
       order: 3
       textZh: "\u545C\u545C\u2026\u2026\u4F46\u8981\u662F\u4E00\u53E3\u6C14\u5403\u592A\u591A\uFF0C\u6211\u4F1A\u8FDE\u7AD9\u90FD\u7AD9\u4E0D\u8D77\u6765\u2026\u2026"
-      textEn: 
+      textEn: Waaah... but if I eat too much at once, I won't even be able to stand...
     - optionId: opt_designer_less
       order: 4
       textZh: "\u6709\u4E86\uFF01"
-      textEn: 
+      textEn: Eureka!
     - optionId: opt_designer_less
       order: 5
       textZh: "\u53EA\u8981\u6BCF\u5929\u5728\u4E09\u9910\u5916\u518D\u52A0\u4E0A\u4E24\u987F\u4E0B\u5348\u8336\uFF0C\u5C31\u80FD\u5168\u90E8\u5403\u5B8C\u4E86\u3002"
-      textEn: 
+      textEn: If I just add two afternoon teas on top of three meals a day, I can
+        finish it all.
     - optionId: opt_designer_less
       order: 6
       textZh: "\u54C8\u54C8\uFF0C\u4E0D\u6127\u662F\u6211\uFF01\u8FD9\u5C31\u662F\u4E13\u4E1A\u8BBE\u8BA1\u5E08\u7684\u6C34\u5E73\uFF01"
-      textEn: 
+      textEn: Haha, that's me! That's the level of a professional artist!
   - id: npc_tutu
     displayNameZh: "\u9F3B\u560E\u56FE"
     displayNameEn: Lil Tu

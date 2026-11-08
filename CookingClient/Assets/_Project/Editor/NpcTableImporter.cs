@@ -24,7 +24,7 @@ namespace Cooking.EditorTools
             "吟游诗人：", "吟游诗人:", "Bard:", "Bard：",
             "猫章鱼：", "猫章鱼:", "Ocatopus:", "Ocatopus：",
             "鼻嘎图：", "鼻嘎图:", "Lil Tu:", "Lil Tu：",
-            "社积食：", "社积食:", "Designer:", "Designer："
+            "社积食：", "社积食:", "Dyspegniter:", "Dyspegniter：", "Designer:", "Designer："
         };
 
         [MenuItem("Cooking/Import Npc Tables")]
@@ -129,13 +129,15 @@ namespace Cooking.EditorTools
                 return "猫章鱼英文名应为 Ocatopus。";
             if (tutu.unlockDay != 6 || tutu.phase != DayPhase.Day || tutu.portrait == null)
                 return "鼻嘎图应为第 6 天白天，并有头像。";
-            if (designer.displayNameEn != "Designer")
-                return "社积食英文名应为 Designer。";
+            if (designer.displayNameEn != "Dyspegniter")
+                return "社积食英文名应为 Dyspegniter。";
 
-            if (!HasLine(bard, "opt_bard_you", "也许是神明的启示，也许只是我不甘心就此沉默。", ""))
-                return "吟游诗人「那你呢」缺少没有英文的那一句。";
-            if (HasAnyEnglish(designer))
-                return "社积食的句子和选项英文应留空。";
+            if (!HasLine(
+                bard,
+                "opt_bard_you",
+                "也许是神明的启示，也许只是我不甘心就此沉默。",
+                "Perhaps it was a revelation from the gods—or perhaps I simply refused to fall silent."))
+                return "吟游诗人「那你呢」缺少英文那一句。";
             if (LineStartsWithSpeaker(novelist))
                 return "小说家句子仍带着说话人前缀。";
 
@@ -536,29 +538,6 @@ namespace Cooking.EditorTools
                 NpcLine line = character.lines[i];
                 if (line != null && line.optionId == optionId && line.textZh == zh && (line.textEn ?? "") == en)
                     return true;
-            }
-
-            return false;
-        }
-
-        static bool HasAnyEnglish(NpcCharacter character)
-        {
-            if (character.options != null)
-            {
-                for (int i = 0; i < character.options.Count; i++)
-                {
-                    if (character.options[i] != null && !string.IsNullOrEmpty(character.options[i].displayNameEn))
-                        return true;
-                }
-            }
-
-            if (character.lines != null)
-            {
-                for (int i = 0; i < character.lines.Count; i++)
-                {
-                    if (character.lines[i] != null && !string.IsNullOrEmpty(character.lines[i].textEn))
-                        return true;
-                }
             }
 
             return false;
