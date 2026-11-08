@@ -131,16 +131,18 @@ namespace Cooking.UI
 
         public void NotifyCut()
         {
-            if (!IsTutorialDay1() || !Needs(TutorialIds.Day1Fry))
+            if (!IsTutorialDay1())
                 return;
 
             if (Needs(TutorialIds.Day1AfterRecipe))
             {
-                PlayDaySegment(TutorialIds.Day1AfterRecipe, PlayCookingHintSequence);
+                PlayDaySegment(TutorialIds.Day1AfterRecipe, () =>
+                    PlayDaySegment(TutorialIds.Day1Fry, null));
                 return;
             }
 
-            PlayCookingHintSequence();
+            if (Needs(TutorialIds.Day1Fry))
+                PlayDaySegment(TutorialIds.Day1Fry, null);
         }
 
         public void NotifyPotPlaced(IngredientInstance item, CookMethod method)
@@ -150,7 +152,7 @@ namespace Cooking.UI
 
             if (method == CookMethod.Fried && Needs(TutorialIds.Day1Fry))
             {
-                PlayCookingHintSequence();
+                PlayDaySegment(TutorialIds.Day1Fry, null);
                 return;
             }
 
@@ -181,7 +183,7 @@ namespace Cooking.UI
             if (!Needs(TutorialIds.Day1Scoop))
                 return false;
 
-            PlayScoopSequence();
+            PlayDaySegment(TutorialIds.Day1Scoop, null);
             return true;
         }
 
@@ -193,7 +195,7 @@ namespace Cooking.UI
             if (!Has(TutorialIds.Day1Scoop) || !Needs(TutorialIds.Day1FindPlate))
                 return;
 
-            PlayPlateHintSequence();
+            PlayDaySegment(TutorialIds.Day1FindPlate, null);
         }
 
         public void NotifyPlateClicked()
@@ -201,7 +203,7 @@ namespace Cooking.UI
             if (!IsTutorialDay1() || !Has(TutorialIds.Day1Scoop) || !Needs(TutorialIds.Day1Plate))
                 return;
 
-            PlayPlateHintSequence();
+            PlayDaySegment(TutorialIds.Day1Plate, null);
         }
 
         public bool AllowPlateDrop()
@@ -227,25 +229,6 @@ namespace Cooking.UI
 
             Remember(TutorialIds.Day1FindPlate);
             Remember(TutorialIds.Day1Plate);
-        }
-
-        void PlayCookingHintSequence()
-        {
-            PlayDaySegment(TutorialIds.Day1Fry, () =>
-                PlayDaySegment(TutorialIds.Day1Oil, () =>
-                    PlayDaySegment(TutorialIds.Day1Boil, () =>
-                        PlayDaySegment(TutorialIds.Day1Salt, null))));
-        }
-
-        void PlayScoopSequence()
-        {
-            PlayDaySegment(TutorialIds.Day1Scoop, PlayPlateHintSequence);
-        }
-
-        void PlayPlateHintSequence()
-        {
-            PlayDaySegment(TutorialIds.Day1Plate, () =>
-                PlayDaySegment(TutorialIds.Day1FindPlate, null));
         }
 
         public void NotifyEatResultReady()
