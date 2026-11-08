@@ -32,7 +32,9 @@ namespace Cooking.Runtime
 
         static bool IsDay6PresentFreeOnFinalDay(DiaryEntry entry, GameSession session)
         {
-            if (entry.kind != DiaryKind.Present || entry.storyDay != 6)
+            if (entry.storyDay != 6)
+                return false;
+            if (entry.kind != DiaryKind.Present && entry.kind != DiaryKind.PresentFallback)
                 return false;
 
             return Moment(session.DayIndex, session.Phase) >= Moment(7, DayPhase.Day);
@@ -50,11 +52,76 @@ namespace Cooking.Runtime
                 if (entry == null || !entry.inBook || !IsUnlocked(entry, session))
                     continue;
 
+                // 第 6 天「现在的日记」由 present / fallback 二选一，不在这里直接加入。
+                if (entry.storyDay == 6 && entry.kind == DiaryKind.Present)
+                    continue;
+
                 pages.Add(entry);
             }
 
+            DiaryEntry day6 = ResolveDay6Present(catalog, session);
+            if (day6 != null)
+                pages.Add(day6);
+
             pages.Sort(CompareOrder);
             return pages;
+        }
+
+        // 第 1–5 天进书日记全解锁 → diary_day6_present；否则 → diary_day6_fallback。
+        static DiaryEntry ResolveDay6Present(DiaryCatalog catalog, GameSession session)
+        {
+            DiaryEntry present = FindKind(catalog, 6, DiaryKind.Present);
+            DiaryEntry fallback = FindKind(catalog, 6, DiaryKind.PresentFallback);
+            bool presentReady = present != null && IsUnlocked(present, session);
+            bool fallbackReady = fallback != null && IsUnlocked(fallback, session);
+            if (!presentReady && !fallbackReady)
+                return null;
+
+            if (AreStoryDaysUnlocked(catalog, session, 1, 5))
+                return presentReady ? present : null;
+
+            return fallbackReady ? fallback : null;
+        }
+
+        public static bool AreStoryDaysUnlocked(
+            DiaryCatalog catalog,
+            GameSession session,
+            int fromDay,
+            int toDay)
+        {
+            if (catalog == null || catalog.entries == null || session == null)
+                return false;
+
+            int needed = 0;
+            for (int i = 0; i < catalog.entries.Count; i++)
+            {
+                DiaryEntry entry = catalog.entries[i];
+                if (entry == null || !entry.inBook)
+                    continue;
+                if (entry.storyDay < fromDay || entry.storyDay > toDay)
+                    continue;
+
+                needed++;
+                if (!IsUnlocked(entry, session))
+                    return false;
+            }
+
+            return needed > 0;
+        }
+
+        static DiaryEntry FindKind(DiaryCatalog catalog, int storyDay, DiaryKind kind)
+        {
+            if (catalog == null || catalog.entries == null)
+                return null;
+
+            for (int i = 0; i < catalog.entries.Count; i++)
+            {
+                DiaryEntry entry = catalog.entries[i];
+                if (entry != null && entry.storyDay == storyDay && entry.kind == kind)
+                    return entry;
+            }
+
+            return null;
         }
 
         public static bool HasUnread(IList<DiaryEntry> visible, IList<string> seenIds)

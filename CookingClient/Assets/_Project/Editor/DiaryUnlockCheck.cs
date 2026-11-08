@@ -86,15 +86,17 @@ namespace Cooking.EditorTools
             session.DayIndex = 7;
             session.Phase = DayPhase.Day;
             List<DiaryEntry> finalDay = DiaryBook.Visible(catalog, session);
-            bool hasDay6Present = false;
-            for (int i = 0; i < finalDay.Count; i++)
-            {
-                if (finalDay[i] != null && finalDay[i].id == "diary_day6_present")
-                    hasDay6Present = true;
-            }
+            if (!HasId(finalDay, "diary_day6_fallback"))
+                return "第 1–5 天未全解锁时，第 7 天白天应显示 diary_day6_fallback。";
+            if (HasId(finalDay, "diary_day6_present"))
+                return "第 1–5 天未全解锁时，不应显示 diary_day6_present。";
 
-            if (!hasDay6Present)
-                return "第 7 天白天即使没做对第 6 天食谱，也应解锁 diary_day6_present。";
+            session.RememberCorrectRecipe("recipe_day2");
+            finalDay = DiaryBook.Visible(catalog, session);
+            if (!HasId(finalDay, "diary_day6_present"))
+                return "第 1–5 天全解锁后，第 7 天白天应显示 diary_day6_present。";
+            if (HasId(finalDay, "diary_day6_fallback"))
+                return "第 1–5 天全解锁后，不应再显示 diary_day6_fallback。";
 
             return null;
             }
@@ -193,10 +195,25 @@ namespace Cooking.EditorTools
                 Page("diary_day1_past", "recipe_day1", 1, DiaryKind.Past, 1, DayPhase.Night, 1, true),
                 Page("diary_day1_present", "recipe_day1", 1, DiaryKind.Present, 2, DayPhase.Day, 2, true),
                 Page("diary_day2_past", "recipe_day2", 2, DiaryKind.Past, 2, DayPhase.Night, 3, true),
+                Page("diary_day2_present", "recipe_day2", 2, DiaryKind.Present, 3, DayPhase.Day, 4, true),
                 Page("diary_day6_present", "recipe_day6", 6, DiaryKind.Present, 7, DayPhase.Day, 12, true),
-                Page("diary_day6_fallback", "recipe_day1", 6, DiaryKind.PresentFallback, 2, DayPhase.Day, 13, false)
+                Page("diary_day6_fallback", "recipe_day6", 6, DiaryKind.PresentFallback, 7, DayPhase.Day, 13, false)
             };
             return catalog;
+        }
+
+        static bool HasId(List<DiaryEntry> pages, string id)
+        {
+            if (pages == null)
+                return false;
+
+            for (int i = 0; i < pages.Count; i++)
+            {
+                if (pages[i] != null && pages[i].id == id)
+                    return true;
+            }
+
+            return false;
         }
 
         static DiaryEntry Page(
