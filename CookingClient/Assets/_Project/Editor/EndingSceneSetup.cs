@@ -66,7 +66,6 @@ namespace Cooking.EditorTools
             so.FindProperty("cgClickDelay").floatValue = 3f;
             so.FindProperty("clickFadeDuration").floatValue = 0.5f;
             so.FindProperty("endingImageHoldDuration").floatValue = 3f;
-            so.FindProperty("creditScrollSpeed").floatValue = 80f;
             so.FindProperty("gameOverPanel").objectReferenceValue = gameOver.gameObject;
 
             so.FindProperty("dialogPanel").objectReferenceValue =
@@ -125,7 +124,7 @@ namespace Cooking.EditorTools
             if (endingPanel != null)
             {
                 AssignImage(so, "endingPanelImage", endingPanel.Find("endingImage"));
-                AssignText(so, "endingText", endingPanel.Find("endingText"));
+                DestroyNamed(endingPanel, "endingText");
 
                 scrollPanel = endingPanel.Find("ScrollPanel");
                 so.FindProperty("scrollPanel").objectReferenceValue =
@@ -134,24 +133,15 @@ namespace Cooking.EditorTools
                 if (scrollPanel != null)
                 {
                     AssignImage(so, "scrollEndingImage", scrollPanel.Find("endingImage"));
-                    Transform credit = scrollPanel.Find("CreditText");
-                    if (credit != null)
-                    {
-                        so.FindProperty("creditText").objectReferenceValue =
-                            credit.GetComponent<TMP_Text>();
-                        so.FindProperty("creditRect").objectReferenceValue =
-                            credit.GetComponent<RectTransform>();
-                    }
-
+                    AssignButton(so, "quitButton", scrollPanel.Find("QuitButton"));
+                    AssignButton(so, "backMenuButton", scrollPanel.Find("BackMeunButton"));
+                    DestroyNamed(scrollPanel, "CreditText");
                     scrollPanel.gameObject.SetActive(false);
                 }
 
                 Transform panelImage = endingPanel.Find("endingImage");
                 if (panelImage != null)
                     panelImage.gameObject.SetActive(false);
-                Transform endingText = endingPanel.Find("endingText");
-                if (endingText != null)
-                    endingText.gameObject.SetActive(false);
             }
 
             so.ApplyModifiedPropertiesWithoutUndo();
@@ -222,12 +212,22 @@ namespace Cooking.EditorTools
             return fadeT.GetComponent<Image>();
         }
 
-        static void AssignText(SerializedObject so, string property, Transform target)
+        static void DestroyNamed(Transform parent, string childName)
+        {
+            if (parent == null)
+                return;
+
+            Transform found = parent.Find(childName);
+            if (found != null)
+                Undo.DestroyObjectImmediate(found.gameObject);
+        }
+
+        static void AssignButton(SerializedObject so, string property, Transform target)
         {
             if (target == null)
                 return;
 
-            so.FindProperty(property).objectReferenceValue = target.GetComponent<TMP_Text>();
+            so.FindProperty(property).objectReferenceValue = target.GetComponent<Button>();
         }
 
         static void AssignImage(SerializedObject so, string property, Transform target)

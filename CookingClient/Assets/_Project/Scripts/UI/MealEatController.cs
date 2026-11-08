@@ -21,8 +21,6 @@ namespace Cooking.UI
         [SerializeField] Button enterNightButton;
         [SerializeField] Button oneMoreButton;
         [SerializeField] Button overButton;
-        [SerializeField] Button quitButton;
-        [SerializeField] Button backMenuButton;
         [SerializeField] TMP_Text mealsText;
         [SerializeField] TMP_Text deliciousnessText;
         [SerializeField] TMP_Text ratingFirstText;
@@ -73,12 +71,6 @@ namespace Cooking.UI
 
             if (overButton == null)
                 overButton = FindButton("OverButton");
-
-            if (quitButton == null)
-                quitButton = FindButton("QuitButton");
-
-            if (backMenuButton == null)
-                backMenuButton = FindButton("BackMeunButton");
 
             if (mealsText == null)
                 mealsText = FindText("NumberOfMealsText");
@@ -164,16 +156,6 @@ namespace Cooking.UI
             else
                 overButton.onClick.AddListener(OpenGameOver);
 
-            if (quitButton == null)
-                Debug.LogError("需要 EndingPanel/QuitButton，并且带 Button。", this);
-            else
-                quitButton.onClick.AddListener(QuitGame);
-
-            if (backMenuButton == null)
-                Debug.LogError("需要 EndingPanel/BackMeunButton，并且带 Button。", this);
-            else
-                backMenuButton.onClick.AddListener(BackToMenu);
-
             if (mealsText == null)
                 Debug.LogError("需要 NumberOfMealsText。", this);
 
@@ -235,12 +217,6 @@ namespace Cooking.UI
 
             if (overButton != null)
                 overButton.onClick.RemoveListener(OpenGameOver);
-
-            if (quitButton != null)
-                quitButton.onClick.RemoveListener(QuitGame);
-
-            if (backMenuButton != null)
-                backMenuButton.onClick.RemoveListener(BackToMenu);
         }
 
         void OnLanguageChanged()
@@ -434,30 +410,6 @@ namespace Cooking.UI
                 Debug.LogError("需要 Canvas/GameOverPanel 上的 EndingSequenceController。", this);
 
             resolving = false;
-        }
-
-        public void QuitGame()
-        {
-            AudioManager.PlayClick();
-            Application.Quit();
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#endif
-        }
-
-        public void BackToMenu()
-        {
-            GameRoot root = GameRoot.Instance;
-            if (root == null)
-                return;
-
-            AudioManager.PlayClick();
-            StopComments();
-            if (gameOverPanel != null)
-                gameOverPanel.SetActive(false);
-
-            resolving = false;
-            root.ReturnToMenu();
         }
 
         void ApplySummary()

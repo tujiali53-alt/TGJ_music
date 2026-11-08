@@ -131,10 +131,16 @@ namespace Cooking.UI
 
         public void NotifyCut()
         {
-            if (!IsTutorialDay1() || !Has(TutorialIds.Day1AfterRecipe) || !Needs(TutorialIds.Day1Fry))
+            if (!IsTutorialDay1() || !Needs(TutorialIds.Day1Fry))
                 return;
 
-            PlayDaySegment(TutorialIds.Day1Fry, null);
+            if (Needs(TutorialIds.Day1AfterRecipe))
+            {
+                PlayDaySegment(TutorialIds.Day1AfterRecipe, PlayCookingHintSequence);
+                return;
+            }
+
+            PlayCookingHintSequence();
         }
 
         public void NotifyPotPlaced(IngredientInstance item, CookMethod method)
@@ -142,20 +148,20 @@ namespace Cooking.UI
             if (!IsTutorialDay1() || item == null || item.DefinitionId != "ing_mushroom")
                 return;
 
-            if (method == CookMethod.Fried
-                && Has(TutorialIds.Day1Fry)
-                && Needs(TutorialIds.Day1Oil))
+            if (method == CookMethod.Fried && Needs(TutorialIds.Day1Fry))
+            {
+                PlayCookingHintSequence();
+                return;
+            }
+
+            if (method == CookMethod.Fried && Needs(TutorialIds.Day1Oil))
             {
                 PlayDaySegment(TutorialIds.Day1Oil, null);
                 return;
             }
 
-            if (method == CookMethod.Boiled
-                && Has(TutorialIds.Day1Boil)
-                && Needs(TutorialIds.Day1Salt))
-            {
+            if (method == CookMethod.Boiled && Needs(TutorialIds.Day1Salt))
                 PlayDaySegment(TutorialIds.Day1Salt, null);
-            }
         }
 
         public void NotifySeasoned(IngredientInstance item, string seasoningId)
@@ -163,20 +169,20 @@ namespace Cooking.UI
             if (!IsTutorialDay1() || item == null || item.DefinitionId != "ing_mushroom")
                 return;
 
-            if (seasoningId == "season_oil"
-                && Has(TutorialIds.Day1Oil)
-                && Needs(TutorialIds.Day1Boil))
-            {
+            if (seasoningId == "season_oil" && Needs(TutorialIds.Day1Boil))
                 PlayDaySegment(TutorialIds.Day1Boil, null);
-                return;
-            }
+        }
 
-            if (seasoningId == "season_salt"
-                && Has(TutorialIds.Day1Salt)
-                && Needs(TutorialIds.Day1Scoop))
-            {
-                PlayDaySegment(TutorialIds.Day1Scoop, null);
-            }
+        public bool TryHandleOptimalDoneness(IngredientInstance item)
+        {
+            if (!IsTutorialDay1() || item == null || item.DefinitionId != "ing_mushroom")
+                return false;
+
+            if (!Needs(TutorialIds.Day1Scoop))
+                return false;
+
+            PlayScoopSequence();
+            return true;
         }
 
         public void NotifyReturnedToInventory(IngredientInstance item)
@@ -187,15 +193,15 @@ namespace Cooking.UI
             if (!Has(TutorialIds.Day1Scoop) || !Needs(TutorialIds.Day1FindPlate))
                 return;
 
-            PlayDaySegment(TutorialIds.Day1FindPlate, null);
+            PlayPlateHintSequence();
         }
 
         public void NotifyPlateClicked()
         {
-            if (!IsTutorialDay1() || !Has(TutorialIds.Day1FindPlate) || !Needs(TutorialIds.Day1Plate))
+            if (!IsTutorialDay1() || !Has(TutorialIds.Day1Scoop) || !Needs(TutorialIds.Day1Plate))
                 return;
 
-            PlayDaySegment(TutorialIds.Day1Plate, null);
+            PlayPlateHintSequence();
         }
 
         public bool AllowPlateDrop()
@@ -203,7 +209,7 @@ namespace Cooking.UI
             if (!IsTutorialDay1())
                 return true;
 
-            return Has(TutorialIds.Day1Plate);
+            return Has(TutorialIds.Day1Scoop);
         }
 
         public bool AllowEat()
@@ -216,6 +222,30 @@ namespace Cooking.UI
 
         public void NotifyPlated()
         {
+            if (!IsTutorialDay1() || !Has(TutorialIds.Day1Scoop))
+                return;
+
+            Remember(TutorialIds.Day1FindPlate);
+            Remember(TutorialIds.Day1Plate);
+        }
+
+        void PlayCookingHintSequence()
+        {
+            PlayDaySegment(TutorialIds.Day1Fry, () =>
+                PlayDaySegment(TutorialIds.Day1Oil, () =>
+                    PlayDaySegment(TutorialIds.Day1Boil, () =>
+                        PlayDaySegment(TutorialIds.Day1Salt, null))));
+        }
+
+        void PlayScoopSequence()
+        {
+            PlayDaySegment(TutorialIds.Day1Scoop, PlayPlateHintSequence);
+        }
+
+        void PlayPlateHintSequence()
+        {
+            PlayDaySegment(TutorialIds.Day1Plate, () =>
+                PlayDaySegment(TutorialIds.Day1FindPlate, null));
         }
 
         public void NotifyEatResultReady()
@@ -254,7 +284,7 @@ namespace Cooking.UI
             PlayDaySegment(TutorialIds.Day1Wakeup, () =>
             {
                 if (recipeNotice != null)
-                    recipeNotice.ShowRedPointForTutorial();
+                    recipeNotice.OpenNowForTutorial();
             });
         }
 
@@ -332,6 +362,9 @@ namespace Cooking.UI
             float delay = Mathf.Max(0f, dayDialogDelay);
             if (delay > 0f)
                 yield return new WaitForSecondsRealtime(delay);
+
+            while (playing || (dialogPlayer != null && dialogPlayer.IsActive))
+                yield return null;
 
             dayPlay = null;
             PlaySegment(segmentId, () =>

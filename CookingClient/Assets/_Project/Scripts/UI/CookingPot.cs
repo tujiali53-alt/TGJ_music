@@ -300,6 +300,9 @@ namespace Cooking.UI
                     {
                         item.OptimalHitTime = Time.time;
                         item.Doneness = definition.optimalDoneness;
+                        if (TutorialDirector.Instance != null
+                            && TutorialDirector.Instance.TryHandleOptimalDoneness(item))
+                            TurnOffAllFires();
                         continue;
                     }
 

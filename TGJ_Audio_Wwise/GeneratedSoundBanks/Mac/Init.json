@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{63E326EC-14A3-4888-957F-2D8A92FD31FC}",
+    "Hash": "{DC050CC7-8195-BBCD-6116-75D4E8F41B44}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -70,6 +70,12 @@
       "Name": "Main Audio Bus",
       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus",
       "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
+     },
+     {
+      "Id": "2478496102",
+      "Name": "SFX_Duck",
+      "ObjectPath": "\\Busses\\MyUnit\\Master Audio Bus\\SFX\\SFX_Duck",
+      "GUID": "{EC7151D6-02C5-406B-B553-5DDCB5AEA0D1}"
      },
      {
       "Id": "3803692087",
@@ -230,6 +236,12 @@
         "Name": "Day",
         "ObjectPath": "\\States\\MyUnit\\Music_GamePhase\\Day",
         "GUID": "{D1F5EEF1-B7F3-4D55-B174-B733DDE2011F}"
+       },
+       {
+        "Id": "529726532",
+        "Name": "End",
+        "ObjectPath": "\\States\\MyUnit\\Music_GamePhase\\End",
+        "GUID": "{70E840A8-3387-4F41-87B9-F5E0964B4676}"
        },
        {
         "Id": "748895195",
@@ -863,6 +875,6 @@
     ]
    }
   ],
-  "FileHash": "{D3E62837-3A48-A5E0-A3D9-A51E877BDC99}"
+  "FileHash": "{EE42A660-84F4-9EA4-444A-D4ED131F7985}"
  }
 }

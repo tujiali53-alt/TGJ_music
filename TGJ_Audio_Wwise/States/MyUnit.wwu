@@ -9,6 +9,7 @@
 						<State Name="Menu" ID="{58AABCA7-0CE8-4D5B-AA20-7908793950AD}"/>
 						<State Name="Day" ID="{D1F5EEF1-B7F3-4D55-B174-B733DDE2011F}"/>
 						<State Name="Night" ID="{8170E1DF-E114-41BA-BB9F-25D384442167}"/>
+						<State Name="End" ID="{70E840A8-3387-4F41-87B9-F5E0964B4676}"/>
 					</ChildrenList>
 				</StateGroup>
 				<StateGroup Name="Music_BGM_Stage" ID="{875345E3-CBD4-48E5-BE15-8A2B336F8A43}">

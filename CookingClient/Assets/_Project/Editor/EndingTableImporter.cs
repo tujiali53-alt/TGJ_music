@@ -91,6 +91,9 @@ namespace Cooking.EditorTools
                 errors++;
             }
 
+            errors += ValidateEndingImages(catalog.Find("ending_good"), "ending_good");
+            errors += ValidateEndingImages(catalog.Find("ending_normal"), "ending_normal");
+
             if (errors == 0)
                 Debug.Log("Ending tables validate OK.");
         }
@@ -195,6 +198,16 @@ namespace Cooking.EditorTools
                     "endingImageEn",
                     id,
                     result);
+                Sprite metaEndingImageZh = LoadOptionalSprite(
+                    Cell(row, "metaEndingImageZh"),
+                    "metaEndingImageZh",
+                    id,
+                    result);
+                Sprite metaEndingImageEn = LoadOptionalSprite(
+                    Cell(row, "metaEndingImageEn"),
+                    "metaEndingImageEn",
+                    id,
+                    result);
 
                 endings.Add(new EndingDefinition
                 {
@@ -207,12 +220,10 @@ namespace Cooking.EditorTools
                     cg = cg,
                     endingImageZh = endingImageZh,
                     endingImageEn = endingImageEn,
-                    panelTextZh = Cell(row, "panelTextZh"),
-                    panelTextEn = Cell(row, "panelTextEn"),
+                    metaEndingImageZh = metaEndingImageZh,
+                    metaEndingImageEn = metaEndingImageEn,
                     clickTextZh = Cell(row, "clickTextZh"),
                     clickTextEn = Cell(row, "clickTextEn"),
-                    creditTextZh = Cell(row, "creditTextZh"),
-                    creditTextEn = Cell(row, "creditTextEn"),
                     lines = new List<EndingLine>()
                 });
             }
@@ -457,6 +468,27 @@ namespace Cooking.EditorTools
             return false;
         }
 
+        static int ValidateEndingImages(EndingDefinition ending, string id)
+        {
+            if (ending == null)
+                return 0;
+
+            int errors = 0;
+            if (ending.endingImageZh == null || ending.endingImageEn == null)
+            {
+                Debug.LogError(id + " 缺少正常结局 endingImageZh/En。");
+                errors++;
+            }
+
+            if (ending.metaEndingImageZh == null || ending.metaEndingImageEn == null)
+            {
+                Debug.LogError(id + " 缺少 meta 结局 metaEndingImageZh/En。");
+                errors++;
+            }
+
+            return errors;
+        }
+
         static Sprite LoadOptionalSprite(string path, string field, string endingId, ImportResult result)
         {
             if (string.IsNullOrWhiteSpace(path))
@@ -546,21 +578,19 @@ namespace Cooking.EditorTools
                     "requireAllNpcProps", "forbidAllNpcProps",
                     "cg",
                     "endingImageZh", "endingImageEn",
-                    "panelTextZh", "panelTextEn",
-                    "clickTextZh", "clickTextEn",
-                    "creditTextZh", "creditTextEn"
+                    "metaEndingImageZh", "metaEndingImageEn",
+                    "clickTextZh", "clickTextEn"
                 },
-                // 日记决定普通/好结局；NPC 全道具只影响流程。EndingPanel 图按语言各绑一张（共 4 张）。
+                // 日记决定普通/好结局台词；NPC 全道具走 meta 图。正常结局 4 张 + meta 4 张。
                 new[]
                 {
                     "ending_good", "100", "1", "0", "0", "0",
                     "Assets/_Project/Arts/Ending/Ending_Good.PNG",
                     "Assets/_Project/Arts/Ending/chGOOD Ending.png",
                     "Assets/_Project/Arts/Ending/engGOOD Ending.png",
-                    "（好结局占位文案）", "",
-                    "点击任意处继续", "",
-                    "特别演出\n平！ 饰演 章鱼猫\n图图 饰演 鼻嘎图\n隔儿DIGE 饰演 社积食\n沉舟 饰演 吟游诗人\n59 饰演 小说家\n\n游戏策划：林子大了什么后厨都有\n\n主策划：平!\n主程序：图图\n游戏美术：隔儿DIGE、59\n\nUI设计：隔儿DIGE\n人物设计：59\n文案策划：59\n翻译：平！\n\n音乐设计：沉舟",
-                    "Special Thanks\nPing! as Octopus Cat\nTutu as Lil Tu\n隔儿DIGE as Sheji Food\nChenzhou as Bard\n59 as Novelist\n\nGame Design: When the forest is big, every kitchen has something\n\nLead Design: Ping!\nLead Programming: Tutu\nArt: 隔儿DIGE, 59\n\nUI: 隔儿DIGE\nCharacter Design: 59\nWriting: 59\nTranslation: Ping!\n\nMusic: Chenzhou"
+                    "Assets/_Project/Arts/Ending/metaEndingImage/P_CHwhatend.png",
+                    "Assets/_Project/Arts/Ending/metaEndingImage/P_ENGwhatend.png",
+                    "点击任意处继续", ""
                 },
                 new[]
                 {
@@ -568,10 +598,9 @@ namespace Cooking.EditorTools
                     "Assets/_Project/Arts/Ending/Ending_Normal.JPG",
                     "Assets/_Project/Arts/Ending/chNoraml Ending.png",
                     "Assets/_Project/Arts/Ending/engNoraml Ending.png",
-                    "（普通结局占位文案）", "",
-                    "点击任意处继续", "",
-                    "特别演出\n平！ 饰演 章鱼猫\n图图 饰演 鼻嘎图\n隔儿DIGE 饰演 社积食\n沉舟 饰演 吟游诗人\n59 饰演 小说家\n\n游戏策划：林子大了什么后厨都有\n\n主策划：平!\n主程序：图图\n游戏美术：隔儿DIGE、59\n\nUI设计：隔儿DIGE\n人物设计：59\n文案策划：59\n翻译：平！\n\n音乐设计：沉舟",
-                    "Special Thanks\nPing! as Octopus Cat\nTutu as Lil Tu\n隔儿DIGE as Sheji Food\nChenzhou as Bard\n59 as Novelist\n\nGame Design: When the forest is big, every kitchen has something\n\nLead Design: Ping!\nLead Programming: Tutu\nArt: 隔儿DIGE, 59\n\nUI: 隔儿DIGE\nCharacter Design: 59\nWriting: 59\nTranslation: Ping!\n\nMusic: Chenzhou"
+                    "Assets/_Project/Arts/Ending/metaEndingImage/CHwhatend.png",
+                    "Assets/_Project/Arts/Ending/metaEndingImage/ENGwhatend.png",
+                    "点击任意处继续", ""
                 }
             };
 

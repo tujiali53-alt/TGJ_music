@@ -54,6 +54,7 @@ State	ID	Name	State Group			Notes
 	2962601785	BGM_V3	Music_BGM_Stage			
 	2962601787	BGM_V1	Music_BGM_Stage			
 	311764537	Day	Music_GamePhase			
+	529726532	End	Music_GamePhase			
 	748895195	None	Music_GamePhase			
 	1011622525	Night	Music_GamePhase			
 	2607556080	Menu	Music_GamePhase			
@@ -113,6 +114,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	917614019	Eat_Pudding	.cache\F7\{F7C4B51E-6153-6FC3-8D83-6643FDD4ED8D}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Eat\Eat_Pudding		449156
 	923872371	Cut_Beef	.cache\E5\{E59A9938-763C-AE08-1B88-6657920B604C}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Beef		384096
 	933676904	Cut_Mushroom	.cache\54\{54DB86A0-7B6D-C090-A383-E644813AB369}.wem		\Containers\MyUnit\SFX\SFX_Cooking\Switch_Cutting\Cut_Mushroom		454136
+	964852473	BGM_End_v1	.cache\75\{757EA6F3-BD0E-C812-50F6-336541ED772C}.wem		\Containers\MyUnit\Music\Switch_BGM\BGM_End\BGM_End_v1\BGM_End_v1		9160576
 	979345559	Cricket_03	.cache\D8\{D8051A5C-1887-374F-115F-E8EAA1EF9D1F}.wem		\Containers\MyUnit\SFX\SFX_Outing\Ambience\Cricket\Cricket\Cricket_03		1150336
 	982619370	Cricket_01	.cache\F7\{F7997EE8-3997-6DE9-F298-2C7EC7655DC7}.wem		\Containers\MyUnit\SFX\SFX_Outing\Ambience\Cricket\Cricket\Cricket_01		809932
 	1006055603	UI_Cancel	.cache\3A\{3A8D6BEF-D9A1-1DEE-10E4-6B0083F0A070}.wem		\Containers\MyUnit\UI\UI_Button\UI_Cancel		60756

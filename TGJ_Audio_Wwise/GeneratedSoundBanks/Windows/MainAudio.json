@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{95648A2A-8E9F-4C9B-8322-80C9450EF305}",
     "Language": "SFX",
-    "Hash": "{4F8C6475-3173-04A4-5559-864B240A3290}",
+    "Hash": "{93DBEE59-5179-986B-0A85-3FFCB90919E3}",
     "ObjectPath": "\\SoundBanks\\MyUnit\\MainAudio",
     "ShortName": "MainAudio",
     "Path": "MainAudio.bnk",
@@ -400,6 +400,14 @@
       "CachePath": "54/{54DB86A0-7B6D-C090-A383-E644813AB369}.wem"
      },
      {
+      "Id": "964852473",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BGM_End_v1.3.wav",
+      "CachePath": "75/{757EA6F3-BD0E-C812-50F6-336541ED772C}.wem"
+     },
+     {
       "Id": "979345559",
       "Language": "SFX",
       "Streaming": "false",
@@ -762,6 +770,98 @@
           ]
          }
         ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "524889184",
+         "Id": "529726532",
+         "GUID": "{70E840A8-3387-4F41-87B9-F5E0964B4676}"
+        },
+        "Children": [
+         {
+          "SwitchValue": {
+           "GroupType": "State",
+           "GroupId": "478818154",
+           "Id": "2962601787",
+           "GUID": "{BC7E74B6-EDEF-447B-A127-76E955F5F390}"
+          },
+          "MediaRefs": [
+           {
+            "Id": "964852473"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "524889184",
+         "Id": "529726532",
+         "GUID": "{70E840A8-3387-4F41-87B9-F5E0964B4676}"
+        },
+        "Children": [
+         {
+          "SwitchValue": {
+           "GroupType": "State",
+           "GroupId": "478818154",
+           "Id": "2962601784",
+           "GUID": "{95F39562-D650-47F8-B8A9-2F25B7AC6456}"
+          },
+          "MediaRefs": [
+           {
+            "Id": "964852473"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "524889184",
+         "Id": "529726532",
+         "GUID": "{70E840A8-3387-4F41-87B9-F5E0964B4676}"
+        },
+        "Children": [
+         {
+          "SwitchValue": {
+           "GroupType": "State",
+           "GroupId": "478818154",
+           "Id": "2962601785",
+           "GUID": "{44DE243B-9402-47E1-B03D-4434AE8E9CAB}"
+          },
+          "MediaRefs": [
+           {
+            "Id": "964852473"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "524889184",
+         "Id": "529726532",
+         "GUID": "{70E840A8-3387-4F41-87B9-F5E0964B4676}"
+        },
+        "Children": [
+         {
+          "SwitchValue": {
+           "GroupType": "State",
+           "GroupId": "478818154",
+           "Id": "748895195",
+           "GUID": "{B0AC52E9-E360-4198-BC69-6EA8E5DD9092}"
+          },
+          "MediaRefs": [
+           {
+            "Id": "964852473"
+           }
+          ]
+         }
+        ]
        }
       ]
      },
@@ -956,8 +1056,8 @@
       "ObjectPath": "\\Events\\SFX\\Outing\\Play_Dice_Roll",
       "GUID": "{EE54DB64-4CCB-4594-9E28-B440B9B5D86C}",
       "DurationType": "OneShot",
-      "DurationMin": "2.4894695",
-      "DurationMax": "2.8525395",
+      "DurationMin": "2.418599",
+      "DurationMax": "2.9361255",
       "MediaRefs": [
        {
         "Id": "270195829"
@@ -1413,6 +1513,12 @@
         "GUID": "{D1F5EEF1-B7F3-4D55-B174-B733DDE2011F}"
        },
        {
+        "Id": "529726532",
+        "Name": "End",
+        "ObjectPath": "\\States\\MyUnit\\Music_GamePhase\\End",
+        "GUID": "{70E840A8-3387-4F41-87B9-F5E0964B4676}"
+       },
+       {
         "Id": "748895195",
         "Name": "None",
         "ObjectPath": "\\States\\MyUnit\\Music_GamePhase\\None",
@@ -1567,6 +1673,6 @@
     ]
    }
   ],
-  "FileHash": "{C81D1B67-F4C7-FE6C-8FB9-348834A00BD5}"
+  "FileHash": "{5CC3558C-D525-9F31-4937-6B7CAF9AA0C4}"
  }
 }

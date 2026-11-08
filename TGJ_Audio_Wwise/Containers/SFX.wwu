@@ -42,7 +42,7 @@
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="SFX" ID="{1444E2D0-F1B5-4D29-9490-AE9CA3A398EC}" WorkUnitID="{5B963A53-AA54-4687-A0B9-112941ACC765}"/>
+							<ObjectRef Name="SFX_Duck" ID="{EC7151D6-02C5-406B-B553-5DDCB5AEA0D1}" WorkUnitID="{5B963A53-AA54-4687-A0B9-112941ACC765}"/>
 						</Reference>
 						<Reference Name="UserAuxSend0">
 							<ObjectRef Name="Reverb_Kitchen" ID="{9237551A-72E7-4206-A9A9-A04CFA391240}" WorkUnitID="{5B963A53-AA54-4687-A0B9-112941ACC765}"/>
@@ -192,6 +192,13 @@
 							</ChildrenList>
 						</PropertyContainer>
 						<SwitchContainer Name="Switch_Cutting" ID="{EB63A520-9422-4DA2-903F-CD21E86EC503}" ShortID="704598579">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>1</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
@@ -554,6 +561,13 @@
 							</GroupingInfo>
 						</SwitchContainer>
 						<SwitchContainer Name="Switch_Eat" ID="{D49C859D-3F58-4AEA-92CC-9932B6C234D1}" ShortID="996747383">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>1</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
@@ -745,6 +759,13 @@
 							</GroupingInfo>
 						</SwitchContainer>
 						<PropertyContainer Name="Seasoning" ID="{DB5B20EE-5558-46BA-A2F6-8AC2726D4C85}" ShortID="758114742">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>1</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F0198DD2-E331-4FEC-AD2C-34BCFAE557A9}"/>
@@ -1394,6 +1415,24 @@
 						<RandomSequenceContainer Name="Random_Dice_Roll" ID="{51EDFF77-99F8-4FDA-BDD8-C80160FACEA3}" ShortID="491563980">
 							<PropertyList>
 								<Property Name="OverrideUserAuxSends" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{8FF46D3B-B559-4D8F-9054-35F1076411C3}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="50"/>
+													<Property Name="Min" Type="Real64" Value="-50"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>1.5</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">

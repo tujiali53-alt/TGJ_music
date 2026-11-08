@@ -26,12 +26,10 @@ namespace Cooking.Data
         public Sprite cg;
         public Sprite endingImageZh;
         public Sprite endingImageEn;
-        public string panelTextZh;
-        public string panelTextEn;
+        public Sprite metaEndingImageZh;
+        public Sprite metaEndingImageEn;
         public string clickTextZh;
         public string clickTextEn;
-        public string creditTextZh;
-        public string creditTextEn;
         public List<EndingLine> lines = new List<EndingLine>();
     }
 
