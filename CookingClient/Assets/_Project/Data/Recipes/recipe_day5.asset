@@ -36,7 +36,7 @@ MonoBehaviour:
     cookMethod: 1
     count: 1
   - ingredientId: ing_shrimp
-    shape: 0
+    shape: 1
     cookMethod: 1
     count: 1
   seasonings:
@@ -46,15 +46,30 @@ MonoBehaviour:
   - seasoningId: season_oil
     targetIngredientId: ing_tomato
     count: 1
+  - seasoningId: season_oil
+    targetIngredientId: ing_rice
+    count: 0
   - seasoningId: season_salt
     targetIngredientId: ing_rice
     count: 1
+  - seasoningId: season_salt
+    targetIngredientId: ing_onion
+    count: 0
+  - seasoningId: season_salt
+    targetIngredientId: ing_tomato
+    count: 0
+  - seasoningId: season_pepper
+    targetIngredientId: ing_onion
+    count: 0
+  - seasoningId: season_pepper
+    targetIngredientId: ing_tomato
+    count: 0
   - seasoningId: season_pepper
     targetIngredientId: ing_cornfish
-    count: 1
+    count: 0
   - seasoningId: season_pepper
     targetIngredientId: ing_shrimp
-    count: 1
+    count: 0
   steps:
   - order: 1
     hintText: "\u9C7C\u5207\u5757\uFF0C\u5904\u7406\u597D\u867E\u3002"

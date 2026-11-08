@@ -41,7 +41,7 @@ MonoBehaviour:
     count: 1
   - seasoningId: season_salt
     targetIngredientId: ing_onion
-    count: 0
+    count: -1
   - seasoningId: season_oil
     targetIngredientId: ing_onion
     count: 1
@@ -50,10 +50,19 @@ MonoBehaviour:
     count: 1
   - seasoningId: season_salt
     targetIngredientId: ing_beef
-    count: 1
+    count: -1
   - seasoningId: season_pepper
     targetIngredientId: ing_doneegg
     count: 1
+  - seasoningId: season_pepper
+    targetIngredientId: ing_onion
+    count: 0
+  - seasoningId: season_pepper
+    targetIngredientId: ing_beef
+    count: 0
+  - seasoningId: season_pepper
+    targetIngredientId: ing_tomato
+    count: 0
   steps:
   - order: 1
     hintText: "\u725B\u8089\u3001\u6D0B\u8471\u3001\u756A\u8304\u5207\u4E01"

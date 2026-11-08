@@ -25,7 +25,7 @@ MonoBehaviour:
     count: 1
   - ingredientId: ing_doneegg
     shape: 1
-    cookMethod: 0
+    cookMethod: 1
     count: 1
   - ingredientId: ing_tomato
     shape: 1
@@ -47,22 +47,22 @@ MonoBehaviour:
     count: 1
   - seasoningId: season_sauce
     targetIngredientId: ing_doneegg
-    count: 1
+    count: -1
   - seasoningId: season_sauce
     targetIngredientId: ing_tomato
-    count: 1
+    count: -1
   - seasoningId: season_sauce
     targetIngredientId: ing_cucumber
-    count: 1
+    count: -1
   - seasoningId: season_pepper
     targetIngredientId: ing_doneegg
-    count: 1
+    count: -2
   - seasoningId: season_pepper
     targetIngredientId: ing_tomato
-    count: 1
+    count: -2
   - seasoningId: season_pepper
     targetIngredientId: ing_cucumber
-    count: 1
+    count: -2
   steps:
   - order: 1
     hintText: "\u9E21\u86CB\u716E\u719F\u540E\u5207\u4E01\uFF0C\u756A\u8304\u5207\u4E01\u3001\u9EC4\u74DC\u5207\u7247\uFF0C\u5C71\u836F\u5207\u4E1D"
