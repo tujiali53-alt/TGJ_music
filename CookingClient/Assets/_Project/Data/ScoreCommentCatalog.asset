@@ -22,7 +22,7 @@ MonoBehaviour:
       I guess I don't need one anymore."
   - id: comment.optimal
     textZh: "{0}\u7684\u706B\u5019\u521A\u521A\u597D\uFF01"
-    textEn: The {0} and {1} are cooked just right!
+    textEn: The {0} cooked just right!
   - id: comment.seasoning
     textZh: "\u8FD9\u4E00\u5473\u8C03\u6599\u770B\u6765\u662F\u653E\u5BF9\u4E86\u3002"
     textEn: Looks like I added the right seasoning.
@@ -37,4 +37,4 @@ MonoBehaviour:
     textEn: A perfect reproduction.
   - id: comment.name_join
     textZh: "\u3001"
-    textEn: 
+    textEn: ", " 

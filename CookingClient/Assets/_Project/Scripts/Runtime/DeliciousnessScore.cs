@@ -152,13 +152,12 @@ namespace Cooking.Runtime
 
             if (optimalNames.Count > 0)
             {
-                string join = comments != null ? comments.NameJoin(language) : "、";
                 AddComment(
                     result,
                     comments,
                     language,
                     "comment.optimal",
-                    string.Join(join, optimalNames));
+                    OptimalNames(optimalNames, language, comments));
             }
 
             if (seasoningMatched)
@@ -226,6 +225,30 @@ namespace Cooking.Runtime
                 return;
 
             result.Comments.Add(text);
+        }
+
+        static string OptimalNames(
+            List<string> names,
+            DiaryLanguage language,
+            ScoreCommentCatalog comments)
+        {
+            if (language != DiaryLanguage.En)
+            {
+                string join = comments != null ? comments.NameJoin(language) : "、";
+                return string.Join(join, names);
+            }
+
+            if (names.Count == 1)
+                return names[0] + " is";
+
+            if (names.Count == 2)
+                return names[0] + " and " + names[1] + " are";
+
+            var head = new List<string>();
+            for (int i = 0; i < names.Count - 1; i++)
+                head.Add(names[i]);
+
+            return string.Join(", ", head) + ", and " + names[names.Count - 1] + " are";
         }
 
         static string FallbackComment(string id, string[] args)
