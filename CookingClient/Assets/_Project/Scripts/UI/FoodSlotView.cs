@@ -36,6 +36,8 @@ namespace Cooking.UI
         bool hovered;
         bool selected;
         bool potToken;
+        bool plateToken;
+        static bool missingCharcoalSprite;
         static Sprite potOccupiedBase;
         static bool missingPotOccupiedBase;
 
@@ -86,6 +88,7 @@ namespace Cooking.UI
                 normalSprite = background.sprite;
 
             potToken = GetComponentInParent<PotArea>() != null;
+            plateToken = GetComponentInParent<Plate>() != null;
 
             if (!inventorySlot)
             {
@@ -196,12 +199,18 @@ namespace Cooking.UI
             if (icon != null)
             {
                 Sprite sprite = null;
+                bool charcoal = has && shownDefinition != null && shown.Doneness >= shownDefinition.maxDoneness;
+                if (charcoal)
+                    shown.IsCharcoal = true;
+
                 if (has && shownDefinition != null)
                 {
                     if (shown.Shape == CutShape.Cut && shownDefinition.spriteCut == null && missingCutSprites.Add(shownDefinition.id))
                         Debug.LogError(shownDefinition.id + " 切开后需要 spriteCut。", shownDefinition);
 
-                    sprite = FoodVisualResolver.SpriteFor(shownDefinition, shown.Shape, shown.CookMethod);
+                    sprite = plateToken && charcoal
+                        ? CharcoalSprite()
+                        : FoodVisualResolver.SpriteFor(shownDefinition, shown.Shape, shown.CookMethod);
                 }
                 icon.enabled = sprite != null;
                 icon.preserveAspect = true;
@@ -216,6 +225,18 @@ namespace Cooking.UI
                 countText.text = has ? "x" + shownQuantity : "";
 
             ApplyOccupiedBase(has);
+        }
+
+        static Sprite CharcoalSprite()
+        {
+            Sprite sprite = MealEatController.CharcoalSprite;
+            if (sprite == null && !missingCharcoalSprite)
+            {
+                missingCharcoalSprite = true;
+                Debug.LogError("DishPresentation 的 charcoalSprite 需要绑上焦炭图 jiaotan1。");
+            }
+
+            return sprite;
         }
 
         void ApplyOccupiedBase(bool has)

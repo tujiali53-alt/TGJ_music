@@ -49,7 +49,6 @@ namespace Cooking.EditorTools
             SerializedObject serialized = new SerializedObject(view);
             serialized.Update();
             serialized.FindProperty("recipeImage").objectReferenceValue = image;
-            serialized.FindProperty("language").enumValueIndex = (int)DiaryLanguage.Zh;
             SerializedProperty list = serialized.FindProperty("recipes");
             list.arraySize = recipes.Length;
             for (int i = 0; i < recipes.Length; i++)

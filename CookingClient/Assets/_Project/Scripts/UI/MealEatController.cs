@@ -49,6 +49,9 @@ namespace Cooking.UI
 
         public static MealEatController Instance { get; private set; }
 
+        public static Sprite CharcoalSprite =>
+            Instance != null && Instance.presentation != null ? Instance.presentation.charcoalSprite : null;
+
         DishResult lastResult;
         bool resolving;
         Coroutine commentReveal;

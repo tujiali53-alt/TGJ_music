@@ -48,7 +48,6 @@ namespace Cooking.EditorTools
                 return "DiaryPanelView 上没有 catalog 字段。";
 
             catalogProperty.objectReferenceValue = catalog;
-            serialized.FindProperty("language").enumValueIndex = (int)DiaryLanguage.Zh;
             serialized.ApplyModifiedProperties();
             EditorUtility.SetDirty(view);
             if (view.Catalog != catalog)

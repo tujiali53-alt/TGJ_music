@@ -1097,7 +1097,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 99558d57211a2ba448a6f472d0c32021, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b875e0131197b9543a15403fd4f52564, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1129,7 +1129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.quit
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &736366757
 GameObject:
   m_ObjectHideFlags: 0
@@ -2066,7 +2066,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b50f51a5c404c1745a38ecb4002ec99c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 641b9bdaa3e3cab4b93058646a577ff3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2098,7 +2098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.cancel
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &880001001
 GameObject:
   m_ObjectHideFlags: 0
@@ -2546,7 +2546,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 79034f36e38181c4f8796532b8c47621, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc8bd0daacd477c48964522dd2fd751c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2578,7 +2578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.settingBg
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1174348935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2910,7 +2910,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 193a444680681d64b83af8fbfec91b1a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e5c2558ee647c7c4591fbfa23328f3a4, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2942,7 +2942,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.setting
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1243945547
 GameObject:
   m_ObjectHideFlags: 0
@@ -3046,7 +3046,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1415056d2fc177049bccc56cfc6110fc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2937fb082be40884abcb4f7b96c249b7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3078,7 +3078,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.instructions
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1255380827
 GameObject:
   m_ObjectHideFlags: 0
@@ -3435,7 +3435,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a34970edc5636804f8676afff3d77231, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c271eb17921b90a4c9b7cb3128ab0988, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3467,7 +3467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.credit
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1457156862
 GameObject:
   m_ObjectHideFlags: 0
@@ -3688,7 +3688,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d1abc7e3a16eb6b4daf160aeda7e3d4a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 468e503174940f144be5acbaa495e1a9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3720,7 +3720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.enterName
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1505714776
 GameObject:
   m_ObjectHideFlags: 0
@@ -3951,7 +3951,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c6389150c7053354897acd2c7e716f74, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6823591a7b871784c9b10c2c5427ac15, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3983,7 +3983,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.confirm
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1586724844
 GameObject:
   m_ObjectHideFlags: 0
@@ -4153,7 +4153,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fead1f9818a0a0d4cb2578cda9c5ba00, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a11dc9c36ee8da946b6fc951ecb5305d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4185,7 +4185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.instructionPanel
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1776963179
 GameObject:
   m_ObjectHideFlags: 0
@@ -4289,7 +4289,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f0c950ec77e43054195e6f3493c4f40d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: baf43f373981f9d4f8795c389fa8c643, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -4321,7 +4321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.start
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1796610183
 GameObject:
   m_ObjectHideFlags: 0
@@ -4754,7 +4754,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b50f51a5c404c1745a38ecb4002ec99c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 641b9bdaa3e3cab4b93058646a577ff3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4786,7 +4786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.cancel
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &1954402352
 GameObject:
   m_ObjectHideFlags: 0
@@ -4965,7 +4965,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 58ae5a50c0babef4da158e055c61bc4f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 557983acb07ff29469bcd0278d48c8b0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4997,7 +4997,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.settingQuit
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &2084165792
 GameObject:
   m_ObjectHideFlags: 0
@@ -5176,7 +5176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b50f51a5c404c1745a38ecb4002ec99c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 641b9bdaa3e3cab4b93058646a577ff3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5208,7 +5208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cooking::Cooking.UI.UiSpriteView
   id: ui.cancel
   catalog: {fileID: 11400000, guid: ba76fea62ce8b014f9e16d1d60481c2c, type: 2}
-  language: 0
+  language: 1
 --- !u!1 &2129139577
 GameObject:
   m_ObjectHideFlags: 0

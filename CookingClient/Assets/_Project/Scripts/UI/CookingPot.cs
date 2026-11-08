@@ -292,7 +292,10 @@ namespace Cooking.UI
                     }
 
                     if (item.Doneness >= definition.maxDoneness)
+                    {
+                        item.IsCharcoal = true;
                         continue;
+                    }
 
                     float previous = item.Doneness;
                     float next = Mathf.Min(definition.maxDoneness, previous + donenessPerSecond * Time.deltaTime);
@@ -307,6 +310,8 @@ namespace Cooking.UI
                     }
 
                     item.Doneness = next;
+                    if (item.Doneness >= definition.maxDoneness)
+                        item.IsCharcoal = true;
                 }
             }
         }

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Reflection;
-using Cooking.Core;
 using Cooking.Data;
 using Cooking.Runtime;
 using Cooking.UI;
@@ -82,11 +81,11 @@ namespace Cooking.EditorTools
                     Undo.RecordObject(view, "Wire UiSpriteView");
                     SetPrivate(view, "id", target.id);
                     SetPrivate(view, "catalog", catalog);
-                    SetPrivate(view, "language", GameLanguage.Current);
+                    SetPrivate(view, "language", DiaryLanguage.En);
                     if (!ReferenceEquals(GetPrivate(view, "catalog"), catalog))
                         return target.objectPath + " 未能写入 UiSpriteCatalog。";
 
-                    Sprite sprite = UiSprites.SpriteFor(catalog, target.id, GameLanguage.Current);
+                    Sprite sprite = UiSprites.SpriteFor(catalog, target.id, DiaryLanguage.En);
                     if (sprite == null)
                         sprite = UiSprites.SpriteFor(catalog, target.id, DiaryLanguage.Zh);
                     if (sprite != null)
